@@ -51,14 +51,10 @@ class LogInTextChild extends State<LogInTextBox> {
                         });
                       },
                       icon: Icon(isHidden == true
-                          ? Icons.remove_red_eye
-                          : Icons.password)))),
+                          ? Icons.visibility
+                          : Icons.visibility_off)))),
         ),
       ]),
     );
   }
-
-  // UserInfo user = new UserInfo(
-  //   userName: userNameController.text,
-  // );
 }
