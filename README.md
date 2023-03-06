@@ -1,4 +1,4 @@
-# demo2
+# This a flutter app
 
 A new Flutter project.
 
