@@ -13,26 +13,22 @@ class SignUpChild extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            height: MediaQuery.of(context).size.height * 1,
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                      "/Users/abu_3athab/Desktop/development/amal/lib/assets/signUpImage.jpg"),
-                  fit: BoxFit.cover),
-            ),
-            // padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Create Account",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  child: new SignUpTextBox(),
-                  padding: EdgeInsets.all(30),
-                )
-              ],
-            )));
+      constraints: BoxConstraints.expand(),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/signUpImage.jpg"), fit: BoxFit.cover),
+      ),
+      padding: const EdgeInsets.all(17.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            "Create Account",
+            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+          ),
+          SignUpTextBox(),
+        ],
+      ),
+    ));
   }
 }

@@ -16,41 +16,37 @@ class App extends State<MainApp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-            padding: const EdgeInsets.all(20.0),
+            constraints: BoxConstraints.expand(),
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(
-                      "/Users/abu_3athab/Desktop/development/amal/lib/assets/signUpImage.jpg"),
+                  image: AssetImage("assets/signUpImage.jpg"),
                   fit: BoxFit.cover),
             ),
-            child: Column(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+                child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                  child: Image.asset(
-                      "/Users/abu_3athab/Desktop/development/amal/lib/assets/amalLogo.png"),
-                ),
+                Image.asset("assets/amalLogo.png"),
                 const Text(
                   "Log In",
                   style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
                 ),
-                Container(child: new LogInTextBox()),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      new RememberMe(),
-                      const TextButton(
-                          onPressed: null,
-                          child: Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic,
-                                color: Color.fromARGB(255, 24, 102, 26),
-                                decoration: TextDecoration.underline),
-                          )),
-                    ],
-                  ),
+                new LogInTextBox(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    new RememberMe(),
+                    const TextButton(
+                        onPressed: null,
+                        child: Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Color.fromARGB(255, 24, 102, 26),
+                              decoration: TextDecoration.underline),
+                        )),
+                  ],
                 ),
                 Container(
                   padding: EdgeInsets.all(20),
@@ -89,6 +85,6 @@ class App extends State<MainApp> {
                   ],
                 )
               ],
-            )));
+            ))));
   }
 }
