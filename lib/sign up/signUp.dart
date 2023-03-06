@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'signUpTextBoxes.dart';
 
 class SignUp extends StatefulWidget {
@@ -11,13 +12,13 @@ class SignUp extends StatefulWidget {
 class SignUpChild extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Scaffold(body: LayoutBuilder(
+      builder: (context, constraints) {
+        return Container(
             height: MediaQuery.of(context).size.height * 1,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(
-                      "/Users/abu_3athab/Desktop/development/amal/lib/assets/signUpImage.jpg"),
+                  image: AssetImage("lib/assets/signUpImage.jpg"),
                   fit: BoxFit.cover),
             ),
             // padding: const EdgeInsets.all(20.0),
@@ -33,6 +34,8 @@ class SignUpChild extends State<SignUp> {
                   padding: EdgeInsets.all(30),
                 )
               ],
-            )));
+            ));
+      },
+    ));
   }
 }
