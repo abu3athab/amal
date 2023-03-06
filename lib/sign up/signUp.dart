@@ -13,10 +13,11 @@ class SignUpChild extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
+            height: MediaQuery.of(context).size.height * 1,
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                      "/Users/abu_3athab/Desktop/development/demo2/lib/assets/signUpImage.jpg"),
+                      "/Users/abu_3athab/Desktop/development/amal/lib/assets/signUpImage.jpg"),
                   fit: BoxFit.cover),
             ),
             // padding: const EdgeInsets.all(20.0),
