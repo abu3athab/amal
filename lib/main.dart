@@ -7,6 +7,8 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
+    // DeviceOrientation.landscapeLeft,
+    // DeviceOrientation.landscapeRight
   ]);
   runApp(MyApp());
 }
@@ -19,4 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//hello
