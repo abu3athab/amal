@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'log in/logIn.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.portraitUp,
+    // DeviceOrientation.landscapeLeft,
+    // DeviceOrientation.landscapeRight
+  ]);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -11,4 +21,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-//hello

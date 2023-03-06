@@ -8,7 +8,8 @@ class SignUpTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      child: SingleChildScrollView(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
             padding: const EdgeInsets.all(10),
             child: TextField(
@@ -53,7 +54,7 @@ class SignUpTextBox extends StatelessWidget {
                 border: OutlineInputBorder(),
               ),
             ))
-      ]),
+      ])),
     );
   }
 }
