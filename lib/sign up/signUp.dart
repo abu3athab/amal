@@ -16,7 +16,7 @@ class SignUpChild extends State<SignUp> {
             decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage(
-                      "/Users/abu_3athab/Desktop/development/amal/lib/assets/signUpImage.jpg"),
+                      "/Users/abu_3athab/Desktop/development/demo2/lib/assets/signUpImage.jpg"),
                   fit: BoxFit.cover),
             ),
             // padding: const EdgeInsets.all(20.0),

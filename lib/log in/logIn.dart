@@ -15,11 +15,11 @@ class App extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
+        body: (Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage(
-                "/Users/abu_3athab/Desktop/development/amal/lib/assets/signUpImage.jpg"),
+                "/Users/abu_3athab/Desktop/development/demo2/lib/assets/signUpImage.jpg"),
             fit: BoxFit.cover),
       ),
       padding: const EdgeInsets.all(20.0),
@@ -28,7 +28,7 @@ class App extends State<MainApp> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Image.asset(
-                "/Users/abu_3athab/Desktop/development/amal/lib/assets/amalLogo.png"),
+                "/Users/abu_3athab/Desktop/development/demo2/lib/assets/amalLogo.png"),
             const Text(
               "Log In",
               style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
@@ -85,6 +85,6 @@ class App extends State<MainApp> {
           ],
         ),
       ),
-    ));
+    )));
   }
 }
