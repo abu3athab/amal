@@ -1,33 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'rememberMe.dart';
-// import 'logInTextBoxes.dart';
-// import 'package:demo2/sign up/signUp.dart';
-
-// class MainApp extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     return App();
-//   }
-// }
-
-// //ddd
-// class App extends State<MainApp> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//         appBar: AppBar(
-//           title: Text("Login"),
-//           backgroundColor: Colors.green,
-//         ),
-//         backgroundColor: Colors.white,
-//         body: Column(
-//           children: [
-//             Container(height: 300, child: Image.asset("assets/amalLogo.png")),
-//             LogInTextBox()
-//           ],
-//         ));
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'rememberMe.dart';
 import 'logInTextBoxes.dart';
@@ -40,27 +10,27 @@ class MainApp extends StatefulWidget {
   }
 }
 
-//hello
 //ddd
 class App extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Colors.white,
         body: Container(
-            height: height,
-            width: width,
-            margin: EdgeInsets.zero,
             constraints: BoxConstraints.expand(),
             padding: const EdgeInsets.all(20.0),
-            child: Column(
+            child: SingleChildScrollView(
+                child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
-                    height: height * 0.25,
-                    child: Image.asset("assets/amalLogo.png")),
+                Image.asset("assets/amalLogo.png"),
+                const Text(
+                  "login",
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
                 new LogInTextBox(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,6 +91,6 @@ class App extends State<MainApp> {
                   ],
                 )
               ],
-            )));
+            ))));
   }
 }
