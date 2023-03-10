@@ -47,22 +47,27 @@ class LoginChild extends State<Login> {
               ),
               LogInPassword(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                       margin: EdgeInsets.symmetric(
                           vertical: 0, horizontal: width * 0.04),
                       child: RememberMe()),
-                  TextButton(
-                    child: const Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.green,
-                          decoration: TextDecoration.underline),
+                  Container(
+                    margin: EdgeInsetsDirectional.fromSTEB(0, 0, 6, 0),
+                    child: Expanded(
+                      child: TextButton(
+                        child: const Text(
+                          "Forgot Password?",
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              color: Colors.green,
+                              decoration: TextDecoration.underline),
+                        ),
+                        onPressed: () => null,
+                      ),
                     ),
-                    onPressed: () => null,
                   ),
                 ],
               ),

@@ -14,8 +14,8 @@ class Child extends State<RememberMe> {
   Widget build(BuildContext context) {
     return Row(children: [
       SizedBox(
-        height: 25,
-        width: 25,
+        height: 24,
+        width: 24,
         child: Checkbox(
           value: this.valuefirst,
           onChanged: (value) {
