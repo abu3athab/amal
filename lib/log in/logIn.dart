@@ -54,15 +54,18 @@ class LoginChild extends State<Login> {
                       margin: EdgeInsets.symmetric(
                           vertical: 0, horizontal: width * 0.02),
                       child: RememberMe()),
-                  TextButton(
-                    child: const Text(
-                      "Forgot Password?",
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: Colors.green,
-                          decoration: TextDecoration.underline),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 0, horizontal: 6),
+                    child: TextButton(
+                      child: const Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.green,
+                            decoration: TextDecoration.underline),
+                      ),
+                      onPressed: () => null,
                     ),
-                    onPressed: () => null,
                   ),
                 ],
               ),
@@ -90,7 +93,7 @@ class LoginChild extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
+                  const Text("Don't have an account?"),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -99,7 +102,7 @@ class LoginChild extends State<Login> {
                               builder: (context) => SignUpChartiy()),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(color: logoColor),
                       ))
