@@ -47,12 +47,12 @@ class LoginChild extends State<Login> {
               ),
               LogInPassword(),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
                       margin: EdgeInsets.symmetric(
-                          vertical: 0, horizontal: width * 0.02),
+                          vertical: 0, horizontal: width * 0.04),
                       child: RememberMe()),
                   TextButton(
                     child: const Text(

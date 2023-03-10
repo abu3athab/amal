@@ -13,21 +13,25 @@ class Child extends State<RememberMe> {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      Checkbox(
-        value: this.valuefirst,
-        onChanged: (value) {
-          setState(() {
-            if (value == true) {
-              this.valuefirst = true;
-            } else {
-              this.valuefirst = false;
-            }
-          });
-        },
-        activeColor: logoColor,
-        checkColor: Colors.black,
-        overlayColor: MaterialStateProperty.all(Colors.white),
-        tristate: false,
+      SizedBox(
+        height: 25,
+        width: 25,
+        child: Checkbox(
+          value: this.valuefirst,
+          onChanged: (value) {
+            setState(() {
+              if (value == true) {
+                this.valuefirst = true;
+              } else {
+                this.valuefirst = false;
+              }
+            });
+          },
+          activeColor: logoColor,
+          checkColor: Colors.black,
+          overlayColor: MaterialStateProperty.all(Colors.white),
+          tristate: false,
+        ),
       ),
       const Text(
         "Remember me",
