@@ -30,7 +30,7 @@ class Child extends State<RememberMe> {
         tristate: false,
       ),
       const Text(
-        "remember me",
+        "Remember me",
         style: TextStyle(fontWeight: FontWeight.w600),
       )
     ]);
