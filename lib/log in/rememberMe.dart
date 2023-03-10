@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:demo2/colors.dart';
 
 class RememberMe extends StatefulWidget {
   @override
@@ -23,7 +24,7 @@ class Child extends State<RememberMe> {
             }
           });
         },
-        activeColor: Colors.greenAccent,
+        activeColor: logoColor,
         checkColor: Colors.black,
         overlayColor: MaterialStateProperty.all(Colors.white),
         tristate: false,
