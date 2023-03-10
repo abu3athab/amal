@@ -4,7 +4,7 @@ import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
-import 'package:demo2/sign%20up/signUpCharity.dart';
+import 'package:demo2/sign%20up/signUp.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -100,8 +100,7 @@ class LoginChild extends State<Login> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => SignUpChartiy()),
+                          MaterialPageRoute(builder: (context) => SignUp()),
                         );
                       },
                       child: Text(
