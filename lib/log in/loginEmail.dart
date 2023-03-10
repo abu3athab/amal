@@ -1,6 +1,8 @@
+import 'package:demo2/colors.dart';
 import 'package:flutter/material.dart';
 
 class LogInEmail extends StatelessWidget {
+  FocusNode labelTextNode = new FocusNode();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -9,11 +11,17 @@ class LogInEmail extends StatelessWidget {
       margin: EdgeInsets.all(15),
       child: TextField(
         decoration: InputDecoration(
+            focusedBorder:
+                OutlineInputBorder(borderSide: BorderSide(color: logoColor)),
             border: OutlineInputBorder(
-                borderSide: BorderSide(
-                    width: 3, color: Color.fromARGB(255, 24, 102, 26)),
-                borderRadius: BorderRadius.circular(10)),
-            labelText: "email"),
+              borderSide: BorderSide(width: 3),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            labelText: "email",
+            labelStyle: TextStyle(
+                color: labelTextNode.hasFocus
+                    ? Colors.green
+                    : Color.fromARGB(255, 51, 47, 47))),
       ),
     );
   }

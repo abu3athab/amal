@@ -1,9 +1,10 @@
-import 'dart:ui';
+import 'dart:ffi';
 
 import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
+import 'package:demo2/sign%20up/signUpCharity.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -36,6 +37,9 @@ class LoginChild extends State<Login> {
                 style: TextStyle(
                   fontSize: 30,
                 ),
+              ),
+              SizedBox(
+                height: height * 0.02,
               ),
               LogInEmail(),
               SizedBox(
@@ -88,7 +92,13 @@ class LoginChild extends State<Login> {
                 children: [
                   Text("Don't have an account?"),
                   TextButton(
-                      onPressed: (() => null),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUpChartiy()),
+                        );
+                      },
                       child: Text(
                         "Sign Up",
                         style: TextStyle(color: logoColor),
