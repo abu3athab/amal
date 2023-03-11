@@ -6,11 +6,25 @@ class SignUpChartiy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: const [
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+
+        children: const [
         TextField(
           decoration: InputDecoration(labelText: 'Charity Name'),
         ),
-        TextField(),
+        TextField(
+          decoration: InputDecoration(labelText: 'Phone Number'),
+        
+        ),
+        TextField(
+          decoration: InputDecoration(labelText: 'Email'),
+        ),
+        TextField(
+          decoration: InputDecoration(labelText: 'Loction'),
+        ),
+        TextField(decoration: InputDecoration(labelText: 'chartiy biography'),
+        )
       ]),
     );
   }
