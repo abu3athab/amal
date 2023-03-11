@@ -12,10 +12,12 @@ class Child extends State<RememberMe> {
   bool valuefirst = false;
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Row(children: [
       SizedBox(
-        height: 24,
-        width: 24,
+        width: width * 0.09,
+        height: height * 0.09,
         child: Checkbox(
           value: this.valuefirst,
           onChanged: (value) {

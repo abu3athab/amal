@@ -30,8 +30,14 @@ class LoginChild extends State<Login> {
             children: [
               Container(
                   height: 0.35 * height,
-                  width: width * 0.65,
-                  child: Image.asset("assets/amalLogo.png")),
+                  width: width * 0.5,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/amalLogo.png",
+                    fit: BoxFit.cover,
+                    width: width * 0.80,
+                    height: height * 50,
+                  )),
               const Text(
                 "Login",
                 style: TextStyle(
@@ -55,18 +61,16 @@ class LoginChild extends State<Login> {
                           vertical: 0, horizontal: width * 0.04),
                       child: RememberMe()),
                   Container(
-                    margin: EdgeInsetsDirectional.fromSTEB(0, 0, 6, 0),
-                    child: Expanded(
-                      child: TextButton(
-                        child: const Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              color: Colors.green,
-                              decoration: TextDecoration.underline),
-                        ),
-                        onPressed: () => null,
+                    margin: EdgeInsets.symmetric(vertical: 0, horizontal: 6),
+                    child: TextButton(
+                      child: const Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.green,
+                            decoration: TextDecoration.underline),
                       ),
+                      onPressed: () => null,
                     ),
                   ),
                 ],
@@ -95,7 +99,7 @@ class LoginChild extends State<Login> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account?"),
+                  const Text("Don't have an account?"),
                   TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -103,7 +107,7 @@ class LoginChild extends State<Login> {
                           MaterialPageRoute(builder: (context) => SignUp()),
                         );
                       },
-                      child: Text(
+                      child: const Text(
                         "Sign Up",
                         style: TextStyle(color: logoColor),
                       ))
