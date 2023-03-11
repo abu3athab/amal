@@ -4,7 +4,7 @@ import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
-import 'package:demo2/sign%20up/signUpCharity.dart';
+import 'package:demo2/sign%20up/signUp.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -58,7 +58,7 @@ class LoginChild extends State<Login> {
                 children: [
                   Container(
                       margin: EdgeInsets.symmetric(
-                          vertical: 0, horizontal: width * 0.02),
+                          vertical: 0, horizontal: width * 0.04),
                       child: RememberMe()),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: 0, horizontal: 6),
@@ -104,8 +104,7 @@ class LoginChild extends State<Login> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => SignUpChartiy()),
+                          MaterialPageRoute(builder: (context) => SignUp()),
                         );
                       },
                       child: const Text(
