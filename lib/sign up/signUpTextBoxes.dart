@@ -1,29 +1,50 @@
 import 'package:flutter/material.dart';
 import '../colors.dart';
 
-class SignUpTextBox extends StatelessWidget {
-  final userNameController = TextEditingController();
-  final emailController = TextEditingController();
-  final phoneNumberController = TextEditingController();
-  final PasswordController = TextEditingController();
+class SignUpTextBox extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    double screenWidth(BuildContext context) =>
-        MediaQuery.of(context).size.width;
-    double screenHeight(BuildContext context) =>
-        MediaQuery.of(context).size.height;
+  State<SignUpTextBox> createState() => _SignUpTextBoxChild();
+}
 
-    return Scaffold(body: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      if (constraints.maxWidth > 600) {
-        return _buildWideContainers();
-      } else {
-        return _buildNormalContainer();
-      }
-    }));
+class _SignUpTextBoxChild extends State<SignUpTextBox> {
+  final userNameController = TextEditingController();
+
+  final emailController = TextEditingController();
+
+  final phoneNumberController = TextEditingController();
+
+  final passwordController = TextEditingController();
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 
-  Widget _buildNormalContainer() {
+  String? get errorText {
+    final pass = passwordController.text;
+    if (pass.isEmpty || pass == null) {
+      return "password field must not be empty";
+    }
+    if (pass.length < 8 || pass.length > 16) {
+      return "password must between 8 and 16 character";
+    }
+    if (!pass.contains(RegExp(r"[a-z]"))) {
+      return "password must contain at least one lower-case letter";
+    }
+    if (!pass.contains(RegExp(r"[A-Z]"))) {
+      return "password must contain at least one upper-case letter";
+    }
+    if (!pass.contains(RegExp(r"[0-9]"))) {
+      return "password must contain at least one number";
+    }
+    if (!pass.contains(RegExp(r'!@#$%^&*?'))) {
+      return "password must contain at least one of these special characters (!@#\$%^&*?)";
+    }
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Center(
       child: SingleChildScrollView(
         child: Padding(
@@ -85,11 +106,12 @@ class SignUpTextBox extends StatelessWidget {
                     SizedBox(
                       height: 50,
                       child: TextField(
-                        controller: PasswordController,
-                        decoration: const InputDecoration(
+                        controller: passwordController,
+                        decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           labelText: "Password",
+                          errorText: errorText,
                           border: OutlineInputBorder(),
                         ),
                       ),
@@ -127,71 +149,6 @@ class SignUpTextBox extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10))),
                             backgroundColor:
                                 MaterialStateProperty.all(logoColor)),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            )),
-      ),
-    );
-  }
-
-  Widget _buildWideContainers() {
-    return Center(
-      child: SingleChildScrollView(
-        child: Padding(
-            padding: const EdgeInsets.all(30),
-            child: Center(
-              child: SizedBox(
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: userNameController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "User Name",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: userNameController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Email",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: userNameController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Password",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: userNameController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Phone Number",
-                          border: OutlineInputBorder(),
-                        ),
                       ),
                     )
                   ],
