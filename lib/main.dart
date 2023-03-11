@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'log in/logIn.dart';
 import 'sign up/chooseType.dart';
 
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Choose(),
+      home: Login(),
     );
   }
 }
