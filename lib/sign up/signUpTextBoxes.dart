@@ -5,7 +5,7 @@ class SignUpTextBox extends StatelessWidget {
   final userNameController = TextEditingController();
   final emailController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final nationalIDController = TextEditingController();
+  final PasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double screenWidth(BuildContext context) =>
@@ -70,7 +70,7 @@ class SignUpTextBox extends StatelessWidget {
                     SizedBox(
                       height: 50,
                       child: TextField(
-                        controller: userNameController,
+                        controller: emailController,
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -85,7 +85,7 @@ class SignUpTextBox extends StatelessWidget {
                     SizedBox(
                       height: 50,
                       child: TextField(
-                        controller: userNameController,
+                        controller: PasswordController,
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -100,7 +100,7 @@ class SignUpTextBox extends StatelessWidget {
                     SizedBox(
                       height: 50,
                       child: TextField(
-                        controller: userNameController,
+                        controller: phoneNumberController,
                         decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
