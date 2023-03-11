@@ -30,8 +30,14 @@ class LoginChild extends State<Login> {
             children: [
               Container(
                   height: 0.35 * height,
-                  width: width * 0.65,
-                  child: Image.asset("assets/amalLogo.png")),
+                  width: width * 0.5,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/amalLogo.png",
+                    fit: BoxFit.cover,
+                    width: width * 0.80,
+                    height: height * 50,
+                  )),
               const Text(
                 "Login",
                 style: TextStyle(
