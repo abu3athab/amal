@@ -17,7 +17,7 @@ class LogInEmail extends StatelessWidget {
               borderSide: BorderSide(width: 3),
               borderRadius: BorderRadius.circular(10),
             ),
-            labelText: "email",
+            labelText: "Email",
             labelStyle: TextStyle(
                 color: labelTextNode.hasFocus
                     ? Colors.green
