@@ -43,6 +43,7 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
     return null;
   }
 
+  bool isHidden = true;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -146,7 +147,22 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                             errorText: errorText,
                             border: OutlineInputBorder(),
                             focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: logoColor))),
+                                borderSide: BorderSide(color: logoColor)),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (isHidden) {
+                                    isHidden = false;
+                                  } else {
+                                    isHidden = true;
+                                  }
+                                });
+                              },
+                              icon: Icon(isHidden == true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              color: logoColor,
+                            )),
                       ),
                     ),
                     Container(
