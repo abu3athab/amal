@@ -43,6 +43,7 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
     return null;
   }
 
+  bool isHidden = true;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -84,44 +85,14 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                       child: TextField(
                         controller: userNameController,
                         decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "User Name",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: emailController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Email",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        onChanged: (value) {},
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Password",
-                          errorText:
-                              passwordController.text.isEmpty ? "" : errorText,
-                          border: OutlineInputBorder(),
-                        ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "User Name",
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
                       ),
                     ),
                     const SizedBox(
@@ -132,11 +103,73 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                       child: TextField(
                         controller: phoneNumberController,
                         decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Phone Number",
-                          border: OutlineInputBorder(),
-                        ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "Phone Number",
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextField(
+
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "Email",
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 75,
+                      child: TextField(
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "Password",
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            errorText: errorText,
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor)),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  if (isHidden) {
+                                    isHidden = false;
+                                  } else {
+                                    isHidden = true;
+                                  }
+                                });
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                              },
+                              icon: Icon(isHidden == true
+                                  ? Icons.visibility_off
+                                  : Icons.visibility),
+                              color: logoColor,
+                            )),
                       ),
                     ),
                     Container(

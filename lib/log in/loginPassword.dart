@@ -23,7 +23,7 @@ class LogInPasswordChild extends State<LogInPassword> {
           decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white,
-              labelText: "password",
+              labelText: "Password",
               labelStyle: TextStyle(
                   color: labelTextNode.hasFocus
                       ? Colors.red
