@@ -119,6 +119,7 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                     SizedBox(
                       height: 50,
                       child: TextField(
+
                         controller: emailController,
                         decoration: const InputDecoration(
                             filled: true,

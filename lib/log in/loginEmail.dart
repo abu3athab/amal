@@ -10,6 +10,7 @@ class LogInEmail extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(15),
       child: TextField(
+        cursorColor: Colors.black,
         decoration: InputDecoration(
             focusedBorder:
                 OutlineInputBorder(borderSide: BorderSide(color: logoColor)),
