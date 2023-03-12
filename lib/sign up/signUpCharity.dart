@@ -1,4 +1,6 @@
+import 'package:demo2/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class SignUpChartiy extends StatefulWidget {
   const SignUpChartiy({Key? key}) : super(key: key);
@@ -36,117 +38,124 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
       appBar: AppBar(
         title: Text('Sign Up for Charity'),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: logoColor,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          height: height - AppBar().preferredSize.height - mediaQuery.padding.top,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  'Enter your charity details:',
-                  style: theme.textTheme.headline6,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                TextFormField(
-                  controller: _charityNameController,
-                  decoration: InputDecoration(
-                    labelText: 'Charity Name',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your charity name';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _phoneNumberController,
-                  decoration: InputDecoration(
-                    labelText: 'Phone Number',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your phone number';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty || !value.contains('@')) {
-                      return 'Please enter a valid email address';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _locationController,
-                  decoration: InputDecoration(
-                    labelText: 'Location',
-                    border: OutlineInputBorder(),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your location';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16),
-                TextFormField(
-                  controller: _bioController,
-                  decoration: InputDecoration(
-                    labelText: 'Charity Biography',
-                    border: OutlineInputBorder(),
-                  ),
-                  maxLines: 5,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your charity biography';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 32),            
-                ElevatedButton(
-              onPressed: () {
-                if (_formKey.currentState?.validate() == true) {
-                  // Save the form data and navigate to the next screen
-                  final charityName = _charityNameController.text;
-                  final phoneNumber = _phoneNumberController.text;
-                  final email = _emailController.text;
-                  final location = _locationController.text;
-                  final bio = _bioController.text;
-                  // TODO: save the data and navigate to the next screen
-                }
-              },
-              child: Text('Next'),
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(width, 48),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-                primary: theme.primaryColor,
+      body: Container(
+        height: height - AppBar().preferredSize.height - mediaQuery.padding.top,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Enter your charity details:',
+                style: theme.textTheme.headline6,
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+              const SizedBox(height: 24),
+              Expanded(
+                child: ListView(children: [
+                  TextFormField(
+                    controller: _charityNameController,
+                    decoration: InputDecoration(
+                        labelText: 'Charity Name',
+                        labelStyle:
+                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: logoColor))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your charity name';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _phoneNumberController,
+                    decoration: InputDecoration(
+                        labelText: 'Phone Number',
+                        labelStyle:
+                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: logoColor))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your phone number';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(height: 16),
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: InputDecoration(
+                        labelText: 'Email',
+                        labelStyle:
+                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: logoColor))),
+                    validator: (value) {
+                      if (value == null ||
+                          value.isEmpty ||
+                          !value.contains('@')) {
+                        return 'Please enter a valid email address';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _locationController,
+                    decoration: InputDecoration(
+                        labelText: 'Location',
+                        labelStyle:
+                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        border: OutlineInputBorder(),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: logoColor))),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your location';
+                      }
+                      return null;
+                    },
+                  ),
+                ]),
+              ),
+              SizedBox(
+                height: height * 0.05,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState?.validate() == true) {
+                    // Save the form data and navigate to the next screen
+                    final charityName = _charityNameController.text;
+                    final phoneNumber = _phoneNumberController.text;
+                    final email = _emailController.text;
+                    final location = _locationController.text;
+
+                    // TODO: save the data and navigate to the next screen
+                  }
+                },
+                child: Text('Next'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: logoColor,
+                  minimumSize: Size(width, 48),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(24)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
-    ),
-  ),
-);}}
+    );
+  }
+}
