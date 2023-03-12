@@ -65,6 +65,7 @@ flutter:
     - assets/amalLogo.png
     - assets/signUpImage.jpg
     - assets/
+    - assets/charityPic.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
