@@ -84,42 +84,14 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                       child: TextField(
                         controller: userNameController,
                         decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "User Name",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: emailController,
-                        decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Email",
-                          border: OutlineInputBorder(),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    SizedBox(
-                      height: 50,
-                      child: TextField(
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Password",
-                          errorText: errorText,
-                          border: OutlineInputBorder(),
-                        ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "User Name",
+                            border: OutlineInputBorder(),
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
                       ),
                     ),
                     const SizedBox(
@@ -130,11 +102,51 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                       child: TextField(
                         controller: phoneNumberController,
                         decoration: const InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          labelText: "Phone Number",
-                          border: OutlineInputBorder(),
-                        ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "Phone Number",
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: TextField(
+                        controller: emailController,
+                        decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "Email",
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      height: 75,
+                      child: TextField(
+                        controller: passwordController,
+                        decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            labelText: "Password",
+                            labelStyle: TextStyle(
+                                color: Color.fromARGB(255, 51, 47, 47)),
+                            errorText: errorText,
+                            border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: logoColor))),
                       ),
                     ),
                     Container(
