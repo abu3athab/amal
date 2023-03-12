@@ -157,6 +157,12 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                                     isHidden = true;
                                   }
                                 });
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
+                                //naji 7mar
                               },
                               icon: Icon(isHidden == true
                                   ? Icons.visibility_off
