@@ -26,7 +26,7 @@ class LogInPasswordChild extends State<LogInPassword> {
               labelText: "password",
               labelStyle: TextStyle(
                   color: labelTextNode.hasFocus
-                      ? Colors.black
+                      ? Colors.red
                       : Color.fromARGB(255, 51, 47, 47)),
               focusedBorder:
                   OutlineInputBorder(borderSide: BorderSide(color: logoColor)),

@@ -112,12 +112,14 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                     SizedBox(
                       height: 50,
                       child: TextField(
+                        onChanged: (value) {},
                         controller: passwordController,
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
                           labelText: "Password",
-                          errorText: errorText,
+                          errorText:
+                              passwordController.text.isEmpty ? "" : errorText,
                           border: OutlineInputBorder(),
                         ),
                       ),
