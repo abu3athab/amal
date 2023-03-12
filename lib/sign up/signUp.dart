@@ -1,3 +1,4 @@
+import 'package:demo2/colors.dart';
 import 'package:flutter/material.dart';
 import 'signUpTextBoxes.dart';
 
@@ -12,6 +13,10 @@ class SignUpChild extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("User SignUp"),
+        backgroundColor: logoColor,
+      ),
       body: Container(
         // // constraints: BoxConstraints.expand(),
         // // padding: const EdgeInsets.all(17.0),

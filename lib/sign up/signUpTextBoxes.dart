@@ -45,22 +45,28 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Center(
       child: SingleChildScrollView(
         child: Padding(
-            padding: const EdgeInsets.all(30),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
             child: Center(
               child: SizedBox(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 150,
-                      child: Image.asset("assets/charityPic.png"),
+                    Container(
+                      height: height * 0.25, //logo size
+                      width: width * 0.8,
+                      child: Image.asset(
+                        "assets/donate2.png",
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                    const SizedBox(
-                      height: 40,
+                    SizedBox(
+                      height: height * 0.02,
                     ),
                     const SizedBox(
                       height: 50,
