@@ -1,6 +1,7 @@
 import 'package:demo2/sign%20up/signUp.dart';
 import 'package:flutter/material.dart';
 import '../colors.dart';
+import 'signUpCharity.dart';
 
 class Choose extends StatelessWidget {
   const Choose({Key? key});
@@ -53,7 +54,12 @@ class Choose extends StatelessWidget {
                     width: 200,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: null,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => SignUpChartiy()),
+                        );
+                      },
                       child: Text('organization',
                           style: TextStyle(color: Colors.black)),
                       style: ButtonStyle(
