@@ -15,7 +15,8 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
   final _phoneNumberController = TextEditingController();
   final _emailController = TextEditingController();
   final _locationController = TextEditingController();
-  final _bioController = TextEditingController();
+  final _password = TextEditingController();
+  bool _isHidden = true;
 
   @override
   void dispose() {
@@ -23,7 +24,7 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
     _phoneNumberController.dispose();
     _emailController.dispose();
     _locationController.dispose();
-    _bioController.dispose();
+    _password.dispose();
     super.dispose();
   }
 
@@ -34,6 +35,29 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
 
     if (phoneNumber.toString().length != 10) {
       return "phone number should consist of 10 digits ";
+    } else {
+      return null;
+    }
+  }
+
+  String? checkPassword(String? pass) {
+    if (pass == null || pass.isEmpty) {
+      return "password field must not be empty";
+    }
+    if (pass.length < 8 || pass.length > 16) {
+      return "password must between 8 and 16 character";
+    }
+    if (!pass.contains(RegExp(r"[a-z]"))) {
+      return "password must contain at least one lower-case letter";
+    }
+    if (!pass.contains(RegExp(r"[A-Z]"))) {
+      return "password must contain at least one upper-case letter";
+    }
+    if (!pass.contains(RegExp(r"[0-9]"))) {
+      return "password must contain at least one number";
+    }
+    if (!pass.contains(RegExp(r'[!@#$%&*?]'))) {
+      return "password must contain at least one of these special characters (!@#%^&*?)";
     } else {
       return null;
     }
@@ -79,8 +103,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                           Icons.account_circle,
                           color: logoColor,
                         ),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: logoColor))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -99,8 +125,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                             Icons.phone,
                             color: logoColor,
                           ),
-                          border: OutlineInputBorder(),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
                           focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
                               borderSide: BorderSide(color: logoColor))),
                       validator: checkPhoneNumber),
                   SizedBox(height: 16),
@@ -113,8 +141,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                           Icons.mail,
                           color: logoColor,
                         ),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: logoColor))),
                     validator: (value) {
                       if (value == null ||
@@ -127,6 +157,42 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
+                    obscureText: _isHidden,
+                    controller: _password,
+                    decoration: InputDecoration(
+                        hintText: "password",
+                        prefixIcon: Icon(
+                          Icons.lock,
+                          color: logoColor,
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: logoColor,
+                            ),
+                            borderRadius: BorderRadius.circular(10)),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              if (_isHidden) {
+                                _isHidden = false;
+                              } else {
+                                _isHidden = true;
+                              }
+                            });
+                          },
+                          icon: Icon(_isHidden == true
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          color: logoColor,
+                        )),
+                    validator: checkPassword,
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  TextFormField(
                     controller: _locationController,
                     decoration: InputDecoration(
                         hintText: 'Location',
@@ -134,8 +200,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                           Icons.add_location_alt,
                           color: logoColor,
                         ),
-                        border: OutlineInputBorder(),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide(color: logoColor))),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
