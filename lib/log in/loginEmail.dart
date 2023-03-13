@@ -12,17 +12,18 @@ class LogInEmail extends StatelessWidget {
       child: TextField(
         cursorColor: Colors.black,
         decoration: InputDecoration(
-            focusedBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: logoColor)),
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: logoColor),
+                borderRadius: BorderRadius.circular(10)),
             border: OutlineInputBorder(
               borderSide: BorderSide(width: 3),
               borderRadius: BorderRadius.circular(10),
             ),
-            labelText: "Email",
-            labelStyle: TextStyle(
-                color: labelTextNode.hasFocus
-                    ? Colors.green
-                    : Color.fromARGB(255, 51, 47, 47))),
+            hintText: "Email",
+            prefixIcon: Icon(
+              Icons.email,
+              color: logoColor,
+            )),
       ),
     );
   }

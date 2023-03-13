@@ -23,13 +23,14 @@ class LogInPasswordChild extends State<LogInPassword> {
           decoration: InputDecoration(
               filled: true,
               fillColor: Colors.white,
-              labelText: "Password",
-              labelStyle: TextStyle(
-                  color: labelTextNode.hasFocus
-                      ? Colors.red
-                      : Color.fromARGB(255, 51, 47, 47)),
-              focusedBorder:
-                  OutlineInputBorder(borderSide: BorderSide(color: logoColor)),
+              hintText: "Password",
+              prefixIcon: Icon(
+                Icons.lock,
+                color: logoColor,
+              ),
+              focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: logoColor),
+                  borderRadius: BorderRadius.circular(10)),
               border: OutlineInputBorder(
                   borderSide: BorderSide(
                       width: 3, color: Color.fromARGB(255, 24, 102, 26)),
