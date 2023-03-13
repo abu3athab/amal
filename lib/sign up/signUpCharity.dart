@@ -27,6 +27,18 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
     super.dispose();
   }
 
+  String? checkPhoneNumber(String? phoneNumber) {
+    if (phoneNumber == null || phoneNumber.toString().isEmpty) {
+      return "field must not be empty";
+    }
+
+    if (phoneNumber.toString().length != 10) {
+      return "phone number should consist of 10 digits ";
+    } else {
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -60,10 +72,13 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                 child: ListView(children: [
                   TextFormField(
                     controller: _charityNameController,
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                        labelText: 'Charity Name',
-                        labelStyle:
-                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        hintText: "Charity name",
+                        prefixIcon: Icon(
+                          Icons.account_circle,
+                          color: logoColor,
+                        ),
                         border: OutlineInputBorder(),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: logoColor))),
@@ -76,28 +91,28 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   ),
                   const SizedBox(height: 16),
                   TextFormField(
-                    controller: _phoneNumberController,
-                    decoration: InputDecoration(
-                        labelText: 'Phone Number',
-                        labelStyle:
-                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
-                        border: OutlineInputBorder(),
-                        focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(color: logoColor))),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your phone number';
-                      }
-                      return null;
-                    },
-                  ),
+                      keyboardType: TextInputType.number,
+                      controller: _phoneNumberController,
+                      decoration: InputDecoration(
+                          hintText: "Phone number",
+                          prefixIcon: Icon(
+                            Icons.phone,
+                            color: logoColor,
+                          ),
+                          border: OutlineInputBorder(),
+                          focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: logoColor))),
+                      validator: checkPhoneNumber),
                   SizedBox(height: 16),
                   TextFormField(
+                    keyboardType: TextInputType.emailAddress,
                     controller: _emailController,
                     decoration: InputDecoration(
-                        labelText: 'Email',
-                        labelStyle:
-                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        hintText: "Email",
+                        prefixIcon: Icon(
+                          Icons.mail,
+                          color: logoColor,
+                        ),
                         border: OutlineInputBorder(),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: logoColor))),
@@ -114,9 +129,11 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   TextFormField(
                     controller: _locationController,
                     decoration: InputDecoration(
-                        labelText: 'Location',
-                        labelStyle:
-                            TextStyle(color: Color.fromARGB(255, 59, 56, 56)),
+                        hintText: 'Location',
+                        prefixIcon: Icon(
+                          Icons.add_location_alt,
+                          color: logoColor,
+                        ),
                         border: OutlineInputBorder(),
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: logoColor))),
