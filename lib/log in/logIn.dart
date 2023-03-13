@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
@@ -82,7 +83,12 @@ class LoginChild extends State<Login> {
                 width: width * 0.6,
                 height: height * 0.05,
                 child: ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainPage()),
+                    );
+                  },
                   child: Text(
                     "Login",
                     style: TextStyle(color: Colors.black),
