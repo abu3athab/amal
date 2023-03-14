@@ -65,7 +65,7 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                     height: height * 0.25, //logo size
                     width: width * 0.8,
                     child: Image.asset(
-                      "assets/donate2.png",
+                      "assets/signUpForUsersImage.png",
                       fit: BoxFit.contain,
                     ),
                   ),

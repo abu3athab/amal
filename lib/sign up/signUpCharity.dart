@@ -34,8 +34,13 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
       return "field must not be empty";
     }
 
-    if (phoneNumber.toString().length != 10) {
+    if (phoneNumber.length != 10) {
       return "phone number should consist of 10 digits ";
+    }
+    if (!(phoneNumber.startsWith('079')) &&
+        !(phoneNumber.startsWith('078')) &&
+        !(phoneNumber.startsWith('077'))) {
+      return "phone number should be Jordanian";
     } else {
       return null;
     }
