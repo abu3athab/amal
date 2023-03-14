@@ -1,6 +1,7 @@
 import 'package:demo2/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 
 class SignUpChartiy extends StatefulWidget {
   const SignUpChartiy({Key? key}) : super(key: key);
@@ -118,6 +119,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   const SizedBox(height: 16),
                   TextFormField(
                       keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       controller: _phoneNumberController,
                       decoration: InputDecoration(
                           hintText: "Phone number",
