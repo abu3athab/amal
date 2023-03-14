@@ -33,7 +33,7 @@ class MainPageChild extends State<MainPage> {
             onPressed: () {},
           )
         ],
-        title: Text("AMAL"),
+        title: Text("Choose a Catagory"),
         backgroundColor: logoColor,
       ),
       body: SingleChildScrollView(
@@ -41,54 +41,75 @@ class MainPageChild extends State<MainPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
-                "Donate to Charity",
-                style: TextStyle(
-                  fontSize: 30,
+              //spacinggggggggggggg/////////////////////
+              Container(
+                color: Color.fromRGBO(120, 193, 248, 1),
+                width: width,
+                child: Text(
+                  "Give To The Community",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
               ),
               Container(
                 width: width,
+                color: Color.fromRGBO(120, 193, 248, 1),
                 height: height * 0.25,
                 child: IconButton(
                   icon: Image.asset(
-                    'assets/doantemainpagecard.jpg',
+                    'assets/volunteermainpageicon.png',
                     fit: BoxFit.fill,
                   ),
                   iconSize: 200,
                   onPressed: () {},
                 ),
               ),
-              Text(
-                "Save lives",
-                style: TextStyle(
-                  fontSize: 30,
+
+              //spacingggggg////////
+              Container(
+                color: Color.fromRGBO(255, 255, 255, 1),
+                width: width,
+                child: Text(
+                  "Save A Life",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, color: Colors.red),
                 ),
               ),
               Container(
                 width: width,
+                color: Color.fromRGBO(255, 255, 255, 1),
                 height: height * 0.25,
                 child: IconButton(
                   icon: Image.asset(
-                    'assets/doantemainpagecard.jpg',
+                    'assets/medicaldonationmainpageicon.png',
                     fit: BoxFit.fill,
                   ),
-                  iconSize: 200,
-                  onPressed: () {},
+                  iconSize: 300,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Mainpagesearch()),
+                    );
+                  },
                 ),
               ),
-              Text(
-                "give to The Communinty",
-                style: TextStyle(
-                  fontSize: 28,
+
+              Container(
+                color: Color.fromRGBO(254, 95, 95, 1),
+                width: width,
+                child: Text(
+                  "Donate to Charity",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
               ),
               Container(
                 width: width,
+                color: Color.fromRGBO(254, 95, 95, 1),
                 height: height * 0.25,
                 child: IconButton(
                   icon: Image.asset(
-                    'assets/doantemainpagecard.jpg',
+                    'assets/donation_main_page_icon.png',
                     fit: BoxFit.fill,
                   ),
                   iconSize: 200,
