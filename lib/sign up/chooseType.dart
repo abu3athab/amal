@@ -30,24 +30,27 @@ class Choose extends StatelessWidget {
               ),
             ),
             Container(
-              height: height * 0.08,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: logoColor,
-                    minimumSize: const Size.fromHeight(50)),
+              width: width,
+              height: height * 0.07,
+              child: TextButton(
+                child: Text("Sign Up as indiviual"),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(logoColorsec),
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                        EdgeInsets.all(16)),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            side: BorderSide(color: logoColor)))),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignUp()),
                   );
                 },
-                child: Text('Sign Up as Indivual'),
               ),
-            ),
-            Container(
-              width: width,
-              height: 7,
-              color: Colors.black,
             ),
             Container(
               width: width,
@@ -61,20 +64,33 @@ class Choose extends StatelessWidget {
               ),
             ),
             Container(
-              height: height * 0.08,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: logoColor,
-                    minimumSize: const Size.fromHeight(50)),
+              width: width,
+              height: height * 0.07,
+              child: TextButton(
+                child: Text("Sign Up as charity"),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(logoColorsec),
+                    padding: MaterialStateProperty.all<EdgeInsets>(
+                        EdgeInsets.all(16)),
+                    foregroundColor:
+                        MaterialStateProperty.all<Color>(Colors.white),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                            side: BorderSide(color: logoColor)))),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => SignUpChartiy()),
                   );
                 },
-                child: Text('Sign Up as a charity'),
               ),
             ),
+            Container(
+              width: width,
+              height: 150,
+              color: logoColor,
+            )
           ]),
         ),
       ),
