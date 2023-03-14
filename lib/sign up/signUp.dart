@@ -29,7 +29,7 @@ class SignUpChild extends State<SignUp> {
             //       "Create Account",
             //       style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             //     ),
-            child: SignUpTextBox(),
+            child: SignUpForUser(),
             // ],
           ),
         ],
