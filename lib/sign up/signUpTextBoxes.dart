@@ -1,30 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../colors.dart';
 
-class SignUpTextBox extends StatefulWidget {
+class SignUpForUser extends StatefulWidget {
   @override
-  State<SignUpTextBox> createState() => _SignUpTextBoxChild();
+  State<SignUpForUser> createState() => _SignUpForUserChild();
 }
 
-class _SignUpTextBoxChild extends State<SignUpTextBox> {
+class _SignUpForUserChild extends State<SignUpForUser> {
   final _signUpFormKey = GlobalKey<FormState>();
 
-  final userNameController = TextEditingController();
+  final _userNameController = TextEditingController();
 
-  final emailController = TextEditingController();
+  final _emailController = TextEditingController();
 
-  final phoneNumberController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
 
-  final passwordController = TextEditingController();
+  final _passwordController = TextEditingController();
   @override
   void dispose() {
-    passwordController.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
-  String? get errorText {
-    final pass = passwordController.text;
-    if (pass.isEmpty || pass == null) {
+  String? checkPhoneNumber(String? phoneNumber) {
+    if (phoneNumber == null || phoneNumber.toString().isEmpty) {
+      return "field must not be empty";
+    }
+
+    if (phoneNumber.length != 10) {
+      return "phone number should consist of 10 digits ";
+    }
+    if (!(phoneNumber.startsWith('079')) &&
+        !(phoneNumber.startsWith('078')) &&
+        !(phoneNumber.startsWith('077'))) {
+      return "phone number should be Jordanian";
+    } else {
+      return null;
+    }
+  }
+
+  String? checkPassword(String? pass) {
+    if (pass == null || pass.isEmpty) {
       return "password field must not be empty";
     }
     if (pass.length < 8 || pass.length > 16) {
@@ -39,10 +56,11 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
     if (!pass.contains(RegExp(r"[0-9]"))) {
       return "password must contain at least one number";
     }
-    if (!pass.contains(RegExp(r'!@#$%^&*?'))) {
-      return "password must contain at least one of these special characters (!@#\$%^&*?)";
+    if (!pass.contains(RegExp(r'[!@#$%&*?]'))) {
+      return "password must contain at least one of these special characters (!@#%^&*?)";
+    } else {
+      return null;
     }
-    return null;
   }
 
   bool isHidden = true;
@@ -86,7 +104,17 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                   SizedBox(
                     height: 50,
                     child: TextFormField(
-                      controller: userNameController,
+                      keyboardType: TextInputType.text,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.allow(
+                            new RegExp(r'[a-z,A-z]'))
+                      ],
+                      controller: _userNameController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "field must not be empty";
+                        }
+                      },
                       decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -104,7 +132,13 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                   SizedBox(
                     height: 50,
                     child: TextFormField(
-                      controller: phoneNumberController,
+                      validator: checkPhoneNumber,
+                      controller: _phoneNumberController,
+                      keyboardType: TextInputType.number,
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.allow(new RegExp(r'[0-9]')),
+                        FilteringTextInputFormatter.digitsOnly
+                      ],
                       decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -122,7 +156,12 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                   SizedBox(
                     height: 50,
                     child: TextFormField(
-                      controller: emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Email must not be empty";
+                        }
+                      },
+                      controller: _emailController,
                       decoration: const InputDecoration(
                           filled: true,
                           fillColor: Colors.white,
@@ -140,7 +179,8 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                   SizedBox(
                     height: 75,
                     child: TextFormField(
-                      controller: passwordController,
+                      validator: checkPassword,
+                      controller: _passwordController,
                       obscureText: isHidden,
                       decoration: InputDecoration(
                           filled: true,
@@ -148,7 +188,6 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                           labelText: "Password",
                           labelStyle:
                               TextStyle(color: Color.fromARGB(255, 51, 47, 47)),
-                          errorText: errorText,
                           border: OutlineInputBorder(),
                           focusedBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: logoColor)),
@@ -174,7 +213,17 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                     width: 230,
                     height: 40,
                     child: ElevatedButton(
-                      onPressed: null,
+                      onPressed: () {
+                        if (_signUpFormKey.currentState?.validate() == true) {
+                          // Save the form data and navigate to the next screen
+                          final username = _userNameController.text;
+                          final phoneNumber = _phoneNumberController.text;
+                          final email = _emailController.text;
+                          final location = _passwordController.text;
+
+                          // TODO: save the data and navigate to the next screen
+                        }
+                      },
                       // ignore: sort_child_properties_last
                       child: const Text(
                         'Sign Up',
