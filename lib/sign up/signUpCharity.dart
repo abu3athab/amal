@@ -98,6 +98,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   TextFormField(
                     controller: _charityNameController,
                     keyboardType: TextInputType.text,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(
+                          new RegExp(r"[A-Z,a-z]")),
+                    ],
                     decoration: InputDecoration(
                         hintText: "Charity name",
                         prefixIcon: Icon(
