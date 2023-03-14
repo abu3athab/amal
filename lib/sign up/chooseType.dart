@@ -30,7 +30,7 @@ class Choose extends StatelessWidget {
               ),
             ),
             Container(
-              height: height * 0.09,
+              height: height * 0.08,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: logoColor,
@@ -50,7 +50,18 @@ class Choose extends StatelessWidget {
               color: Colors.black,
             ),
             Container(
-              height: height * 0.09,
+              width: width,
+              height: height * 0.35,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage(
+                      'assets/flat-illustration-world-humanitarian-day_23-2149484207 (1).png'),
+                ),
+              ),
+            ),
+            Container(
+              height: height * 0.08,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     backgroundColor: logoColor,
@@ -64,22 +75,6 @@ class Choose extends StatelessWidget {
                 child: Text('Sign Up as a charity'),
               ),
             ),
-            Container(
-              width: width,
-              height: height * 0.35,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  fit: BoxFit.fill,
-                  image: AssetImage(
-                      'assets/flat-illustration-world-humanitarian-day_23-2149484207 (1).png'),
-                ),
-              ),
-            ),
-            Container(
-              width: width,
-              height: 100,
-              color: logoColor,
-            )
           ]),
         ),
       ),
