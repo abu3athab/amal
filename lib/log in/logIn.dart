@@ -21,10 +21,10 @@ class LoginChild extends State<Login> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          height: height,
-          width: width,
+      body: Container(
+        height: height,
+        width: width,
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,7 +81,7 @@ class LoginChild extends State<Login> {
               ),
               Container(
                 width: width * 0.6,
-                height: height * 0.05,
+                height: height * 0.07,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
