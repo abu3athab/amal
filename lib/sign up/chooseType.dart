@@ -43,7 +43,7 @@ class Choose extends StatelessWidget {
                         MaterialStateProperty.all<Color>(Colors.white),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                            side: BorderSide(color: logoColor)))),
+                            side: BorderSide(color: logoColorsec)))),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -72,12 +72,12 @@ class Choose extends StatelessWidget {
                     backgroundColor:
                         MaterialStateProperty.all<Color>(logoColorsec),
                     padding: MaterialStateProperty.all<EdgeInsets>(
-                        EdgeInsets.all(16)),
+                        EdgeInsets.all(17)),
                     foregroundColor:
                         MaterialStateProperty.all<Color>(Colors.white),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
-                            side: BorderSide(color: logoColor)))),
+                            side: BorderSide(color: logoColorsec)))),
                 onPressed: () {
                   Navigator.push(
                     context,
