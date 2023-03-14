@@ -68,7 +68,7 @@ class LoginChild extends State<Login> {
                         "Forgot Password?",
                         style: TextStyle(
                             fontStyle: FontStyle.italic,
-                            color: Colors.green,
+                            color: logoColor,
                             decoration: TextDecoration.underline),
                       ),
                       onPressed: () => null,
@@ -91,7 +91,7 @@ class LoginChild extends State<Login> {
                   },
                   child: Text(
                     "Login",
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all(RoundedRectangleBorder(

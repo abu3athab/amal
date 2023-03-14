@@ -178,7 +178,7 @@ class _SignUpTextBoxChild extends State<SignUpTextBox> {
                       // ignore: sort_child_properties_last
                       child: const Text(
                         'Sign Up',
-                        style: TextStyle(color: Colors.black),
+                        style: TextStyle(color: Colors.white),
                       ),
 
                       style: ButtonStyle(

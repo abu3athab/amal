@@ -8,11 +8,77 @@ class Choose extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-        appBar: AppBar(
-          title: Text("choose account type"),
-          backgroundColor: logoColor,
+      appBar: AppBar(
+        title: Text("choose account type"),
+        backgroundColor: logoColor,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(children: [
+            Container(
+              width: width,
+              height: height * 0.35,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage(
+                      "assets/flat-world-humanitarian-day-illustration-with-person-holding-aid-box_23-2149459659 (1).png"),
+                ),
+              ),
+            ),
+            Container(
+              height: height * 0.08,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: logoColor,
+                    minimumSize: const Size.fromHeight(50)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUp()),
+                  );
+                },
+                child: Text('Sign Up as Indivual'),
+              ),
+            ),
+            Container(
+              width: width,
+              height: 7,
+              color: Colors.black,
+            ),
+            Container(
+              width: width,
+              height: height * 0.35,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage(
+                      'assets/flat-illustration-world-humanitarian-day_23-2149484207 (1).png'),
+                ),
+              ),
+            ),
+            Container(
+              height: height * 0.08,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: logoColor,
+                    minimumSize: const Size.fromHeight(50)),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpChartiy()),
+                  );
+                },
+                child: Text('Sign Up as a charity'),
+              ),
+            ),
+          ]),
         ),
+      ),
+      /*
         backgroundColor: Colors.white,
         body: Center(
           child: Container(
@@ -74,6 +140,8 @@ class Choose extends StatelessWidget {
               ),
             ),
           ),
-        ));
+        )
+        */
+    );
   }
 }
