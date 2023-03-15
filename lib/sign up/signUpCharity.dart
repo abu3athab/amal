@@ -231,26 +231,35 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
               SizedBox(
                 height: height * 0.05,
               ),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState?.validate() == true) {
-                    // Save the form data and navigate to the next screen
-                    final charityName = _charityNameController.text;
-                    final phoneNumber = _phoneNumberController.text;
-                    final email = _emailController.text;
-                    final location = _locationController.text;
+              Container(
+                margin: const EdgeInsets.all(20),
+                width: 230,
+                height: 40,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() == true) {
+                      // Save the form data and navigate to the next screen
+                      final charityName = _charityNameController.text;
+                      final phoneNumber = _phoneNumberController.text;
+                      final email = _emailController.text;
+                      final location = _locationController.text;
 
-                    // TODO: save the data and navigate to the next screen
-                  }
-                },
-                child: Text('Next'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: logoColor,
-                  minimumSize: Size(width, 48),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(24)),
+                      // TODO: save the data and navigate to the next screen
+                    }
+                  },
+
+                  // ignore: sort_child_properties_last
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(color: Colors.white),
+                  ),
+
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                      backgroundColor: MaterialStateProperty.all(logoColor)),
                 ),
-              ),
+              )
             ],
           ),
         ),

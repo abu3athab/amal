@@ -18,6 +18,7 @@ class forgotpassver extends StatefulWidget {
 
 class forgotpassverchild extends State<forgotpassver> {
   final emailControllerpass = TextEditingController();
+  final optController = OtpFieldController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -54,6 +55,12 @@ class forgotpassverchild extends State<forgotpassver> {
             Container(
               width: width * 0.8,
               child: OTPTextField(
+                controller: optController,
+                onChanged: (value) {
+                  if (value != null) {
+                    print("jellp");
+                  }
+                },
                 length: 4,
                 width: MediaQuery.of(context).size.width,
                 fieldWidth: width * 0.122,
