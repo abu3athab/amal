@@ -30,8 +30,8 @@ class MainPageNavigatorChild extends State<MainPageNavigator> {
         child: BottomNavigationBar(
             currentIndex: pageIndex,
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
+            selectedItemColor: Colors.white.withOpacity(1),
+            unselectedItemColor: Colors.white.withOpacity(0.5),
             backgroundColor: logoColor,
             items: [
               BottomNavigationBarItem(
