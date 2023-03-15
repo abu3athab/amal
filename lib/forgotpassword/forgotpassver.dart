@@ -9,14 +9,14 @@ import 'package:otp_text_field/style.dart';
 import '../log in/logIn.dart';
 import 'forgotpass.dart';
 
-class forgotpassver extends StatefulWidget {
+class ForgotPassver extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return forgotpassverchild();
+    return ForgotPassverChild();
   }
 }
 
-class forgotpassverchild extends State<forgotpassver> {
+class ForgotPassverChild extends State<ForgotPassver> {
   final emailControllerpass = TextEditingController();
   final optController = OtpFieldController();
   @override
@@ -122,7 +122,7 @@ class forgotpassverchild extends State<forgotpassver> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => forgotpass()),
+                  MaterialPageRoute(builder: (context) => ForgotPass()),
                 );
               },
               icon: Icon(
