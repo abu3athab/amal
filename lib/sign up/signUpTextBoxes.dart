@@ -238,8 +238,8 @@ class _SignUpForUserChild extends State<SignUpForUser> {
               ),
               Container(
                 margin: const EdgeInsets.all(20),
-                width: 230,
-                height: 40,
+                width: width * 0.6,
+                height: height * 0.05,
                 child: ElevatedButton(
                   onPressed: () {
                     if (_signUpFormKey.currentState?.validate() == true) {

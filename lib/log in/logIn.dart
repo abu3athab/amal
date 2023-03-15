@@ -88,7 +88,7 @@ class LoginChild extends State<Login> {
               ),
               Container(
                 width: width * 0.6,
-                height: height * 0.07,
+                height: height * 0.05,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
