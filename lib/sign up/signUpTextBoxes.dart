@@ -20,6 +20,9 @@ class _SignUpForUserChild extends State<SignUpForUser> {
   @override
   void dispose() {
     _passwordController.dispose();
+    _userNameController.dispose();
+    _emailController.dispose();
+    _phoneNumberController.dispose();
     super.dispose();
   }
 
@@ -104,12 +107,12 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                       ),
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 75,
                       child: TextFormField(
                         keyboardType: TextInputType.text,
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(
-                              new RegExp(r'[a-z,A-z]'))
+                              RegExp(r'[a-z,A-z]'))
                         ],
                         controller: _userNameController,
                         validator: (value) {
@@ -119,7 +122,7 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                         },
                         decoration: InputDecoration(
                             hintText: "User Name",
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.account_circle,
                               color: logoColor,
                             ),
@@ -127,47 +130,46 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: Color.fromARGB(255, 51, 47, 47)),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: logoColor))),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: height * 0.005,
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 75,
                       child: TextFormField(
                         validator: checkPhoneNumber,
                         controller: _phoneNumberController,
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
-                          FilteringTextInputFormatter.allow(
-                              new RegExp(r'[0-9]')),
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                           FilteringTextInputFormatter.digitsOnly
                         ],
                         decoration: InputDecoration(
                             hintText: "Phone number",
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.phone,
                               color: logoColor,
                             ),
                             filled: true,
                             fillColor: Colors.white,
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: Color.fromARGB(255, 51, 47, 47)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: logoColor))),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: height * 0.005,
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 75,
                       child: TextFormField(
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -178,21 +180,21 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                         decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.mail,
                               color: logoColor,
                             ),
                             hintText: "Email",
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: Color.fromARGB(255, 51, 47, 47)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: logoColor))),
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
+                    SizedBox(
+                      height: height * 0.005,
                     ),
                     SizedBox(
                       height: 75,
@@ -204,15 +206,15 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                             filled: true,
                             fillColor: Colors.white,
                             hintText: "password",
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.lock,
                               color: logoColor,
                             ),
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: Color.fromARGB(255, 51, 47, 47)),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                                 borderSide: BorderSide(color: logoColor)),
                             suffixIcon: IconButton(
                               onPressed: () {
