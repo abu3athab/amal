@@ -18,43 +18,57 @@ class MainPageNavigatorChild extends State<MainPageNavigator> {
     ),
     Container(
       color: Colors.red,
+    ),
+    Container(
+      color: Colors.black,
     )
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-          currentIndex: pageIndex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(255, 170, 163, 163),
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: logoColor,
+      bottomNavigationBar: Container(
+        child: BottomNavigationBar(
+            currentIndex: pageIndex,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white,
+            backgroundColor: logoColor,
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                  color: Colors.white,
+                ),
+                label: "home",
               ),
-              label: "home",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search,
-                color: logoColor,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
+                label: "search",
               ),
-              label: "search",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                color: logoColor,
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.account_circle,
+                  color: Colors.white,
+                ),
+                label: "Profile",
               ),
-              label: "settings",
-            )
-          ],
-          onTap: (value) {
-            setState(() {
-              pageIndex = value;
-            });
-          }),
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.white,
+                ),
+                label: "settings",
+              )
+            ],
+            onTap: (value) {
+              setState(() {
+                pageIndex = value;
+              });
+            }),
+      ),
       body: pages[pageIndex],
     );
   }
