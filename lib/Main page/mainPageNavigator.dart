@@ -2,6 +2,8 @@ import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/colors.dart';
 import 'package:flutter/material.dart';
 
+import '../profilepage.dart/profile.dart';
+
 class MainPageNavigator extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -14,11 +16,9 @@ class MainPageNavigatorChild extends State<MainPageNavigator> {
   final pages = [
     new MainPage(),
     Container(
-      color: Colors.amber,
-    ),
-    Container(
       color: Colors.red,
     ),
+    new Profile(),
     Container(
       color: Colors.black,
     )
