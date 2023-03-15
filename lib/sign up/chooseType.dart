@@ -31,7 +31,7 @@ class Choose extends StatelessWidget {
             ),
             Container(
               width: width,
-              height: height * 0.07,
+              height: height * 0.08,
               child: TextButton(
                 child: Text("Sign Up as indiviual"),
                 style: ButtonStyle(
@@ -65,7 +65,7 @@ class Choose extends StatelessWidget {
             ),
             Container(
               width: width,
-              height: height * 0.07,
+              height: height * 0.08,
               child: TextButton(
                 child: Text("Sign Up as charity"),
                 style: ButtonStyle(

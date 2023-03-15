@@ -36,7 +36,7 @@ class LoginChild extends State<Login> {
                   width: width * 0.5,
                   alignment: Alignment.center,
                   child: Image.asset(
-                    "assets/amalLogo.png",
+                    "assets/logo.png",
                     fit: BoxFit.cover,
                     width: width * 0.80,
                     height: height * 50,
