@@ -8,8 +8,6 @@ import 'package:demo2/log%20in/rememberMe.dart';
 import 'package:demo2/sign%20up/chooseType.dart';
 import 'package:flutter/material.dart';
 
-import '../Main page/mainPage.dart';
-
 class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -76,7 +74,7 @@ class LoginChild extends State<Login> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => forgotpass()),
+                          MaterialPageRoute(builder: (context) => ForgotPass()),
                         );
                       },
                     ),

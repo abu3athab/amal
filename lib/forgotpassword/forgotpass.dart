@@ -6,14 +6,14 @@ import 'package:flutter/widgets.dart';
 import '../log in/logIn.dart';
 import 'forgotpassver.dart';
 
-class forgotpass extends StatefulWidget {
+class ForgotPass extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return forgotpasschild();
+    return ForgotPassChild();
   }
 }
 
-class forgotpasschild extends State<forgotpass> {
+class ForgotPassChild extends State<ForgotPass> {
   final emailControllerpass = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -74,7 +74,7 @@ class forgotpasschild extends State<forgotpass> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => forgotpassver()),
+                    MaterialPageRoute(builder: (context) => ForgotPassver()),
                   );
                 },
                 child: Text(
