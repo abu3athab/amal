@@ -1,6 +1,8 @@
 import 'dart:ffi';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/forgotpassword/forgotpass.dart';
+
 import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
@@ -71,7 +73,12 @@ class LoginChild extends State<Login> {
                             color: logoColor,
                             decoration: TextDecoration.underline),
                       ),
-                      onPressed: () => null,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => forgotpass()),
+                        );
+                      },
                     ),
                   ),
                 ],
