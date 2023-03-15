@@ -1,5 +1,4 @@
-import 'dart:ffi';
-import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/Main%20page/mainPageNavigator.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 
@@ -7,8 +6,9 @@ import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
 import 'package:demo2/sign%20up/chooseType.dart';
-import 'package:demo2/sign%20up/signUp.dart';
 import 'package:flutter/material.dart';
+
+import '../Main page/mainPage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -36,7 +36,7 @@ class LoginChild extends State<Login> {
                   width: width * 0.5,
                   alignment: Alignment.center,
                   child: Image.asset(
-                    "assets/amalLogo.png",
+                    "assets/logo.png",
                     fit: BoxFit.cover,
                     width: width * 0.80,
                     height: height * 50,
@@ -93,7 +93,8 @@ class LoginChild extends State<Login> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MainPage()),
+                      MaterialPageRoute(
+                          builder: (context) => MainPageNavigator()),
                     );
                   },
                   child: Text(
