@@ -6,15 +6,16 @@ import 'package:flutter/widgets.dart';
 import '../log in/logIn.dart';
 import 'forgotpassver.dart';
 
-class forgotpass extends StatefulWidget {
+class changepass extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return forgotpasschild();
+    return changepasschild();
   }
 }
 
-class forgotpasschild extends State<forgotpass> {
+class changepasschild extends State<changepass> {
   final emailControllerpass = TextEditingController();
+  final emailControllerpass2 = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -31,17 +32,17 @@ class forgotpasschild extends State<forgotpass> {
               height: height * 0.1,
             ),
             Text(
-              "Forgot Password?",
+              "Yay Success!!",
               style: TextStyle(fontSize: 27, color: Colors.black),
             ),
             Container(
               child: Image.asset(
-                "assets/sadgirlpassword.jpeg",
+                "assets/happygirlpassword.jpeg",
                 height: height * 0.30,
               ),
             ),
             Text(
-              "Please Enter the email address associated with your account",
+              "Enter your new password",
               style: TextStyle(fontSize: 20, color: Colors.black),
               textAlign: TextAlign.center,
             ),
@@ -49,7 +50,7 @@ class forgotpasschild extends State<forgotpass> {
               height: 20,
             ),
             Text(
-              "we will send you a link to reset your password",
+              "And we will take care of the rest",
               style: TextStyle(fontSize: 16, color: Colors.grey),
               textAlign: TextAlign.center,
             ),
@@ -61,7 +62,18 @@ class forgotpasschild extends State<forgotpass> {
               child: TextField(
                 controller: emailControllerpass,
                 textAlign: TextAlign.center,
-                decoration: InputDecoration(hintText: "Enter Email Address"),
+                decoration: InputDecoration(hintText: "New password"),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: width * 0.8,
+              child: TextField(
+                controller: emailControllerpass2,
+                textAlign: TextAlign.center,
+                decoration: InputDecoration(hintText: "confirm New password"),
               ),
             ),
             SizedBox(
@@ -74,11 +86,11 @@ class forgotpasschild extends State<forgotpass> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => forgotpassver()),
+                    MaterialPageRoute(builder: (context) => Login()),
                   );
                 },
                 child: Text(
-                  "Send",
+                  "Change",
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 style: ButtonStyle(
@@ -86,28 +98,6 @@ class forgotpasschild extends State<forgotpass> {
                         borderRadius: BorderRadius.circular(50))),
                     backgroundColor: MaterialStateProperty.all(logoColor)),
               ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Login()),
-                );
-              },
-              icon: Icon(
-                // <-- Icon
-                Icons.arrow_back,
-                size: 24.0,
-              ),
-              label: Text('Go Back'),
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50))),
-                  backgroundColor:
-                      MaterialStateProperty.all(logoColor)), // <-- Text
             ),
           ],
         ),

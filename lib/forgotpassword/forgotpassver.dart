@@ -1,9 +1,13 @@
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/forgotpassword/changepass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
+
+import '../log in/logIn.dart';
+import 'forgotpass.dart';
 
 class forgotpassver extends StatefulWidget {
   @override
@@ -35,7 +39,7 @@ class forgotpassverchild extends State<forgotpassver> {
             ),
             Container(
               child: Image.asset(
-                "assets/happygirlpassword.jpeg",
+                "assets/2255657.jpg",
                 height: height * 0.30,
               ),
             ),
@@ -88,7 +92,12 @@ class forgotpassverchild extends State<forgotpassver> {
               width: width * 0.6,
               height: height * 0.07,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => changepass()),
+                  );
+                },
                 child: Text(
                   "Verify",
                   style: TextStyle(color: Colors.white, fontSize: 18),
@@ -98,6 +107,28 @@ class forgotpassverchild extends State<forgotpassver> {
                         borderRadius: BorderRadius.circular(50))),
                     backgroundColor: MaterialStateProperty.all(logoColor)),
               ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => forgotpass()),
+                );
+              },
+              icon: Icon(
+                // <-- Icon
+                Icons.arrow_back,
+                size: 24.0,
+              ),
+              label: Text('Go Back'),
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50))),
+                  backgroundColor:
+                      MaterialStateProperty.all(logoColor)), // <-- Text
             ),
           ],
         ),
