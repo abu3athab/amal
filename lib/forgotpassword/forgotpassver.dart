@@ -1,4 +1,3 @@
-import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/changepass.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-import '../log in/logIn.dart';
 import 'forgotpass.dart';
 
 class forgotpassver extends StatefulWidget {
