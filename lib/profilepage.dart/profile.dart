@@ -52,47 +52,111 @@ class ProfileChild extends State<Profile> {
                     SizedBox(
                       height: height * 0.04,
                     ),
-                    CircleAvatar(
-                      backgroundImage: AssetImage('assets/girlportrait.jpeg'),
-                      radius: width * 0.22,
-                    ),
+                    LayoutBuilder(builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      if (constraints.maxWidth > 500.0) {
+                        return new CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/girlportrait.jpeg'),
+                          radius: width * 0.16,
+                        );
+                      } else if (constraints.maxWidth < 320) {
+                        return new CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/girlportrait.jpeg'),
+                          radius: width * 0.15,
+                        );
+                      } else {
+                        return new CircleAvatar(
+                          backgroundImage:
+                              AssetImage('assets/girlportrait.jpeg'),
+                          radius: width * 0.22,
+                        );
+                      }
+                    }),
                     SizedBox(
-                      height: height * 0.015,
+                      height: height * 0.018,
                     ),
-                    Text(
-                      "Alessandra Lauren",
-                      style: TextStyle(color: logoColor, fontSize: 30),
+                    LayoutBuilder(builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      if (constraints.maxWidth > 500.0) {
+                        return new Text(
+                          "Alessandra Lauren",
+                          style: TextStyle(color: logoColor, fontSize: 45),
+                        );
+                      } else {
+                        return new Text(
+                          "Alessandra Lauren",
+                          style: TextStyle(color: logoColor, fontSize: 30),
+                        );
+                      }
+                    }),
+                    SizedBox(
+                      height: height * 0.008,
+                    ),
+                    LayoutBuilder(builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      if (constraints.maxWidth > 500.0) {
+                        return new Text(
+                          'AMMAN, JORDAN',
+                          style: TextStyle(fontSize: 22),
+                        );
+                      } else {
+                        return new Text('AMMAN, JORDAN');
+                      }
+                    }),
+                    SizedBox(
+                      height: height * 0.008,
                     ),
                     SizedBox(
                       height: height * 0.008,
                     ),
-                    Text('AMMAN, JORDAN'),
-                    SizedBox(
-                      height: height * 0.008,
-                    ),
-                    SizedBox(
-                      height: height * 0.008,
-                    ),
-                    Container(
-                      width: width * 0.75,
-                      child: Flexible(
-                        child: Text(
-                            "I live in the sunshine where I belong, Sprinkling kindness everywhere I go.",
-                            textAlign: TextAlign.center,
-                            style: new TextStyle(
-                                fontSize: 15.0,
-                                foreground: Paint()
-                                  ..shader = LinearGradient(
-                                    colors: <Color>[
-                                      Colors.pinkAccent,
-                                      Colors.deepPurpleAccent,
-                                      logoColorsec
-                                      //add more color here.
-                                    ],
-                                  ).createShader(
-                                      Rect.fromLTWH(50.0, 0.0, 200.0, 100.0)))),
-                      ),
-                    ),
+                    LayoutBuilder(builder:
+                        (BuildContext context, BoxConstraints constraints) {
+                      if (constraints.maxWidth > 500.0) {
+                        return Container(
+                          width: width * 0.75,
+                          child: new Flexible(
+                            child: Text(
+                                "I live in the sunshine where I belong, Sprinkling kindness everywhere I go.",
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                    fontSize: 25.0,
+                                    foreground: Paint()
+                                      ..shader = LinearGradient(
+                                        colors: <Color>[
+                                          Colors.pinkAccent,
+                                          Colors.deepPurpleAccent,
+                                          logoColorsec
+                                          //add more color here.
+                                        ],
+                                      ).createShader(Rect.fromLTWH(
+                                          220.0, 200.0, 200.0, 150.0)))),
+                          ),
+                        );
+                      } else {
+                        return Container(
+                          width: width * 0.75,
+                          child: new Flexible(
+                            child: Text(
+                                "I live in the sunshine where I belong, Sprinkling kindness everywhere I go.",
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                    fontSize: 15.0,
+                                    foreground: Paint()
+                                      ..shader = LinearGradient(
+                                        colors: <Color>[
+                                          Colors.pinkAccent,
+                                          Colors.deepPurpleAccent,
+                                          logoColorsec
+                                          //add more color here.
+                                        ],
+                                      ).createShader(Rect.fromLTWH(
+                                          50.0, 0.0, 200.0, 100.0)))),
+                          ),
+                        );
+                      }
+                    }),
                     SizedBox(
                       height: height * 0.02,
                     ),
@@ -114,14 +178,18 @@ class ProfileChild extends State<Profile> {
                             children: [
                               Text(
                                 "Username:",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 "Alessandra.Love1710",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                             ],
                           ),
@@ -131,14 +199,18 @@ class ProfileChild extends State<Profile> {
                             children: [
                               Text(
                                 "Email:",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 "Alessandra_Lauren@gmail.com",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                             ],
                           ),
@@ -148,14 +220,18 @@ class ProfileChild extends State<Profile> {
                             children: [
                               Text(
                                 "Phone Number:",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 "0790741003",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                             ],
                           ),
@@ -165,14 +241,18 @@ class ProfileChild extends State<Profile> {
                             children: [
                               Text(
                                 "Gender:",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 "Female",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                             ],
                           ),
@@ -182,14 +262,18 @@ class ProfileChild extends State<Profile> {
                             children: [
                               Text(
                                 "Date of Birth:",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                               SizedBox(
                                 height: 20,
                               ),
                               Text(
                                 "Oct/17/2000",
-                                style: TextStyle(color: logoColorsec),
+                                style: TextStyle(
+                                    color: logoColorsec,
+                                    fontSize: width * 0.03),
                               ),
                             ],
                           ),
