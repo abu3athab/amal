@@ -37,6 +37,9 @@ class ProfileChild extends State<Profile> {
             Container(
               width: width * 0.92,
               height: height * 0.65,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+              ),
               padding: new EdgeInsets.all(10.0),
               child: Card(
                 shape: RoundedRectangleBorder(
@@ -44,168 +47,170 @@ class ProfileChild extends State<Profile> {
                 ),
                 color: Colors.white,
                 elevation: 10,
-                child: Column(mainAxisSize: MainAxisSize.min, children: [
-                  SizedBox(
-                    height: height * 0.04,
-                  ),
-                  CircleAvatar(
-                    backgroundImage: AssetImage('assets/girlportrait.jpeg'),
-                    radius: width * 0.22,
-                  ),
-                  SizedBox(
-                    height: height * 0.015,
-                  ),
-                  Text(
-                    "Alessandra Lauren",
-                    style: TextStyle(color: logoColor, fontSize: 30),
-                  ),
-                  SizedBox(
-                    height: height * 0.008,
-                  ),
-                  Text('AMMAN, JORDAN'),
-                  SizedBox(
-                    height: height * 0.008,
-                  ),
-                  Text("Bio",
-                      style: new TextStyle(
-                          fontSize: 20.0,
-                          foreground: Paint()
-                            ..shader = LinearGradient(
-                              colors: <Color>[
-                                Colors.pinkAccent,
-                                Colors.deepPurpleAccent,
-                                Colors.red
-                                //add more color here.
-                              ],
-                            ).createShader(
-                                Rect.fromLTWH(0.0, 0.0, 200.0, 100.0)))),
-                  SizedBox(
-                    height: height * 0.008,
-                  ),
-                  Container(
-                    width: width * 0.75,
-                    child: Flexible(
-                      child: Text(
-                          "I live in the sunshine where I belong, Sprinkling kindness everywhere I go.",
-                          textAlign: TextAlign.center,
-                          style: new TextStyle(
-                              fontSize: 15.0,
-                              foreground: Paint()
-                                ..shader = LinearGradient(
-                                  colors: <Color>[
-                                    Colors.pinkAccent,
-                                    Colors.deepPurpleAccent,
-                                    logoColorsec
-                                    //add more color here.
-                                  ],
-                                ).createShader(
-                                    Rect.fromLTWH(50.0, 0.0, 200.0, 100.0)))),
+                child: SingleChildScrollView(
+                  child: Column(mainAxisSize: MainAxisSize.min, children: [
+                    SizedBox(
+                      height: height * 0.04,
                     ),
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  Container(
-                    width: width * 0.7,
-                    height: 2,
-                    color: logoColorsec,
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  Container(
-                    width: width * 0.7,
-                    child: Column(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Username:",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Alessandra.Love1710",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Email:",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Alessandra_Lauren@gmail.com",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Phone Number:",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "0790741003",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Gender:",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Female",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Date of Birth:",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "Oct/17/2000",
-                              style: TextStyle(color: logoColorsec),
-                            ),
-                          ],
-                        ),
-                      ],
+                    CircleAvatar(
+                      backgroundImage: AssetImage('assets/girlportrait.jpeg'),
+                      radius: width * 0.22,
                     ),
-                  ),
-                ]),
+                    SizedBox(
+                      height: height * 0.015,
+                    ),
+                    Text(
+                      "Alessandra Lauren",
+                      style: TextStyle(color: logoColor, fontSize: 30),
+                    ),
+                    SizedBox(
+                      height: height * 0.008,
+                    ),
+                    Text('AMMAN, JORDAN'),
+                    SizedBox(
+                      height: height * 0.008,
+                    ),
+                    Text("Bio",
+                        style: new TextStyle(
+                            fontSize: 20.0,
+                            foreground: Paint()
+                              ..shader = LinearGradient(
+                                colors: <Color>[
+                                  Colors.pinkAccent,
+                                  Colors.deepPurpleAccent,
+                                  Colors.red
+                                  //add more color here.
+                                ],
+                              ).createShader(
+                                  Rect.fromLTWH(0.0, 0.0, 200.0, 100.0)))),
+                    SizedBox(
+                      height: height * 0.008,
+                    ),
+                    Container(
+                      width: width * 0.75,
+                      child: Flexible(
+                        child: Text(
+                            "I live in the sunshine where I belong, Sprinkling kindness everywhere I go.",
+                            textAlign: TextAlign.center,
+                            style: new TextStyle(
+                                fontSize: 15.0,
+                                foreground: Paint()
+                                  ..shader = LinearGradient(
+                                    colors: <Color>[
+                                      Colors.pinkAccent,
+                                      Colors.deepPurpleAccent,
+                                      logoColorsec
+                                      //add more color here.
+                                    ],
+                                  ).createShader(
+                                      Rect.fromLTWH(50.0, 0.0, 200.0, 100.0)))),
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Container(
+                      width: width * 0.7,
+                      height: 2,
+                      color: logoColorsec,
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Container(
+                      width: width * 0.7,
+                      child: Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Username:",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Alessandra.Love1710",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Email:",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Alessandra_Lauren@gmail.com",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Phone Number:",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "0790741003",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Gender:",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Female",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Date of Birth:",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                "Oct/17/2000",
+                                style: TextStyle(color: logoColorsec),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ]),
+                ),
               ),
             ),
             Container(
