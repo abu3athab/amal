@@ -209,40 +209,43 @@ class ProfileChild extends State<Profile> {
                 ),
                 color: Colors.white,
                 elevation: 10,
-                child: Row(mainAxisSize: MainAxisSize.min, children: [
-                  SizedBox(
-                    width: width * 0.025,
-                  ),
-                  IconButton(
-                    iconSize: height * 0.04,
-                    icon: const Icon(Icons.volunteer_activism),
-                    tooltip: 'Increase ',
-                    onPressed: () {
-                      setState(() {});
-                    },
-                  ),
-                  SizedBox(
-                    width: width * 0.1,
-                  ),
-                  IconButton(
-                    iconSize: height * 0.04,
-                    icon: const Icon(Icons.account_circle),
-                    tooltip: 'Increase ',
-                    onPressed: () {
-                      setState(() {});
-                    },
-                  ),
-                  SizedBox(
-                    width: width * 0.1,
-                  ),
-                  IconButton(
-                    iconSize: height * 0.04,
-                    icon: const Icon(Icons.edit),
-                    onPressed: () {
-                      setState(() {});
-                    },
-                  ),
-                ]),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                        child: Center(
+                      child: IconButton(
+                        iconSize: height * 0.04,
+                        icon: const Icon(Icons.volunteer_activism),
+                        onPressed: () {
+                          setState(() {});
+                        },
+                      ),
+                    )),
+                    VerticalDivider(width: 1.0),
+                    Expanded(
+                        child: Center(
+                      child: IconButton(
+                        iconSize: height * 0.04,
+                        icon: const Icon(Icons.account_circle),
+                        onPressed: () {
+                          setState(() {});
+                        },
+                      ),
+                    )),
+                    VerticalDivider(width: 1.0),
+                    Expanded(
+                        child: Center(
+                      child: IconButton(
+                        iconSize: height * 0.04,
+                        icon: const Icon(Icons.edit),
+                        onPressed: () {
+                          setState(() {});
+                        },
+                      ),
+                    )),
+                  ],
+                ),
               ),
             ),
           ],
