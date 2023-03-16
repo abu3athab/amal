@@ -70,19 +70,6 @@ class ProfileChild extends State<Profile> {
                     SizedBox(
                       height: height * 0.008,
                     ),
-                    Text("Bio",
-                        style: new TextStyle(
-                            fontSize: 20.0,
-                            foreground: Paint()
-                              ..shader = LinearGradient(
-                                colors: <Color>[
-                                  Colors.pinkAccent,
-                                  Colors.deepPurpleAccent,
-                                  Colors.red
-                                  //add more color here.
-                                ],
-                              ).createShader(
-                                  Rect.fromLTWH(0.0, 0.0, 200.0, 100.0)))),
                     SizedBox(
                       height: height * 0.008,
                     ),
