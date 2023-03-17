@@ -1,5 +1,6 @@
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/settings%20page/settingspage.dart';
 import 'package:flutter/material.dart';
 
 import '../profilepage.dart/profile.dart';
@@ -19,9 +20,7 @@ class MainPageNavigatorChild extends State<MainPageNavigator> {
       color: Colors.red,
     ),
     new Profile(),
-    Container(
-      color: Colors.black,
-    )
+    new Settings(),
   ];
   @override
   Widget build(BuildContext context) {

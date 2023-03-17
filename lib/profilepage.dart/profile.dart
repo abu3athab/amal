@@ -293,9 +293,6 @@ class ProfileChild extends State<Profile> {
               //     ),
               //   ],
               // )),
-              SizedBox(
-                width: width * 0.04,
-              )
             ],
           ),
         ),
