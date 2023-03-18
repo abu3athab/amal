@@ -68,22 +68,22 @@ class MainPageChild extends State<MainPage> {
                     color: logoColor,
                     elevation: 10,
                     child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      // Text(
-                      //   "Quote of The Day ",
-                      //   textAlign: TextAlign.start,
-                      //   style: TextStyle(fontSize: 25, color: Colors.white),
-                      // ),
-                      // Container(
-                      //   width: width,
-                      //   height: 20,
-                      // ),
-                      // Text(
-                      //   "Kindness is giving hope to those who think they are all alone in this world.",
-                      //   textAlign: TextAlign.center,
-                      //   style: TextStyle(
-                      //       fontSize: 25,
-                      //       color: Color.fromRGBO(247, 170, 137, 1)),
-                      // ),
+                      Text(
+                        "Quote of The Day ",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
+                      Container(
+                        width: width,
+                        height: 20,
+                      ),
+                      Text(
+                        "Kindness is giving hope to those who think they are all alone in this world.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Color.fromRGBO(247, 170, 137, 1)),
+                      ),
                     ]),
                   ),
                 ),
