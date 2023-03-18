@@ -304,7 +304,150 @@ class Settingschild extends State<Settings> {
                           child: Container(
                             width: width * 0.7,
                             height: height * 0.5,
-                            color: Colors.red,
+                            padding: EdgeInsets.all(height * 0.015),
+                            color: Colors.white,
+                            child: SingleChildScrollView(
+                              child: Column(children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Allow Notifications",
+                                      style: TextStyle(fontSize: width * 0.05),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.15,
+                                      child: FittedBox(
+                                        child: Switch(
+                                          value: false,
+                                          activeColor: Colors.white,
+                                          onChanged: (value) {},
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                ////
+                                Container(
+                                  width: width * 0.65,
+                                  color: Colors.grey,
+                                  height: height * 0.001,
+                                ),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: width * 0.45,
+                                      child: Text(
+                                        "Allow urgent blood request notifications",
+                                        style:
+                                            TextStyle(fontSize: width * 0.05),
+                                        maxLines: 3,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.15,
+                                      child: FittedBox(
+                                        child: Switch(
+                                          value: false,
+                                          activeColor: Colors.white,
+                                          onChanged: (value) {},
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Container(
+                                  width: width * 0.65,
+                                  color: Colors.grey,
+                                  height: height * 0.001,
+                                ),
+                                ////////
+
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: width * 0.45,
+                                      child: Text(
+                                        "Allow volunteer event reminder notification",
+                                        style:
+                                            TextStyle(fontSize: width * 0.05),
+                                        maxLines: 3,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.15,
+                                      child: FittedBox(
+                                        child: Switch(
+                                          value: false,
+                                          activeColor: Colors.white,
+                                          onChanged: (value) {},
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Container(
+                                  width: width * 0.65,
+                                  color: Colors.grey,
+                                  height: height * 0.001,
+                                ),
+                                ///////////
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: width * 0.45,
+                                      child: Text(
+                                        "Allow motivitional quote notification",
+                                        style:
+                                            TextStyle(fontSize: width * 0.05),
+                                        maxLines: 3,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: width * 0.15,
+                                      child: FittedBox(
+                                        child: Switch(
+                                          value: false,
+                                          activeColor: Colors.white,
+                                          onChanged: (value) {},
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: height * 0.01,
+                                ),
+                                Container(
+                                  width: width * 0.65,
+                                  color: Colors.grey,
+                                  height: height * 0.001,
+                                ),
+                              ]),
+                            ),
                           ),
                         ),
                         //notification container
