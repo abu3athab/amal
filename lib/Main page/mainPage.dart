@@ -1,5 +1,6 @@
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -17,34 +18,6 @@ class MainPageChild extends State<MainPage> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: Text(""),
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Mainpagesearch()),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons
-                .account_circle_rounded), //to be changed to user account picute
-            onPressed: () {},
-          )
-        ],
-        title: Text(
-          "Welcome to Amal",
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: logoColor,
-      ),
       body: SingleChildScrollView(
         child: Center(
           child: Column(
@@ -54,49 +27,15 @@ class MainPageChild extends State<MainPage> {
                 width: width,
                 height: 200,
                 padding: new EdgeInsets.all(10.0),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Mainpagesearch()),
-                    );
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    color: logoColor,
-                    elevation: 10,
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      // Text(
-                      //   "Quote of The Day ",
-                      //   textAlign: TextAlign.start,
-                      //   style: TextStyle(fontSize: 25, color: Colors.white),
-                      // ),
-                      // Container(
-                      //   width: width,
-                      //   height: 20,
-                      // ),
-                      // Text(
-                      //   "Kindness is giving hope to those who think they are all alone in this world.",
-                      //   textAlign: TextAlign.center,
-                      //   style: TextStyle(
-                      //       fontSize: 25,
-                      //       color: Color.fromRGBO(247, 170, 137, 1)),
-                      // ),
-                    ]),
-                  ),
-                ),
+                child: Column(mainAxisSize: MainAxisSize.min, children: []),
               ),
-              Text(
-                "Charity",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ),
+
+              /*// charity card
               InkWell(
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Mainpagesearch()),
+                    MaterialPageRoute(builder: (context) => Profile()),
                   );
                 },
                 child: SizedBox(
@@ -124,7 +63,7 @@ class MainPageChild extends State<MainPage> {
                     ),
                   ),
                 ),
-              ),
+              )*/
               ///////////////////////////volunteering button
               Row(
                 children: [
