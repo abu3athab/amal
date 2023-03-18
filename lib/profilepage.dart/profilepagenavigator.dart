@@ -30,17 +30,6 @@ class ProfilePageNavigatorChild extends State<ProfilePageNavigator> {
                 child: Center(
               child: IconButton(
                 iconSize: height * 0.04,
-                icon: const Icon(Icons.volunteer_activism),
-                onPressed: () {
-                  setState(() {});
-                },
-              ),
-            )),
-            VerticalDivider(width: 1.0),
-            Expanded(
-                child: Center(
-              child: IconButton(
-                iconSize: height * 0.04,
                 icon: const Icon(Icons.account_circle),
                 onPressed: () {
                   setState(() {});
@@ -52,7 +41,7 @@ class ProfilePageNavigatorChild extends State<ProfilePageNavigator> {
                 child: Center(
               child: IconButton(
                 iconSize: height * 0.04,
-                icon: const Icon(Icons.edit),
+                icon: const Icon(Icons.volunteer_activism),
                 onPressed: () {
                   setState(() {});
                 },

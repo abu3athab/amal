@@ -18,6 +18,11 @@ class MainPageChild extends State<MainPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: Text(""),
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         actions: [
           IconButton(
             icon: Icon(Icons.search),
