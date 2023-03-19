@@ -50,7 +50,6 @@ class MainPageChild extends State<MainPage> {
                                 color: Colors.grey, fontSize: width * 0.04),
                           ),
                         ],
-
                       ),
                     ),
                     CircleAvatar(
