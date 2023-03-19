@@ -199,6 +199,9 @@ class Settingschild extends State<Settings> {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
                                   TextButton.icon(
                                     onPressed: () {},
                                     icon: Icon(
@@ -213,10 +216,16 @@ class Settingschild extends State<Settings> {
                                           color: logoColor),
                                     ), // <-- Text
                                   ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
                                   Container(
                                     width: width * 0.82,
                                     color: Colors.grey,
                                     height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
                                   ///////////////////////
                                   TextButton.icon(
@@ -233,10 +242,16 @@ class Settingschild extends State<Settings> {
                                           color: logoColor),
                                     ), // <-- Text
                                   ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
                                   Container(
                                     width: width * 0.82,
                                     color: Colors.grey,
                                     height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
                                   /////////////////////////
                                   TextButton.icon(
@@ -253,10 +268,16 @@ class Settingschild extends State<Settings> {
                                           color: logoColor),
                                     ), // <-- Text
                                   ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
                                   Container(
                                     width: width * 0.82,
                                     color: Colors.grey,
                                     height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
                                   /////////////////////////
                                   TextButton.icon(
@@ -273,10 +294,16 @@ class Settingschild extends State<Settings> {
                                           color: logoColor),
                                     ), // <-- Text
                                   ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
                                   Container(
                                     width: width * 0.82,
                                     color: Colors.grey,
                                     height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
                                   ///////////////////////////////
                                   TextButton.icon(
@@ -315,8 +342,9 @@ class Settingschild extends State<Settings> {
                                     children: [
                                       Text(
                                         "Allow Notifications",
-                                        style:
-                                            TextStyle(fontSize: width * 0.05),
+                                        style: TextStyle(
+                                            fontSize: width * 0.05,
+                                            color: logoColor),
                                       ),
                                       SizedBox(
                                         width: width * 0.2,
@@ -329,6 +357,9 @@ class Settingschild extends State<Settings> {
                                         ),
                                       ),
                                     ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
 
                                   ////
@@ -338,7 +369,7 @@ class Settingschild extends State<Settings> {
                                     height: height * 0.001,
                                   ),
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.02,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -348,8 +379,9 @@ class Settingschild extends State<Settings> {
                                         width: width * 0.45,
                                         child: Text(
                                           "Allow urgent blood request notifications",
-                                          style:
-                                              TextStyle(fontSize: width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              color: logoColor),
                                           maxLines: 3,
                                         ),
                                       ),
@@ -366,7 +398,7 @@ class Settingschild extends State<Settings> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.02,
                                   ),
                                   Container(
                                     width: width * 0.83,
@@ -376,7 +408,7 @@ class Settingschild extends State<Settings> {
                                   ////////
 
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.02,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -386,8 +418,9 @@ class Settingschild extends State<Settings> {
                                         width: width * 0.45,
                                         child: Text(
                                           "Allow volunteer event reminder notification",
-                                          style:
-                                              TextStyle(fontSize: width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              color: logoColor),
                                           maxLines: 3,
                                         ),
                                       ),
@@ -404,7 +437,7 @@ class Settingschild extends State<Settings> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.02,
                                   ),
                                   Container(
                                     width: width * 0.83,
@@ -413,7 +446,7 @@ class Settingschild extends State<Settings> {
                                   ),
                                   ///////////
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.02,
                                   ),
                                   Row(
                                     mainAxisAlignment:
@@ -423,8 +456,9 @@ class Settingschild extends State<Settings> {
                                         width: width * 0.45,
                                         child: Text(
                                           "Allow motivitional quote notification",
-                                          style:
-                                              TextStyle(fontSize: width * 0.05),
+                                          style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              color: logoColor),
                                           maxLines: 3,
                                         ),
                                       ),
@@ -441,7 +475,7 @@ class Settingschild extends State<Settings> {
                                     ],
                                   ),
                                   SizedBox(
-                                    height: height * 0.01,
+                                    height: height * 0.02,
                                   ),
                                   Container(
                                     width: width * 0.83,
