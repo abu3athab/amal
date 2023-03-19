@@ -20,36 +20,110 @@ class MainPageChild extends State<MainPage> {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              width: width,
-              height: height * 0.29,
-              color: logoColorsec,
-              padding: EdgeInsets.all(10),
-              child: Column(children: [
-                SizedBox(height: height * .06),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hi, Alessandra",
-                            style: TextStyle(
-                                color: Colors.white, fontSize: width * 0.06),
-                          ),
-                          Text(
-                            "Let's start spreading goodness",
-                            style: TextStyle(
-                                color: Colors.grey, fontSize: width * 0.04),
-                          ),
-                        ],
+
+      appBar: AppBar(
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: Text(""),
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Mainpagesearch()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons
+                .account_circle_rounded), //to be changed to user account picute
+            onPressed: () {},
+          )
+        ],
+        title: Text(
+          "Welcome to Amal",
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: logoColor,
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: width,
+                height: 200,
+                padding: new EdgeInsets.all(10.0),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Mainpagesearch()),
+                    );
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    color: logoColor,
+                    elevation: 10,
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Text(
+                        "Quote of The Day ",
+                        textAlign: TextAlign.start,
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
+                      Container(
+                        width: width,
+                        height: 20,
+                      ),
+                      Text(
+                        "Kindness is giving hope to those who think they are all alone in this world.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Color.fromRGBO(247, 170, 137, 1)),
+                      ),
+                    ]),
+                  ),
+                ),
+              ),
+              Text(
+                "Charity",
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Mainpagesearch()),
+                  );
+                },
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: height * 0.12,
+                  child: Card(
+                    color: Color.fromRGBO(254, 95, 95, 1),
+                    semanticContainer: true,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    elevation: 10,
+                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    child: Container(
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image:
+                              AssetImage('assets/donation_main_page_icon.png'),
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     CircleAvatar(
