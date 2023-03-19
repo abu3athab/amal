@@ -176,6 +176,7 @@ class MainPageChild extends State<MainPage> {
                                     'assets/Community-Donation-Drive-Feature-Image-01.webp'),
                                 radius: width * 0.1,
                               ),
+                              //added
                               Text(
                                 "Volunteer",
                                 style: TextStyle(
