@@ -22,10 +22,11 @@ class Settingschild extends State<Settings> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/gradientredblue.png"),
-              fit: BoxFit.cover)),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [logoColor, logoColorsec])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
