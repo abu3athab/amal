@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,309 +19,480 @@ class MainPageChild extends State<MainPage> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: Text(""),
-        ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Mainpagesearch()),
-              );
-            },
-          ),
-          IconButton(
-            icon: Icon(Icons
-                .account_circle_rounded), //to be changed to user account picute
-            onPressed: () {},
-          )
-        ],
-        title: Text(
-          "Welcome to Amal",
-          textAlign: TextAlign.center,
-        ),
-        backgroundColor: logoColor,
-      ),
-      body: SingleChildScrollView(
+      backgroundColor: logoColor,
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [logoColor, logoColorsec])),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 width: width,
-                height: 200,
-                padding: new EdgeInsets.all(10.0),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Mainpagesearch()),
-                    );
-                  },
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
+                height: height * 0.29,
+                padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
+                child: Column(children: [
+                  SizedBox(height: height * .06),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Hi, Alessandra",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: width * 0.06),
+                            ),
+                            Text(
+                              "Let's start spreading goodness",
+                              style: TextStyle(
+                                  color: Colors.grey, fontSize: width * 0.04),
+                            ),
+                          ],
+                        ),
+                      ),
+                      CircleAvatar(
+                        backgroundImage: AssetImage('assets/girlportrait.jpeg'),
+                        radius: height * 0.04,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: height * 0.01,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        color: Color.fromRGBO(255, 255, 255, 0.15)),
+                    padding: EdgeInsets.all(7),
+                    width: width,
+                    height: height * 0.085,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        SizedBox(
+                          width: width * 0.01,
+                          height: 2,
+                        ),
+                        Container(
+                          width: width * 0.7,
+                          child: TextField(
+                            cursorColor: Colors.grey,
+                            decoration: InputDecoration(
+                              focusedBorder: UnderlineInputBorder(
+                                  borderSide:
+                                      BorderSide(color: Colors.grey, width: 1)),
+                              hintText: 'Try Food,Clothes..',
+                            ),
+                            style: TextStyle(fontSize: height * 0.035),
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: IconButton(
+                            iconSize: width * 0.07,
+                            icon: const Icon(Icons.search),
+                            onPressed: () {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
                     ),
-                    color: logoColor,
-                    elevation: 10,
-                    child: Column(mainAxisSize: MainAxisSize.min, children: [
-                      Text(
-                        "Quote of The Day ",
-                        textAlign: TextAlign.start,
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                ]),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(5, 0, 5, 15),
+                width: width,
+                height: height * 0.6,
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.fromLTRB(20, 0, 0, 10),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Catagories",
+                            style: TextStyle(
+                                fontSize: width * 0.05, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: height * 0.01,
+                      ),
+                      Container(
+                        width: width * 0.95,
+                        decoration: BoxDecoration(),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: width * 0.001,
+                            ),
+                            Column(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage:
+                                      AssetImage('assets/charityPic.png'),
+                                  radius: width * 0.10,
+                                ),
+                                Text(
+                                  "Charity",
+                                  style: TextStyle(
+                                      fontSize: width * 0.04,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                      'assets/illustration-person-donating-blood_23-2148236971.jpg'),
+                                  radius: width * 0.10,
+                                ),
+                                Text(
+                                  "Blood donation",
+                                  style: TextStyle(
+                                      fontSize: width * 0.04,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                      'assets/Community-Donation-Drive-Feature-Image-01.webp'),
+                                  radius: width * 0.1,
+                                ),
+                                //added
+                                Text(
+                                  "Volunteer",
+                                  style: TextStyle(
+                                      fontSize: width * 0.04,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: width * 0.001,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: width * 0.001,
+                        height: 10,
+                      ),
+                      Container(
+                        width: width * 0.9,
+                        height: 1,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: width * 0.001,
+                        height: 10,
                       ),
                       Container(
                         width: width,
-                        height: 20,
-                      ),
-                      Text(
-                        "Kindness is giving hope to those who think they are all alone in this world.",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Color.fromRGBO(247, 170, 137, 1)),
-                      ),
-                    ]),
-                  ),
-                ),
-              ),
-              Text(
-                "Charity",
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ),
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Mainpagesearch()),
-                  );
-                },
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: height * 0.12,
-                  child: Card(
-                    color: Color.fromRGBO(254, 95, 95, 1),
-                    semanticContainer: true,
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    elevation: 10,
-                    margin: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-                    child: Container(
-                      padding: const EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image:
-                              AssetImage('assets/donation_main_page_icon.png'),
-                          fit: BoxFit.contain,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              ///////////////////////////volunteering button
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Text(
-                        "Volunteering",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Mainpagesearch()),
-                          );
-                        },
-                        child: SizedBox(
-                          width: width * 0.5,
-                          height: height * 0.12,
-                          child: Card(
-                            color: Color.fromRGBO(119, 193, 248, 1),
-                            semanticContainer: true,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text("Featured Charities",
+                                    style: TextStyle(
+                                        fontSize: width * 0.05,
+                                        color: Colors.white)),
+                              ),
                             ),
-                            elevation: 10,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 20),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/volunteermainpageicon.png'),
-                                  fit: BoxFit.contain,
+                            //CHAIRTY CARD//////////////////
+                            Container(
+                              width: width * 0.95,
+                              height: height * 0.18,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Colors.white,
+                                elevation: 10,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(7.5),
+                                      child: Image.asset(
+                                          "assets/drawn-clothing-donation-concept-illustrated_23-2148833206.png"),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Tekyat um Ali",
+                                          style:
+                                              TextStyle(fontSize: width * 0.05),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.005,
+                                        ),
+                                        Text(
+                                          "Donation type : food,clothes,supplies ",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.01,
+                                        ),
+                                        Container(
+                                          width: width * 0.5,
+                                          child: Expanded(
+                                            child: Text(
+                                              "description : we provide the neccesarry things to the people who cant afford it",
+                                              style: TextStyle(
+                                                  fontSize: height * 0.015),
+                                              softWrap: true,
+                                              maxLines: 6,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.02,
+                                        ),
+                                        Text(
+                                          "Location : Amman/Jordan",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  /////////////////blood donation button
-                  Column(
-                    children: [
-                      Text(
-                        "Blood Donation",
-                        style: TextStyle(color: Colors.black, fontSize: 20),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Mainpagesearch()),
-                          );
-                        },
-                        child: SizedBox(
-                          width: width * 0.5,
-                          height: height * 0.12,
-                          child: Card(
-                            color: Colors.white,
-                            semanticContainer: true,
-                            clipBehavior: Clip.antiAliasWithSaveLayer,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            elevation: 10,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 5, horizontal: 20),
-                            child: Container(
-                              padding: const EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                image: DecorationImage(
-                                  image: AssetImage(
-                                      'assets/medicaldonationmainpageicon.png'),
-                                  fit: BoxFit.contain,
+                            //CHAIRTY CARD//////////////////
+                            Container(
+                              width: width * 0.95,
+                              height: height * 0.18,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Colors.white,
+                                elevation: 10,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(7.5),
+                                      child: Image.asset(
+                                          "assets/drawn-clothing-donation-concept-illustrated_23-2148833206.png"),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Tekyat um Ali",
+                                          style:
+                                              TextStyle(fontSize: width * 0.05),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.005,
+                                        ),
+                                        Text(
+                                          "Donation type : food,clothes,supplies ",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.01,
+                                        ),
+                                        Container(
+                                          width: width * 0.5,
+                                          child: Expanded(
+                                            child: Text(
+                                              "description : we provide the neccesarry things to the people who cant afford it",
+                                              style: TextStyle(
+                                                  fontSize: height * 0.015),
+                                              softWrap: true,
+                                              maxLines: 6,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.02,
+                                        ),
+                                        Text(
+                                          "Location : Amman/Jordan",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
-                          ),
+                            Container(
+                              width: width * 0.95,
+                              height: height * 0.18,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Colors.white,
+                                elevation: 10,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(7.5),
+                                      child: Image.asset(
+                                          "assets/drawn-clothing-donation-concept-illustrated_23-2148833206.png"),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Tekyat um Ali",
+                                          style:
+                                              TextStyle(fontSize: width * 0.05),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.005,
+                                        ),
+                                        Text(
+                                          "Donation type : food,clothes,supplies ",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.01,
+                                        ),
+                                        Container(
+                                          width: width * 0.5,
+                                          child: Expanded(
+                                            child: Text(
+                                              "description : we provide the neccesarry things to the people who cant afford it",
+                                              style: TextStyle(
+                                                  fontSize: height * 0.015),
+                                              softWrap: true,
+                                              maxLines: 6,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.02,
+                                        ),
+                                        Text(
+                                          "Location : Amman/Jordan",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: width * 0.95,
+                              height: height * 0.18,
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                color: Colors.white,
+                                elevation: 10,
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.all(7.5),
+                                      child: Image.asset(
+                                          "assets/drawn-clothing-donation-concept-illustrated_23-2148833206.png"),
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Tekyat um Ali",
+                                          style:
+                                              TextStyle(fontSize: width * 0.05),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.005,
+                                        ),
+                                        Text(
+                                          "Donation type : food,clothes,supplies ",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.01,
+                                        ),
+                                        Container(
+                                          width: width * 0.5,
+                                          child: Expanded(
+                                            child: Text(
+                                              "description : we provide the neccesarry things to the people who cant afford it",
+                                              style: TextStyle(
+                                                  fontSize: height * 0.015),
+                                              softWrap: true,
+                                              maxLines: 6,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: height * 0.02,
+                                        ),
+                                        Text(
+                                          "Location : Amman/Jordan",
+                                          style:
+                                              TextStyle(fontSize: width * 0.03),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
+                      )
                     ],
                   ),
-                ],
-              ),
-              SizedBox(
-                width: width,
-                height: 10,
-              ),
-              Container(
-                width: width,
-                height: 2,
-                color: Colors.black,
-              ),
-              SizedBox(
-                width: width,
-                height: 5,
-              ),
-              Container(
-                width: width,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    "Featured Charities",
-                    style: TextStyle(fontSize: 23, color: Colors.black),
-                    textAlign: TextAlign.start,
-                  ),
                 ),
-              ),
-
-              /*
-              //spacinggggggggggggg/////////////////////
-              Container(
-                color: Color.fromRGBO(120, 193, 248, 1),
-                width: width,
-                child: Text(
-                  "Give To The Community",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ),
-              Container(
-                width: width,
-                color: Color.fromRGBO(120, 193, 248, 1),
-                height: height * 0.25,
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/volunteermainpageicon.png',
-                    fit: BoxFit.fill,
-                  ),
-                  iconSize: 200,
-                  onPressed: () {},
-                ),
-              ),
-
-              //spacingggggg////////
-              Container(
-                color: Color.fromRGBO(255, 255, 255, 1),
-                width: width,
-                child: Text(
-                  "Save A Life",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, color: Colors.red),
-                ),
-              ),
-              Container(
-                width: width,
-                color: Color.fromRGBO(255, 255, 255, 1),
-                height: height * 0.25,
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/medicaldonationmainpageicon.png',
-                    fit: BoxFit.fill,
-                  ),
-                  iconSize: 300,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Mainpagesearch()),
-                    );
-                  },
-                ),
-              ),
-
-              Container(
-                color: Color.fromRGBO(254, 95, 95, 1),
-                width: width,
-                child: Text(
-                  "Donate to Charity",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ),
-              Container(
-                width: width,
-                color: Color.fromRGBO(254, 95, 95, 1),
-                height: height * 0.25,
-                child: IconButton(
-                  icon: Image.asset(
-                    'assets/donation_main_page_icon.png',
-                    fit: BoxFit.fill,
-                  ),
-                  iconSize: 200,
-                  onPressed: () {},
-                ),
-              ),
-              */
+              )
             ],
           ),
         ),

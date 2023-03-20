@@ -22,10 +22,11 @@ class Settingschild extends State<Settings> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/gradientredblue.png"),
-              fit: BoxFit.cover)),
+      decoration: BoxDecoration(
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [logoColor, logoColorsec])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -148,169 +149,351 @@ class Settingschild extends State<Settings> {
                 ],
               ),
               SizedBox(
-                height: height * 0.0535,
+                height: height * 0.035,
               ),
-              //end of general/notification row///////////////////////
-
               Container(
-                  width: width * 0.9,
-                  height: height * 0.65,
-                  padding: EdgeInsets.all(20),
-                  child: Center(
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          child: Container(
-                            width: width * 0.8,
-                            height: height * 0.6,
-                            color: Color.fromRGBO(0, 0, 0, 0.4),
-                          ),
-                        ),
-                        //general container
-                        Opacity(
-                          opacity: generalboxvis,
-                          child: Container(
-                            width: width * 0.7,
-                            height: height * 0.5,
-                            padding: EdgeInsets.all(height * 0.015),
-                            color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Enable Dark Mode",
-                                      style: TextStyle(fontSize: width * 0.05),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.15,
-                                      child: FittedBox(
-                                        child: Switch(
-                                          value: false,
-                                          activeColor: Colors.white,
-                                          onChanged: (value) {},
+                width: width * 0.92,
+                height: height * 0.65,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                padding: new EdgeInsets.all(1.0),
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  color: Colors.white,
+                  elevation: 10,
+                  child: SingleChildScrollView(
+                    child: Column(mainAxisSize: MainAxisSize.min, children: [
+                      Stack(
+                        children: [
+                          //general container
+                          Opacity(
+                            opacity: generalboxvis,
+                            child: Container(
+                              width: width * 0.83,
+                              height: height * 0.7,
+                              color: Colors.white,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Enable Dark Mode",
+                                        style:
+                                            TextStyle(fontSize: width * 0.06),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.2,
+                                        child: FittedBox(
+                                          child: Switch(
+                                            value: false,
+                                            activeColor: Colors.white,
+                                            onChanged: (value) {},
+                                          ),
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.account_circle,
+                                      size: height * 0.05,
+                                      color: logoColor,
                                     ),
-                                  ],
-                                ),
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.account_circle,
-                                    size: height * 0.05,
-                                    color: logoColor,
+                                    label: Text(
+                                      'Edit profile',
+                                      style: TextStyle(
+                                          fontSize: height * 0.04,
+                                          color: logoColor),
+                                    ), // <-- Text
                                   ),
-                                  label: Text(
-                                    'Edit profile',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                ///////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.email,
-                                    color: logoColor,
-                                    size: height * 0.05,
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
-                                  label: Text(
-                                    'Edit email',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                /////////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    color: logoColor,
-                                    Icons.lock,
-                                    size: height * 0.05,
+                                  Container(
+                                    width: width * 0.82,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
                                   ),
-                                  label: Text(
-                                    'Edit password',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                /////////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    color: logoColor,
-                                    Icons.language,
-                                    size: height * 0.05,
+                                  SizedBox(
+                                    height: height * 0.01,
                                   ),
-                                  label: Text(
-                                    'Edit language',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                ///////////////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    color: logoColor,
-                                    Icons.logout,
-                                    size: height * 0.05,
+                                  ///////////////////////
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.email,
+                                      color: logoColor,
+                                      size: height * 0.05,
+                                    ),
+                                    label: Text(
+                                      'Edit email',
+                                      style: TextStyle(
+                                          fontSize: height * 0.04,
+                                          color: logoColor),
+                                    ), // <-- Text
                                   ),
-                                  label: Text(
-                                    'Log out',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                              ],
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  Container(
+                                    width: width * 0.82,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  /////////////////////////
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      color: logoColor,
+                                      Icons.lock,
+                                      size: height * 0.05,
+                                    ),
+                                    label: Text(
+                                      'Edit password',
+                                      style: TextStyle(
+                                          fontSize: height * 0.04,
+                                          color: logoColor),
+                                    ), // <-- Text
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  Container(
+                                    width: width * 0.82,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  /////////////////////////
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      color: logoColor,
+                                      Icons.language,
+                                      size: height * 0.05,
+                                    ),
+                                    label: Text(
+                                      'Edit language',
+                                      style: TextStyle(
+                                          fontSize: height * 0.04,
+                                          color: logoColor),
+                                    ), // <-- Text
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  Container(
+                                    width: width * 0.82,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+                                  ///////////////////////////////
+                                  TextButton.icon(
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      color: logoColor,
+                                      Icons.logout,
+                                      size: height * 0.05,
+                                    ),
+                                    label: Text(
+                                      'Log out',
+                                      style: TextStyle(
+                                          fontSize: height * 0.04,
+                                          color: logoColor),
+                                    ), // <-- Text
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        //general container
+                          //general container
 
-                        //notification container
-                        Opacity(
-                          opacity: notificationboxvis,
-                          child: Container(
-                            width: width * 0.7,
-                            height: height * 0.5,
-                            color: Colors.red,
+                          //notification container
+                          Opacity(
+                            opacity: notificationboxvis,
+                            child: Container(
+                              width: width * 0.83,
+                              height: height * 0.7,
+                              padding: EdgeInsets.all(height * 0.015),
+                              color: Colors.white,
+                              child: SingleChildScrollView(
+                                child: Column(children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Allow Notifications",
+                                        style: TextStyle(
+                                            fontSize: width * 0.05,
+                                            color: logoColor),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.2,
+                                        child: FittedBox(
+                                          child: Switch(
+                                            value: false,
+                                            activeColor: Colors.white,
+                                            onChanged: (value) {},
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.01,
+                                  ),
+
+                                  ////
+                                  Container(
+                                    width: width * 0.83,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width * 0.45,
+                                        child: Text(
+                                          "Allow urgent blood request notifications",
+                                          style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              color: logoColor),
+                                          maxLines: 3,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.2,
+                                        child: FittedBox(
+                                          child: Switch(
+                                            value: false,
+                                            activeColor: Colors.white,
+                                            onChanged: (value) {},
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Container(
+                                    width: width * 0.83,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                  ////////
+
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width * 0.45,
+                                        child: Text(
+                                          "Allow volunteer event reminder notification",
+                                          style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              color: logoColor),
+                                          maxLines: 3,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.2,
+                                        child: FittedBox(
+                                          child: Switch(
+                                            value: false,
+                                            activeColor: Colors.white,
+                                            onChanged: (value) {},
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Container(
+                                    width: width * 0.83,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                  ///////////
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: width * 0.45,
+                                        child: Text(
+                                          "Allow motivitional quote notification",
+                                          style: TextStyle(
+                                              fontSize: width * 0.05,
+                                              color: logoColor),
+                                          maxLines: 3,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: width * 0.2,
+                                        child: FittedBox(
+                                          child: Switch(
+                                            value: false,
+                                            activeColor: Colors.white,
+                                            onChanged: (value) {},
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: height * 0.02,
+                                  ),
+                                  Container(
+                                    width: width * 0.83,
+                                    color: Colors.grey,
+                                    height: height * 0.001,
+                                  ),
+                                ]),
+                              ),
+                            ),
                           ),
-                        ),
-                        //notification container
-                      ],
-                    ),
-                  )),
+                          //notification container
+                        ],
+                      ),
+                    ]),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
