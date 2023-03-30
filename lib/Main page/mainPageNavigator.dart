@@ -24,8 +24,11 @@ class MainPageNavigatorChild extends State<MainPageNavigator> {
   ];
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       bottomNavigationBar: Container(
+        //height: height * 0.1,
         child: BottomNavigationBar(
             currentIndex: pageIndex,
             type: BottomNavigationBarType.fixed,
