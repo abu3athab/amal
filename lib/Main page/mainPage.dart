@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 import 'package:demo2/Main%20page/mainpagesearch.dart';
+import 'package:demo2/charity%20page/charityPage.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class MainPageChild extends State<MainPage> {
                     ],
                   ),
                   SizedBox(
-                    height: height * 0.01,
+                    height: height * 0.02,
                   ),
                   Container(
                     decoration: BoxDecoration(
@@ -72,7 +73,7 @@ class MainPageChild extends State<MainPage> {
                         color: Color.fromRGBO(255, 255, 255, 0.15)),
                     padding: EdgeInsets.all(7),
                     width: width,
-                    height: height * 0.085,
+                    height: height * 0.07,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -90,7 +91,7 @@ class MainPageChild extends State<MainPage> {
                                       BorderSide(color: Colors.grey, width: 1)),
                               hintText: 'Try Food,Clothes..',
                             ),
-                            style: TextStyle(fontSize: height * 0.035),
+                            style: TextStyle(fontSize: height * 0.021),
                           ),
                         ),
                         Container(
@@ -141,20 +142,28 @@ class MainPageChild extends State<MainPage> {
                             SizedBox(
                               width: width * 0.001,
                             ),
-                            Column(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage:
-                                      AssetImage('assets/charityPic.png'),
-                                  radius: width * 0.10,
-                                ),
-                                Text(
-                                  "Charity",
-                                  style: TextStyle(
-                                      fontSize: width * 0.04,
-                                      color: Colors.white),
-                                ),
-                              ],
+                            InkWell(
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    backgroundImage:
+                                        AssetImage('assets/charityPic.png'),
+                                    radius: width * 0.10,
+                                  ),
+                                  Text(
+                                    "Charity",
+                                    style: TextStyle(
+                                        fontSize: width * 0.04,
+                                        color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CharityPage()));
+                              },
                             ),
                             Column(
                               children: [
