@@ -1,8 +1,8 @@
 import 'dart:ffi';
 
 import 'package:demo2/Main%20page/mainpagesearch.dart';
-import 'package:demo2/charity%20page/charityPage.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -162,7 +162,7 @@ class MainPageChild extends State<MainPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => CharityPage()));
+                                        builder: (context) => LogInPassword()));
                               },
                             ),
                             Column(

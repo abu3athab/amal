@@ -1,5 +1,6 @@
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/settings%20page/set.dart';
 import 'package:demo2/settings%20page/settingspage.dart';
 import 'package:flutter/material.dart';
 
@@ -14,14 +15,7 @@ class MainPageNavigator extends StatefulWidget {
 
 class MainPageNavigatorChild extends State<MainPageNavigator> {
   int pageIndex = 0;
-  final pages = [
-    new MainPage(),
-    Container(
-      color: Colors.red,
-    ),
-    new Profile(),
-    new Settings(),
-  ];
+  final pages = [new MainPage(), new Settings(), new Profile(), new Config()];
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
