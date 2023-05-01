@@ -1,8 +1,8 @@
 import 'dart:ffi';
 
 import 'package:demo2/Main%20page/mainpagesearch.dart';
-
 import 'package:demo2/colors.dart';
+import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:flutter/material.dart';
@@ -189,16 +189,7 @@ class MainPageChild extends State<MainPage> {
                                   ),
                                 ],
                               ),
-                              Column(
-                                children: [
-                                  CircleAvatar(
-                                    backgroundImage: AssetImage(
-                                        'assets/Community-Donation-Drive-Feature-Image-01.webp'),
-                                    radius: width * 0.1,
-                                  ),
-                                  //added
-                                  Text(
-                                    "Volunteer",
+
                                     style: TextStyle(
                                         fontSize: width * 0.04,
                                         color: Colors.black),
