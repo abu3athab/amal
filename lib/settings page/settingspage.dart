@@ -22,11 +22,7 @@ class Settingschild extends State<Settings> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topRight,
-              end: Alignment.bottomLeft,
-              colors: [logoColor, logoColorsec])),
+      decoration: BoxDecoration(color: Colors.white),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -34,7 +30,7 @@ class Settingschild extends State<Settings> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: height * 0.07,
+                height: height * 0.01,
               ),
               //start of setting title bar/////////////////////////
               Row(
@@ -48,7 +44,7 @@ class Settingschild extends State<Settings> {
                           angle: 90 * math.pi / 180,
                           child: Icon(
                             Icons.bar_chart,
-                            color: Colors.white,
+                            color: Colors.black,
                             size: height * 0.03,
                           ),
                         ),
@@ -62,7 +58,7 @@ class Settingschild extends State<Settings> {
                         Text(
                           "SETTINGS ",
                           style: TextStyle(
-                              color: Colors.white, fontSize: width * 0.05),
+                              color: Colors.black, fontSize: width * 0.05),
                         ),
                       ],
                     ),
@@ -76,7 +72,7 @@ class Settingschild extends State<Settings> {
                           angle: 270 * math.pi / 180,
                           child: Icon(
                             Icons.bar_chart,
-                            color: Colors.white,
+                            color: Colors.black,
                             size: height * 0.03,
                           ),
                         ),
@@ -110,7 +106,7 @@ class Settingschild extends State<Settings> {
                             child: Text(
                               "GENERAL",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: width * 0.045),
+                                  color: Colors.black, fontSize: width * 0.045),
                             )),
                       ),
                     ),
@@ -120,7 +116,7 @@ class Settingschild extends State<Settings> {
                     child: Text(
                       "/",
                       style: TextStyle(
-                          color: Colors.white, fontSize: width * 0.08),
+                          color: Colors.black, fontSize: width * 0.08),
                     ),
                   ),
                   VerticalDivider(width: 1.0),
@@ -141,7 +137,7 @@ class Settingschild extends State<Settings> {
                             child: Text(
                               "NOTIFICATION",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: width * 0.045),
+                                  color: Colors.black, fontSize: width * 0.045),
                             )),
                       ),
                     ),
@@ -153,7 +149,7 @@ class Settingschild extends State<Settings> {
               ),
               Container(
                 width: width * 0.92,
-                height: height * 0.65,
+                height: height * 0.6,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                 ),

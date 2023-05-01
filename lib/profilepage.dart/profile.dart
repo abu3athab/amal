@@ -27,9 +27,9 @@ class ProfileChild extends State<Profile> {
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
-              begin: Alignment.topRight,
+              begin: Alignment.centerRight,
               end: Alignment.bottomLeft,
-              colors: [logoColor, logoColorsec])),
+              colors: [Colors.white, Colors.white])),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
