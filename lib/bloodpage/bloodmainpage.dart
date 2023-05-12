@@ -29,6 +29,7 @@ class BloodmainChild extends State<Bloodmain> {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
             child: Column(
