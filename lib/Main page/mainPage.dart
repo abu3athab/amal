@@ -5,6 +5,7 @@ import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
+import 'package:demo2/volunteer%20page/volunteermain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -190,10 +191,20 @@ class MainPageChild extends State<MainPage> {
                               ),
                               Column(
                                 children: [
-                                  CircleAvatar(
-                                    backgroundImage: AssetImage(
-                                        'assets/Community-Donation-Drive-Feature-Image-01.webp'),
-                                    radius: width * 0.1,
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Vounteermain()),
+                                      );
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundImage: AssetImage(
+                                          'assets/Community-Donation-Drive-Feature-Image-01.webp'),
+                                      radius: width * 0.1,
+                                    ),
                                   ),
                                   //added
                                   Text(

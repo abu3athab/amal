@@ -1,14 +1,6 @@
-import 'dart:math';
-
-import 'package:demo2/Main%20page/mainpagesearch.dart';
-import 'package:demo2/colors.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
-import 'package:demo2/profilepage.dart/profilepagenavigator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import '../log in/logIn.dart';
-import 'package:scroll_to_index/scroll_to_index.dart';
 
 class Profile extends StatefulWidget {
   @override

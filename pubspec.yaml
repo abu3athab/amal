@@ -39,6 +39,8 @@ dependencies:
   otp_text_field: ^1.1.3
   scroll_to_index: ^3.0.1
   cloud_firestore: ^4.4.5
+  intl: ^0.18.1
+  flutter_time_picker_spinner: ^2.0.0
 
 dev_dependencies:
   flutter_test:
