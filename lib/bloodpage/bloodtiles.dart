@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Eventtile extends StatelessWidget {
+class Bloodtiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Container(
       width: width * 0.95,
-      height: height * 0.16,
+      height: height * 0.161,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -18,7 +18,7 @@ class Eventtile extends StatelessWidget {
           children: [
             Container(
               child: Image.asset(
-                  "assets/drawn-clothing-donation-concept-illustrated_23-2148833206.png"),
+                  "assets/illustration-person-donating-blood_23-2148236971.jpg"),
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
@@ -26,30 +26,33 @@ class Eventtile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Park cleaning",
-                    style: TextStyle(fontSize: height * 0.02),
+                    "Amman jubiha",
+                    style: TextStyle(fontSize: height * 0.03),
+                  ),
+                  SizedBox(
+                    height: height * 0.005,
                   ),
                   Text(
-                    "Date: march 7th",
-                    style: TextStyle(fontSize: height * 0.02),
+                    "Blood type: O+",
+                    style: TextStyle(fontSize: height * 0.028),
                     softWrap: true,
                     maxLines: 2,
                   ),
+                  SizedBox(
+                    height: height * 0.005,
+                  ),
                   Text(
-                    "Time: 9:00 AM",
-                    style: TextStyle(fontSize: height * 0.02),
+                    "requried units : 4",
+                    style: TextStyle(fontSize: height * 0.028),
                     softWrap: true,
                     maxLines: 2,
                   ),
-                  Text(
-                    "Amman Jubiha",
-                    style: TextStyle(fontSize: height * 0.02),
-                    softWrap: true,
-                    maxLines: 2,
+                  SizedBox(
+                    height: height * 0.005,
                   ),
                   Text(
                     "Click to view info",
-                    style: TextStyle(fontSize: height * 0.012),
+                    style: TextStyle(fontSize: height * 0.01),
                     softWrap: true,
                     maxLines: 2,
                   ),
