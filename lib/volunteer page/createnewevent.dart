@@ -60,6 +60,7 @@ class CreateneweventChild extends State<Createnewevent> {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 3, 8, 8),
             child: Column(

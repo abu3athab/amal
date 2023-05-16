@@ -25,7 +25,9 @@ class MainPageNavigatorChild extends State<MainPageNavigator> {
         MediaQuery.of(context).padding.top -
         MediaQuery.of(context).padding.bottom;
     return SafeArea(
+      bottom: false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         bottomNavigationBar: Container(
           height: availableHeight * 0.1,
           child: BottomNavigationBar(

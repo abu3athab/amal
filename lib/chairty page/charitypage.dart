@@ -1,25 +1,27 @@
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/bloodpage/bloodtiles.dart';
+import 'package:demo2/bloodpage/requestblood.dart';
+import 'package:demo2/chairty%20page/charityitemlist.dart';
+import 'package:demo2/chairty%20page/charitytiles.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
+import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
 import 'package:flutter/material.dart';
 
-import '../side bar/side_bar.dart';
-
-class Vounteermain extends StatefulWidget {
+class Charitypage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return VounteermainChild();
+    return CharitypageChild();
   }
 }
 
-class VounteermainChild extends State<Vounteermain> {
+class CharitypageChild extends State<Charitypage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final _editProfileKey = GlobalKey<FormState>();
 
     return Container(
       decoration: BoxDecoration(
@@ -37,13 +39,38 @@ class VounteermainChild extends State<Vounteermain> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: Text(
-                    "You make a living by what you get. You make a life by what you give.",
-                    style: TextStyle(fontSize: width * 0.07),
-                  ),
-                ),
+                Container(
+                    width: width,
+                    height: height * 0.2,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage(
+                              "assets/flat-illustration-world-humanitarian-day_23-2149484207 (1).png"),
+                          fit: BoxFit.cover,
+                          opacity: 0.4),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Tikyat Um Ali",
+                          style: TextStyle(fontSize: width * 0.08),
+                        ),
+                        Text(
+                          "Tikyat Um Ali main goal is to provide help to every indivual and family in need so everyone can enjoy a full life without worrying about basic needs",
+                          style: TextStyle(fontSize: width * 0.04),
+                        ),
+                        Spacer(),
+                        Row(children: [
+                          Text(
+                            "location: Amman, Jordan",
+                            style: TextStyle(fontSize: width * 0.05),
+                          ),
+                          Spacer(),
+                          TextButton(onPressed: () {}, child: Text("view info"))
+                        ]),
+                      ],
+                    )),
+                //////////////////////////////
                 Container(
                     width: width,
                     height: height * 0.10,
@@ -70,7 +97,7 @@ class VounteermainChild extends State<Vounteermain> {
                               focusedBorder: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.grey, width: 1)),
-                              hintText: 'Try Charity,Food.clothing...',
+                              hintText: 'Try Food.clothing...',
                             ),
                             style: TextStyle(fontSize: height * 0.021),
                           ),
@@ -83,46 +110,22 @@ class VounteermainChild extends State<Vounteermain> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20)),
                             ),
-                            child: Image.asset("assets/magnifying-glass.gif")),
+                            child: InkWell(
+                              child: Image.asset("assets/magnifying-glass.gif"),
+                              onTap: () {},
+                            )),
                       ],
                     )),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Manageevents()),
-                      );
-                    },
-                    child: Text(
-                      "manage your events",
-                      style: TextStyle(fontSize: width * 0.06),
-                    )),
-                Divider(
-                  thickness: 2,
-                ),
-                Row(
-                  children: [
-                    Text("Events in amman"),
-                    Spacer(),
-                    Row(
-                      children: [
-                        TextButton(
-                            onPressed: () {}, child: Text("Change city")),
-                        TextButton(onPressed: () {}, child: Text("See all"))
-                      ],
-                    )
-                  ],
-                ),
                 Expanded(
                     child: ListView(
                   padding: const EdgeInsets.all(8),
                   children: <Widget>[
-                    Eventtile(),
-                    Eventtile(),
-                    Eventtile(),
-                    Eventtile(),
-                    Eventtile(),
-                    Eventtile(),
+                    Charityitems(),
+                    Charityitems(),
+                    Charityitems(),
+                    Charityitems(),
+                    Charityitems(),
+                    Charityitems(),
                   ],
                 )),
               ],
