@@ -1,90 +1,134 @@
-import 'package:flutter/material.dart';
-import 'rememberMe.dart';
-import 'logInTextBoxes.dart';
-import 'package:demo2/sign up/signUp.dart';
+import 'package:demo2/Main%20page/mainPageNavigator.dart';
+import 'package:demo2/colors.dart';
+import 'package:demo2/forgotpassword/forgotpass.dart';
 
-class MainApp extends StatefulWidget {
+import 'package:demo2/log%20in/loginEmail.dart';
+import 'package:demo2/log%20in/loginPassword.dart';
+import 'package:demo2/log%20in/rememberMe.dart';
+import 'package:demo2/sign%20up/chooseType.dart';
+import 'package:flutter/material.dart';
+
+class Login extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return App();
+    return LoginChild();
   }
 }
 
-//ddd
-class App extends State<MainApp> {
+class LoginChild extends State<Login> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
-        body: Container(
-            constraints: BoxConstraints.expand(),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assets/signUpImage.jpg"),
-                  fit: BoxFit.cover),
-            ),
-            padding: const EdgeInsets.all(20.0),
-            child: SingleChildScrollView(
-                child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Image.asset("assets/amalLogo.png"),
-                const Text(
-                  "Log In",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+      body: Container(
+        height: height,
+        width: width,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  height: 0.35 * height,
+                  width: width * 0.5,
+                  alignment: Alignment.center,
+                  child: Image.asset(
+                    "assets/logo.png",
+                    fit: BoxFit.cover,
+                    width: width * 0.80,
+                    height: height * 50,
+                  )),
+              const Text(
+                "Login",
+                style: TextStyle(
+                  fontSize: 30,
                 ),
-                new LogInTextBox(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    new RememberMe(),
-                    const TextButton(
-                        onPressed: null,
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              color: Color.fromARGB(255, 24, 102, 26),
-                              decoration: TextDecoration.underline),
-                        )),
-                  ],
-                ),
-                Container(
-                  padding: EdgeInsets.all(20),
-                  width: 210,
-                  child: ElevatedButton(
-                    onPressed: null,
-                    child: Text(
-                      "Login",
-                      style: TextStyle(color: Color.fromARGB(154, 0, 0, 0)),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Color.fromARGB(255, 72, 201, 22)),
+              ),
+              SizedBox(
+                height: height * 0.02,
+              ),
+              LogInEmail(),
+              SizedBox(
+                height: height * 0.0001,
+              ),
+              LogInPassword(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      margin: EdgeInsets.symmetric(
+                          vertical: 0, horizontal: width * 0.04),
+                      child: RememberMe()),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 0, horizontal: 6),
+                    child: TextButton(
+                      child: const Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            color: logoColor,
+                            decoration: TextDecoration.underline),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => ForgotPass()),
+                        );
+                      },
                     ),
                   ),
+                ],
+              ),
+              SizedBox(
+                height: height * 0.04,
+              ),
+              Container(
+                width: width * 0.6,
+                height: height * 0.05,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MainPageNavigator()),
+                    );
+                  },
+                  child: Text(
+                    "Login",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ButtonStyle(
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                      backgroundColor: MaterialStateProperty.all(logoColor)),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have an account?",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUp()));
-                        },
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(
-                              color: Color.fromARGB(255, 24, 102, 26)),
-                        ))
-                  ],
-                )
-              ],
-            ))));
+              ),
+              SizedBox(
+                height: height * 0.04,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account?"),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Choose()),
+                        );
+                      },
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(color: logoColor),
+                      ))
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

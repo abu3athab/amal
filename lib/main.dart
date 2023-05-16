@@ -7,8 +7,6 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
-    // DeviceOrientation.landscapeLeft,
-    // DeviceOrientation.landscapeRight
   ]);
   runApp(MyApp());
 }
@@ -17,7 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainApp(),
+      debugShowCheckedModeBanner: false,
+      home: Login(),
     );
   }
 }
