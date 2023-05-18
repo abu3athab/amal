@@ -1,5 +1,6 @@
 import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/log%20in/user.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../colors.dart';
@@ -68,6 +69,16 @@ class SignUpForUserChild extends State<SignUpForUser> {
     }
     if (!pass.contains(RegExp(r'[!@#$%&*?]'))) {
       return "password must contain at least one of these special characters (!@#%^&*?)";
+    } else {
+      return null;
+    }
+  }
+
+  String? checkEmail(String? email) {
+    if (email == null || email.isEmpty) {
+      return "email field must not be empty";
+    } else if (!EmailValidator.validate(email)) {
+      return "email isn't valid";
     } else {
       return null;
     }
@@ -178,11 +189,7 @@ class SignUpForUserChild extends State<SignUpForUser> {
                     SizedBox(
                       height: 75,
                       child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Email must not be empty";
-                          }
-                        },
+                        validator: checkEmail,
                         controller: _emailController,
                         decoration: InputDecoration(
                             filled: true,
@@ -284,21 +291,18 @@ class SignUpForUserChild extends State<SignUpForUser> {
                         );
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'email-already-in-use') {
-                          ScaffoldMessenger.of(context as BuildContext)
-                              .showSnackBar(SnackBar(
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             duration: Duration(seconds: 5),
                             content: Text('this email is already registered'),
                           ));
-                        } else if (e.code == 'ERROR_INVALID_EMAIL') {
-                          ScaffoldMessenger.of(context as BuildContext)
-                              .showSnackBar(SnackBar(
-                                  duration: Duration(seconds: 5),
-                                  content: Text('invalid ')));
+                        } else if (e.code == 'error_invalid_email') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid ')));
                         } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
-                          ScaffoldMessenger.of(context as BuildContext)
-                              .showSnackBar(SnackBar(
-                                  duration: Duration(seconds: 5),
-                                  content: Text('invalid credentials ')));
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid credentials ')));
                         }
                       }
                       ;
