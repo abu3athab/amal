@@ -10,6 +10,12 @@ class LogInPassword extends StatefulWidget {
 
 class LogInPasswordChild extends State<LogInPassword> {
   FocusNode labelTextNode = new FocusNode();
+
+  TextEditingController _passwordController = TextEditingController();
+  String getUserPassword() {
+    return this._passwordController.text;
+  }
+
   var isHidden = true;
   @override
   Widget build(BuildContext context) {

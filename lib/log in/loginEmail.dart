@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 
 class LogInEmail extends StatelessWidget {
   FocusNode labelTextNode = new FocusNode();
+  TextEditingController _emailController = TextEditingController();
+
+  String getUserEmail() {
+    return this._emailController.text;
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -10,6 +16,7 @@ class LogInEmail extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(15),
       child: TextField(
+        controller: _emailController,
         cursorColor: Colors.black,
         decoration: InputDecoration(
             focusedBorder: OutlineInputBorder(
