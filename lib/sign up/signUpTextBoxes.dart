@@ -306,8 +306,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
                         }
                       }
                       ;
-
-                      ;
                     }
                   },
 
