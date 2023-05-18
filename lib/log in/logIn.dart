@@ -6,6 +6,7 @@ import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
 import 'package:demo2/sign%20up/chooseType.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -16,6 +17,8 @@ class Login extends StatefulWidget {
 }
 
 class LoginChild extends State<Login> {
+  String _email = LogInEmail().getUserEmail();
+  String _password = LogInPasswordChild().getUserPassword();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -89,11 +92,40 @@ class LoginChild extends State<Login> {
                 height: height * 0.05,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainPageNavigator()),
-                    );
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      duration: Duration(seconds: 2),
+                      content: Text(_email),
+                    ));
+                    // final user = await FirebaseAuth.instance
+                    //     .signInWithEmailAndPassword(
+                    //         email: _email, password: _password);
+
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => MainPageNavigator()),
+                    // );
+
+                    // if (user != null) {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => MainPageNavigator()),
+                    //   );
+                    // } else {
+                    //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //     duration: Duration(seconds: 2),
+                    //     content: Text("user doesn't exist"),
+                    //   ));
+
+                    //   } catch (e) {
+                    //     _email = "";
+                    //     _password = "";
+                    //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //       duration: Duration(seconds: 2),
+                    //       content: Text("user doesn't "),
+                    //     ));
+                    //   }
                   },
                   child: Text(
                     "Login",

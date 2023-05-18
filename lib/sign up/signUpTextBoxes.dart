@@ -1,22 +1,28 @@
+import 'package:demo2/log%20in/logIn.dart';
+import 'package:demo2/log%20in/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final _firebase = FirebaseAuth.instance;
 
 class SignUpForUser extends StatefulWidget {
   @override
-  State<SignUpForUser> createState() => _SignUpForUserChild();
+  State<SignUpForUser> createState() => SignUpForUserChild();
 }
 
-class _SignUpForUserChild extends State<SignUpForUser> {
+class SignUpForUserChild extends State<SignUpForUser> {
   final _signUpFormKey = GlobalKey<FormState>();
 
-  final _userNameController = TextEditingController();
+  TextEditingController _userNameController = TextEditingController();
 
-  final _emailController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
 
-  final _phoneNumberController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
 
-  final _passwordController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
   @override
   void dispose() {
     _passwordController.dispose();
@@ -241,18 +247,67 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                 width: width * 0.6,
                 height: height * 0.05,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_signUpFormKey.currentState?.validate() == true) {
+                  onPressed: () async {
+                    if (_signUpFormKey.currentState!.validate()) {
+                      // If the form is valid, display a snackbar. In the real world,
+                      // you'd often call a server or save the information in a database.
+
                       // Save the form data and navigate to the next screen
                       final username = _userNameController.text;
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
-                      final location = _passwordController.text;
+                      final password = _passwordController.text;
+                      var _firebase = FirebaseAuth.instance;
 
                       // TODO: save the data and navigate to the next screen
+                      //if the user hasn't registered an acount will be created and send the user to the login page
+                      //if the acount already resistered a message will be sent to the user
+
+                      try {
+                        final userCredentials =
+                            await _firebase.createUserWithEmailAndPassword(
+                                email: email, password: password);
+                        addUser(
+                          username,
+                          email,
+                          phoneNumber,
+                          password,
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          duration: Duration(seconds: 2),
+                          content: Text('account successfuly registered'),
+                        ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Login()),
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'email-already-in-use') {
+                          ScaffoldMessenger.of(context as BuildContext)
+                              .showSnackBar(SnackBar(
+                            duration: Duration(seconds: 5),
+                            content: Text('this email is already registered'),
+                          ));
+                        } else if (e.code == 'ERROR_INVALID_EMAIL') {
+                          ScaffoldMessenger.of(context as BuildContext)
+                              .showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 5),
+                                  content: Text('invalid ')));
+                        } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
+                          ScaffoldMessenger.of(context as BuildContext)
+                              .showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 5),
+                                  content: Text('invalid credentials ')));
+                        }
+                      }
+                      ;
+
+                      ;
                     }
                   },
+
                   // ignore: sort_child_properties_last
+
                   child: const Text(
                     'Sign Up',
                     style: TextStyle(color: Colors.white),
@@ -268,4 +323,6 @@ class _SignUpForUserChild extends State<SignUpForUser> {
           ),
         ));
   }
+
+  Future<void> validateUser() async {}
 }

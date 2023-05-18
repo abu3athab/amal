@@ -1,13 +1,32 @@
+import 'dart:math';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 class UserInfo {
-  String? userName;
-  String? email = '';
-  String? phoneNumber = '';
-  String? nationalID = '';
-  String? password = '';
+  String userName;
+  String email = '';
+  String phoneNumber = '';
+  String password = '';
   UserInfo(
-      {this.userName,
-      this.email,
-      this.phoneNumber,
-      this.nationalID,
-      this.password});
+      {required this.userName,
+      required this.email,
+      required this.phoneNumber,
+      required this.password});
+}
+
+Future<void> addUser(
+    String username, String email, String phoneNumber, String password) async {
+  CollectionReference users =
+      await FirebaseFirestore.instance.collection('Users');
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = auth.currentUser!.uid.toString();
+  users.add({
+    'name': username,
+    'email': email,
+    'phone number': phoneNumber,
+    'password': password,
+    'uid': uid
+  });
+  return;
 }
