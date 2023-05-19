@@ -1,16 +1,12 @@
-
-import 'package:demo2/Main%20page/mainPageNavigator.dart';
-import 'package:demo2/Main%20page/mainpagesearch.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
-
-import 'package:demo2/log%20in/loginEmail.dart';
-import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
 import 'package:demo2/sign%20up/chooseType.dart';
-import 'package:demo2/sign%20up/signUpTextBoxes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../Main page/mainPage.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -33,6 +29,7 @@ class LoginChild extends State<Login> {
   void dispose() {
     _passwordController.dispose();
     _emailController.dispose();
+    labelTextNode.dispose();
     super.dispose();
   }
 
@@ -187,39 +184,68 @@ class LoginChild extends State<Login> {
                       if (_formKey.currentState!.validate()) {
                         final email = _emailController.text;
                         final password = _passwordController.text;
-                        final _firebase = FirebaseAuth.instance;
-                        if (SignUpForUserChild.isEmailVerified) {
-                          try {
-                            UserCredential credential =
-                                await _firebase.signInWithEmailAndPassword(
-                                    email: email, password: password);
+                        FirebaseFirestore _firestore =
+                            FirebaseFirestore.instance;
 
+                        try {
+                          UserCredential userCredential = await FirebaseAuth
+                              .instance
+                              .signInWithEmailAndPassword(
+                            email: email,
+                            password: password,
+                          );
+
+                          // User logged in successfully
+                          // Now retrieve user data from Firestore
+
+                          QuerySnapshot<Map<String, dynamic>> userData =
+                              await _firestore
+                                  .collection('Users')
+                                  .where('uid',
+                                      isEqualTo: userCredential.user!.uid)
+                                  .get();
+
+                          if (userData.docs.isNotEmpty) {
+                            // Access the first document from the query snapshot
+                            DocumentSnapshot<Map<String, dynamic>>
+                                userSnapshot = userData.docs.firstWhere((doc) =>
+                                    doc.data()['uid'] ==
+                                    userCredential.user!.uid);
+                            //String phoneNumber = userSnapshot.data()!['phone number'];
+
+                            // ... Access other user data fields
+
+                            // Navigate to the main page after successful login
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MainPageNavigator()),
+                                  builder: (context) => MainPage()),
                             );
-                          } on FirebaseAuthException catch (e) {
-                            if (e.code == 'user-not-found') {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
                                 duration: Duration(seconds: 5),
-                                content: Text('user not found'),
-                              ));
-                            } else if (e.code == 'wrong-password') {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('wrong pass'),
-                              ));
-                            }
+                                content: Text('User not found'),
+                              ),
+                            );
                           }
-                        } else
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            duration: Duration(seconds: 5),
-                            content: Text(
-                                SignUpForUserChild.isEmailVerified.toString()),
-                          ));
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 5),
+                                content: Text('User not found'),
+                              ),
+                            );
+                          } else if (e.code == 'wrong-password') {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                duration: Duration(seconds: 5),
+                                content: Text('Wrong password'),
+                              ),
+                            );
+                          }
+                        }
                       }
                     },
                     child: Text(
@@ -227,9 +253,11 @@ class LoginChild extends State<Login> {
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ButtonStyle(
-                        shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10))),
-                        backgroundColor: MaterialStateProperty.all(logoColor)),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      )),
+                      backgroundColor: MaterialStateProperty.all(logoColor),
+                    ),
                   ),
                 ),
                 SizedBox(

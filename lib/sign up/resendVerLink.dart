@@ -2,14 +2,7 @@ import 'package:demo2/colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ResendVerLink extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return ResendVerLinkChild();
-  }
-}
-
-class ResendVerLinkChild extends State<ResendVerLink> {
+class ResendVerLinkChild extends StatelessWidget {
   ResendVerLinkChild(
       {User? user,
       String? name,

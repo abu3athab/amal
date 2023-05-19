@@ -122,12 +122,8 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
     });
     if (isEmailVerified) {
       timer?.cancel();
-      addCharity(
-        _charityNameController.text,
-        _emailController.text,
-        _phoneNumberController.text,
-        _passwordController.text,
-      );
+      addCharity(_charityNameController.text, _emailController.text,
+          _phoneNumberController.text, _passwordController.text, 'yes');
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: Duration(seconds: 3),
         content: Text('account successfuly registered'),
