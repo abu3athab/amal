@@ -79,12 +79,7 @@ class SignUpForUserChild extends State<SignUpForUser> {
     });
     if (isEmailVerified) {
       timer?.cancel();
-      addUser(
-        username,
-        email,
-        phoneNumber,
-        password,
-      );
+      addUser(username, email, phoneNumber, password);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: Duration(seconds: 3),
         content: Text('account successfuly registered'),
@@ -375,6 +370,4 @@ class SignUpForUserChild extends State<SignUpForUser> {
           ),
         ));
   }
-
-  Future<void> validateUser() async {}
 }

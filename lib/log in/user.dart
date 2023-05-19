@@ -31,8 +31,8 @@ Future<void> addUser(
   return;
 }
 
-Future<void> addCharity(
-    String username, String email, String phoneNumber, String password) async {
+Future<void> addCharity(String username, String email, String phoneNumber,
+    String password, String v) async {
   CollectionReference charities =
       await FirebaseFirestore.instance.collection('Charities');
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -42,6 +42,7 @@ Future<void> addCharity(
     'email': email,
     'phone number': phoneNumber,
     'password': password,
+    'verified': v,
     'uid': uid
   });
   return;
