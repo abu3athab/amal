@@ -1,10 +1,17 @@
+import 'dart:async';
+
 import 'package:demo2/colors.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
+import '../log in/logIn.dart';
+import '../log in/user.dart';
+
 class SignUpChartiy extends StatefulWidget {
-  const SignUpChartiy({Key? key}) : super(key: key);
+  SignUpChartiy({Key? key}) : super(key: key);
 
   @override
   State<SignUpChartiy> createState() => _SignUpChartiyState();
@@ -12,11 +19,15 @@ class SignUpChartiy extends StatefulWidget {
 
 class _SignUpChartiyState extends State<SignUpChartiy> {
   final _formKey = GlobalKey<FormState>();
+  final _firebase = FirebaseAuth.instance;
+  static bool isEmailVerified = false;
+  Timer? timer;
+
   final _charityNameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _emailController = TextEditingController();
   final _locationController = TextEditingController();
-  final _password = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isHidden = true;
 
   @override
@@ -25,7 +36,7 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
     _phoneNumberController.dispose();
     _emailController.dispose();
     _locationController.dispose();
-    _password.dispose();
+    _passwordController.dispose();
     super.dispose();
   }
 
@@ -66,6 +77,65 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
       return "password must contain at least one of these special characters (!@#%^&*?)";
     } else {
       return null;
+    }
+  }
+
+  String? checkEmail(String? email) {
+    if (email == null || email.isEmpty) {
+      return "email field must not be empty";
+    } else if (!EmailValidator.validate(email)) {
+      return "email isn't valid";
+    } else {
+      return null;
+    }
+  }
+
+  void isVerifiedEmail() {
+    isEmailVerified = _firebase.currentUser!.emailVerified;
+    if (!isEmailVerified) {
+      sendVerificationEmail();
+      timer =
+          Timer.periodic(Duration(seconds: 3), (timer) => checkEmailVerified());
+    }
+  }
+
+  Future<void> sendVerificationEmail() async {
+    try {
+      final user = _firebase.currentUser;
+      await user!.sendEmailVerification();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("a verification link has been sent to your email"),
+        duration: Duration(seconds: 3),
+      ));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("somthing went wrong"),
+        duration: Duration(seconds: 3),
+      ));
+    }
+  }
+
+  Future<void> checkEmailVerified() async {
+    await _firebase.currentUser!.reload();
+    setState(() {
+      isEmailVerified = _firebase.currentUser!.emailVerified;
+    });
+    if (isEmailVerified) {
+      timer?.cancel();
+      addCharity(
+        _charityNameController.text,
+        _emailController.text,
+        _phoneNumberController.text,
+        _passwordController.text,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: Duration(seconds: 3),
+        content: Text('account successfuly registered'),
+      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
     }
   }
 
@@ -147,32 +217,24 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                       validator: checkPhoneNumber),
                   SizedBox(height: 16),
                   TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _emailController,
-                    decoration: InputDecoration(
-                        hintText: "Email",
-                        prefixIcon: Icon(
-                          Icons.mail,
-                          color: logoColor,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: logoColor))),
-                    validator: (value) {
-                      if (value == null ||
-                          value.isEmpty ||
-                          !value.contains('@')) {
-                        return 'Please enter a valid email address';
-                      }
-                      return null;
-                    },
-                  ),
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                          hintText: "Email",
+                          prefixIcon: Icon(
+                            Icons.mail,
+                            color: logoColor,
+                          ),
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: logoColor))),
+                      validator: checkEmail),
                   const SizedBox(height: 16),
                   TextFormField(
                     obscureText: _isHidden,
-                    controller: _password,
+                    controller: _passwordController,
                     decoration: InputDecoration(
                         hintText: "password",
                         prefixIcon: Icon(
@@ -206,26 +268,6 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   SizedBox(
                     height: 16,
                   ),
-                  TextFormField(
-                    controller: _locationController,
-                    decoration: InputDecoration(
-                        hintText: 'Location',
-                        prefixIcon: Icon(
-                          Icons.add_location_alt,
-                          color: logoColor,
-                        ),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: logoColor))),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your location';
-                      }
-                      return null;
-                    },
-                  ),
                 ]),
               ),
               SizedBox(
@@ -236,15 +278,38 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                 width: width * 0.6,
                 height: height * 0.05,
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState?.validate() == true) {
                       // Save the form data and navigate to the next screen
                       final charityName = _charityNameController.text;
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
-                      final location = _locationController.text;
+                      final password = _passwordController.text;
+                      final _firebase = FirebaseAuth.instance;
 
                       // TODO: save the data and navigate to the next screen
+                      try {
+                        final userCredentials =
+                            await _firebase.createUserWithEmailAndPassword(
+                                email: email, password: password);
+
+                        isVerifiedEmail();
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'email-already-in-use') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            duration: Duration(seconds: 5),
+                            content: Text('this email is already registered'),
+                          ));
+                        } else if (e.code == 'error_invalid_email') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid ')));
+                        } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid credentials ')));
+                        }
+                      }
                     }
                   },
 
