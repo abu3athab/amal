@@ -10,6 +10,7 @@ import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/volunteermain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../chairty page/charitytiles.dart';
 
@@ -28,14 +29,16 @@ class MainPageChild extends State<MainPage> {
     var availableHeight =
         MediaQuery.of(context).size.height - AppBar().preferredSize.height;
     MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom;
-    return Container(
-      decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.centerRight,
-              end: Alignment.bottomLeft,
-              colors: [Colors.white, Colors.white])),
-      child: SafeArea(
-        bottom: false,
+
+    final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
+
+    return SafeArea(
+      bottom: false,
+      child: SideMenu(
+        background: logoColor,
+        key: _sideMenuKey,
+        menu: Sidemenu(),
+        type: SideMenuType.shrinkNSlide,
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Center(
@@ -89,11 +92,12 @@ class MainPageChild extends State<MainPage> {
                                   child: InkWell(
                                     child: Image.asset("assets/menu.gif"),
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Sidemenu()),
-                                      );
+                                      final _state = _sideMenuKey.currentState;
+                                      if (_state!.isOpened)
+                                        _state
+                                            .closeSideMenu(); // close side menu
+                                      else
+                                        _state.openSideMenu();
                                     },
                                   )),
                               Spacer(),

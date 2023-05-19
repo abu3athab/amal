@@ -1,6 +1,6 @@
-import 'dart:js_interop';
-
+import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/Main%20page/mainPageNavigator.dart';
+import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 
@@ -240,7 +240,15 @@ class LoginChild extends State<Login> {
                         child: const Text(
                           "Sign Up",
                           style: TextStyle(color: logoColor),
-                        ))
+                        )),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                          );
+                        },
+                        child: Text("bypass auth"))
                   ],
                 )
               ],

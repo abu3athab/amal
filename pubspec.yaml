@@ -43,6 +43,7 @@ dependencies:
   flutter_time_picker_spinner: ^2.0.0
   firebase_auth: ^4.6.1
   email_validator: ^2.1.17
+  shrink_sidemenu: ^2.0.0+2-null-safety
 
 dev_dependencies:
   flutter_test:
