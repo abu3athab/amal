@@ -327,7 +327,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
                       final password = _passwordController.text;
-                      var _firebase = FirebaseAuth.instance;
 
                       // TODO: save the data and navigate to the next screen
                       //if the user hasn't registered an acount will be created and send the user to the login page
@@ -337,7 +336,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
                         final userCredentials =
                             await _firebase.createUserWithEmailAndPassword(
                                 email: email, password: password);
-                        User? user = FirebaseAuth.instance.currentUser;
 
                         isVerifiedEmail();
                       } on FirebaseAuthException catch (e) {
