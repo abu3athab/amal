@@ -1,5 +1,12 @@
+import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/bloodpage/bloodmainpage.dart';
+import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:flutter/material.dart';
+
+import '../settings page/set.dart';
+import '../settings page/settingspage.dart';
 
 class Sidemenu extends StatefulWidget {
   @override
@@ -13,12 +20,12 @@ class Sidemenuchild extends State<Sidemenu> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-        body: Container(
-      width: width * 0.7,
-      height: height,
-      color: logoColor,
-      child: SafeArea(
+    return SafeArea(
+      child: Scaffold(
+          body: Container(
+        width: width * 1,
+        height: height,
+        color: logoColor,
         child: Column(children: [
           //info card start//////////////////////////////
           ListTile(
@@ -55,31 +62,23 @@ class Sidemenuchild extends State<Sidemenu> {
           ),
 
           //button tiles////////////////////////
-          ListTile(
-            leading: Icon(
-              Icons.home,
-              size: width * 0.1,
-            ),
-            title: Text(
-              "Home",
-              style: TextStyle(fontSize: width * 0.05, color: Colors.white),
-            ),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          //button tiles////////////////////////
-
-          //button tiles////////////////////////
-          ListTile(
-            leading: Icon(
-              Icons.favorite,
-              size: width * 0.1,
-            ),
-            title: Text(
-              "Charity",
-              style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.home,
+                color: Colors.white,
+                size: width * 0.1,
+              ),
+              title: Text(
+                "Home",
+                style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+              ),
             ),
           ),
           Divider(
@@ -89,14 +88,23 @@ class Sidemenuchild extends State<Sidemenu> {
           //button tiles////////////////////////
 
           //button tiles////////////////////////
-          ListTile(
-            leading: Icon(
-              Icons.bloodtype,
-              size: width * 0.1,
-            ),
-            title: Text(
-              "Blood Donation",
-              style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Charitymain()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.favorite,
+                color: Colors.white,
+                size: width * 0.1,
+              ),
+              title: Text(
+                "Charity",
+                style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+              ),
             ),
           ),
           Divider(
@@ -106,14 +114,49 @@ class Sidemenuchild extends State<Sidemenu> {
           //button tiles////////////////////////
 
           //button tiles////////////////////////
-          ListTile(
-            leading: Icon(
-              Icons.handshake,
-              size: width * 0.1,
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Bloodmain()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.bloodtype,
+                color: Colors.white,
+                size: width * 0.1,
+              ),
+              title: Text(
+                "Blood Donation",
+                style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+              ),
             ),
-            title: Text(
-              "Volunteer",
-              style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+          ),
+          Divider(
+            height: 1,
+            color: Colors.grey,
+          ),
+          //button tiles////////////////////////
+
+          //button tiles////////////////////////
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MainPage()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.handshake,
+                size: width * 0.1,
+                color: Colors.white,
+              ),
+              title: Text(
+                "Volunteer",
+                style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+              ),
             ),
           ),
           Divider(
@@ -137,14 +180,23 @@ class Sidemenuchild extends State<Sidemenu> {
           ),
 
           //button tiles////////////////////////
-          ListTile(
-            leading: Icon(
-              Icons.account_circle_rounded,
-              size: width * 0.1,
-            ),
-            title: Text(
-              "Profile",
-              style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Profile()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.account_circle_rounded,
+                size: width * 0.1,
+                color: Colors.white,
+              ),
+              title: Text(
+                "Profile",
+                style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+              ),
             ),
           ),
           Divider(
@@ -154,14 +206,23 @@ class Sidemenuchild extends State<Sidemenu> {
           //button tiles////////////////////////
 
           //button tiles////////////////////////
-          ListTile(
-            leading: Icon(
-              Icons.settings,
-              size: width * 0.1,
-            ),
-            title: Text(
-              "Settings",
-              style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Config()),
+              );
+            },
+            child: ListTile(
+              leading: Icon(
+                Icons.settings,
+                size: width * 0.1,
+                color: Colors.white,
+              ),
+              title: Text(
+                "Settings",
+                style: TextStyle(fontSize: width * 0.05, color: Colors.white),
+              ),
             ),
           ),
           Divider(
@@ -170,7 +231,7 @@ class Sidemenuchild extends State<Sidemenu> {
           ),
           //button tiles////////////////////////
         ]),
-      ),
-    ));
+      )),
+    );
   }
 }
