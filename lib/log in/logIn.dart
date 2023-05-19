@@ -1,4 +1,4 @@
-import 'package:demo2/Main%20page/mainPage.dart';
+
 import 'package:demo2/Main%20page/mainPageNavigator.dart';
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
@@ -8,6 +8,7 @@ import 'package:demo2/log%20in/loginEmail.dart';
 import 'package:demo2/log%20in/loginPassword.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
 import 'package:demo2/sign%20up/chooseType.dart';
+import 'package:demo2/sign%20up/signUpTextBoxes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -187,30 +188,38 @@ class LoginChild extends State<Login> {
                         final email = _emailController.text;
                         final password = _passwordController.text;
                         final _firebase = FirebaseAuth.instance;
+                        if (SignUpForUserChild.isEmailVerified) {
+                          try {
+                            UserCredential credential =
+                                await _firebase.signInWithEmailAndPassword(
+                                    email: email, password: password);
 
-                        try {
-                          UserCredential credential =
-                              await _firebase.signInWithEmailAndPassword(
-                                  email: email, password: password);
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MainPageNavigator()),
-                          );
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 5),
-                              content: Text('user not found'),
-                            ));
-                          } else if (e.code == 'wrong-password') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 5),
-                              content: Text('wrong pass'),
-                            ));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MainPageNavigator()),
+                            );
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                duration: Duration(seconds: 5),
+                                content: Text('user not found'),
+                              ));
+                            } else if (e.code == 'wrong-password') {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                duration: Duration(seconds: 5),
+                                content: Text('wrong pass'),
+                              ));
+                            }
                           }
-                        }
+                        } else
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            duration: Duration(seconds: 5),
+                            content: Text(
+                                SignUpForUserChild.isEmailVerified.toString()),
+                          ));
                       }
                     },
                     child: Text(

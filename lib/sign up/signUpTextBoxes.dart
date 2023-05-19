@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/log%20in/user.dart';
 import 'package:email_validator/email_validator.dart';
@@ -16,6 +18,8 @@ class SignUpForUser extends StatefulWidget {
 
 class SignUpForUserChild extends State<SignUpForUser> {
   final _signUpFormKey = GlobalKey<FormState>();
+  static bool isEmailVerified = false;
+  Timer? timer;
 
   TextEditingController _userNameController = TextEditingController();
 
@@ -25,13 +29,71 @@ class SignUpForUserChild extends State<SignUpForUser> {
 
   TextEditingController _passwordController = TextEditingController();
 
+  String get username => this._userNameController.text.trim();
+
+  String get email => this._emailController.text.trim();
+
+  String get phoneNumber => this._phoneNumberController.text.trim();
+
+  String get password => _passwordController.text.trim();
+
   @override
   void dispose() {
     _passwordController.dispose();
     _userNameController.dispose();
     _emailController.dispose();
     _phoneNumberController.dispose();
+    timer?.cancel();
     super.dispose();
+  }
+
+  void isVerifiedEmail() {
+    isEmailVerified = _firebase.currentUser!.emailVerified;
+    if (!isEmailVerified) {
+      sendVerificationEmail();
+      timer =
+          Timer.periodic(Duration(seconds: 3), (timer) => checkEmailVerified());
+    }
+  }
+
+  Future<void> sendVerificationEmail() async {
+    try {
+      final user = _firebase.currentUser;
+      await user!.sendEmailVerification();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("a verification link has been sent to your email"),
+        duration: Duration(seconds: 3),
+      ));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("somthing went wrong"),
+        duration: Duration(seconds: 3),
+      ));
+    }
+  }
+
+  Future<void> checkEmailVerified() async {
+    await _firebase.currentUser!.reload();
+    setState(() {
+      isEmailVerified = _firebase.currentUser!.emailVerified;
+    });
+    if (isEmailVerified) {
+      timer?.cancel();
+      addUser(
+        username,
+        email,
+        phoneNumber,
+        password,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: Duration(seconds: 3),
+        content: Text('account successfuly registered'),
+      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+    }
   }
 
   String? checkPhoneNumber(String? phoneNumber) {
@@ -265,7 +327,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
                       final password = _passwordController.text;
-                      var _firebase = FirebaseAuth.instance;
 
                       // TODO: save the data and navigate to the next screen
                       //if the user hasn't registered an acount will be created and send the user to the login page
@@ -275,20 +336,8 @@ class SignUpForUserChild extends State<SignUpForUser> {
                         final userCredentials =
                             await _firebase.createUserWithEmailAndPassword(
                                 email: email, password: password);
-                        addUser(
-                          username,
-                          email,
-                          phoneNumber,
-                          password,
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          duration: Duration(seconds: 2),
-                          content: Text('account successfuly registered'),
-                        ));
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                        );
+
+                        isVerifiedEmail();
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'email-already-in-use') {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
