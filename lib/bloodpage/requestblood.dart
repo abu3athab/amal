@@ -18,10 +18,11 @@ class Requestblood extends StatefulWidget {
 }
 
 class RequestbloodChild extends State<Requestblood> {
-
   String? urgency;
   final controller = TextEditingController();
   final _bloodUnitsController = TextEditingController();
+  String? location = "Amman";
+  String? bloodType = 'A+';
   bool isenabled = false;
 
   TextEditingController dateinput = TextEditingController();
@@ -95,21 +96,20 @@ class RequestbloodChild extends State<Requestblood> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: DropdownButton(
-
                             icon: const Icon(Icons.keyboard_arrow_down),
-
+                            value: bloodType,
                             // Array list of items
-                            items: types.map((String items) {
+                            items: types.map((String types) {
                               return DropdownMenuItem(
-                                value: items,
-                                child: Text(items),
+                                value: types,
+                                child: Text(types),
                               );
                             }).toList(),
                             // After selecting the desired option,it will
                             // change button value to selected value
                             onChanged: (String? newValue) {
                               setState(() {
-
+                                bloodType = newValue!;
                               });
                             },
                           ),
