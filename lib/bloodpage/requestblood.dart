@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
@@ -5,6 +6,7 @@ import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -16,9 +18,13 @@ class Requestblood extends StatefulWidget {
 }
 
 class RequestbloodChild extends State<Requestblood> {
-  String dropdownvalue = 'A+';
+  final _bloodReqRef = FirebaseFirestore.instance.collection('bloodReq');
+  final _auth = FirebaseAuth.instance;
+
+  String bloodType = 'A+';
   String? urgency;
   final controller = TextEditingController();
+  final _bloodUnitsController = TextEditingController();
   bool isenabled = false;
 
   TextEditingController dateinput = TextEditingController();
@@ -78,7 +84,7 @@ class RequestbloodChild extends State<Requestblood> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: DropdownButton(
-                            value: dropdownvalue,
+                            value: bloodType,
 
                             icon: const Icon(Icons.keyboard_arrow_down),
 
@@ -93,7 +99,7 @@ class RequestbloodChild extends State<Requestblood> {
                             // change button value to selected value
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue!;
+                                bloodType = newValue!;
                               });
                             },
                           ),
@@ -105,6 +111,10 @@ class RequestbloodChild extends State<Requestblood> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: TextField(
+                            onChanged: (value) {
+                              _bloodUnitsController.text = value;
+                            },
+                            controller: _bloodUnitsController,
                             decoration:
                                 InputDecoration(labelText: 'Amount of units'),
                             keyboardType: TextInputType.number,
