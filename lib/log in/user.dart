@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -80,8 +78,8 @@ Future<void> updateUserEmailVerification(String v) async {
   }
 }
 
-Future<void> addBloodUser(String locationName, String bloodType,
-    String requiredUnits, String isUrgent, String info) async {
+Future<bool> addBloodUser(String locationName, String bloodType,
+    String requiredUnits, String isUrgent) async {
   try {
     CollectionReference users =
         await FirebaseFirestore.instance.collection('Users');
@@ -94,11 +92,11 @@ Future<void> addBloodUser(String locationName, String bloodType,
       'blood type': bloodType,
       'number of units': requiredUnits,
       'urgency': isUrgent,
-      'additional info': info,
       'user id': uid
     });
-    return;
+
+    return true;
   } catch (e) {
-    return;
+    return false;
   }
 }
