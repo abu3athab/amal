@@ -2,7 +2,10 @@ import 'dart:developer';
 
 import 'package:demo2/colors.dart';
 import 'package:demo2/settings%20page/settingspage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../log in/logIn.dart';
 
 class Config extends StatefulWidget {
   @override
@@ -124,7 +127,13 @@ class ConfigChild extends State<Config> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: ListTile(
-            onTap: () => null,
+            onTap: () {
+              FirebaseAuth.instance.signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Login()),
+              );
+            },
             title: Text("Log out"),
             trailing: Icon(
               Icons.keyboard_arrow_right,
