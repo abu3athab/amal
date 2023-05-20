@@ -10,12 +10,7 @@ class Charityitems extends StatelessWidget {
       width: width * 0.95,
       height: height * 0.161,
       child: InkWell(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Charitypage()),
-          );
-        },
+        onTap: () {},
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),

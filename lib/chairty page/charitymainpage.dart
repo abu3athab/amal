@@ -145,34 +145,47 @@ class CharitymainChild extends State<Charitymain> {
                   ),
 
                   ///
-                  Row(
-                    children: [
-                      Spacer(),
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/juggling.gif')),
-                          Text(
-                            "Fun",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/graduation.gif')),
-                          Text(
-                            "Education",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 5, 22, 0),
+                    child: Row(
+                      children: [
+                        Column(
+                          children: [
+                            Container(
+                                width: width * 0.15,
+                                child: Image.asset('assets/juggling.gif')),
+                            Text(
+                              "Fun",
+                              style: TextStyle(fontSize: height * 0.03),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          children: [
+                            Container(
+                                width: width * 0.15,
+                                child: Image.asset('assets/graduation.gif')),
+                            Text(
+                              "Education",
+                              style: TextStyle(fontSize: height * 0.03),
+                            ),
+                          ],
+                        ),
+                        Spacer(),
+                        Column(
+                          children: [
+                            Container(
+                                width: width * 0.15,
+                                child: Image.asset('assets/heartbeat.gif')),
+                            Text(
+                              "Health",
+                              style: TextStyle(fontSize: height * 0.03),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   Divider(
                     thickness: 1,
