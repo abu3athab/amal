@@ -1,6 +1,4 @@
-import 'dart:math';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
@@ -294,7 +292,16 @@ class LoginChild extends State<Login> {
                         },
                         child: Text("bypass auth"))
                   ],
-                )
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Charityadminmain()),
+                      );
+                    },
+                    child: Text("chariy admin")),
               ],
             ),
           ),
