@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../log in/logIn.dart';
+import 'editPro.dart';
 
 class Config extends StatefulWidget {
   @override
@@ -38,7 +39,11 @@ class ConfigChild extends State<Config> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: ListTile(
-            onTap: () => null,
+            onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfilePage()),
+                          ),
             title: Text("Edit profile"),
             trailing: Icon(
               Icons.keyboard_arrow_right,
