@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
+import 'package:demo2/log%20in/user.dart';
 import 'package:demo2/sign%20up/chooseType.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -211,11 +214,15 @@ class LoginChild extends State<Login> {
                                 userSnapshot = userData.docs.firstWhere((doc) =>
                                     doc.data()['uid'] ==
                                     userCredential.user!.uid);
+                            String verfified = userSnapshot.data()!['verified'];
+
                             //String phoneNumber = userSnapshot.data()!['phone number'];
 
                             // ... Access other user data fields
 
                             // Navigate to the main page after successful login
+                            // updateUserEmailVerification("true");
+
                             Navigator.push(
                               context,
                               MaterialPageRoute(
