@@ -10,6 +10,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../log in/user.dart';
+
 class Requestblood extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -18,6 +20,11 @@ class Requestblood extends StatefulWidget {
 }
 
 class RequestbloodChild extends State<Requestblood> {
+  CollectionReference _userRef = FirebaseFirestore.instance.collection('Users');
+  CollectionReference _bloodRef =
+      FirebaseFirestore.instance.collection('bloodReq');
+  final _firebase = FirebaseAuth.instance;
+
   String? urgency;
   final controller = TextEditingController();
   final _bloodUnitsController = TextEditingController();
@@ -25,15 +32,25 @@ class RequestbloodChild extends State<Requestblood> {
   String? bloodType = 'A+';
   bool isenabled = false;
 
-  TextEditingController dateinput = TextEditingController();
-  final timeController = TextEditingController();
-  final timeController2 = TextEditingController();
+  void alertUser(bool isAdded) {
+    if (isAdded) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("your request has been saved sucessfully"),
+        duration: Duration(seconds: 4),
+      ));
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("error saving your request please try again"),
+        duration: Duration(seconds: 4),
+      ));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    dateinput.text = "";
+
     var types = [
       'O+',
       'O-',
@@ -215,6 +232,9 @@ class RequestbloodChild extends State<Requestblood> {
                     height: height * 0.07,
                     child: ElevatedButton(
                         onPressed: () {
+                          addBloodUser(location!, bloodType!,
+                              _bloodUnitsController.text, urgency!);
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
