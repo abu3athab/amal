@@ -41,7 +41,7 @@ class CharitypageChild extends State<Charitypage> {
               children: [
                 Container(
                     width: width,
-                    height: height * 0.2,
+                    height: height * 0.21,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage(

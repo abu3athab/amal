@@ -16,7 +16,8 @@ class Requestblood extends StatefulWidget {
 }
 
 class RequestbloodChild extends State<Requestblood> {
-  String dropdownvalue = 'A+';
+  String bloodtype = 'A+';
+  String location = 'Amman';
   String? urgency;
   final controller = TextEditingController();
   bool isenabled = false;
@@ -30,7 +31,7 @@ class RequestbloodChild extends State<Requestblood> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     dateinput.text = "";
-    var items = [
+    var types = [
       'O+',
       'O-',
       'A+',
@@ -39,6 +40,20 @@ class RequestbloodChild extends State<Requestblood> {
       'B-',
       'AB+',
       'AB-',
+    ];
+    var locations = [
+      'Ajlun',
+      'Amman',
+      'Aqaba',
+      'Balqa',
+      'Irbid',
+      'Jarash',
+      'Karak',
+      'Maan',
+      'Madaba',
+      'Mafraq',
+      'Tafilah',
+      'Zarqa',
     ];
 
     return Container(
@@ -78,12 +93,12 @@ class RequestbloodChild extends State<Requestblood> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: DropdownButton(
-                            value: dropdownvalue,
+                            value: bloodtype,
 
                             icon: const Icon(Icons.keyboard_arrow_down),
 
                             // Array list of items
-                            items: items.map((String items) {
+                            items: types.map((String items) {
                               return DropdownMenuItem(
                                 value: items,
                                 child: Text(items),
@@ -93,7 +108,7 @@ class RequestbloodChild extends State<Requestblood> {
                             // change button value to selected value
                             onChanged: (String? newValue) {
                               setState(() {
-                                dropdownvalue = newValue!;
+                                bloodtype = newValue!;
                               });
                             },
                           ),
@@ -140,69 +155,37 @@ class RequestbloodChild extends State<Requestblood> {
                             });
                           },
                         ),
+
+                        ////////////////////////////////
+
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Text(
-                              "If this is not urgent when is the best time to donate"),
-                        ),
-                        TextField(
-                          readOnly: true,
-                          enabled: isenabled,
-                          decoration: InputDecoration(
-                              icon:
-                                  Icon(Icons.access_time), //icon of text field
-                              labelText: "Enter Time" //label text of field
-                              ),
-                          controller: timeController,
-                          onTap: () async {
-                            var time = await showTimePicker(
-                                context: context, initialTime: TimeOfDay.now());
-
-                            if (time != null) {
-                              timeController.text = time.format(context);
-                            }
-                          },
-                        ),
-//////////////////
-                        SizedBox(
-                          height: height * 0.02,
+                          child: Text("where will the event take place"),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(5.0),
-                          child: Text("End of the donation period"),
-                        ),
-                        TextField(
-                          readOnly: true,
-                          enabled: isenabled,
-                          decoration: InputDecoration(
-                              icon:
-                                  Icon(Icons.access_time), //icon of text field
-                              labelText: "Enter Time" //label text of field
-                              ),
-                          controller: timeController2,
-                          onTap: () async {
-                            var time = await showTimePicker(
-                                context: context, initialTime: TimeOfDay.now());
+                          child: DropdownButton(
+                            // Initial Value
+                            value: location,
 
-                            if (time != null) {
-                              timeController2.text = time.format(context);
-                            }
-                          },
-                        ),
-                        SizedBox(
-                          height: height * 0.05,
-                        ),
-                        Container(
-                            width: width,
-                            height: height * 0.07,
-                            child: ElevatedButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Add location",
-                                  style: TextStyle(fontSize: width * 0.08),
-                                ))),
-                        SizedBox(
-                          height: height * 0.02,
+                            // Down Arrow Icon
+                            icon: const Icon(Icons.keyboard_arrow_down),
+
+                            // Array list of items
+                            items: locations.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            // After selecting the desired option,it will
+                            // change button value to selected value
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                location = newValue!;
+                              });
+                            },
+                          ),
                         ),
 
                         Padding(

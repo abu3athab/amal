@@ -1,6 +1,7 @@
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/Main%20page/mainPageNavigator.dart';
 import 'package:demo2/Main%20page/mainpagesearch.dart';
+import 'package:demo2/charityadmin/charityadminmain.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 
@@ -250,7 +251,16 @@ class LoginChild extends State<Login> {
                         },
                         child: Text("bypass auth"))
                   ],
-                )
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Charityadminmain()),
+                      );
+                    },
+                    child: Text("chariy admin")),
               ],
             ),
           ),
