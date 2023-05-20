@@ -1,4 +1,4 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../Main page/mainPage.dart';
+import '../charityadmin/charityadminmain.dart';
 
 class Login extends StatefulWidget {
   @override
