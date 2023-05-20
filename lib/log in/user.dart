@@ -79,3 +79,26 @@ Future<void> updateUserEmailVerification(String v) async {
     print("Error: $e");
   }
 }
+
+Future<void> addBloodUser(String locationName, String bloodType,
+    String requiredUnits, String isUrgent, String info) async {
+  try {
+    CollectionReference users =
+        await FirebaseFirestore.instance.collection('Users');
+    CollectionReference bloodRef =
+        await FirebaseFirestore.instance.collection('bloodReq');
+    FirebaseAuth auth = FirebaseAuth.instance;
+    String uid = auth.currentUser!.uid.toString();
+    bloodRef.add({
+      'location name': locationName,
+      'blood type': bloodType,
+      'number of units': requiredUnits,
+      'urgency': isUrgent,
+      'additional info': info,
+      'user id': uid
+    });
+    return;
+  } catch (e) {
+    return;
+  }
+}
