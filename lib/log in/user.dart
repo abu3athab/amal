@@ -78,16 +78,18 @@ Future<void> updateUserEmailVerification(String v) async {
   }
 }
 
-Future<bool> addBloodUser(String locationName, String bloodType,
+Future<bool> addUrgentBloodUser(String locationName, String bloodType,
     String requiredUnits, String isUrgent) async {
   try {
-    CollectionReference users =
+    CollectionReference user =
         await FirebaseFirestore.instance.collection('Users');
-    CollectionReference bloodRef =
-        await FirebaseFirestore.instance.collection('bloodReq');
+    CollectionReference urgentBloodRef = await FirebaseFirestore.instance
+        .collection('bloodReq')
+        .doc('IRfqh4URf73SlN04i2yQ')
+        .collection('urgent');
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser!.uid.toString();
-    bloodRef.add({
+    urgentBloodRef.add({
       'location name': locationName,
       'blood type': bloodType,
       'number of units': requiredUnits,
@@ -99,4 +101,50 @@ Future<bool> addBloodUser(String locationName, String bloodType,
   } catch (e) {
     return false;
   }
+}
+
+Future<bool> addNonUrgentBloodUser(String locationName, String bloodType,
+    String requiredUnits, String isUrgent) async {
+  try {
+    CollectionReference user =
+        await FirebaseFirestore.instance.collection('Users');
+    CollectionReference urgentBloodRef = await FirebaseFirestore.instance
+        .collection('bloodReq')
+        .doc('IRfqh4URf73SlN04i2yQ')
+        .collection('nonurgent');
+    FirebaseAuth auth = FirebaseAuth.instance;
+    String uid = auth.currentUser!.uid.toString();
+    urgentBloodRef.add({
+      'location name': locationName,
+      'blood type': bloodType,
+      'number of units': requiredUnits,
+      'urgency': isUrgent,
+      'user id': uid
+    });
+
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+Future<void> addEvent(String name, String description, String date,
+    String startTime, String endTime, String location) async {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = auth.currentUser!.uid;
+  await FirebaseFirestore.instance.collection('events').add({
+    'name': name,
+    'uid': uid,
+    'description': description,
+    'date': date,
+    'startTime': startTime,
+    'endTime': endTime,
+    'location': location,
+  });
+}
+
+String getUserId() {
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String uid = auth.currentUser!.uid.toString();
+  return uid;
 }

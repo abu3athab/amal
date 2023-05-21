@@ -1,3 +1,4 @@
+import 'package:demo2/log%20in/user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,7 +17,7 @@ class CreateneweventChild extends State<Createnewevent> {
   TextEditingController dateinput = TextEditingController();
   final timeController = TextEditingController();
   final timeController2 = TextEditingController();
-  String dropdownvalue = 'Amman';
+  String location = 'Amman';
 
   // List of items in our dropdown menu
   var items = [
@@ -74,7 +75,8 @@ class CreateneweventChild extends State<Createnewevent> {
                         child: Text("what is the name of the event"),
                       ),
                       TextField(
-                        controller: _nameController, // Name controller added here
+                        controller:
+                            _nameController, // Name controller added here
                         obscureText: false,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -84,7 +86,6 @@ class CreateneweventChild extends State<Createnewevent> {
                       SizedBox(
                         height: height * 0.02,
                       ),
-
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text("what will we do during the event"),
@@ -92,7 +93,8 @@ class CreateneweventChild extends State<Createnewevent> {
                       TextField(
                         keyboardType: TextInputType.multiline,
                         maxLines: 3,
-                        controller: _descriptionController, // Description controller added here
+                        controller:
+                            _descriptionController, // Description controller added here
                         obscureText: false,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -185,7 +187,7 @@ class CreateneweventChild extends State<Createnewevent> {
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: DropdownButton(
-                          value: dropdownvalue,
+                          value: location,
                           icon: const Icon(Icons.keyboard_arrow_down),
                           items: items.map((String items) {
                             return DropdownMenuItem(
@@ -195,7 +197,7 @@ class CreateneweventChild extends State<Createnewevent> {
                           }).toList(),
                           onChanged: (String? newValue) {
                             setState(() {
-                              dropdownvalue = newValue!;
+                              location = newValue!;
                             });
                           },
                         ),
@@ -209,16 +211,14 @@ class CreateneweventChild extends State<Createnewevent> {
                     width: width,
                     height: height * 0.07,
                     child: ElevatedButton(
-                        onPressed: () async {
-                          await FirebaseFirestore.instance.collection('events').add({
-                            'name': _nameController.text,
-                            'description': _descriptionController.text,
-                            'date': dateinput.text,
-                            'startTime': timeController.text,
-                            'endTime': timeController2.text,
-                            'location': dropdownvalue,
-                          });
-                          Navigator.pop(context);
+                        onPressed: () {
+                          addEvent(
+                              _nameController.text,
+                              _descriptionController.text,
+                              dateinput.text,
+                              timeController.text,
+                              timeController2.text,
+                              location);
                         },
                         child: Text(
                           "Create a new event",

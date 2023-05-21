@@ -1,7 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo2/bloodpage/bloodRequester.dart';
 import 'package:demo2/bloodpage/bloodrequestinfo.dart';
 import 'package:flutter/material.dart';
 
 class Bloodtiles extends StatelessWidget {
+  String location;
+  String bloodType;
+  String nOfUnits;
+  Bloodtiles(
+      {required this.location,
+      required this.bloodType,
+      required this.nOfUnits});
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -10,7 +20,12 @@ class Bloodtiles extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Bloodrequestindo()),
+          MaterialPageRoute(
+              builder: (context) => Bloodrequestindo(
+                    location: location,
+                    bloodType: bloodType,
+                    nOfUnits: nOfUnits,
+                  )),
         );
       },
       child: Container(
@@ -34,14 +49,14 @@ class Bloodtiles extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Amman jubiha",
+                      location!,
                       style: TextStyle(fontSize: height * 0.03),
                     ),
                     SizedBox(
                       height: height * 0.005,
                     ),
                     Text(
-                      "Blood type: O+",
+                      "Blood type: ${bloodType!}",
                       style: TextStyle(fontSize: height * 0.028),
                       softWrap: true,
                       maxLines: 2,
@@ -50,7 +65,7 @@ class Bloodtiles extends StatelessWidget {
                       height: height * 0.005,
                     ),
                     Text(
-                      "requried units : 4",
+                      "requried units : ${nOfUnits!}",
                       style: TextStyle(fontSize: height * 0.028),
                       softWrap: true,
                       maxLines: 2,

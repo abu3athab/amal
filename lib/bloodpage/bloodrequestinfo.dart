@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
@@ -11,14 +12,15 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../colors.dart';
 import '../side bar/side_bar.dart';
 
-class Bloodrequestindo extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return BloodrequestindoChild();
-  }
-}
+class Bloodrequestindo extends StatelessWidget {
+  String location;
+  String bloodType;
+  String nOfUnits;
+  Bloodrequestindo(
+      {required this.location,
+      required this.bloodType,
+      required this.nOfUnits});
 
-class BloodrequestindoChild extends State<Bloodrequestindo> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -52,7 +54,7 @@ class BloodrequestindoChild extends State<Bloodrequestindo> {
                       child: FittedBox(
                         fit: BoxFit.fill,
                         child: Text(
-                          "O+",
+                          bloodType,
                           style: TextStyle(color: Colors.white),
                         ),
                       ),
@@ -66,7 +68,8 @@ class BloodrequestindoChild extends State<Bloodrequestindo> {
                             style: TextStyle(fontSize: width * 0.07),
                           ),
                           Spacer(),
-                          Text("3", style: TextStyle(fontSize: width * 0.07))
+                          Text(nOfUnits,
+                              style: TextStyle(fontSize: width * 0.07))
                         ],
                       ),
                     ),
@@ -82,7 +85,7 @@ class BloodrequestindoChild extends State<Bloodrequestindo> {
                       child: FittedBox(
                         fit: BoxFit.contain,
                         child: Text(
-                          "Place Holder (view location on maps)",
+                          " location: ${location} ",
                           style: TextStyle(color: Colors.white),
                         ),
                       ),

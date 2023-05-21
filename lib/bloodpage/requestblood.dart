@@ -1,15 +1,13 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
-import 'package:demo2/profilepage.dart/profileBadges.dart';
-import 'package:demo2/profilepage.dart/profileView.dart';
-import 'package:demo2/volunteer%20page/eventtiles.dart';
-import 'package:demo2/volunteer%20page/manageyourevents.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'bloodRequester.dart';
 import '../log in/user.dart';
 
 class Requestblood extends StatefulWidget {
@@ -20,10 +18,7 @@ class Requestblood extends StatefulWidget {
 }
 
 class RequestbloodChild extends State<Requestblood> {
-  CollectionReference _userRef = FirebaseFirestore.instance.collection('Users');
-  CollectionReference _bloodRef =
-      FirebaseFirestore.instance.collection('bloodReq');
-  final _firebase = FirebaseAuth.instance;
+  late BloodRequesterModel bloodRequesterModel;
 
   String? urgency;
   final controller = TextEditingController();
@@ -178,7 +173,7 @@ class RequestbloodChild extends State<Requestblood> {
                           },
                         ),
 
-                        ////////////////////////////////
+                        ////////////////////////////
 
                         Padding(
                           padding: const EdgeInsets.all(5.0),
@@ -232,14 +227,19 @@ class RequestbloodChild extends State<Requestblood> {
                     height: height * 0.07,
                     child: ElevatedButton(
                         onPressed: () {
-                          addBloodUser(location!, bloodType!,
-                              _bloodUnitsController.text, urgency!);
+                          if (urgency == 'urgent') {
+                            addUrgentBloodUser(location!, bloodType!,
+                                _bloodUnitsController.text, urgency!);
+                          } else if (urgency == 'nonurgent') {
+                            addNonUrgentBloodUser(location!, bloodType!,
+                                _bloodUnitsController.text, urgency!);
+                          }
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Bloodmain()),
-                          );
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("your request has been added sucessfully"),
+                            duration: Duration(seconds: 2),
+                          ));
                         },
                         child: Text(
                           "Make request",

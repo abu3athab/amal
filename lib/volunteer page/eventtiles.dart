@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class Eventtile extends StatelessWidget {
+  String name;
+  String date;
+  String startTime;
+  String location;
+  Eventtile(
+      {required this.name,
+      required this.date,
+      required this.startTime,
+      required this.location});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -26,23 +35,23 @@ class Eventtile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Park cleaning",
+                    name,
                     style: TextStyle(fontSize: height * 0.02),
                   ),
                   Text(
-                    "Date: march 7th",
-                    style: TextStyle(fontSize: height * 0.02),
-                    softWrap: true,
-                    maxLines: 2,
-                  ),
-                  Text(
-                    "Time: 9:00 AM",
+                    date,
                     style: TextStyle(fontSize: height * 0.02),
                     softWrap: true,
                     maxLines: 2,
                   ),
                   Text(
-                    "Amman Jubiha",
+                    startTime,
+                    style: TextStyle(fontSize: height * 0.02),
+                    softWrap: true,
+                    maxLines: 2,
+                  ),
+                  Text(
+                    location,
                     style: TextStyle(fontSize: height * 0.02),
                     softWrap: true,
                     maxLines: 2,

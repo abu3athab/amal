@@ -1,8 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/log%20in/user.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/volunteer%20page/createnewevent.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Manageevents extends StatefulWidget {
@@ -13,6 +16,10 @@ class Manageevents extends StatefulWidget {
 }
 
 class ManageeventsChild extends State<Manageevents> {
+  var userData = FirebaseFirestore.instance
+      .collection('Users')
+      .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .get();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -41,19 +48,41 @@ class ManageeventsChild extends State<Manageevents> {
                     style: TextStyle(fontSize: width * 0.065),
                   ),
                 ),
-                Container(
-                  width: width,
-                  height: height * 0.75,
-                  child: Expanded(
-                      child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: <Widget>[
-                      Eventtile(),
-                      Eventtile(),
-                      Eventtile(),
-                    ],
-                  )),
-                ),
+                // Container(
+                //   width: width,
+                //   height: height * 0.75,
+                //   child: Expanded(
+                //     child: FutureBuilder(
+                //       future: userData,
+                //       builder: (context, snapshot) {
+                //         if (snapshot.connectionState ==
+                //             ConnectionState.waiting) {
+                //           return Center(
+                //             child: CircularProgressIndicator(),
+                //           );
+                //         }
+
+                //        else if (snapshot.hasData) {
+                //           return ListView.builder(
+                //               itemCount: snapshot.data!.docs.length,
+                //               itemBuilder: ((context, index) {
+                //                 return Eventtile(
+                //                   name: snapshot.data!.docs[index].get('name'),
+                //                   date: snapshot.data!.docs[index].get('date'),
+                //                   startTime: snapshot.data!.docs[index]
+                //                       .get('startTime'),
+                //                   location: snapshot.data!.docs[index]
+                //                       .get('location name'),
+                //                 );
+                //               }));
+                //         } else{
+                //           print("error");
+                //         }
+
+                //       },
+                //     ),
+                //   ),
+                // ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
