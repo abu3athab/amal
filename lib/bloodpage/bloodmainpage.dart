@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/bloodpage/bloodRequester.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
@@ -19,6 +21,17 @@ class Bloodmain extends StatefulWidget {
 }
 
 class BloodmainChild extends State<Bloodmain> {
+  List<BloodRequesterModel> requester = List.empty(growable: true);
+
+  CollectionReference urgentBloodReqRef = FirebaseFirestore.instance
+      .collection('bloodReq')
+      .doc('IRfqh4URf73SlN04i2yQ')
+      .collection('urgent');
+  CollectionReference nonUrgentBloodReqRef = FirebaseFirestore.instance
+      .collection('bloodReq')
+      .doc('IRfqh4URf73SlN04i2yQ')
+      .collection('nonurgent');
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -106,12 +119,33 @@ class BloodmainChild extends State<Bloodmain> {
                     width: width,
                     height: height * 0.3,
                     child: Expanded(
-                        child: ListView(
-                      children: <Widget>[
-                        Bloodtiles(),
-                        Bloodtiles(),
-                        Bloodtiles(),
-                      ],
+                        child: FutureBuilder(
+                      future: urgentBloodReqRef.get(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        if (snapshot.hasError) {
+                          return Text("error: ${snapshot.error}");
+                        } else {
+                          var data = snapshot.data;
+                          return ListView.builder(
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: ((context, index) {
+                                return Bloodtiles(
+                                  location: snapshot.data!.docs[index]
+                                      .get('location name'),
+                                  bloodType: snapshot.data!.docs[index]
+                                      .get('blood type'),
+                                  nOfUnits: snapshot.data!.docs[index]
+                                      .get('number of units'),
+                                );
+                              }));
+                        }
+                      },
                     )),
                   ),
                   ///////////////////////////////////////////////////////////////
@@ -146,13 +180,34 @@ class BloodmainChild extends State<Bloodmain> {
                     width: width,
                     height: height * 0.29,
                     child: Expanded(
-                        child: ListView(
-                      children: <Widget>[
-                        Bloodtiles(),
-                        Bloodtiles(),
-                        Bloodtiles(),
-                      ],
-                    )),
+                      child: FutureBuilder(
+                        future: nonUrgentBloodReqRef.get(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          if (snapshot.hasError) {
+                            return Text("error: ${snapshot.error}");
+                          } else {
+                            return ListView.builder(
+                                itemCount: snapshot.data!.docs.length,
+                                itemBuilder: ((context, index) {
+                                  return Bloodtiles(
+                                    location: snapshot.data!.docs[index]
+                                        .get('location name'),
+                                    bloodType: snapshot.data!.docs[index]
+                                        .get('blood type'),
+                                    nOfUnits: snapshot.data!.docs[index]
+                                        .get('number of units'),
+                                  );
+                                }));
+                          }
+                        },
+                      ),
+                    ),
                   ),
 
                   Container(

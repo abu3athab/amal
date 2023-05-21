@@ -44,6 +44,8 @@ dependencies:
   firebase_auth: ^4.6.1
   email_validator: ^2.1.17
   shrink_sidemenu: ^2.0.0+2-null-safety
+  get: ^4.6.5
+  dynamic_list_item: ^1.2.0
 
 dev_dependencies:
   flutter_test:
