@@ -16,10 +16,12 @@ class Manageevents extends StatefulWidget {
 }
 
 class ManageeventsChild extends State<Manageevents> {
-  var userData = FirebaseFirestore.instance
-      .collection('Users')
-      .where('uid', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
-      .get();
+  late String uid = FirebaseAuth.instance.currentUser!.uid;
+  late CollectionReference ref = FirebaseFirestore.instance
+      .collection('events')
+      .doc(uid)
+      .collection('myEvents');
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -48,41 +50,37 @@ class ManageeventsChild extends State<Manageevents> {
                     style: TextStyle(fontSize: width * 0.065),
                   ),
                 ),
-                // Container(
-                //   width: width,
-                //   height: height * 0.75,
-                //   child: Expanded(
-                //     child: FutureBuilder(
-                //       future: userData,
-                //       builder: (context, snapshot) {
-                //         if (snapshot.connectionState ==
-                //             ConnectionState.waiting) {
-                //           return Center(
-                //             child: CircularProgressIndicator(),
-                //           );
-                //         }
-
-                //        else if (snapshot.hasData) {
-                //           return ListView.builder(
-                //               itemCount: snapshot.data!.docs.length,
-                //               itemBuilder: ((context, index) {
-                //                 return Eventtile(
-                //                   name: snapshot.data!.docs[index].get('name'),
-                //                   date: snapshot.data!.docs[index].get('date'),
-                //                   startTime: snapshot.data!.docs[index]
-                //                       .get('startTime'),
-                //                   location: snapshot.data!.docs[index]
-                //                       .get('location name'),
-                //                 );
-                //               }));
-                //         } else{
-                //           print("error");
-                //         }
-
-                //       },
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  width: width,
+                  height: height * 0.75,
+                  child: Expanded(
+                      child: FutureBuilder(
+                    future: ref.get(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      if (snapshot.hasError) {
+                        return Text("error: ${snapshot.error}");
+                      } else {
+                        return ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: ((context, index) {
+                              return Eventtile(
+                                location:
+                                    snapshot.data!.docs[index].get('location'),
+                                date: snapshot.data!.docs[index].get('date'),
+                                startTime:
+                                    snapshot.data!.docs[index].get('startTime'),
+                                name: snapshot.data!.docs[index].get('name'),
+                              );
+                            }));
+                      }
+                    },
+                  )),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
@@ -108,5 +106,19 @@ class ManageeventsChild extends State<Manageevents> {
         ),
       ),
     );
+  }
+
+  Future<List<QueryDocumentSnapshot>> fetchDocuments(String documentId) async {
+    try {
+      final QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+          .collection('documents')
+          .where('id', isEqualTo: documentId)
+          .get();
+
+      return querySnapshot.docs;
+    } catch (e) {
+      print('Error fetching documents: $e');
+      return [];
+    }
   }
 }

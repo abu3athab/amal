@@ -20,7 +20,8 @@ Future<void> addUser(String username, String email, String phoneNumber,
       await FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser!.uid.toString();
-  users.add({
+  DocumentReference userDoc = users.doc(uid);
+  userDoc.set({
     'name': username,
     'email': email,
     'phone number': phoneNumber,
@@ -128,23 +129,74 @@ Future<bool> addNonUrgentBloodUser(String locationName, String bloodType,
   }
 }
 
-Future<void> addEvent(String name, String description, String date,
-    String startTime, String endTime, String location) async {
-  FirebaseAuth auth = FirebaseAuth.instance;
-  String uid = auth.currentUser!.uid;
-  await FirebaseFirestore.instance.collection('events').add({
-    'name': name,
-    'uid': uid,
-    'description': description,
-    'date': date,
-    'startTime': startTime,
-    'endTime': endTime,
-    'location': location,
-  });
-}
+// Future<void> addEvent(String name, String description, String date,
+//     String startTime, String endTime, String location) async {
+//   CollectionReference eventRef =
+//       FirebaseFirestore.instance.collection('events');
+//   FirebaseAuth auth = FirebaseAuth.instance;
+//   String uid = auth.currentUser!.uid;
+//   DocumentReference doc = eventRef.doc(uid);
+//   await doc.set({
+//     'name': name,
+//     'uid': uid,
+//     'description': description,
+//     'date': date,
+//     'startTime': startTime,
+//     'endTime': endTime,
+//     'location': location,
+//   });
+// }
 
 String getUserId() {
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser!.uid.toString();
   return uid;
+}
+
+Future<void> addEvent(String name, String description, String date,
+    String startTime, String endTime, String location) async {
+  try {
+    // Get the current user's ID
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    CollectionReference userRef =
+        FirebaseFirestore.instance.collection('Users');
+    DocumentSnapshot userDoc = await userRef.doc(uid).get();
+
+    if (!userDoc.exists) {
+      // Handle the case where no matching user document was found
+      print('No user document found for the current user.');
+      return;
+    }
+
+    String userName = userDoc.get('name');
+    String userEmail = userDoc.get('email');
+
+    // Create a reference to the user document using the user ID
+    DocumentReference userDocRef =
+        FirebaseFirestore.instance.collection('events').doc(uid);
+
+    // Create the user document with the specified ID and set the user name and email
+    await userDocRef.set({
+      'name': userName,
+      'email': userEmail,
+    });
+
+    // Create a reference to the collection inside the user document for myEvents
+    CollectionReference myEventsCollectionRef =
+        userDocRef.collection('myEvents');
+
+    // Add data to the collection
+    await myEventsCollectionRef.add({
+      'name': name,
+      'description': description,
+      'date': date,
+      'startTime': startTime,
+      'endTime': endTime,
+      'location': location,
+    });
+
+    print('Document and collection created successfully!');
+  } catch (e) {
+    print('Error creating document and collection: $e');
+  }
 }
