@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
@@ -17,6 +18,29 @@ class Vounteermain extends StatefulWidget {
 }
 
 class VounteermainChild extends State<Vounteermain> {
+  Future<QuerySnapshot> fetchSubcollectionsData() async {
+    final QuerySnapshot querySnapshot =
+        await FirebaseFirestore.instance.collection('events').get();
+
+    return querySnapshot;
+  }
+
+  Future<List<QuerySnapshot>> fetchSubcollectionsDataForDocuments(
+      List<DocumentSnapshot> documents) async {
+    final List<Future<QuerySnapshot>> futures = [];
+
+    for (var document in documents) {
+      final collectionRef = FirebaseFirestore.instance
+          .collection('events')
+          .doc(document.id)
+          .collection('myEvents');
+
+      futures.add(collectionRef.get());
+    }
+
+    return await Future.wait(futures);
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -125,17 +149,77 @@ class VounteermainChild extends State<Vounteermain> {
                     ],
                   ),
                   Expanded(
-                      child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: <Widget>[
-                      // Eventtile(),
-                      // Eventtile(),
-                      // Eventtile(),
-                      // Eventtile(),
-                      // Eventtile(),
-                      // Eventtile(),
-                    ],
-                  )),
+                    child: FutureBuilder<QuerySnapshot>(
+                      future: fetchSubcollectionsData(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (snapshot.hasError) {
+                          return Text("Error: ${snapshot.error}");
+                        } else if (snapshot.hasData) {
+                          final documents = snapshot.data!.docs;
+                          return FutureBuilder<List<QuerySnapshot>>(
+                            future:
+                                fetchSubcollectionsDataForDocuments(documents),
+                            builder: (context, subcollectionsSnapshot) {
+                              if (subcollectionsSnapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              } else if (subcollectionsSnapshot.hasError) {
+                                return Text(
+                                    "Error: ${subcollectionsSnapshot.error}");
+                              } else if (subcollectionsSnapshot.hasData) {
+                                final subcollections =
+                                    subcollectionsSnapshot.data!;
+                                return ListView.builder(
+                                  itemCount: documents.length,
+                                  itemBuilder: (context, index) {
+                                    final document = documents[index];
+                                    final subcollection = subcollections[index];
+                                    final subcollectionData = subcollection.docs
+                                        .map((doc) => doc.data())
+                                        .toList();
+
+                                    return Column(
+                                      children: [
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              NeverScrollableScrollPhysics(),
+                                          itemCount: subcollectionData.length,
+                                          itemBuilder: (context, index) {
+                                            final data =
+                                                subcollectionData[index]
+                                                    as Map<String, dynamic>;
+
+                                            return Eventtile(
+                                              name: data['name'],
+                                              date: data['date'],
+                                              startTime: data['startTime'],
+                                              location: data['location'],
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                return Text("No data found");
+                              }
+                            },
+                          );
+                        } else {
+                          return Text("No data found");
+                        }
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),
