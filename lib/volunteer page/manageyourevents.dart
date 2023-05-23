@@ -54,32 +54,39 @@ class ManageeventsChild extends State<Manageevents> {
                   width: width,
                   height: height * 0.75,
                   child: Expanded(
-                      child: FutureBuilder(
-                    future: ref.get(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      if (snapshot.hasError) {
-                        return Text("error: ${snapshot.error}");
-                      } else {
-                        return ListView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: ((context, index) {
-                              return Eventtile(
-                                location:
-                                    snapshot.data!.docs[index].get('location'),
-                                date: snapshot.data!.docs[index].get('date'),
-                                startTime:
-                                    snapshot.data!.docs[index].get('startTime'),
-                                name: snapshot.data!.docs[index].get('name'),
-                              );
-                            }));
-                      }
-                    },
-                  )),
+                      child: StreamBuilder<Object>(
+                          stream: ref.snapshots(),
+                          builder: (context, snapshot) {
+                            return FutureBuilder(
+                              future: ref.get(),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                                if (snapshot.hasError) {
+                                  return Text("error: ${snapshot.error}");
+                                } else {
+                                  return ListView.builder(
+                                      itemCount: snapshot.data!.docs.length,
+                                      itemBuilder: ((context, index) {
+                                        return Eventtile(
+                                          location: snapshot.data!.docs[index]
+                                              .get('location'),
+                                          date: snapshot.data!.docs[index]
+                                              .get('date'),
+                                          startTime: snapshot.data!.docs[index]
+                                              .get('startTime'),
+                                          name: snapshot.data!.docs[index]
+                                              .get('name'),
+                                        );
+                                      }));
+                                }
+                              },
+                            );
+                          })),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

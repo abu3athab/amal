@@ -219,6 +219,11 @@ class CreateneweventChild extends State<Createnewevent> {
                               timeController.text,
                               timeController2.text,
                               location);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("your event has been added sucessfully"),
+                            duration: Duration(seconds: 2),
+                          ));
                         },
                         child: Text(
                           "Create a new event",

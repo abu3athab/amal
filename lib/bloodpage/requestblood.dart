@@ -7,7 +7,6 @@ import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'bloodRequester.dart';
 import '../log in/user.dart';
 
 class Requestblood extends StatefulWidget {
@@ -18,8 +17,6 @@ class Requestblood extends StatefulWidget {
 }
 
 class RequestbloodChild extends State<Requestblood> {
-  late BloodRequesterModel bloodRequesterModel;
-
   String? urgency;
   final controller = TextEditingController();
   final _bloodUnitsController = TextEditingController();
