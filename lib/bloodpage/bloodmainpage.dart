@@ -7,6 +7,7 @@ import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
@@ -22,6 +23,7 @@ class Bloodmain extends StatefulWidget {
 
 class BloodmainChild extends State<Bloodmain> {
   List<BloodRequesterModel> requester = List.empty(growable: true);
+  FirebaseAuth? firebaseAuth = FirebaseAuth.instance;
 
   CollectionReference urgentBloodReqRef = FirebaseFirestore.instance
       .collection('bloodReq')
@@ -131,7 +133,6 @@ class BloodmainChild extends State<Bloodmain> {
                         if (snapshot.hasError) {
                           return Text("error: ${snapshot.error}");
                         } else {
-                          var data = snapshot.data;
                           return ListView.builder(
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: ((context, index) {
