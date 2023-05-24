@@ -141,14 +141,7 @@ class CharityadminmainChild extends State<Charityadminmain> {
                   Expanded(
                       child: ListView(
                     padding: const EdgeInsets.all(8),
-                    children: <Widget>[
-                      Charityitems(),
-                      Charityitems(),
-                      Charityitems(),
-                      Charityitems(),
-                      Charityitems(),
-                      Charityitems(),
-                    ],
+                    children: <Widget>[],
                   )),
                 ],
               ),
