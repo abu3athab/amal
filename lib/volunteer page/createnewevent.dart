@@ -218,6 +218,7 @@ class CreateneweventChild extends State<Createnewevent> {
                       SizedBox(
                         height: height * 0.02,
                       ),
+
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text("where will the event take place"),

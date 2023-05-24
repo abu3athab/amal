@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:demo2/colors.dart';
+import 'package:demo2/sign%20up/enterCharitydetails.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -266,6 +267,14 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   ),
                 ]),
               ),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Charitydetails()),
+                    );
+                  },
+                  child: Text("enter charity details after sign up")),
               SizedBox(
                 height: height * 0.05,
               ),
