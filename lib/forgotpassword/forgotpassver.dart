@@ -1,6 +1,8 @@
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/changepass.dart';
+import 'package:email_auth/email_auth.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -9,16 +11,14 @@ import 'package:otp_text_field/style.dart';
 import '../log in/logIn.dart';
 import 'forgotpass.dart';
 
-class ForgotPassver extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return ForgotPassverChild();
-  }
-}
+class ForgotPassver extends StatelessWidget {
+  EmailOTP myAuth;
+  String email;
+  ForgotPassver({required this.myAuth, required this.email});
+  final otpController = OtpFieldController();
+  bool isVerifiedOTP = false;
+  String optValue = "";
 
-class ForgotPassverChild extends State<ForgotPassver> {
-  final emailControllerpass = TextEditingController();
-  final optController = OtpFieldController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -55,10 +55,10 @@ class ForgotPassverChild extends State<ForgotPassver> {
             Container(
               width: width * 0.8,
               child: OTPTextField(
-                controller: optController,
+                controller: otpController,
                 onChanged: (value) {
                   if (value != null) {
-                    print("jellp");
+                    optValue = value;
                   }
                 },
                 length: 4,
@@ -89,7 +89,25 @@ class ForgotPassverChild extends State<ForgotPassver> {
                       'Resend',
                       style: TextStyle(color: logoColor),
                     ),
-                    onPressed: () {}),
+                    onPressed: () async {
+                      myAuth.setConfig(
+                          appEmail: "ahmed.alkhatib13@gmail.com",
+                          appName: "Email OTP",
+                          userEmail: email,
+                          otpLength: 4,
+                          otpType: OTPType.digitsOnly);
+                      if (await myAuth.sendOTP() == true) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("OTP has been sent"),
+                        ));
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Oops, OTP send failed"),
+                        ));
+                      }
+                    }),
               ],
             ),
             SizedBox(
@@ -99,11 +117,22 @@ class ForgotPassverChild extends State<ForgotPassver> {
               width: width * 0.6,
               height: height * 0.07,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => changepass()),
-                  );
+                onPressed: () async {
+                  if (await myAuth.verifyOTP(otp: optValue)) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => changepass()),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("OPT verified"),
+                      duration: Duration(seconds: 2),
+                    ));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("your entered OPT doesn't the sent one"),
+                      duration: Duration(seconds: 2),
+                    ));
+                  }
                 },
                 child: Text(
                   "Verify",

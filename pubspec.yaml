@@ -46,6 +46,8 @@ dependencies:
   shrink_sidemenu: ^2.0.0+2-null-safety
   get: ^4.6.5
   dynamic_list_item: ^1.2.0
+  email_auth: ^1.0.0
+  email_otp: ^2.0.1
 
 dev_dependencies:
   flutter_test:

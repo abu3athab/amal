@@ -130,14 +130,16 @@ class RequestbloodChild extends State<Requestblood> {
                         Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: TextField(
-                            onChanged: (value) {
-                              _bloodUnitsController.text = value;
-                            },
+                            // onChanged: (value) {
+                            //   _bloodUnitsController.text = value;
+                            // },
                             controller: _bloodUnitsController,
                             decoration:
                                 InputDecoration(labelText: 'Amount of units'),
                             keyboardType: TextInputType.number,
-                            inputFormatters: [
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
                               FilteringTextInputFormatter.digitsOnly
                             ],
                           ),
