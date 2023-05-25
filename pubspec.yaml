@@ -48,6 +48,7 @@ dependencies:
   dynamic_list_item: ^1.2.0
   email_auth: ^1.0.0
   email_otp: ^2.0.1
+  image_picker: ^0.8.7+5
 
 dev_dependencies:
   flutter_test:
