@@ -65,7 +65,13 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Charityadminmain()),
+                          );
+                        },
                       ),
                       Spacer(),
                       Text(
