@@ -91,51 +91,6 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
     }
   }
 
-  void isVerifiedEmail() {
-    isEmailVerified = _firebase.currentUser!.emailVerified;
-    if (!isEmailVerified) {
-      sendVerificationEmail();
-      timer =
-          Timer.periodic(Duration(seconds: 3), (timer) => checkEmailVerified());
-    }
-  }
-
-  Future<void> sendVerificationEmail() async {
-    try {
-      final user = _firebase.currentUser;
-      await user!.sendEmailVerification();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("a verification link has been sent to your email"),
-        duration: Duration(seconds: 3),
-      ));
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("somthing went wrong"),
-        duration: Duration(seconds: 3),
-      ));
-    }
-  }
-
-  Future<void> checkEmailVerified() async {
-    await _firebase.currentUser!.reload();
-    setState(() {
-      isEmailVerified = _firebase.currentUser!.emailVerified;
-    });
-    if (isEmailVerified) {
-      timer?.cancel();
-      addCharity(_charityNameController.text, _emailController.text,
-          _phoneNumberController.text, _passwordController.text, 'yes');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(seconds: 3),
-        content: Text('account successfuly registered'),
-      ));
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -294,8 +249,6 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                         final userCredentials =
                             await _firebase.createUserWithEmailAndPassword(
                                 email: email, password: password);
-
-                        isVerifiedEmail();
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'email-already-in-use') {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
