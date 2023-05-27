@@ -1,9 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/log%20in/user.dart';
+import 'package:demo2/profilepage.dart/profileBadges.dart';
+import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
+
 import '../colors.dart';
 import '../side bar/side_bar.dart';
 
@@ -79,7 +83,13 @@ class VounteermainChild extends State<Vounteermain> {
                             width: width * 0.1,
                             child: InkWell(
                               child: Image.asset("assets/menu.gif"),
-
+                              // onTap: () {
+                              //   final _state = _sideMenuKey.currentState;
+                              //   if (_state!.isOpened)
+                              //     _state.closeSideMenu(); // close side menu
+                              //   else
+                              //     _state.openSideMenu();
+                              // },
                             )),
                         Spacer(),
                         Container(
@@ -92,7 +102,11 @@ class VounteermainChild extends State<Vounteermain> {
                                       BorderSide(color: Colors.grey, width: 1)),
                               hintText: 'Try Charity,Food.clothing...',
                             ),
-
+                            onChanged: (value) {
+                              setState(() {
+                                searchText = value;
+                              });
+                            },
                             style: TextStyle(fontSize: height * 0.021),
                           ),
                         ),
@@ -169,7 +183,38 @@ class VounteermainChild extends State<Vounteermain> {
                                   final subcollectionData = subcollection.docs
                                       .map((doc) => doc.data())
                                       .toList();
-       },
+
+                                  return Column(
+                                    children: [
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: subcollectionData.length,
+                                        itemBuilder: (context, index) {
+                                          final data = subcollectionData[index]
+                                              as Map<String, dynamic>;
+                                          if (searchText.isEmpty) {
+                                            return Eventtile(
+                                              name: data['name'],
+                                              date: data['date'],
+                                              startTime: data['startTime'],
+                                              location: data['location'],
+                                            );
+                                          }
+                                          if (data['name']
+                                              .toString()
+                                              .toLowerCase()
+                                              .contains(
+                                                  searchText.toLowerCase())) {
+                                            return Eventtile(
+                                              name: data['name'],
+                                              date: data['date'],
+                                              startTime: data['startTime'],
+                                              location: data['location'],
+                                            );
+                                          } else
+                                            return Container();
+                                        },
                                       ),
                                     ],
                                   );
