@@ -121,7 +121,10 @@ class ForgotPassver extends StatelessWidget {
                   if (await myAuth.verifyOTP(otp: optValue)) {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => changepass()),
+                      MaterialPageRoute(
+                          builder: (context) => ChangePass(
+                                email: email,
+                              )),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("OPT verified"),

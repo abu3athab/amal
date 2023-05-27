@@ -5,6 +5,7 @@ import 'package:demo2/chairty%20page/charitytiles.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
+import 'package:demo2/sign%20up/awaitapproval.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
 import 'package:flutter/material.dart';
@@ -161,7 +162,13 @@ class CharitydetailsChild extends State<Charitydetails> {
                       width: width,
                       height: height * 0.08,
                       child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Awaitapproval()),
+                            );
+                          },
                           child: Text("Request approval from admin ")))
                 ],
               ),
