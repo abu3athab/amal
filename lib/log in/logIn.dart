@@ -19,6 +19,7 @@ class Login extends StatefulWidget {
 }
 
 class LoginChild extends State<Login> {
+  CollectionReference _userRef = FirebaseFirestore.instance.collection('Users');
   final _formKey = GlobalKey<FormState>();
   FocusNode labelTextNode = new FocusNode();
 
@@ -27,6 +28,21 @@ class LoginChild extends State<Login> {
   TextEditingController _passwordController = TextEditingController();
 
   var isHidden = true;
+  static bool isLoggedIn = false;
+
+  Future<bool> checkUserCredentials(String email, String password) async {
+    try {
+      final QuerySnapshot snapshot = await _userRef
+          .where('email', isEqualTo: email)
+          .where('password', isEqualTo: password)
+          .get();
+
+      return snapshot.size > 0;
+    } catch (e) {
+      print('Error checking user credentials: $e');
+      return false;
+    }
+  }
 
   @override
   void dispose() {
@@ -185,73 +201,25 @@ class LoginChild extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        final email = _emailController.text;
-                        final password = _passwordController.text;
-                        FirebaseFirestore _firestore =
-                            FirebaseFirestore.instance;
+                        String _email = _emailController.text;
+                        String _password = _passwordController.text;
 
-                        try {
-                          UserCredential userCredential = await FirebaseAuth
-                              .instance
-                              .signInWithEmailAndPassword(
-                            email: email,
-                            password: password,
+                        final bool isCredentialsCorrect =
+                            await checkUserCredentials(_email, _password);
+                        if (isCredentialsCorrect) {
+                          setState(() {
+                            isLoggedIn = true;
+                          });
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
                           );
-
-                          // User logged in successfully
-                          // Now retrieve user data from Firestore
-
-                          QuerySnapshot<Map<String, dynamic>> userData =
-                              await _firestore
-                                  .collection('Users')
-                                  .where('uid',
-                                      isEqualTo: userCredential.user!.uid)
-                                  .get();
-
-                          if (userData.docs.isNotEmpty) {
-                            // Access the first document from the query snapshot
-                            DocumentSnapshot<Map<String, dynamic>>
-                                userSnapshot = userData.docs.firstWhere((doc) =>
-                                    doc.data()['uid'] ==
-                                    userCredential.user!.uid);
-                            String verfified = userSnapshot.data()!['verified'];
-
-                            //String phoneNumber = userSnapshot.data()!['phone number'];
-
-                            // ... Access other user data fields
-
-                            // Navigate to the main page after successful login
-                            // updateUserEmailVerification("true");
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainPage()),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('User not found'),
-                              ),
-                            );
-                          }
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('User not found'),
-                              ),
-                            );
-                          } else if (e.code == 'wrong-password') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('Wrong password'),
-                              ),
-                            );
-                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "users not found please check your email and password"),
+                            duration: Duration(seconds: 2),
+                          ));
                         }
                       }
                     },

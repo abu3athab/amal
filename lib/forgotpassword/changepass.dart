@@ -12,23 +12,28 @@ class ChangePass extends StatelessWidget {
   String email;
   ChangePass({required this.email});
   var _userRef = FirebaseFirestore.instance;
+  bool exist = false;
 
   final _changePassFormKey = GlobalKey<FormState>();
   TextEditingController passController = TextEditingController();
   TextEditingController passConfirmController = TextEditingController();
 
   Future<void> updateUserPassword(String password) async {
-    final userData = await _userRef
-        .collection('Users')
-        .where('email', isEqualTo: email)
-        .get();
+    try {
+      final userData = await _userRef
+          .collection('Users')
+          .where('email', isEqualTo: email)
+          .get();
 
-    if (userData.docs.isNotEmpty) {
-      final userSnapshot =
-          userData.docs.firstWhere((doc) => doc['email'] == email);
+      if (userData.docs.isNotEmpty) {
+        final userSnapshot =
+            userData.docs.firstWhere((doc) => doc['email'] == email);
 
-      // Update the specific field here
-      await userSnapshot.reference.update({'password': password});
+        // Update the specific field here
+        await userSnapshot.reference.update({'password': password});
+      }
+    } catch (e) {
+      print(e);
     }
   }
 
