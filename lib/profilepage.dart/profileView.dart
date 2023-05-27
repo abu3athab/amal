@@ -18,12 +18,9 @@ class ProfileViewChild extends State<ProfileView> {
     return Center(
         child: Column(
       children: [
-        SizedBox(
-          height: height * 0.08,
-        ),
         Text(
           "My Profile",
-          style: TextStyle(fontSize: 30, color: Colors.white),
+          style: TextStyle(fontSize: 30, color: logoColor),
         ),
         Container(
           width: width * 0.92,

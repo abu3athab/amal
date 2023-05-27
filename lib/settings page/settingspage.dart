@@ -22,10 +22,7 @@ class Settingschild extends State<Settings> {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      decoration: const BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/gradientredblue.png"),
-              fit: BoxFit.cover)),
+      decoration: BoxDecoration(color: Colors.white),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
@@ -33,7 +30,7 @@ class Settingschild extends State<Settings> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: height * 0.07,
+                height: height * 0.01,
               ),
               //start of setting title bar/////////////////////////
               Row(
@@ -47,7 +44,7 @@ class Settingschild extends State<Settings> {
                           angle: 90 * math.pi / 180,
                           child: Icon(
                             Icons.bar_chart,
-                            color: Colors.white,
+                            color: Colors.black,
                             size: height * 0.03,
                           ),
                         ),
@@ -61,7 +58,7 @@ class Settingschild extends State<Settings> {
                         Text(
                           "SETTINGS ",
                           style: TextStyle(
-                              color: Colors.white, fontSize: width * 0.05),
+                              color: Colors.black, fontSize: width * 0.05),
                         ),
                       ],
                     ),
@@ -75,7 +72,7 @@ class Settingschild extends State<Settings> {
                           angle: 270 * math.pi / 180,
                           child: Icon(
                             Icons.bar_chart,
-                            color: Colors.white,
+                            color: Colors.black,
                             size: height * 0.03,
                           ),
                         ),
@@ -109,7 +106,7 @@ class Settingschild extends State<Settings> {
                             child: Text(
                               "GENERAL",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: width * 0.045),
+                                  color: Colors.black, fontSize: width * 0.045),
                             )),
                       ),
                     ),
@@ -119,7 +116,7 @@ class Settingschild extends State<Settings> {
                     child: Text(
                       "/",
                       style: TextStyle(
-                          color: Colors.white, fontSize: width * 0.08),
+                          color: Colors.black, fontSize: width * 0.08),
                     ),
                   ),
                   VerticalDivider(width: 1.0),
@@ -140,7 +137,7 @@ class Settingschild extends State<Settings> {
                             child: Text(
                               "NOTIFICATION",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: width * 0.045),
+                                  color: Colors.black, fontSize: width * 0.045),
                             )),
                       ),
                     ),
@@ -152,7 +149,7 @@ class Settingschild extends State<Settings> {
               ),
               Container(
                 width: width * 0.92,
-                height: height * 0.65,
+                height: height * 0.6,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -493,303 +490,6 @@ class Settingschild extends State<Settings> {
                   ),
                 ),
               ),
-              //end of general/notification row///////////////////////
-              /* 
-              Container(
-                  width: width * 0.9,
-                  height: height * 0.65,
-                  padding: EdgeInsets.all(20),
-                  child: Center(
-                    child: Stack(
-                      children: [
-                        //general container
-                        Opacity(
-                          opacity: generalboxvis,
-                          child: Container(
-                            width: width * 0.7,
-                            height: height * 0.,
-                            padding: EdgeInsets.all(height * 0.015),
-                            color: Colors.white,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Enable Dark Mode",
-                                      style: TextStyle(fontSize: width * 0.05),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.15,
-                                      child: FittedBox(
-                                        child: Switch(
-                                          value: false,
-                                          activeColor: Colors.white,
-                                          onChanged: (value) {},
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.account_circle,
-                                    size: height * 0.05,
-                                    color: logoColor,
-                                  ),
-                                  label: Text(
-                                    'Edit profile',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                ///////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.email,
-                                    color: logoColor,
-                                    size: height * 0.05,
-                                  ),
-                                  label: Text(
-                                    'Edit email',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                /////////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    color: logoColor,
-                                    Icons.lock,
-                                    size: height * 0.05,
-                                  ),
-                                  label: Text(
-                                    'Edit password',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                /////////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    color: logoColor,
-                                    Icons.language,
-                                    size: height * 0.05,
-                                  ),
-                                  label: Text(
-                                    'Edit language',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                ///////////////////////////////
-                                TextButton.icon(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    color: logoColor,
-                                    Icons.logout,
-                                    size: height * 0.05,
-                                  ),
-                                  label: Text(
-                                    'Log out',
-                                    style: TextStyle(
-                                        fontSize: width * 0.05,
-                                        color: logoColor),
-                                  ), // <-- Text
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        //general container
-
-                        //notification container
-                        Opacity(
-                          opacity: notificationboxvis,
-                          child: Container(
-                            width: width * 0.7,
-                            height: height * 0.5,
-                            padding: EdgeInsets.all(height * 0.015),
-                            color: Colors.white,
-                            child: SingleChildScrollView(
-                              child: Column(children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Allow Notifications",
-                                      style: TextStyle(fontSize: width * 0.05),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.15,
-                                      child: FittedBox(
-                                        child: Switch(
-                                          value: false,
-                                          activeColor: Colors.white,
-                                          onChanged: (value) {},
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                                ////
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: width * 0.45,
-                                      child: Text(
-                                        "Allow urgent blood request notifications",
-                                        style:
-                                            TextStyle(fontSize: width * 0.05),
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.15,
-                                      child: FittedBox(
-                                        child: Switch(
-                                          value: false,
-                                          activeColor: Colors.white,
-                                          onChanged: (value) {},
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                ////////
-
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: width * 0.45,
-                                      child: Text(
-                                        "Allow volunteer event reminder notification",
-                                        style:
-                                            TextStyle(fontSize: width * 0.05),
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.15,
-                                      child: FittedBox(
-                                        child: Switch(
-                                          value: false,
-                                          activeColor: Colors.white,
-                                          onChanged: (value) {},
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                                ///////////
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      width: width * 0.45,
-                                      child: Text(
-                                        "Allow motivitional quote notification",
-                                        style:
-                                            TextStyle(fontSize: width * 0.05),
-                                        maxLines: 3,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: width * 0.15,
-                                      child: FittedBox(
-                                        child: Switch(
-                                          value: false,
-                                          activeColor: Colors.white,
-                                          onChanged: (value) {},
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: height * 0.01,
-                                ),
-                                Container(
-                                  width: width * 0.65,
-                                  color: Colors.grey,
-                                  height: height * 0.001,
-                                ),
-                              ]),
-                            ),
-                          ),
-                        ),
-                        //notification container
-                      ],
-                    ),
-                  )),*/
             ],
           ),
         ),

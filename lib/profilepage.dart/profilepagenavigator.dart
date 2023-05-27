@@ -1,3 +1,4 @@
+import 'package:demo2/colors.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePageNavigator extends StatefulWidget {
@@ -28,23 +29,39 @@ class ProfilePageNavigatorChild extends State<ProfilePageNavigator> {
           children: [
             Expanded(
                 child: Center(
-              child: IconButton(
-                iconSize: height * 0.04,
-                icon: const Icon(Icons.account_circle),
-                onPressed: () {
-                  setState(() {});
-                },
+              child: Column(
+                children: [
+                  IconButton(
+                    iconSize: height * 0.04,
+                    icon: const Icon(
+                      Icons.account_circle,
+                      color: logoColor,
+                    ),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                  ),
+                  Text("Profile")
+                ],
               ),
             )),
             VerticalDivider(width: 1.0),
             Expanded(
                 child: Center(
-              child: IconButton(
-                iconSize: height * 0.04,
-                icon: const Icon(Icons.volunteer_activism),
-                onPressed: () {
-                  setState(() {});
-                },
+              child: Column(
+                children: [
+                  IconButton(
+                    iconSize: height * 0.04,
+                    icon: const Icon(
+                      Icons.volunteer_activism,
+                      color: logoColor,
+                    ),
+                    onPressed: () {
+                      setState(() {});
+                    },
+                  ),
+                  Text("Badges")
+                ],
               ),
             )),
           ],

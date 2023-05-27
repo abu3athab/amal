@@ -1,29 +1,94 @@
+import 'dart:async';
+
+import 'package:demo2/log%20in/logIn.dart';
+import 'package:demo2/log%20in/user.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+//asdsadsa
+final _firebase = FirebaseAuth.instance;
 
 class SignUpForUser extends StatefulWidget {
   @override
-  State<SignUpForUser> createState() => _SignUpForUserChild();
+  State<SignUpForUser> createState() => SignUpForUserChild();
 }
 
-class _SignUpForUserChild extends State<SignUpForUser> {
+class SignUpForUserChild extends State<SignUpForUser> {
   final _signUpFormKey = GlobalKey<FormState>();
+  static bool isEmailVerified = false;
+  Timer? timer;
 
-  final _userNameController = TextEditingController();
+  TextEditingController _userNameController = TextEditingController();
 
-  final _emailController = TextEditingController();
+  TextEditingController _emailController = TextEditingController();
 
-  final _phoneNumberController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
 
-  final _passwordController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+
+  String get username => this._userNameController.text.trim();
+
+  String get email => this._emailController.text.trim();
+
+  String get phoneNumber => this._phoneNumberController.text.trim();
+
+  String get password => _passwordController.text.trim();
+
   @override
   void dispose() {
     _passwordController.dispose();
     _userNameController.dispose();
     _emailController.dispose();
     _phoneNumberController.dispose();
+    timer?.cancel();
     super.dispose();
+  }
+
+  void isVerifiedEmail() {
+    isEmailVerified = _firebase.currentUser!.emailVerified;
+    if (!isEmailVerified) {
+      sendVerificationEmail();
+      timer =
+          Timer.periodic(Duration(seconds: 3), (timer) => checkEmailVerified());
+    }
+  }
+
+  Future<void> sendVerificationEmail() async {
+    try {
+      final user = _firebase.currentUser;
+      await user!.sendEmailVerification();
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("a verification link has been sent to your email"),
+        duration: Duration(seconds: 3),
+      ));
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text("somthing went wrong"),
+        duration: Duration(seconds: 3),
+      ));
+    }
+  }
+
+  Future<void> checkEmailVerified() async {
+    await _firebase.currentUser!.reload();
+    setState(() {
+      isEmailVerified = _firebase.currentUser!.emailVerified;
+    });
+    if (isEmailVerified) {
+      timer?.cancel();
+      addUser(username, email, phoneNumber, password, 'false');
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: Duration(seconds: 3),
+        content: Text('account successfuly registered'),
+      ));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Login()),
+      );
+    }
   }
 
   String? checkPhoneNumber(String? phoneNumber) {
@@ -61,6 +126,16 @@ class _SignUpForUserChild extends State<SignUpForUser> {
     }
     if (!pass.contains(RegExp(r'[!@#$%&*?]'))) {
       return "password must contain at least one of these special characters (!@#%^&*?)";
+    } else {
+      return null;
+    }
+  }
+
+  String? checkEmail(String? email) {
+    if (email == null || email.isEmpty) {
+      return "email field must not be empty";
+    } else if (!EmailValidator.validate(email)) {
+      return "email isn't valid";
     } else {
       return null;
     }
@@ -171,11 +246,7 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                     SizedBox(
                       height: 75,
                       child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Email must not be empty";
-                          }
-                        },
+                        validator: checkEmail,
                         controller: _emailController,
                         decoration: InputDecoration(
                             filled: true,
@@ -241,18 +312,49 @@ class _SignUpForUserChild extends State<SignUpForUser> {
                 width: width * 0.6,
                 height: height * 0.05,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_signUpFormKey.currentState?.validate() == true) {
+                  onPressed: () async {
+                    if (_signUpFormKey.currentState!.validate()) {
+                      // If the form is valid, display a snackbar. In the real world,
+                      // you'd often call a server or save the information in a database.
+
                       // Save the form data and navigate to the next screen
                       final username = _userNameController.text;
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
-                      final location = _passwordController.text;
+                      final password = _passwordController.text;
 
                       // TODO: save the data and navigate to the next screen
+                      //if the user hasn't registered an acount will be created and send the user to the login page
+                      //if the acount already resistered a message will be sent to the user
+
+                      try {
+                        final userCredentials =
+                            await _firebase.createUserWithEmailAndPassword(
+                                email: email, password: password);
+
+                        isVerifiedEmail();
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'email-already-in-use') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            duration: Duration(seconds: 5),
+                            content: Text('this email is already registered'),
+                          ));
+                        } else if (e.code == 'error_invalid_email') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid ')));
+                        } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid credentials ')));
+                        }
+                      }
+                      ;
                     }
                   },
+
                   // ignore: sort_child_properties_last
+
                   child: const Text(
                     'Sign Up',
                     style: TextStyle(color: Colors.white),
