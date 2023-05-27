@@ -48,7 +48,7 @@ dependencies:
   dynamic_list_item: ^1.2.0
   email_auth: ^1.0.0
   email_otp: ^2.0.1
-  mailer: ^6.0.1
+
 
 dev_dependencies:
   flutter_test:
