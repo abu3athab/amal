@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class Vounteermain extends StatefulWidget {
 }
 
 class VounteermainChild extends State<Vounteermain> {
+  String searchText = "";
   Future<QuerySnapshot> fetchSubcollectionsData() async {
     final QuerySnapshot querySnapshot =
         await FirebaseFirestore.instance.collection('events').get();
@@ -77,13 +79,7 @@ class VounteermainChild extends State<Vounteermain> {
                             width: width * 0.1,
                             child: InkWell(
                               child: Image.asset("assets/menu.gif"),
-                              onTap: () {
-                                final _state = _sideMenuKey.currentState;
-                                if (_state!.isOpened)
-                                  _state.closeSideMenu(); // close side menu
-                                else
-                                  _state.openSideMenu();
-                              },
+
                             )),
                         Spacer(),
                         Container(
@@ -96,6 +92,7 @@ class VounteermainChild extends State<Vounteermain> {
                                       BorderSide(color: Colors.grey, width: 1)),
                               hintText: 'Try Charity,Food.clothing...',
                             ),
+
                             style: TextStyle(fontSize: height * 0.021),
                           ),
                         ),
@@ -172,24 +169,7 @@ class VounteermainChild extends State<Vounteermain> {
                                   final subcollectionData = subcollection.docs
                                       .map((doc) => doc.data())
                                       .toList();
-
-                                  return Column(
-                                    children: [
-                                      ListView.builder(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: subcollectionData.length,
-                                        itemBuilder: (context, index) {
-                                          final data = subcollectionData[index]
-                                              as Map<String, dynamic>;
-
-                                          return Eventtile(
-                                            name: data['name'],
-                                            date: data['date'],
-                                            startTime: data['startTime'],
-                                            location: data['location'],
-                                          );
-                                        },
+       },
                                       ),
                                     ],
                                   );

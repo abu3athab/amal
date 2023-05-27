@@ -32,8 +32,8 @@ Future<void> addUser(String username, String email, String phoneNumber,
   return;
 }
 
-Future<void> addCharity(String username, String email, String phoneNumber,
-    String password, String v) async {
+Future<void> addCharity(
+    String username, String email, String phoneNumber, String password) async {
   try {
     CollectionReference charities =
         await FirebaseFirestore.instance.collection('Charities');
@@ -44,7 +44,10 @@ Future<void> addCharity(String username, String email, String phoneNumber,
       'email': email,
       'phone number': phoneNumber,
       'password': password,
-      'verified': v,
+      'verified': 'false',
+      'charity name': "",
+      'charity bio': "",
+      'location': '',
       'uid': uid
     });
     return;
@@ -199,4 +202,76 @@ Future<void> addEvent(String name, String description, String date,
   } catch (e) {
     print('Error creating document and collection: $e');
   }
+}
+
+Future<void> updateCharityEmailVerification(
+    String name, String bio, String location, String v) async {
+  try {
+    final FirebaseFirestore firestore = FirebaseFirestore.instance;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+
+    if (user != null) {
+      final uid = user.uid;
+      final userData = await firestore
+          .collection('Charities')
+          .where('uid', isEqualTo: uid)
+          .get();
+
+      if (userData.docs.isNotEmpty) {
+        final userSnapshot =
+            userData.docs.firstWhere((doc) => doc['uid'] == uid);
+
+        // Update the specific field here
+        await userSnapshot.reference.update({
+          'charity name': name,
+          'charity bio': bio,
+          'location': location,
+          'verified': v
+        });
+      }
+    }
+  } catch (e) {
+    print("Error: $e");
+  }
+}
+
+Future<void> addMyEvents(String name, String description, String date,
+    String startTime, String endTime, String location) async {
+  CollectionReference events = FirebaseFirestore.instance.collection('events');
+  var auth = FirebaseAuth.instance;
+  String uid = auth.currentUser!.uid;
+  await events.add({
+    'name': name,
+    'description': description,
+    'date': date,
+    'startTime': startTime,
+    'endTime': endTime,
+    'location': location,
+    'uid': uid
+  });
+}
+
+CollectionReference eventsRef = FirebaseFirestore.instance.collection('events');
+Future<QuerySnapshot> fetchSubcollectionsData() async {
+  final QuerySnapshot querySnapshot =
+      await FirebaseFirestore.instance.collection('events').get();
+
+  return querySnapshot;
+}
+
+Future<List<QuerySnapshot>> fetchSubcollectionsDataForDocuments(
+    List<DocumentSnapshot> documents) async {
+  final List<Future<QuerySnapshot>> allEvents = [];
+
+  for (var document in documents) {
+    final collectionRef = FirebaseFirestore.instance
+        .collection('events')
+        .doc(document.id)
+        .collection('myEvents');
+
+    allEvents.add(collectionRef.get());
+  }
+
+  return await Future.wait(allEvents);
 }
