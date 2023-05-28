@@ -1,6 +1,7 @@
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
 import 'package:email_auth/email_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:email_otp/email_otp.dart';
@@ -17,6 +18,9 @@ class ForgotPass extends StatefulWidget {
 class ForgotPassChild extends State<ForgotPass> {
   final emailControllerpass = TextEditingController();
   EmailOTP myauth = EmailOTP();
+  Future<void> sendResetPassEmail(String email) async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -73,35 +77,23 @@ class ForgotPassChild extends State<ForgotPass> {
               height: height * 0.07,
               child: ElevatedButton(
                 onPressed: () async {
-                  myauth.setConfig(
-                      appEmail: "me@rohitchouhan.com",
-                      appName: "Email OTP",
-                      userEmail: emailControllerpass.text,
-                      otpLength: 4,
-                      otpType: OTPType.digitsOnly);
                   if (emailControllerpass.text.isEmpty) {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("email field must not be empty"),
                       duration: Duration(seconds: 2),
                     ));
                   } else {
-                    if (await myauth.sendOTP() == true) {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("OTP has been sent"),
-                      ));
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ForgotPassver(
-                                  email: emailControllerpass.text,
-                                  myAuth: myauth,
-                                )),
-                      );
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text("Oops, OTP send failed"),
-                      ));
-                    }
+                    String email = emailControllerpass.text;
+                    sendResetPassEmail(email);
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ForgotPassver(
+                                email: emailControllerpass.text,
+                                myAuth: myauth,
+                              )),
+                    );
                   }
                 },
                 child: Text(

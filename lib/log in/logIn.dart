@@ -189,22 +189,59 @@ class LoginChild extends State<Login> {
                       if (_formKey.currentState!.validate()) {
                         String _email = _emailController.text;
                         String _password = _passwordController.text;
+                        try {
+                          final isCredentialsCorrect = FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: _email, password: _password);
 
-                        final isCredentialsCorrect = FirebaseAuth.instance
-                            .signInWithEmailAndPassword(
-                                email: _email, password: _password);
-
-                        if (isCredentialsCorrect != null) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),
                           );
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(
-                                "users not found please check your email and password"),
-                            duration: Duration(seconds: 2),
-                          ));
+                          //  else {
+                          //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          //     content: Text(
+                          //         "users not found please check your email and password"),
+                          //     duration: Duration(seconds: 2),
+                          //   ));
+                          // }
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'network-request-failed') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("No internet connection!!"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          } else if (e.code == "wrong-password") {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Please enter correct password"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          } else if (e.code == 'user-not-found') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("User not found"),
+                              duration: Duration(seconds: 2),
+                            ));
+                            // print('Email not found');
+                          } else if (e.code == 'too-many-requests') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text("Too many attempts please try later"),
+                              duration: Duration(seconds: 2),
+                            ));
+                            //print('Too many attempts please try later');
+                          } else if (e.code == 'unknwon') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Error has occured!"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          } else if (e.code == 'unknown') {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Error occured!"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          } else {
+                            print(e.code);
+                          }
                         }
                       }
                     },

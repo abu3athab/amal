@@ -298,7 +298,7 @@ class SignUpForUserChild extends State<SignUpForUser> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => OTP(
+                              builder: (context) => UserOTP(
                                     auth: auth,
                                     userName: username,
                                     email: email,

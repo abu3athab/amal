@@ -1,3 +1,8 @@
+import 'package:demo2/chairty%20page/charitymainpage.dart';
+import 'package:demo2/sign%20up/entercharitydetails.dart';
+import 'package:demo2/sign%20up/signUpCharity.dart';
+import 'package:flutter/material.dart';
+
 import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/log%20in/user.dart';
@@ -9,13 +14,13 @@ import 'package:otp_text_field/style.dart';
 
 import '../forgotpassword/forgotpass.dart';
 
-class UserOTP extends StatelessWidget {
+class CharityOTP extends StatelessWidget {
   EmailOTP auth;
   String userName;
   String email;
   String password;
   String phoneNumber;
-  UserOTP(
+  CharityOTP(
       {required this.auth,
       required this.userName,
       required this.email,
@@ -126,7 +131,7 @@ class UserOTP extends StatelessWidget {
                       final userCredentials = await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: email, password: password);
-                      addUser(userName, email, phoneNumber, 'user');
+                      addCharity(userName, email, phoneNumber, 'charity');
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -175,7 +180,7 @@ class UserOTP extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ForgotPass()),
+                  MaterialPageRoute(builder: (context) => SignUpChartiy()),
                 );
               },
               icon: Icon(

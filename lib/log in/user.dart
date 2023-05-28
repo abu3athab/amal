@@ -15,10 +15,7 @@ class UserInfo {
 }
 
 Future<void> addUser(
-  String username,
-  String email,
-  String phoneNumber,
-) async {
+    String username, String email, String phoneNumber, String type) async {
   CollectionReference users =
       await FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -28,29 +25,33 @@ Future<void> addUser(
     'name': username,
     'email': email,
     'phone number': phoneNumber,
+    'type': type,
     'uid': uid
   });
   return;
 }
 
 Future<void> addCharity(
-    String username, String email, String phoneNumber, String password) async {
+    String username, String email, String phoneNumber, String type) async {
   try {
     CollectionReference charities =
-        await FirebaseFirestore.instance.collection('Charities');
+        await FirebaseFirestore.instance.collection('Users');
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser!.uid;
-    charities.add({
+    DocumentReference userDoc = charities.doc(uid);
+
+    userDoc.set({
       'name': username,
       'email': email,
       'phone number': phoneNumber,
-      'password': password,
-      'verified': 'false',
       'charity name': "",
       'charity bio': "",
       'location': '',
+      'type': type,
       'uid': uid
     });
+    CollectionReference myProducts = userDoc.collection('myProducts');
+    myProducts.add({'name': "a"});
     return;
   } catch (e) {
     print("error");
@@ -205,8 +206,8 @@ Future<void> addEvent(String name, String description, String date,
   }
 }
 
-Future<void> updateCharityEmailVerification(
-    String name, String bio, String location, String v) async {
+Future<void> updateCharityDetails(
+    String name, String bio, String location) async {
   try {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -228,7 +229,6 @@ Future<void> updateCharityEmailVerification(
           'charity name': name,
           'charity bio': bio,
           'location': location,
-          'verified': v
         });
       }
     }

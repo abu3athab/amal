@@ -2,6 +2,8 @@ import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
+import 'package:demo2/log%20in/logIn.dart';
+import 'package:demo2/log%20in/user.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
@@ -28,6 +30,8 @@ class CharitydetailsChild extends State<Charitydetails> {
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
 
     String? location = "Amman";
+    TextEditingController charityNameController = TextEditingController();
+    TextEditingController bioController = TextEditingController();
 
     var locations = [
       'Ajlun',
@@ -103,6 +107,7 @@ class CharitydetailsChild extends State<Charitydetails> {
                             border: OutlineInputBorder(),
                             labelText: 'Charity name',
                           ),
+                          controller: charityNameController,
                         ),
                         SizedBox(
                           height: height * 0.02,
@@ -113,6 +118,7 @@ class CharitydetailsChild extends State<Charitydetails> {
                           child: Text("what is the goal of this Charity"),
                         ),
                         TextField(
+                          controller: bioController,
                           keyboardType: TextInputType.multiline,
                           maxLines: 3,
                           obscureText: false,
@@ -163,10 +169,13 @@ class CharitydetailsChild extends State<Charitydetails> {
                       height: height * 0.08,
                       child: ElevatedButton(
                           onPressed: () {
+                            String chrarityName = charityNameController.text;
+                            String bio = bioController.text;
+                            String loca = location!;
+                            updateCharityDetails(chrarityName, bio, loca);
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => Awaitapproval()),
+                              MaterialPageRoute(builder: (context) => Login()),
                             );
                           },
                           child: Text("Request approval from admin ")))
