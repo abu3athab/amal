@@ -184,39 +184,34 @@ class VounteermainChild extends State<Vounteermain> {
                                       .map((doc) => doc.data())
                                       .toList();
 
-                                  return Column(
-                                    children: [
-                                      ListView.builder(
-                                        shrinkWrap: true,
-                                        physics: NeverScrollableScrollPhysics(),
-                                        itemCount: subcollectionData.length,
-                                        itemBuilder: (context, index) {
-                                          final data = subcollectionData[index]
-                                              as Map<String, dynamic>;
-                                          if (searchText.isEmpty) {
-                                            return Eventtile(
-                                              name: data['name'],
-                                              date: data['date'],
-                                              startTime: data['startTime'],
-                                              location: data['location'],
-                                            );
-                                          }
-                                          if (data['name']
-                                              .toString()
-                                              .toLowerCase()
-                                              .contains(
-                                                  searchText.toLowerCase())) {
-                                            return Eventtile(
-                                              name: data['name'],
-                                              date: data['date'],
-                                              startTime: data['startTime'],
-                                              location: data['location'],
-                                            );
-                                          } else
-                                            return Container();
-                                        },
-                                      ),
-                                    ],
+                                  return ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: subcollectionData.length,
+                                    itemBuilder: (context, index) {
+                                      final data = subcollectionData[index]
+                                          as Map<String, dynamic>;
+                                      if (searchText.isEmpty) {
+                                        return Eventtile(
+                                          name: data['name'],
+                                          date: data['date'],
+                                          startTime: data['startTime'],
+                                          location: data['location'],
+                                        );
+                                      }
+                                      if (data['name']
+                                          .toString()
+                                          .toLowerCase()
+                                          .contains(searchText.toLowerCase())) {
+                                        return Eventtile(
+                                          name: data['name'],
+                                          date: data['date'],
+                                          startTime: data['startTime'],
+                                          location: data['location'],
+                                        );
+                                      } else
+                                        return Container();
+                                    },
                                   );
                                 },
                               );

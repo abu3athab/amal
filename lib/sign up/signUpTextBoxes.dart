@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/log%20in/user.dart';
-import 'package:demo2/sign%20up/verifyUserByOTP.dart';
-import 'package:email_auth/email_auth.dart';
+import 'package:demo2/sign%20up/sendUserSignupOTP.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +20,7 @@ class SignUpForUser extends StatefulWidget {
 
 class SignUpForUserChild extends State<SignUpForUser> {
   final _signUpFormKey = GlobalKey<FormState>();
-  static bool isEmailVerified = false;
-  Timer? timer;
+  EmailOTP auth = EmailOTP();
 
   TextEditingController _userNameController = TextEditingController();
 
@@ -39,7 +37,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
   String get phoneNumber => this._phoneNumberController.text.trim();
 
   String get password => _passwordController.text.trim();
-  EmailOTP myauth = EmailOTP();
 
   @override
   void dispose() {
@@ -47,7 +44,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
     _userNameController.dispose();
     _emailController.dispose();
     _phoneNumberController.dispose();
-    timer?.cancel();
     super.dispose();
   }
 
@@ -267,6 +263,12 @@ class SignUpForUserChild extends State<SignUpForUser> {
                   ],
                 ),
               ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Resend"),
+                style: ButtonStyle(
+                    foregroundColor: MaterialStateProperty.all(logoColor)),
+              ),
               Container(
                 margin: const EdgeInsets.all(20),
                 width: width * 0.6,
@@ -274,17 +276,21 @@ class SignUpForUserChild extends State<SignUpForUser> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_signUpFormKey.currentState!.validate()) {
+                      // If the form is valid, display a snackbar. In the real world,
+                      // you'd often call a server or save the information in a database.
+
+                      // Save the form data and navigate to the next screen
                       final username = _userNameController.text;
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
                       final password = _passwordController.text;
-                      myauth.setConfig(
-                          appEmail: "ahmed.alkhatib13@gmail.com",
+                      auth.setConfig(
+                          appEmail: "me@rohitchouhan.com",
                           appName: "Email OTP",
                           userEmail: email,
                           otpLength: 4,
                           otpType: OTPType.digitsOnly);
-                      if (await myauth.sendOTP() == true) {
+                      if (await auth.sendOTP() == true) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("OTP has been sent"),
@@ -293,18 +299,13 @@ class SignUpForUserChild extends State<SignUpForUser> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => OTP(
-                                    email: email,
-                                    pass: password,
-                                    otp: myauth,
-                                    phoneNumber: phoneNumber,
+                                    auth: auth,
                                     userName: username,
+                                    email: email,
+                                    password: password,
+                                    phoneNumber: phoneNumber,
                                   )),
                         );
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("Oops, OTP send failed"),
-                        ));
                       }
                     }
                   },

@@ -19,7 +19,8 @@ Future<void> addUser(
   String email,
   String phoneNumber,
 ) async {
-  CollectionReference users = FirebaseFirestore.instance.collection('Users');
+  CollectionReference users =
+      await FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser!.uid.toString();
   DocumentReference userDoc = users.doc(uid);

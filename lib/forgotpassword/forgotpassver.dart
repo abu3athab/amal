@@ -3,7 +3,6 @@ import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/changepass.dart';
 import 'package:email_auth/email_auth.dart';
 import 'package:email_otp/email_otp.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -19,13 +18,6 @@ class ForgotPassver extends StatelessWidget {
   final otpController = OtpFieldController();
   bool isVerifiedOTP = false;
   String optValue = "";
-  Future<void> sendResetPassEmail() async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } on FirebaseAuth catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +130,6 @@ class ForgotPassver extends StatelessWidget {
                       content: Text("OPT verified"),
                       duration: Duration(seconds: 2),
                     ));
-                    sendResetPassEmail();
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("your entered OPT doesn't the sent one"),

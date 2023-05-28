@@ -1,33 +1,27 @@
-import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
-import 'package:demo2/forgotpassword/changepass.dart';
+import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/log%20in/user.dart';
-import 'package:demo2/sign%20up/successPage.dart';
-import 'package:email_auth/email_auth.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
-import '../log in/logIn.dart';
+import '../forgotpassword/forgotpass.dart';
 
 class OTP extends StatelessWidget {
-  String email;
-  String pass;
-  EmailOTP otp;
+  EmailOTP auth;
   String userName;
+  String email;
+  String password;
   String phoneNumber;
   OTP(
-      {required this.email,
-      required this.pass,
-      required this.otp,
+      {required this.auth,
       required this.userName,
+      required this.email,
+      required this.password,
       required this.phoneNumber});
-  final otpController = OtpFieldController();
-  bool isVerifiedOTP = false;
-  String optValue = "";
+  String otpValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +59,9 @@ class OTP extends StatelessWidget {
             Container(
               width: width * 0.8,
               child: OTPTextField(
-                controller: otpController,
                 onChanged: (value) {
                   if (value != null) {
-                    optValue = value;
+                    otpValue = value;
                   }
                 },
                 length: 4,
@@ -100,13 +93,13 @@ class OTP extends StatelessWidget {
                       style: TextStyle(color: logoColor),
                     ),
                     onPressed: () async {
-                      otp.setConfig(
+                      auth.setConfig(
                           appEmail: "ahmed.alkhatib13@gmail.com",
                           appName: "Email OTP",
                           userEmail: email,
                           otpLength: 4,
                           otpType: OTPType.digitsOnly);
-                      if (await otp.sendOTP() == true) {
+                      if (await auth.sendOTP() == true) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("OTP has been sent"),
@@ -128,15 +121,36 @@ class OTP extends StatelessWidget {
               height: height * 0.07,
               child: ElevatedButton(
                 onPressed: () async {
-                  if (await otp.verifyOTP(otp: optValue)) {
-                  
-                    // addUser(userName, email, phoneNumber);
-                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
-                        email: email, password: pass);
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    //   content: Text("OPT verified"),
-                    //   duration: Duration(seconds: 2),
-                    // ));
+                  if (await auth.verifyOTP(otp: otpValue)) {
+                    try {
+                      final userCredentials = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                              email: email, password: password);
+                      addUser(userName, email, phoneNumber);
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'email-already-in-use') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          duration: Duration(seconds: 5),
+                          content: Text('this email is already registered'),
+                        ));
+                      } else if (e.code == 'error_invalid_email') {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            duration: Duration(seconds: 5),
+                            content: Text('invalid ')));
+                      } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            duration: Duration(seconds: 5),
+                            content: Text('invalid credentials ')));
+                      }
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text("OPT verified"),
+                      duration: Duration(seconds: 2),
+                    ));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("your entered OPT doesn't the sent one"),
@@ -161,7 +175,7 @@ class OTP extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Success()),
+                  MaterialPageRoute(builder: (context) => ForgotPass()),
                 );
               },
               icon: Icon(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo2/administrator/administratormain.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/forgotpass.dart';
 import 'package:demo2/log%20in/rememberMe.dart';
@@ -18,6 +19,7 @@ class Login extends StatefulWidget {
 }
 
 class LoginChild extends State<Login> {
+  CollectionReference _userRef = FirebaseFirestore.instance.collection('Users');
   final _formKey = GlobalKey<FormState>();
   FocusNode labelTextNode = new FocusNode();
 
@@ -26,6 +28,7 @@ class LoginChild extends State<Login> {
   TextEditingController _passwordController = TextEditingController();
 
   var isHidden = true;
+  static bool isLoggedIn = false;
 
   @override
   void dispose() {
@@ -184,42 +187,24 @@ class LoginChild extends State<Login> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        final email = _emailController.text;
-                        final password = _passwordController.text;
-                        FirebaseFirestore _firestore =
-                            FirebaseFirestore.instance;
+                        String _email = _emailController.text;
+                        String _password = _passwordController.text;
 
-                        try {
-                          UserCredential userCredential = await FirebaseAuth
-                              .instance
-                              .signInWithEmailAndPassword(
-                            email: email,
-                            password: password,
-                          );
+                        final isCredentialsCorrect = FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: _email, password: _password);
 
+                        if (isCredentialsCorrect != null) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),
                           );
-
-                          // User logged in successfully
-                          // Now retrieve user data from Firestore
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'user-not-found') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('User not found'),
-                              ),
-                            );
-                          } else if (e.code == 'wrong-password') {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('Wrong password'),
-                              ),
-                            );
-                          }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "users not found please check your email and password"),
+                            duration: Duration(seconds: 2),
+                          ));
                         }
                       }
                     },
@@ -263,15 +248,30 @@ class LoginChild extends State<Login> {
                         child: Text("bypass auth"))
                   ],
                 ),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Charityadminmain()),
-                      );
-                    },
-                    child: Text("chariy admin")),
+                Row(
+                  children: [
+                    Spacer(),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Charityadminmain()),
+                          );
+                        },
+                        child: Text("chariy admin")),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AdminMain()),
+                          );
+                        },
+                        child: Text("App Admin")),
+                    Spacer(),
+                  ],
+                ),
               ],
             ),
           ),
