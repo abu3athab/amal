@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:demo2/colors.dart';
+import 'package:demo2/sign%20up/sendCharityUserOTP.dart';
+import 'package:email_auth/email_auth.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,7 @@ class SignUpChartiy extends StatefulWidget {
 }
 
 class _SignUpChartiyState extends State<SignUpChartiy> {
+  EmailOTP auth = EmailOTP();
   final _formKey = GlobalKey<FormState>();
   final _firebase = FirebaseAuth.instance;
   static bool isEmailVerified = false;
@@ -238,32 +242,36 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   onPressed: () async {
                     if (_formKey.currentState?.validate() == true) {
                       // Save the form data and navigate to the next screen
-                      final charityName = _charityNameController.text;
+                      final charityUserName = _charityNameController.text;
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
                       final password = _passwordController.text;
                       final _firebase = FirebaseAuth.instance;
 
                       // TODO: save the data and navigate to the next screen
-                      try {
-                        final userCredentials =
-                            await _firebase.createUserWithEmailAndPassword(
-                                email: email, password: password);
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'email-already-in-use') {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            duration: Duration(seconds: 5),
-                            content: Text('this email is already registered'),
-                          ));
-                        } else if (e.code == 'error_invalid_email') {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 5),
-                              content: Text('invalid ')));
-                        } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 5),
-                              content: Text('invalid credentials ')));
-                        }
+
+                      auth.setConfig(
+                          appEmail: "me@rohitchouhan.com",
+                          appName: "Email OTP",
+                          userEmail: email,
+                          otpLength: 4,
+                          otpType: OTPType.digitsOnly);
+                      if (await auth.sendOTP() == true) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("OTP has been sent"),
+                        ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CharityOTP(
+                                    auth: auth,
+                                    userName: charityUserName,
+                                    email: email,
+                                    password: password,
+                                    phoneNumber: phoneNumber,
+                                  )),
+                        );
                       }
                     }
                   },

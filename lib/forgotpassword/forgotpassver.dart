@@ -3,6 +3,7 @@ import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/changepass.dart';
 import 'package:email_auth/email_auth.dart';
 import 'package:email_otp/email_otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:otp_text_field/otp_field.dart';
@@ -18,6 +19,10 @@ class ForgotPassver extends StatelessWidget {
   final otpController = OtpFieldController();
   bool isVerifiedOTP = false;
   String optValue = "";
+
+  Future<void> sendResetPassEmail() async {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,32 +50,12 @@ class ForgotPassver extends StatelessWidget {
               ),
             ),
             Text(
-              "Enter the verification code we just sent you on your email address",
+              "A password reset link has been sent to your email address",
               style: TextStyle(fontSize: 20, color: Colors.black),
               textAlign: TextAlign.center,
             ),
             SizedBox(
               height: 20,
-            ),
-            Container(
-              width: width * 0.8,
-              child: OTPTextField(
-                controller: otpController,
-                onChanged: (value) {
-                  if (value != null) {
-                    optValue = value;
-                  }
-                },
-                length: 4,
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: width * 0.122,
-                style: TextStyle(fontSize: 17),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.underline,
-                onCompleted: (pin) {
-                  print("Completed: " + pin);
-                },
-              ),
             ),
             SizedBox(
               height: 40,
@@ -80,7 +65,7 @@ class ForgotPassver extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "If you didn't receive a code!",
+                  "If you didn't receive a link!",
                   style: TextStyle(color: Colors.grey, fontSize: 16),
                   textAlign: TextAlign.center,
                 ),
@@ -90,62 +75,12 @@ class ForgotPassver extends StatelessWidget {
                       style: TextStyle(color: logoColor),
                     ),
                     onPressed: () async {
-                      myAuth.setConfig(
-                          appEmail: "ahmed.alkhatib13@gmail.com",
-                          appName: "Email OTP",
-                          userEmail: email,
-                          otpLength: 4,
-                          otpType: OTPType.digitsOnly);
-                      if (await myAuth.sendOTP() == true) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("OTP has been sent"),
-                        ));
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("Oops, OTP send failed"),
-                        ));
-                      }
+                      sendResetPassEmail();
                     }),
               ],
             ),
             SizedBox(
               height: 40,
-            ),
-            Container(
-              width: width * 0.6,
-              height: height * 0.07,
-              child: ElevatedButton(
-                onPressed: () async {
-                  if (await myAuth.verifyOTP(otp: optValue)) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChangePass(
-                                email: email,
-                              )),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("OPT verified"),
-                      duration: Duration(seconds: 2),
-                    ));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("your entered OPT doesn't the sent one"),
-                      duration: Duration(seconds: 2),
-                    ));
-                  }
-                },
-                child: Text(
-                  "Verify",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                style: ButtonStyle(
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50))),
-                    backgroundColor: MaterialStateProperty.all(logoColor)),
-              ),
             ),
             SizedBox(
               height: 20,
@@ -160,9 +95,28 @@ class ForgotPassver extends StatelessWidget {
               icon: Icon(
                 // <-- Icon
                 Icons.arrow_back,
-                size: 24.0,
+                size: 26.0,
               ),
               label: Text('Go Back'),
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50))),
+                  backgroundColor:
+                      MaterialStateProperty.all(logoColor)), // <-- Text
+            ),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Login()),
+                );
+              },
+              icon: Icon(
+                // <-- Icon
+                Icons.arrow_forward,
+                size: 26.0,
+              ),
+              label: Text('login     '),
               style: ButtonStyle(
                   shape: MaterialStateProperty.all(RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(50))),

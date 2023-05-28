@@ -100,7 +100,7 @@ class VounteermainChild extends State<Vounteermain> {
                               focusedBorder: UnderlineInputBorder(
                                   borderSide:
                                       BorderSide(color: Colors.grey, width: 1)),
-                              hintText: 'Try Charity,Food.clothing...',
+                              hintText: 'Search events by their name',
                             ),
                             onChanged: (value) {
                               setState(() {
@@ -137,15 +137,8 @@ class VounteermainChild extends State<Vounteermain> {
                 ),
                 Row(
                   children: [
-                    Text("Events in amman"),
+                    Text("Events in jordan"),
                     Spacer(),
-                    Row(
-                      children: [
-                        TextButton(
-                            onPressed: () {}, child: Text("Change city")),
-                        TextButton(onPressed: () {}, child: Text("See all"))
-                      ],
-                    )
                   ],
                 ),
                 Expanded(
