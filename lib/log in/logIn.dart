@@ -197,44 +197,13 @@ class LoginChild extends State<Login> {
                             password: password,
                           );
 
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                          );
+
                           // User logged in successfully
                           // Now retrieve user data from Firestore
-
-                          QuerySnapshot<Map<String, dynamic>> userData =
-                              await _firestore
-                                  .collection('Users')
-                                  .where('uid',
-                                      isEqualTo: userCredential.user!.uid)
-                                  .get();
-
-                          if (userData.docs.isNotEmpty) {
-                            // Access the first document from the query snapshot
-                            DocumentSnapshot<Map<String, dynamic>>
-                                userSnapshot = userData.docs.firstWhere((doc) =>
-                                    doc.data()['uid'] ==
-                                    userCredential.user!.uid);
-                            String verfified = userSnapshot.data()!['verified'];
-
-                            //String phoneNumber = userSnapshot.data()!['phone number'];
-
-                            // ... Access other user data fields
-
-                            // Navigate to the main page after successful login
-                            // updateUserEmailVerification("true");
-
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MainPage()),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                duration: Duration(seconds: 5),
-                                content: Text('User not found'),
-                              ),
-                            );
-                          }
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'user-not-found') {
                             ScaffoldMessenger.of(context).showSnackBar(

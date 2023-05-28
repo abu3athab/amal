@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/log%20in/user.dart';
+import 'package:demo2/sign%20up/verifyUserByOTP.dart';
+import 'package:email_auth/email_auth.dart';
+import 'package:email_otp/email_otp.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +39,7 @@ class SignUpForUserChild extends State<SignUpForUser> {
   String get phoneNumber => this._phoneNumberController.text.trim();
 
   String get password => _passwordController.text.trim();
+  EmailOTP myauth = EmailOTP();
 
   @override
   void dispose() {
@@ -45,50 +49,6 @@ class SignUpForUserChild extends State<SignUpForUser> {
     _phoneNumberController.dispose();
     timer?.cancel();
     super.dispose();
-  }
-
-  void isVerifiedEmail() {
-    isEmailVerified = _firebase.currentUser!.emailVerified;
-    if (!isEmailVerified) {
-      sendVerificationEmail();
-      timer =
-          Timer.periodic(Duration(seconds: 3), (timer) => checkEmailVerified());
-    }
-  }
-
-  Future<void> sendVerificationEmail() async {
-    try {
-      final user = _firebase.currentUser;
-      await user!.sendEmailVerification();
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("a verification link has been sent to your email"),
-        duration: Duration(seconds: 3),
-      ));
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("somthing went wrong"),
-        duration: Duration(seconds: 3),
-      ));
-    }
-  }
-
-  Future<void> checkEmailVerified() async {
-    await _firebase.currentUser!.reload();
-    setState(() {
-      isEmailVerified = _firebase.currentUser!.emailVerified;
-    });
-    if (isEmailVerified) {
-      timer?.cancel();
-      addUser(username, email, phoneNumber, password, 'false');
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        duration: Duration(seconds: 3),
-        content: Text('account successfuly registered'),
-      ));
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Login()),
-      );
-    }
   }
 
   String? checkPhoneNumber(String? phoneNumber) {
@@ -314,42 +274,38 @@ class SignUpForUserChild extends State<SignUpForUser> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_signUpFormKey.currentState!.validate()) {
-                      // If the form is valid, display a snackbar. In the real world,
-                      // you'd often call a server or save the information in a database.
-
-                      // Save the form data and navigate to the next screen
                       final username = _userNameController.text;
                       final phoneNumber = _phoneNumberController.text;
                       final email = _emailController.text;
                       final password = _passwordController.text;
-
-                      // TODO: save the data and navigate to the next screen
-                      //if the user hasn't registered an acount will be created and send the user to the login page
-                      //if the acount already resistered a message will be sent to the user
-
-                      try {
-                        final userCredentials =
-                            await _firebase.createUserWithEmailAndPassword(
-                                email: email, password: password);
-
-                        isVerifiedEmail();
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'email-already-in-use') {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            duration: Duration(seconds: 5),
-                            content: Text('this email is already registered'),
-                          ));
-                        } else if (e.code == 'error_invalid_email') {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 5),
-                              content: Text('invalid ')));
-                        } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 5),
-                              content: Text('invalid credentials ')));
-                        }
+                      myauth.setConfig(
+                          appEmail: "ahmed.alkhatib13@gmail.com",
+                          appName: "Email OTP",
+                          userEmail: email,
+                          otpLength: 4,
+                          otpType: OTPType.digitsOnly);
+                      if (await myauth.sendOTP() == true) {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("OTP has been sent"),
+                        ));
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OTP(
+                                    email: email,
+                                    pass: password,
+                                    otp: myauth,
+                                    phoneNumber: phoneNumber,
+                                    userName: username,
+                                  )),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Oops, OTP send failed"),
+                        ));
                       }
-                      ;
                     }
                   },
 
