@@ -30,20 +30,6 @@ class LoginChild extends State<Login> {
   var isHidden = true;
   static bool isLoggedIn = false;
 
-  Future<bool> checkUserCredentials(String email, String password) async {
-    try {
-      final QuerySnapshot snapshot = await _userRef
-          .where('email', isEqualTo: email)
-          .where('password', isEqualTo: password)
-          .get();
-
-      return snapshot.size > 0;
-    } catch (e) {
-      print('Error checking user credentials: $e');
-      return false;
-    }
-  }
-
   @override
   void dispose() {
     _passwordController.dispose();
@@ -204,12 +190,11 @@ class LoginChild extends State<Login> {
                         String _email = _emailController.text;
                         String _password = _passwordController.text;
 
-                        final bool isCredentialsCorrect =
-                            await checkUserCredentials(_email, _password);
-                        if (isCredentialsCorrect) {
-                          setState(() {
-                            isLoggedIn = true;
-                          });
+                        final isCredentialsCorrect = FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: _email, password: _password);
+
+                        if (isCredentialsCorrect != null) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => MainPage()),

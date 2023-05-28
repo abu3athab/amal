@@ -14,8 +14,11 @@ class UserInfo {
       required this.password});
 }
 
-Future<void> addUser(String username, String email, String phoneNumber,
-    String password, String v) async {
+Future<void> addUser(
+  String username,
+  String email,
+  String phoneNumber,
+) async {
   CollectionReference users =
       await FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -25,8 +28,6 @@ Future<void> addUser(String username, String email, String phoneNumber,
     'name': username,
     'email': email,
     'phone number': phoneNumber,
-    'password': password,
-    'verified': v,
     'uid': uid
   });
   return;
