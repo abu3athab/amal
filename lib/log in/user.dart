@@ -14,10 +14,12 @@ class UserInfo {
       required this.password});
 }
 
-Future<void> addUser(String username, String email, String phoneNumber,
-    String password, String v) async {
-  CollectionReference users =
-      await FirebaseFirestore.instance.collection('Users');
+Future<void> addUser(
+  String username,
+  String email,
+  String phoneNumber,
+) async {
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser!.uid.toString();
   DocumentReference userDoc = users.doc(uid);
@@ -25,8 +27,6 @@ Future<void> addUser(String username, String email, String phoneNumber,
     'name': username,
     'email': email,
     'phone number': phoneNumber,
-    'password': password,
-    'verified': v,
     'uid': uid
   });
   return;

@@ -14,46 +14,6 @@ class ChangePass extends StatelessWidget {
   var _userRef = FirebaseFirestore.instance;
 
   final _changePassFormKey = GlobalKey<FormState>();
-  TextEditingController passController = TextEditingController();
-  TextEditingController passConfirmController = TextEditingController();
-
-  Future<void> updateUserPassword(String password) async {
-    final userData = await _userRef
-        .collection('Users')
-        .where('email', isEqualTo: email)
-        .get();
-
-    if (userData.docs.isNotEmpty) {
-      final userSnapshot =
-          userData.docs.firstWhere((doc) => doc['email'] == email);
-
-      // Update the specific field here
-      await userSnapshot.reference.update({'password': password});
-    }
-  }
-
-  String? checkPassword(String? pass) {
-    if (pass == null || pass.isEmpty) {
-      return "password field must not be empty";
-    }
-    if (pass.length < 8 || pass.length > 16) {
-      return "password must between 8 and 16 character";
-    }
-    if (!pass.contains(RegExp(r"[a-z]"))) {
-      return "password must contain at least one lower-case letter";
-    }
-    if (!pass.contains(RegExp(r"[A-Z]"))) {
-      return "password must contain at least one upper-case letter";
-    }
-    if (!pass.contains(RegExp(r"[0-9]"))) {
-      return "password must contain at least one number";
-    }
-    if (!pass.contains(RegExp(r'[!@#$%&*?]'))) {
-      return "password must contain at least one of these special characters (!@#%^&*?)";
-    } else {
-      return null;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,8 +42,11 @@ class ChangePass extends StatelessWidget {
                   height: height * 0.30,
                 ),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Text(
-                "Enter your new password",
+                "A reset password link has been sent to your email",
                 style: TextStyle(fontSize: 20, color: Colors.black),
                 textAlign: TextAlign.center,
               ),
@@ -91,32 +54,15 @@ class ChangePass extends StatelessWidget {
                 height: 20,
               ),
               Text(
-                "And we will take care of the rest",
+                "",
                 style: TextStyle(fontSize: 16, color: Colors.grey),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
                 height: 40,
               ),
-              Container(
-                width: width * 0.8,
-                child: TextFormField(
-                  controller: passController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: "New password"),
-                  validator: checkPassword,
-                ),
-              ),
               SizedBox(
                 height: 20,
-              ),
-              Container(
-                width: width * 0.8,
-                child: TextFormField(
-                  controller: passConfirmController,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(hintText: "confirm New password"),
-                ),
               ),
               SizedBox(
                 height: height * 0.1,
@@ -125,31 +71,9 @@ class ChangePass extends StatelessWidget {
                 width: width * 0.6,
                 height: height * 0.07,
                 child: ElevatedButton(
-                  onPressed: () {
-                    if (_changePassFormKey.currentState!.validate()) {
-                      String pass = passController.text;
-                      String passConfirm = passConfirmController.text;
-                      if (pass != passConfirm) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text("passwords doesn't match"),
-                          duration: Duration(seconds: 2),
-                        ));
-                      } else {
-                        updateUserPassword(pass);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text("passwords has been updated sucessfully"),
-                          duration: Duration(seconds: 2),
-                        ));
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                        );
-                      }
-                    }
-                  },
+                  onPressed: () {},
                   child: Text(
-                    "Change",
+                    "Login",
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                   style: ButtonStyle(

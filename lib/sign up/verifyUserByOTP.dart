@@ -1,6 +1,8 @@
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/forgotpassword/changepass.dart';
+import 'package:demo2/log%20in/user.dart';
+import 'package:demo2/sign%20up/successPage.dart';
 import 'package:email_auth/email_auth.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,22 +12,22 @@ import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/style.dart';
 
 import '../log in/logIn.dart';
-import 'forgotpass.dart';
 
-class ForgotPassver extends StatelessWidget {
-  EmailOTP myAuth;
+class OTP extends StatelessWidget {
   String email;
-  ForgotPassver({required this.myAuth, required this.email});
+  String pass;
+  EmailOTP otp;
+  String userName;
+  String phoneNumber;
+  OTP(
+      {required this.email,
+      required this.pass,
+      required this.otp,
+      required this.userName,
+      required this.phoneNumber});
   final otpController = OtpFieldController();
   bool isVerifiedOTP = false;
   String optValue = "";
-  Future<void> sendResetPassEmail() async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
-    } on FirebaseAuth catch (e) {
-      print(e);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -98,13 +100,13 @@ class ForgotPassver extends StatelessWidget {
                       style: TextStyle(color: logoColor),
                     ),
                     onPressed: () async {
-                      myAuth.setConfig(
+                      otp.setConfig(
                           appEmail: "ahmed.alkhatib13@gmail.com",
                           appName: "Email OTP",
                           userEmail: email,
                           otpLength: 4,
                           otpType: OTPType.digitsOnly);
-                      if (await myAuth.sendOTP() == true) {
+                      if (await otp.sendOTP() == true) {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("OTP has been sent"),
@@ -126,19 +128,15 @@ class ForgotPassver extends StatelessWidget {
               height: height * 0.07,
               child: ElevatedButton(
                 onPressed: () async {
-                  if (await myAuth.verifyOTP(otp: optValue)) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ChangePass(
-                                email: email,
-                              )),
-                    );
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("OPT verified"),
-                      duration: Duration(seconds: 2),
-                    ));
-                    sendResetPassEmail();
+                  if (await otp.verifyOTP(otp: optValue)) {
+                  
+                    // addUser(userName, email, phoneNumber);
+                    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: email, password: pass);
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //   content: Text("OPT verified"),
+                    //   duration: Duration(seconds: 2),
+                    // ));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text("your entered OPT doesn't the sent one"),
@@ -163,7 +161,7 @@ class ForgotPassver extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ForgotPass()),
+                  MaterialPageRoute(builder: (context) => Success()),
                 );
               },
               icon: Icon(
