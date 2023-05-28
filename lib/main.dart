@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'log in/logIn.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+//wqwqwlll
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
