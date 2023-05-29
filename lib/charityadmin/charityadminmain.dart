@@ -1,13 +1,16 @@
 import 'dart:ffi';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/chairty%20page/charityitemlist.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/charityadmin/editcharitymenu.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/volunteermain.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -21,6 +24,7 @@ class Charityadminmain extends StatefulWidget {
 }
 
 class CharityadminmainChild extends State<Charityadminmain> {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -148,10 +152,45 @@ class CharityadminmainChild extends State<Charityadminmain> {
                     ),
                   ),
                   Expanded(
-                      child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: <Widget>[],
+                      child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(uid)
+                        .collection('myProducts')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Container();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else {
+                        return ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, Index) {
+                              String url =
+                                  snapshot.data!.docs[Index].get('imageUrl');
+                              return Charityitems(
+                                  imageUrl: url,
+                                  name: snapshot.data!.docs[Index]
+                                      .get('product name'),
+                                  desc: snapshot.data!.docs[Index].get('desc'),
+                                  cost: snapshot.data!.docs[Index].get('cost'),
+                                  categ:
+                                      snapshot.data!.docs[Index].get('categ'));
+                            });
+                      }
+                    },
                   )),
+                  TextButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Login()),
+                        );
+                      },
+                      child: Text("sign out"))
                 ],
               ),
             ),

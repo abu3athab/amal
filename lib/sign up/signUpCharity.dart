@@ -33,6 +33,24 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
   final _emailController = TextEditingController();
   final _locationController = TextEditingController();
   final _passwordController = TextEditingController();
+  TextEditingController charityController = TextEditingController();
+  TextEditingController bioController = TextEditingController();
+  String? location = "Amman";
+
+  var locations = [
+    'Ajlun',
+    'Amman',
+    'Aqaba',
+    'Balqa',
+    'Irbid',
+    'Jarash',
+    'Karak',
+    'Maan',
+    'Madaba',
+    'Mafraq',
+    'Tafilah',
+    'Zarqa',
+  ];
   bool _isHidden = true;
 
   @override
@@ -224,6 +242,69 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   SizedBox(
                     height: 16,
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("what is the name of the Charity"),
+                  ),
+                  TextFormField(
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Charity name',
+                    ),
+                    controller: charityController,
+                  ),
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
+                  /////////
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("what is the goal of this Charity"),
+                  ),
+                  TextFormField(
+                    controller: bioController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 3,
+                    obscureText: false,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Charity goal (bio)',
+                    ),
+                  ),
+                  SizedBox(
+                    height: height * 0.02,
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("where will the event take place"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: DropdownButton(
+                      // Initial Value
+                      value: location,
+
+                      // Down Arrow Icon
+                      icon: const Icon(Icons.keyboard_arrow_down),
+
+                      // Array list of items
+                      items: locations.map((String items) {
+                        return DropdownMenuItem(
+                          value: items,
+                          child: Text(items),
+                        );
+                      }).toList(),
+                      // After selecting the desired option,it will
+                      // change button value to selected value
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          location = newValue!;
+                        });
+                      },
+                    ),
+                  ),
                 ]),
               ),
               TextButton(
@@ -247,6 +328,9 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                       final email = _emailController.text;
                       final password = _passwordController.text;
                       final _firebase = FirebaseAuth.instance;
+                      final charityName = charityController.text;
+                      final charityBio = bioController.text;
+                      final loca = location;
 
                       // TODO: save the data and navigate to the next screen
 
@@ -270,6 +354,9 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                                     email: email,
                                     password: password,
                                     phoneNumber: phoneNumber,
+                                    charityName: charityName,
+                                    charityBio: charityBio,
+                                    loca: loca,
                                   )),
                         );
                       }

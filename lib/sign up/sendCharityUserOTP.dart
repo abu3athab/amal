@@ -20,13 +20,20 @@ class CharityOTP extends StatelessWidget {
   String email;
   String password;
   String phoneNumber;
+  final charityName;
+  final charityBio;
+  final loca;
   CharityOTP(
       {required this.auth,
       required this.userName,
       required this.email,
       required this.password,
-      required this.phoneNumber});
+      required this.phoneNumber,
+      required this.charityName,
+      required this.charityBio,
+      required this.loca});
   String otpValue = "";
+  String? location = "Amman";
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +138,8 @@ class CharityOTP extends StatelessWidget {
                       final userCredentials = await FirebaseAuth.instance
                           .createUserWithEmailAndPassword(
                               email: email, password: password);
-                      addCharity(userName, email, phoneNumber, 'charity');
+                      addCharity(userName, email, phoneNumber, 'charity',
+                          charityName, charityBio, loca);
                     } on FirebaseAuthException catch (e) {
                       if (e.code == 'email-already-in-use') {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

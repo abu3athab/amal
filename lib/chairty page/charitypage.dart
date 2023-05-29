@@ -120,12 +120,12 @@ class CharitypageChild extends State<Charitypage> {
                     child: ListView(
                   padding: const EdgeInsets.all(8),
                   children: <Widget>[
-                    Charityitems(),
-                    Charityitems(),
-                    Charityitems(),
-                    Charityitems(),
-                    Charityitems(),
-                    Charityitems(),
+                    // Charityitems(),
+                    // Charityitems(),
+                    // Charityitems(),
+                    // Charityitems(),
+                    // Charityitems(),
+                    // Charityitems(),
                   ],
                 )),
               ],

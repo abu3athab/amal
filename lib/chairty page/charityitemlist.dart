@@ -1,7 +1,21 @@
+import 'dart:io';
+
 import 'package:demo2/chairty%20page/charitypage.dart';
 import 'package:flutter/material.dart';
 
 class Charityitems extends StatelessWidget {
+  String imageUrl;
+  String name;
+  String desc;
+  String cost;
+  String categ;
+  Charityitems(
+      {required this.imageUrl,
+      required this.name,
+      required this.desc,
+      required this.cost,
+      required this.categ});
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -20,7 +34,7 @@ class Charityitems extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                child: Image.asset("assets/fashion.png"),
+                child: Image.network(imageUrl),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -28,7 +42,7 @@ class Charityitems extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "T-shirt for one child",
+                      name,
                       style: TextStyle(fontSize: height * 0.02),
                     ),
                     SizedBox(
@@ -37,14 +51,9 @@ class Charityitems extends StatelessWidget {
                     SizedBox(
                       height: height * 0.005,
                     ),
-                    Text(
-                      "description : soft cotton T_shirt for children",
-                      style: TextStyle(fontSize: height * 0.012),
-                      softWrap: true,
-                    ),
                     Spacer(),
                     Text(
-                      "price: 5 Jod",
+                      "price: ${cost} Jod",
                       style: TextStyle(fontSize: height * 0.03),
                       softWrap: true,
                       maxLines: 2,

@@ -19,13 +19,14 @@ class Login extends StatefulWidget {
 }
 
 class LoginChild extends State<Login> {
-  CollectionReference _userRef = FirebaseFirestore.instance.collection('Users');
   final _formKey = GlobalKey<FormState>();
   FocusNode labelTextNode = new FocusNode();
 
   TextEditingController _emailController = TextEditingController();
 
   TextEditingController _passwordController = TextEditingController();
+  var auth;
+  var _userRef;
 
   var isHidden = true;
   static bool isLoggedIn = false;
@@ -36,6 +37,15 @@ class LoginChild extends State<Login> {
     _emailController.dispose();
     labelTextNode.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    _userRef = FirebaseFirestore.instance.collection('Users');
+    auth = FirebaseAuth.instance;
+
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
@@ -190,21 +200,34 @@ class LoginChild extends State<Login> {
                         String _email = _emailController.text;
                         String _password = _passwordController.text;
                         try {
-                          final isCredentialsCorrect = FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
+                          var isCredentialsCorrect =
+                              await auth.signInWithEmailAndPassword(
                                   email: _email, password: _password);
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                          //  else {
-                          //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          //     content: Text(
-                          //         "users not found please check your email and password"),
-                          //     duration: Duration(seconds: 2),
-                          //   ));
-                          // }
+                          final uid = auth.currentUser!.uid;
+                          final userData = await FirebaseFirestore.instance
+                              .collection('Users')
+                              .where('uid', isEqualTo: uid)
+                              .get();
+
+                          if (userData.docs.isNotEmpty) {
+                            final userSnapshot = userData.docs
+                                .firstWhere((doc) => doc['uid'] == uid);
+                            String type = userSnapshot.get('type');
+                            if (type == 'user') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MainPage()),
+                              );
+                            } else if (type == 'charity') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Charityadminmain()),
+                              );
+                            }
+                          }
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'network-request-failed') {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
