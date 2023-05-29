@@ -5,9 +5,11 @@ import 'package:demo2/chairty%20page/charityitemlist.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/charityadmin/editcharitymenu.dart';
 import 'package:demo2/colors.dart';
+import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/volunteermain.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -150,8 +152,17 @@ class CharityadminmainChild extends State<Charityadminmain> {
                   Expanded(
                       child: ListView(
                     padding: const EdgeInsets.all(8),
-                    children: <Widget>[],
+                    children: <Widget>[Charityitems()],
                   )),
+                  TextButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Login()),
+                        );
+                      },
+                      child: Text("sign out"))
                 ],
               ),
             ),
