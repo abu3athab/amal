@@ -1,6 +1,8 @@
 import 'dart:ffi';
 import 'dart:io';
 import 'package:demo2/charityadmin/charityadminmain.dart';
+import 'package:demo2/log%20in/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
@@ -14,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../chairty page/charitytiles.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Editcharitymenu extends StatefulWidget {
   @override
@@ -25,8 +28,14 @@ class Editcharitymenu extends StatefulWidget {
 var catagory = "catagory";
 
 class EditcharitymenuChild extends State<Editcharitymenu> {
+  File? selectedImage;
   ImagePicker picker = ImagePicker();
+  String imageUrl = "";
   XFile? image;
+  String id = FirebaseAuth.instance.currentUser!.uid;
+  TextEditingController nameController = TextEditingController();
+  TextEditingController descController = TextEditingController();
+  TextEditingController costController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -102,6 +111,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      controller: nameController,
                       obscureText: false,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -119,6 +129,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      controller: descController,
                       obscureText: false,
                       maxLines: 3,
                       decoration: InputDecoration(
@@ -137,6 +148,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      controller: costController,
                       obscureText: false,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -176,21 +188,48 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
 ///////////////////
                   ElevatedButton(
                       onPressed: () async {
-                        image =
-                            await picker.pickImage(source: ImageSource.gallery);
-                        setState(() {
-                          //update UI
-                        });
+                        try {
+                          var pickedImage = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          if (pickedImage == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("no image selected!!"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          } else {
+                            setState(() {
+                              selectedImage = File(pickedImage.path);
+                            });
+                          }
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("jpeg extension isn't supported"),
+                            duration: Duration(seconds: 2),
+                          ));
+                        }
                       },
                       child: Text("Pick Image")),
-
-                  image == null ? Container() : Image.file(File(image!.path)),
 
                   SizedBox(
                     height: height * 0.1,
                   ),
                   TextButton(
-                      onPressed: () {
+                      onPressed: () async {
+                        String name = nameController.text;
+                        String desc = descController.text;
+                        String cost = costController.text;
+                        if (selectedImage != null) {
+                          var postID =
+                              DateTime.now().microsecondsSinceEpoch.toString();
+                          Reference reference = FirebaseStorage.instance
+                              .ref()
+                              .child('$id/images')
+                              .child('post_$postID');
+                          await reference.putFile(selectedImage!);
+                          imageUrl = await reference.getDownloadURL();
+                          addCharityProduct(
+                              name, desc, cost, catagory, imageUrl);
+                        }
                         Navigator.push(
                           context,
                           MaterialPageRoute(

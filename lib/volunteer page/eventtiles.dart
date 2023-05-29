@@ -46,7 +46,7 @@ class Eventtile extends StatelessWidget {
             children: [
               Container(
                 child: Image.asset(
-                    "assets/drawn-clothing-donation-concept-illustrated_23-2148833206.png"),
+                    "assets/Community-Donation-Drive-Feature-Image-01.webp"),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),

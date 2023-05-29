@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/chairty%20page/charityitemlist.dart';
@@ -23,6 +24,7 @@ class Charityadminmain extends StatefulWidget {
 }
 
 class CharityadminmainChild extends State<Charityadminmain> {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -150,9 +152,35 @@ class CharityadminmainChild extends State<Charityadminmain> {
                     ),
                   ),
                   Expanded(
-                      child: ListView(
-                    padding: const EdgeInsets.all(8),
-                    children: <Widget>[Charityitems()],
+                      child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection('Users')
+                        .doc(uid)
+                        .collection('myProducts')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Container();
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      } else {
+                        return ListView.builder(
+                            itemCount: snapshot.data!.docs.length,
+                            itemBuilder: (context, Index) {
+                              String url =
+                                  snapshot.data!.docs[Index].get('imageUrl');
+                              return Charityitems(
+                                  imageUrl: url,
+                                  name: snapshot.data!.docs[Index]
+                                      .get('product name'),
+                                  desc: snapshot.data!.docs[Index].get('desc'),
+                                  cost: snapshot.data!.docs[Index].get('cost'),
+                                  categ:
+                                      snapshot.data!.docs[Index].get('categ'));
+                            });
+                      }
+                    },
                   )),
                   TextButton(
                       onPressed: () {

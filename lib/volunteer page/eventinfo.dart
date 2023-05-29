@@ -84,7 +84,7 @@ class Eventinfo extends StatelessWidget {
                   child: Row(
                     children: [
                       Text(
-                        "Location $location",
+                        "Location $loca",
                         style: TextStyle(fontSize: width * 0.05),
                       ),
                     ],

@@ -58,6 +58,22 @@ Future<void> addCharity(String username, String email, String phoneNumber,
   }
 }
 
+Future<void> addCharityProduct(String name, String desc, String cost,
+    String categ, String imageUrl) async {
+  String uid = FirebaseAuth.instance.currentUser!.uid;
+  CollectionReference productRef = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(uid)
+      .collection('myProducts');
+  productRef.add({
+    'product name': name,
+    'desc': desc,
+    'cost': cost,
+    'categ': categ,
+    'imageUrl': imageUrl
+  });
+}
+
 Future<void> updateUserEmailVerification(String v) async {
   try {
     final FirebaseFirestore firestore = FirebaseFirestore.instance;
