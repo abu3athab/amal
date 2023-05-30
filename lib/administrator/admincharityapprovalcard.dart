@@ -15,10 +15,10 @@ class Charity_admin_approval_card extends StatelessWidget {
       height: height * 0.161,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => Cardapprovalpage()),
-          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(builder: (context) => Cardapprovalpage()),
+          // );
         },
         child: Card(
           shape: RoundedRectangleBorder(
