@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/administrator/checkUrgent.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
@@ -16,6 +17,7 @@ import '../chairty page/charitytiles.dart';
 import '../colors.dart';
 import '../side bar/side_bar.dart';
 import '../volunteer page/volunteermain.dart';
+import 'adminBloodtiles.dart';
 import 'admincharityapprovalcard.dart';
 
 class AdminMain extends StatefulWidget {
@@ -27,6 +29,10 @@ class AdminMain extends StatefulWidget {
 
 class AdminMainChild extends State<AdminMain> {
   // List<BloodRequesterModel> requester = List.empty(growable: true);
+  CollectionReference urgentRef = FirebaseFirestore.instance
+      .collection('bloodReq')
+      .doc('IRfqh4URf73SlN04i2yQ')
+      .collection('urgent');
 
   @override
   Widget build(BuildContext context) {
@@ -95,32 +101,17 @@ class AdminMainChild extends State<AdminMain> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(8, 0, 8, 5),
                         child: Text(
-                          "Aprove new Requests",
+                          "Manage requests of users",
                           style: TextStyle(fontSize: width * 0.06),
                         ),
                       )
                     ],
                   ),
-                  Container(
-                    width: width * 0.95,
-                    height: height * 0.4,
-                    decoration: BoxDecoration(color: Colors.white),
-                    child: Expanded(
-                        child: ListView(
-                      padding: const EdgeInsets.all(8),
-                      children: <Widget>[
-                        Charity_admin_approval_card(),
-                        Charity_admin_approval_card(),
-                        Charity_admin_approval_card(),
-                        Charity_admin_approval_card(),
-                        Charity_admin_approval_card(),
-                        Charity_admin_approval_card(),
-                      ],
-                    )),
-                  ),
+
                   SizedBox(
                     height: 5,
                   ),
+
                   Divider(
                     thickness: 2,
                   ),
@@ -169,7 +160,7 @@ class AdminMainChild extends State<AdminMain> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Bloodmain()),
+                                    builder: (context) => CheckUrgentMain()),
                               );
                             },
                           ),

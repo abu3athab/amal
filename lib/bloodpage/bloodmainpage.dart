@@ -138,15 +138,23 @@ class BloodmainChild extends State<Bloodmain> {
                                     return ListView.builder(
                                         itemCount: snapshot.data!.docs.length,
                                         itemBuilder: ((context, index) {
-                                          return Bloodtiles(
-                                            location: snapshot.data!.docs[index]
-                                                .get('location name'),
-                                            bloodType: snapshot
-                                                .data!.docs[index]
-                                                .get('blood type'),
-                                            nOfUnits: snapshot.data!.docs[index]
-                                                .get('number of units'),
-                                          );
+                                          bool isVerified = snapshot
+                                              .data!.docs[index]
+                                              .get('isVerfied');
+                                          if (isVerified) {
+                                            return Bloodtiles(
+                                              location: snapshot
+                                                  .data!.docs[index]
+                                                  .get('location name'),
+                                              bloodType: snapshot
+                                                  .data!.docs[index]
+                                                  .get('blood type'),
+                                              nOfUnits: snapshot
+                                                  .data!.docs[index]
+                                                  .get('number of units'),
+                                            );
+                                          } else
+                                            return Container();
                                         }));
                                   }
                                 },
@@ -185,38 +193,46 @@ class BloodmainChild extends State<Bloodmain> {
                     width: width,
                     height: height * 0.29,
                     child: Expanded(
-                      child: StreamBuilder<Object>(
-                          stream: nonUrgentBloodReqRef.snapshots(),
-                          builder: (context, snapshot) {
-                            return FutureBuilder(
-                              future: nonUrgentBloodReqRef.get(),
-                              builder: (context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                                if (snapshot.hasError) {
-                                  return Text("error: ${snapshot.error}");
-                                } else {
-                                  return ListView.builder(
-                                      itemCount: snapshot.data!.docs.length,
-                                      itemBuilder: ((context, index) {
-                                        return Bloodtiles(
-                                          location: snapshot.data!.docs[index]
-                                              .get('location name'),
-                                          bloodType: snapshot.data!.docs[index]
-                                              .get('blood type'),
-                                          nOfUnits: snapshot.data!.docs[index]
-                                              .get('number of units'),
-                                        );
-                                      }));
-                                }
-                              },
-                            );
-                          }),
-                    ),
+                        child: StreamBuilder<Object>(
+                            stream: nonUrgentBloodReqRef.snapshots(),
+                            builder: (context, snapshot) {
+                              return FutureBuilder(
+                                future: nonUrgentBloodReqRef.get(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                  if (snapshot.hasError) {
+                                    return Text("error: ${snapshot.error}");
+                                  } else {
+                                    return ListView.builder(
+                                        itemCount: snapshot.data!.docs.length,
+                                        itemBuilder: ((context, index) {
+                                          bool isVerified = snapshot
+                                              .data!.docs[index]
+                                              .get('isVerfied');
+                                          if (isVerified) {
+                                            return Bloodtiles(
+                                              location: snapshot
+                                                  .data!.docs[index]
+                                                  .get('location name'),
+                                              bloodType: snapshot
+                                                  .data!.docs[index]
+                                                  .get('blood type'),
+                                              nOfUnits: snapshot
+                                                  .data!.docs[index]
+                                                  .get('number of units'),
+                                            );
+                                          } else
+                                            return Container();
+                                        }));
+                                  }
+                                },
+                              );
+                            })),
                   ),
 
                   Container(

@@ -111,12 +111,14 @@ Future<bool> addUrgentBloodUser(String locationName, String bloodType,
         .collection('urgent');
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser!.uid.toString();
-    urgentBloodRef.add({
+    DocumentReference doc = urgentBloodRef.doc(uid);
+    doc.set({
       'location name': locationName,
       'blood type': bloodType,
       'number of units': requiredUnits,
       'urgency': isUrgent,
-      'user id': uid
+      'user id': uid,
+      'isVerfied': false
     });
 
     return true;
@@ -136,12 +138,14 @@ Future<bool> addNonUrgentBloodUser(String locationName, String bloodType,
         .collection('nonurgent');
     FirebaseAuth auth = FirebaseAuth.instance;
     String uid = auth.currentUser!.uid.toString();
-    urgentBloodRef.add({
+    DocumentReference doc = urgentBloodRef.doc(uid);
+    doc.set({
       'location name': locationName,
       'blood type': bloodType,
       'number of units': requiredUnits,
       'urgency': isUrgent,
-      'user id': uid
+      'user id': uid,
+      'isVerfied': false
     });
 
     return true;

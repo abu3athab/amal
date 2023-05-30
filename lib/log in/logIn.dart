@@ -226,6 +226,12 @@ class LoginChild extends State<Login> {
                                 MaterialPageRoute(
                                     builder: (context) => Charityadminmain()),
                               );
+                            } else if (type == 'admin') {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminMain()),
+                              );
                             }
                           }
                         } on FirebaseAuthException catch (e) {

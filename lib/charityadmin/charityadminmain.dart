@@ -4,6 +4,7 @@ import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/chairty%20page/charityitemlist.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
+import 'package:demo2/charityadmin/charityadminsettings.dart';
 import 'package:demo2/charityadmin/editcharitymenu.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/logIn.dart';
@@ -58,9 +59,18 @@ class CharityadminmainChild extends State<Charityadminmain> {
                           style: TextStyle(fontSize: width * 0.07),
                         ),
                         Spacer(),
-                        Container(
-                          width: width * 0.1,
-                          child: Image.asset("assets/settings.gif"),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Charityadminsettings()),
+                            );
+                          },
+                          child: Container(
+                            width: width * 0.1,
+                            child: Image.asset("assets/settings.gif"),
+                          ),
                         ),
                       ],
                     ),

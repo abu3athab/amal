@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../log in/user.dart';
 
-class CardApprovalForUrgent extends StatefulWidget {
+class CardApprovalForNonUrgent extends StatefulWidget {
   String location;
   String bloodType;
   String nOfUnits;
@@ -16,7 +16,7 @@ class CardApprovalForUrgent extends StatefulWidget {
   String name;
   String email;
   String phoneNumber;
-  CardApprovalForUrgent(
+  CardApprovalForNonUrgent(
       {required this.location,
       required this.bloodType,
       required this.nOfUnits,
@@ -26,17 +26,17 @@ class CardApprovalForUrgent extends StatefulWidget {
       required this.phoneNumber});
   @override
   State<StatefulWidget> createState() {
-    return CardapprovalpageChild();
+    return CardapprovalpageNonChild();
   }
 }
 
-class CardapprovalpageChild extends State<CardApprovalForUrgent> {
+class CardapprovalpageNonChild extends State<CardApprovalForNonUrgent> {
   Future<void> deleteDocument(String documentId) async {
     try {
       await FirebaseFirestore.instance
           .collection('bloodReq')
           .doc('IRfqh4URf73SlN04i2yQ')
-          .collection('urgent')
+          .collection('nonurgent')
           .doc(widget.uid)
           .delete();
       print('Document deleted successfully');
@@ -50,7 +50,7 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
       await FirebaseFirestore.instance
           .collection('bloodReq')
           .doc('IRfqh4URf73SlN04i2yQ')
-          .collection('urgent')
+          .collection('nonurgent')
           .doc(widget.uid)
           .update({'isVerfied': newValue});
       print('Attribute updated successfully');
