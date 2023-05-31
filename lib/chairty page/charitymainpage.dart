@@ -2,6 +2,7 @@ import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
+import 'package:demo2/paymentpages.dart/choosepaymentmethod.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
@@ -80,15 +81,24 @@ class CharitymainChild extends State<Charitymain> {
                             ),
                           ),
                           Spacer(),
-                          Container(
-                              width: width * 0.1,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                              ),
-                              child:
-                                  Image.asset("assets/magnifying-glass.gif")),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Choosepayment()),
+                              );
+                            },
+                            child: Container(
+                                width: width * 0.1,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20)),
+                                ),
+                                child:
+                                    Image.asset("assets/magnifying-glass.gif")),
+                          ),
                         ],
                       )),
                   ////////search bar/////////////////

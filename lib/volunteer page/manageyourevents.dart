@@ -81,10 +81,6 @@ class ManageeventsChild extends State<Manageevents> {
                                               .get('startTime'),
                                           name: snapshot.data!.docs[index]
                                               .get('name'),
-                                          desc: snapshot.data!.docs[index]
-                                              .get('description'),
-                                          finishTime: snapshot.data!.docs[index]
-                                              .get('endTime'),
                                         );
                                       }));
                                 }

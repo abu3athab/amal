@@ -190,8 +190,6 @@ class VounteermainChild extends State<Vounteermain> {
                                           date: data['date'],
                                           startTime: data['startTime'],
                                           location: data['location'],
-                                          finishTime: data['endTime'],
-                                          desc: data['description'],
                                         );
                                       }
                                       if (data['name']
@@ -203,8 +201,6 @@ class VounteermainChild extends State<Vounteermain> {
                                           date: data['date'],
                                           startTime: data['startTime'],
                                           location: data['location'],
-                                          finishTime: data['endTime'],
-                                          desc: data['description'],
                                         );
                                       } else
                                         return Container();
