@@ -59,14 +59,7 @@ Future<void> addCharity(
       'isVerfied': false,
       'uid': uid,
     });
-    CollectionReference myProducts = userDoc.collection('myProducts');
-    myProducts.add({
-      'product name': '',
-      'desc': '',
-      'cost': '',
-      'categ': '',
-      'imageUrl': ''
-    });
+
     return;
   } catch (e) {
     print("error");
@@ -76,11 +69,12 @@ Future<void> addCharity(
 Future<void> addCharityProduct(String name, String desc, String cost,
     String categ, String imageUrl) async {
   String uid = FirebaseAuth.instance.currentUser!.uid;
-  CollectionReference productRef = FirebaseFirestore.instance
-      .collection('Users')
-      .doc(uid)
-      .collection('myProducts');
-  productRef.add({
+  CollectionReference productRef =
+      FirebaseFirestore.instance.collection('Users');
+  DocumentReference userDoc = productRef.doc(uid);
+  var ref = userDoc.collection('myProducts');
+
+  ref.add({
     'product name': name,
     'desc': desc,
     'cost': cost,

@@ -280,7 +280,8 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                 Container(
                   width: width,
                   height: height * 0.25,
-                  child: Image.asset('assets/donateblood.png'),
+                  child: Image.asset(
+                      'assets/facebook-template-with-humanitary-aid-refugees-conceptwatercolor_83728-9598.png'),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
