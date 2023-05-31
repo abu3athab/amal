@@ -25,8 +25,8 @@ class LoginChild extends State<Login> {
   TextEditingController _emailController = TextEditingController();
 
   TextEditingController _passwordController = TextEditingController();
-  var auth;
-  var _userRef;
+  var _userRef = FirebaseFirestore.instance.collection('Users');
+  var auth = FirebaseAuth.instance;
 
   var isHidden = true;
   static bool isLoggedIn = false;
@@ -37,15 +37,6 @@ class LoginChild extends State<Login> {
     _emailController.dispose();
     labelTextNode.dispose();
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    _userRef = FirebaseFirestore.instance.collection('Users');
-    auth = FirebaseAuth.instance;
-
-    // TODO: implement initState
-    super.initState();
   }
 
   @override
@@ -214,57 +205,68 @@ class LoginChild extends State<Login> {
                             final userSnapshot = userData.docs
                                 .firstWhere((doc) => doc['uid'] == uid);
                             String type = userSnapshot.get('type');
-                            if (type == 'user') {
+                            bool isVerfied = userSnapshot.get('isVerfied');
+                            if (type == 'user' && isVerfied) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MainPage()),
                               );
-                            } else if (type == 'charity') {
+                            } else if (type == 'charity' && isVerfied) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Charityadminmain()),
                               );
-                            } else if (type == 'admin') {
+                            } else if (type == 'admin' && isVerfied) {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => AdminMain()),
                               );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      "Your account has not been approved by the admin!")));
                             }
                           }
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'network-request-failed') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text("No internet connection!!"),
                               duration: Duration(seconds: 2),
                             ));
                           } else if (e.code == "wrong-password") {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text("Please enter correct password"),
                               duration: Duration(seconds: 2),
                             ));
                           } else if (e.code == 'user-not-found') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text("User not found"),
                               duration: Duration(seconds: 2),
                             ));
                             // print('Email not found');
                           } else if (e.code == 'too-many-requests') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content:
                                   Text("Too many attempts please try later"),
                               duration: Duration(seconds: 2),
                             ));
                             //print('Too many attempts please try later');
                           } else if (e.code == 'unknwon') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text("Error has occured!"),
                               duration: Duration(seconds: 2),
                             ));
                           } else if (e.code == 'unknown') {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text("Error occured!"),
                               duration: Duration(seconds: 2),
                             ));

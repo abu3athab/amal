@@ -2,10 +2,12 @@ import 'dart:developer';
 
 import 'package:demo2/colors.dart';
 import 'package:demo2/settings%20page/settingspage.dart';
+import 'package:demo2/settings%20page/updateaccountinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../log in/logIn.dart';
+import 'Notificationsettings.dart';
 import 'editPro.dart';
 
 class Config extends StatefulWidget {
@@ -40,11 +42,10 @@ class ConfigChild extends State<Config> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: ListTile(
             onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfilePage()),
-                          ),
-            title: Text("Edit profile"),
+              context,
+              MaterialPageRoute(builder: (context) => Updateaccountinfo()),
+            ),
+            title: Text("Edit Account"),
             trailing: Icon(
               Icons.keyboard_arrow_right,
               color: logoColor,
@@ -59,42 +60,10 @@ class ConfigChild extends State<Config> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: ListTile(
-            onTap: () => null,
-            title: Text("Edit email"),
-            trailing: Icon(
-              Icons.keyboard_arrow_right,
-              color: logoColor,
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Notifcationsettings()),
             ),
-            leading: Icon(
-              Icons.email,
-              color: logoColor,
-            ),
-          ),
-        ),
-        Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: ListTile(
-            onTap: () => null,
-            title: Text("Edit password"),
-            trailing: Icon(
-              Icons.keyboard_arrow_right,
-              color: logoColor,
-            ),
-            leading: Icon(
-              Icons.lock,
-              color: logoColor,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: height * 0.03,
-        ),
-        Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          child: ListTile(
-            onTap: () => null,
             title: Text("Notifications"),
             trailing: Icon(
               Icons.keyboard_arrow_right,

@@ -18,6 +18,7 @@ import '../colors.dart';
 import '../side bar/side_bar.dart';
 import '../volunteer page/volunteermain.dart';
 import 'adminBloodtiles.dart';
+import 'adminCheckCharity.dart';
 import 'admincharityapprovalcard.dart';
 
 class AdminMain extends StatefulWidget {
@@ -145,7 +146,7 @@ class AdminMainChild extends State<AdminMain> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Charitymain()),
+                                builder: (context) => AdminCharitymain()),
                           );
                         },
                       ),
