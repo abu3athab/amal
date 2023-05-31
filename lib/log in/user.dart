@@ -26,13 +26,21 @@ Future<void> addUser(
     'email': email,
     'phone number': phoneNumber,
     'type': type,
-    'uid': uid
+    'uid': uid,
+    'isVerfied': true
   });
   return;
 }
 
-Future<void> addCharity(String username, String email, String phoneNumber,
-    String type, String charityName, String charityBio, String location) async {
+Future<void> addCharity(
+  String username,
+  String email,
+  String phoneNumber,
+  String type,
+  String charityName,
+  String charityBio,
+  String location,
+) async {
   try {
     CollectionReference charities =
         await FirebaseFirestore.instance.collection('Users');
@@ -48,10 +56,17 @@ Future<void> addCharity(String username, String email, String phoneNumber,
       'charity bio': charityBio,
       'location': location,
       'type': type,
-      'uid': uid
+      'isVerfied': false,
+      'uid': uid,
     });
     CollectionReference myProducts = userDoc.collection('myProducts');
-    myProducts.add({'name': "a"});
+    myProducts.add({
+      'product name': '',
+      'desc': '',
+      'cost': '',
+      'categ': '',
+      'imageUrl': ''
+    });
     return;
   } catch (e) {
     print("error");

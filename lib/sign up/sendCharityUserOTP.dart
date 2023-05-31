@@ -135,26 +135,32 @@ class CharityOTP extends StatelessWidget {
                 onPressed: () async {
                   if (await auth.verifyOTP(otp: otpValue)) {
                     try {
-                      final userCredentials = await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: email, password: password);
-                      addCharity(userName, email, phoneNumber, 'charity',
-                          charityName, charityBio, loca);
-                    } on FirebaseAuthException catch (e) {
-                      if (e.code == 'email-already-in-use') {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          duration: Duration(seconds: 5),
-                          content: Text('this email is already registered'),
-                        ));
-                      } else if (e.code == 'error_invalid_email') {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      //need modification to only stoer the user in the collection not create his account in fireAuth
+                      try {
+                        //need modification to only stoer the user in the collection not create his account in fireAuth
+                        final userCredentials = await FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: email, password: password);
+                        addCharity(userName, email, phoneNumber, 'charity',
+                            charityName, charityBio, loca);
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'email-already-in-use') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             duration: Duration(seconds: 5),
-                            content: Text('invalid ')));
-                      } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            duration: Duration(seconds: 5),
-                            content: Text('invalid credentials ')));
+                            content: Text('this email is already registered'),
+                          ));
+                        } else if (e.code == 'error_invalid_email') {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid ')));
+                        } else if (e.code == "ERROR_INVALID_CREDENTIAL") {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 5),
+                              content: Text('invalid credentials ')));
+                        }
                       }
+                    } catch (e) {
+                      print(e);
                     }
                     Navigator.push(
                       context,

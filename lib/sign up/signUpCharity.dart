@@ -152,7 +152,7 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                           new RegExp(r"[A-Z,a-z]")),
                     ],
                     decoration: InputDecoration(
-                        hintText: "Charity name",
+                        hintText: "Charity admin name",
                         prefixIcon: Icon(
                           Icons.account_circle,
                           color: logoColor,
