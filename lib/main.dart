@@ -69,6 +69,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/administrator/admincharityapprovalcard.dart';
+import 'package:demo2/administrator/administratormain.dart';
 import 'package:demo2/charityadmin/charityadminmain.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -123,9 +124,10 @@ class MyApp extends StatelessWidget {
                     return Charityadminmain();
                   } else if (userType == 'user') {
                     return MainPage();
-                  } else {
+                  } else if (userType == 'admin') {
+                    return AdminMain();
+                  } else
                     return Login();
-                  }
                 } else {
                   return Login();
                 }

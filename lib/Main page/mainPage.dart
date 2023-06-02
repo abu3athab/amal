@@ -227,10 +227,10 @@ class MainPageChild extends State<MainPage> {
                       child: ListView(
                           padding: const EdgeInsets.all(8),
                           children: <Widget>[
-                        Charitytiles(),
-                        Charitytiles(),
-                        Charitytiles(),
-                        Charitytiles(),
+                        // Charitytiles(),
+                        // Charitytiles(),
+                        // Charitytiles(),
+                        // Charitytiles(),
                       ])),
                 ],
               ),

@@ -15,10 +15,12 @@ import '../bloodpage/bloodmainpage.dart';
 import '../chairty page/charitymainpage.dart';
 import '../chairty page/charitytiles.dart';
 import '../colors.dart';
+import '../log in/logIn.dart';
 import '../side bar/side_bar.dart';
 import '../volunteer page/volunteermain.dart';
 import 'adminBloodtiles.dart';
 import 'adminCheckCharity.dart';
+import 'adminVolunteerMain.dart';
 import 'admincharityapprovalcard.dart';
 
 class AdminMain extends StatefulWidget {
@@ -179,7 +181,7 @@ class AdminMainChild extends State<AdminMain> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Vounteermain()),
+                                    builder: (context) => AdminVounteermain()),
                               );
                             },
                             child: Container(
@@ -228,8 +230,14 @@ class AdminMainChild extends State<AdminMain> {
                     ],
                   ),
                   TextButton(
-                      onPressed: () {},
-                      child: Text("System Settings",
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Login()),
+                        );
+                      },
+                      child: Text("Signout",
                           style: TextStyle(fontSize: width * 0.09)))
                 ],
               ),

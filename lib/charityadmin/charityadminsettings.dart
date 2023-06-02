@@ -15,6 +15,7 @@ import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/volunteermain.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -126,6 +127,7 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                           Icons.password,
                           color: logoColor,
                         ),
+
                       ),
                     ),
                     Card(
@@ -184,6 +186,7 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                           borderRadius: BorderRadius.circular(10)),
                       child: ListTile(
                         onTap: () {
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
