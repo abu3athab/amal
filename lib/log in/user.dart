@@ -220,7 +220,8 @@ Future<void> addEvent(String name, String description, String date,
         userDocRef.collection('myEvents');
 
     // Add data to the collection
-    await myEventsCollectionRef.add({
+    DocumentReference newEventDocRef = await myEventsCollectionRef.add({
+      'id': '', // Placeholder value for the ID field
       'name': name,
       'description': description,
       'date': date,
@@ -228,6 +229,9 @@ Future<void> addEvent(String name, String description, String date,
       'endTime': endTime,
       'location': location,
     });
+
+    // Update the "id" field with the actual ID of the document
+    await newEventDocRef.update({'id': newEventDocRef.id});
 
     print('Document and collection created successfully!');
   } catch (e) {
@@ -304,4 +308,36 @@ Future<List<QuerySnapshot>> fetchSubcollectionsDataForDocuments(
   }
 
   return await Future.wait(allEvents);
+}
+
+void updateUserName(String userId, String updatedValue) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  try {
+    // Get the document reference using the user ID
+    DocumentReference userRef = firestore.collection('Users').doc(userId);
+
+    // Update the specific field using the update method
+    await userRef.update({'name': updatedValue});
+
+    print('User field updated successfully.');
+  } catch (e) {
+    print('Error updating user field: $e');
+  }
+}
+
+void updateUserPhoneNumber(String userId, String updatedValue) async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  try {
+    // Get the document reference using the user ID
+    DocumentReference userRef = firestore.collection('Users').doc(userId);
+
+    // Update the specific field using the update method
+    await userRef.update({'phone number': updatedValue});
+
+    print('User field updated successfully.');
+  } catch (e) {
+    print('Error updating user field: $e');
+  }
 }

@@ -229,12 +229,12 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                           imageUrl = await reference.getDownloadURL();
                           addCharityProduct(
                               name, desc, cost, catagory, imageUrl);
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content:
+                                Text("Product has been added successfully!"),
+                            duration: Duration(seconds: 2),
+                          ));
                         }
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Charityadminmain()),
-                        );
                       },
                       child: Text(
                         "create",

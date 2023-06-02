@@ -260,15 +260,8 @@ class CheckUrgentMainChild extends State<CheckUrgentMain> {
                     Container(
                         width: width * 0.1,
                         child: InkWell(
-                          child: Image.asset("assets/menu.gif"),
-                          onTap: () {
-                            final _state = _sideMenuKey.currentState;
-                            if (_state!.isOpened)
-                              _state.closeSideMenu(); // close side menu
-                            else
-                              _state.openSideMenu();
-                          },
-                        )),
+                            child: Image.asset("assets/menu.gif"),
+                            onTap: () => null)),
                     SizedBox(
                       width: width * 0.07,
                     ),
@@ -411,7 +404,7 @@ class CheckUrgentMainChild extends State<CheckUrgentMain> {
                                               .data!.docs[index]
                                               .get('isVerfied');
                                           if (!isVerfied) {
-                                            return AdminUrgentBloodtiles(
+                                            return AdminNonUrgentBloodtiles(
                                               location: snapshot
                                                   .data!.docs[index]
                                                   .get('location name'),
