@@ -324,15 +324,6 @@ class LoginChild extends State<Login> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Charityadminmain()),
-                          );
-                        },
-                        child: Text("chariy admin")),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
                                 builder: (context) => AdminMain()),
                           );
                         },

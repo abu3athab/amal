@@ -61,19 +61,6 @@ class _AdminUrgentBloodtilesState extends State<AdminUrgentBloodtiles> {
                         phoneNumber: phoneNumber!,
                       )),
             );
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CardApprovalForNonUrgent(
-                        location: widget.location,
-                        bloodType: widget.bloodType,
-                        nOfUnits: widget.nOfUnits,
-                        uid: widget.uid,
-                        name: username!,
-                        email: email!,
-                        phoneNumber: phoneNumber!,
-                      )),
-            );
 
             // ... retrieve other attributes
 

@@ -211,7 +211,7 @@ class CreateneweventChild extends State<Createnewevent> {
                     width: width,
                     height: height * 0.07,
                     child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           addEvent(
                               _nameController.text,
                               _descriptionController.text,

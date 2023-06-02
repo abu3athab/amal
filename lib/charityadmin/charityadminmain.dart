@@ -54,10 +54,19 @@ class CharityadminmainChild extends State<Charityadminmain> {
                     padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
                     child: Row(
                       children: [
-                        Text(
-                          "Tikyat Um Ali",
-                          style: TextStyle(fontSize: width * 0.07),
-                        ),
+                        StreamBuilder<DocumentSnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection('Users')
+                                .doc(uid)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              String charityName =
+                                  snapshot.data!.get('charity name');
+                              return Text(
+                                charityName,
+                                style: TextStyle(fontSize: width * 0.07),
+                              );
+                            }),
                         Spacer(),
                         InkWell(
                           onTap: () {
@@ -192,15 +201,6 @@ class CharityadminmainChild extends State<Charityadminmain> {
                       }
                     },
                   )),
-                  TextButton(
-                      onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Login()),
-                        );
-                      },
-                      child: Text("sign out"))
                 ],
               ),
             ),

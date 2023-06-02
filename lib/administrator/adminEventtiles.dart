@@ -1,15 +1,25 @@
-import 'package:demo2/chairty%20page/charitypage.dart';
+import 'package:demo2/volunteer%20page/eventinfo.dart';
 import 'package:flutter/material.dart';
 
-class Charitytiles extends StatelessWidget {
-  String charityName;
+import 'adminEventInfo.dart';
+
+class AdminEventtile extends StatelessWidget {
+  String name;
+  String date;
+  String startTime;
+  String finishTime;
   String location;
-  String bio;
+  String desc;
+  String id;
   String uid;
-  Charitytiles(
-      {required this.charityName,
+  AdminEventtile(
+      {required this.name,
+      required this.date,
+      required this.startTime,
+      required this.finishTime,
       required this.location,
-      required this.bio,
+      required this.desc,
+      required this.id,
       required this.uid});
   @override
   Widget build(BuildContext context) {
@@ -17,16 +27,19 @@ class Charitytiles extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     return Container(
       width: width * 0.95,
-      height: height * 0.161,
+      height: height * 0.16,
       child: InkWell(
         onTap: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Charitypage(
-                      charityName: charityName,
-                      location: location,
-                      bio: bio,
+                builder: (context) => AdminEventinfo(
+                      name: name,
+                      startTime: startTime,
+                      endTime: finishTime,
+                      loca: location,
+                      desc: desc,
+                      id: id,
                       uid: uid,
                     )),
           );
@@ -40,7 +53,8 @@ class Charitytiles extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                child: Image.asset("assets/charity.png"),
+                child: Image.asset(
+                    "assets/Community-Donation-Drive-Feature-Image-01.webp"),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -48,33 +62,30 @@ class Charitytiles extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      charityName,
-                      style: TextStyle(fontSize: height * 0.03),
-                    ),
-                    SizedBox(
-                      height: height * 0.005,
+                      name,
+                      style: TextStyle(fontSize: height * 0.02),
                     ),
                     Text(
-                      "location: $charityName",
+                      date,
                       style: TextStyle(fontSize: height * 0.02),
                       softWrap: true,
                       maxLines: 2,
                     ),
-                    SizedBox(
-                      height: height * 0.005,
-                    ),
                     Text(
-                      "Number of benifactors: 19520",
-                      style: TextStyle(fontSize: height * 0.012),
+                      startTime,
+                      style: TextStyle(fontSize: height * 0.02),
                       softWrap: true,
                       maxLines: 2,
                     ),
-                    SizedBox(
-                      height: height * 0.005,
+                    Text(
+                      location,
+                      style: TextStyle(fontSize: height * 0.02),
+                      softWrap: true,
+                      maxLines: 2,
                     ),
                     Text(
-                      "Click to view info",
-                      style: TextStyle(fontSize: height * 0.01),
+                      "Click to view more info",
+                      style: TextStyle(fontSize: height * 0.012),
                       softWrap: true,
                       maxLines: 2,
                     ),
