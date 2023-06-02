@@ -4,6 +4,7 @@ import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/chairty%20page/charityitemlist.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
+import 'package:demo2/chairty%20page/productpage.dart';
 import 'package:demo2/charityadmin/charityadminsettings.dart';
 import 'package:demo2/charityadmin/editcharitymenu.dart';
 import 'package:demo2/colors.dart';
@@ -142,7 +143,13 @@ class CharityadminmainChild extends State<Charityadminmain> {
                         ),
                       ),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Productpage()),
+                            );
+                          },
                           child: Text(
                             "view detailed info",
                             style: TextStyle(fontSize: width * 0.04),

@@ -363,7 +363,8 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                       ),
                       child: Center(
                         child: TextButton(
-                          child: Text("Approve"),
+                          child: Text("Approve",
+                              style: TextStyle(color: Colors.white)),
                           onPressed: () async {
                             // Call the update function when the "Approve" button is pressed
                             await updateCharityDocument();
@@ -381,7 +382,10 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                       ),
                       child: Center(
                         child: TextButton(
-                          child: Text("Deny"),
+                          child: Text(
+                            "Deny",
+                            style: TextStyle(color: Colors.white),
+                          ),
                           onPressed: () async {
                             // Call the delete function when the "Deny" button is pressed
                             await deleteDocumentCharity();
