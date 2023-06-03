@@ -1,5 +1,6 @@
 import 'dart:ffi';
 import 'dart:io';
+import 'dart:math';
 import 'package:demo2/charityadmin/charityadminmain.dart';
 import 'package:demo2/log%20in/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -228,7 +229,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                           await reference.putFile(selectedImage!);
                           imageUrl = await reference.getDownloadURL();
                           addCharityProduct(
-                              name, desc, cost, catagory, imageUrl);
+                              name, desc, int.parse(cost), catagory, imageUrl);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
                                 Text("Product has been added successfully!"),

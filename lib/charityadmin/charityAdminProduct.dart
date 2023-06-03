@@ -14,29 +14,27 @@ import 'package:demo2/volunteer%20page/manageyourevents.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-class Productpage extends StatefulWidget {
+import 'charityAdminItems.dart';
+
+class AdminProductpage extends StatefulWidget {
   String name;
   String imageUrl;
   int cost;
   String desc;
   String categ;
-  String itemID;
-  String uid;
-  Productpage(
+  AdminProductpage(
       {required this.name,
       required this.categ,
       required this.desc,
       required this.cost,
-      required this.imageUrl,
-      required this.itemID,
-      required this.uid});
+      required this.imageUrl});
   @override
   State<StatefulWidget> createState() {
-    return ProductpageChild();
+    return AdminProductpageChild();
   }
 }
 
-class ProductpageChild extends State<Productpage> {
+class AdminProductpageChild extends State<AdminProductpage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -69,14 +67,12 @@ class ProductpageChild extends State<Productpage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Charityitems(
+                                builder: (context) => CharityAdminitems(
                                       name: widget.name,
                                       desc: widget.desc,
                                       imageUrl: widget.imageUrl,
                                       categ: widget.categ,
                                       cost: widget.cost,
-                                      itemID: widget.itemID,
-                                      uid: widget.uid,
                                     )),
                           );
                         },
@@ -144,25 +140,6 @@ class ProductpageChild extends State<Productpage> {
                 SizedBox(
                   width: width * 0.8,
                   height: height * 0.06,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Choosepayment(
-                                    itemID: widget.itemID,
-                                    cost: widget.cost,
-                                    uid: widget.uid,
-                                  )),
-                        );
-                      },
-                      child: Text("Proceed to payment"),
-                      style: ButtonStyle(
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      )))),
                 ),
                 SizedBox(
                   height: 30,

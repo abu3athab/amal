@@ -127,7 +127,6 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                           Icons.password,
                           color: logoColor,
                         ),
-
                       ),
                     ),
                     Card(
@@ -186,7 +185,6 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                           borderRadius: BorderRadius.circular(10)),
                       child: ListTile(
                         onTap: () {
-
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -229,6 +227,7 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                       height: height * 0.07,
                       child: ElevatedButton.icon(
                           onPressed: () {
+                            FirebaseAuth.instance.signOut();
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => Login()),

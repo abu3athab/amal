@@ -207,11 +207,14 @@ class CharitypageChild extends State<Charitypage> {
 
               // Render the attributes of the product document
               return Charityitems(
-                  imageUrl: document['imageUrl'],
-                  name: document['product name'],
-                  desc: document['desc'],
-                  cost: document['cost'],
-                  categ: document['categ']);
+                imageUrl: document['imageUrl'],
+                name: document['product name'],
+                desc: document['desc'],
+                cost: document['cost'],
+                categ: document['categ'],
+                itemID: document['id'],
+                uid: widget.uid,
+              );
             },
           );
         },

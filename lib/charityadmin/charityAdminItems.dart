@@ -4,22 +4,20 @@ import 'package:demo2/chairty%20page/charitypage.dart';
 import 'package:demo2/chairty%20page/productpage.dart';
 import 'package:flutter/material.dart';
 
-class Charityitems extends StatelessWidget {
+import 'charityAdminProduct.dart';
+
+class CharityAdminitems extends StatelessWidget {
   String imageUrl;
   String name;
   String desc;
   int cost;
   String categ;
-  String itemID;
-  String uid;
-  Charityitems(
+  CharityAdminitems(
       {required this.imageUrl,
       required this.name,
       required this.desc,
       required this.cost,
-      required this.categ,
-      required this.itemID,
-      required this.uid});
+      required this.categ});
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +31,12 @@ class Charityitems extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => Productpage(
+                builder: (context) => AdminProductpage(
                       imageUrl: imageUrl,
                       name: name,
                       desc: desc,
                       categ: categ,
                       cost: cost,
-                      itemID: itemID,
-                      uid: uid,
                     )),
           );
         },
