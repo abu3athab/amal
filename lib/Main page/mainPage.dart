@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainpagesearch.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
@@ -8,6 +9,7 @@ import 'package:demo2/colors.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/volunteermain.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -224,14 +226,49 @@ class MainPageChild extends State<MainPage> {
                   ///
                   /////////list view//////////////////////////////////////////////////////
                   Expanded(
-                      child: ListView(
+                    child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+                      stream: FirebaseFirestore.instance
+                          .collection('Users')
+                          .snapshots(),
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                              snapshot) {
+                        if (snapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${snapshot.error}'));
+                        }
+
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+
+                        final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                            documents = snapshot.data!.docs;
+                        final List<QueryDocumentSnapshot<Map<String, dynamic>>>
+                            charityDocuments = documents
+                                .where((doc) => doc['type'] == 'charity')
+                                .toList();
+
+                        return ListView.builder(
                           padding: const EdgeInsets.all(8),
-                          children: <Widget>[
-                        // Charitytiles(),
-                        // Charitytiles(),
-                        // Charitytiles(),
-                        // Charitytiles(),
-                      ])),
+                          itemCount: charityDocuments.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final QueryDocumentSnapshot<Map<String, dynamic>>
+                                document = charityDocuments[index];
+                            final String userId = document.id;
+
+                            return Charitytiles(
+                              charityName: document['charity name'],
+                              location: document['location'],
+                              bio: document['charity bio'],
+                              uid: document['uid'],
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -17,6 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../chairty page/charitytiles.dart';
+import 'charityAdminItems.dart';
 
 class Charityadminmain extends StatefulWidget {
   @override
@@ -27,6 +28,9 @@ class Charityadminmain extends StatefulWidget {
 
 class CharityadminmainChild extends State<Charityadminmain> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
+  String numberOfDonations = '';
+  String totalIncome = '';
+  var fire = FirebaseFirestore.instance.collection('Users');
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -55,18 +59,23 @@ class CharityadminmainChild extends State<Charityadminmain> {
                     padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
                     child: Row(
                       children: [
-                        StreamBuilder<DocumentSnapshot>(
-                            stream: FirebaseFirestore.instance
-                                .collection('Users')
-                                .doc(uid)
-                                .snapshots(),
+                        FutureBuilder<DocumentSnapshot>(
+                            future: fire.doc(uid).get(),
                             builder: (context, snapshot) {
-                              String charityName =
-                                  snapshot.data!.get('charity name');
-                              return Text(
-                                charityName,
-                                style: TextStyle(fontSize: width * 0.07),
-                              );
+                              if (!snapshot.hasData) {
+                                return Text("data");
+                              } else {
+                                String charityName =
+                                    snapshot.data!.get('charity name');
+                                totalIncome =
+                                    snapshot.data!.get('total').toString();
+                                numberOfDonations =
+                                    snapshot.data!.get('count').toString();
+                                return Text(
+                                  charityName,
+                                  style: TextStyle(fontSize: width * 0.07),
+                                );
+                              }
                             }),
                         Spacer(),
                         InkWell(
@@ -111,7 +120,7 @@ class CharityadminmainChild extends State<Charityadminmain> {
                             ),
                             Spacer(),
                             Text(
-                              "105",
+                              '$totalIncome jod',
                               style: TextStyle(
                                   fontSize: width * 0.05, color: Colors.white),
                             ),
@@ -126,13 +135,13 @@ class CharityadminmainChild extends State<Charityadminmain> {
                         child: Row(
                           children: [
                             Text(
-                              "Total Income",
+                              "Total of doners",
                               style: TextStyle(
                                   fontSize: width * 0.05, color: Colors.white),
                             ),
                             Spacer(),
                             Text(
-                              "3600",
+                              numberOfDonations,
                               style: TextStyle(
                                   fontSize: width * 0.05, color: Colors.white),
                             ),
@@ -142,18 +151,6 @@ class CharityadminmainChild extends State<Charityadminmain> {
                           ],
                         ),
                       ),
-                      TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Productpage()),
-                            );
-                          },
-                          child: Text(
-                            "view detailed info",
-                            style: TextStyle(fontSize: width * 0.04),
-                          ))
                     ]),
                   ),
                   Padding(
@@ -196,7 +193,7 @@ class CharityadminmainChild extends State<Charityadminmain> {
                             itemBuilder: (context, Index) {
                               String url =
                                   snapshot.data!.docs[Index].get('imageUrl');
-                              return Charityitems(
+                              return CharityAdminitems(
                                   imageUrl: url,
                                   name: snapshot.data!.docs[Index]
                                       .get('product name'),

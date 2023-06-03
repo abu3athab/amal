@@ -16,6 +16,10 @@ import '../colors.dart';
 import 'enterpaymentdetails.dart';
 
 class Choosepayment extends StatefulWidget {
+  String itemID;
+  int cost;
+  String uid;
+  Choosepayment({required this.itemID, required this.cost, required this.uid});
   @override
   State<StatefulWidget> createState() {
     return ChoosepaymentChild();
@@ -74,13 +78,13 @@ class ChoosepaymentChild extends State<Choosepayment> {
                   Image.asset(
                       "assets/WhatsApp Image 2023-05-31 at 6.54.40 PM.jpeg"),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Enterpaymentdetail()),
-                      );
-                    },
+                    // onTap: () {
+                    //   Navigator.push(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (context) => Enterpaymentdetail()),
+                    //   );
+                    // },
                     child: Container(
                       width: width * 0.95,
                       child: Card(
@@ -115,7 +119,11 @@ class ChoosepaymentChild extends State<Choosepayment> {
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Enterpaymentdetail()),
+                            builder: (context) => Enterpaymentdetail(
+                                  itemID: widget.itemID,
+                                  cost: widget.cost,
+                                  uid: widget.uid,
+                                )),
                       ),
                       child: Card(
                         shape: RoundedRectangleBorder(

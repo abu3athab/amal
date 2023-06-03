@@ -4,11 +4,13 @@ import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
+import 'package:demo2/log%20in/user.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
@@ -16,6 +18,11 @@ import '../colors.dart';
 import 'choosepaymentmethode.dart';
 
 class Enterpaymentdetail extends StatefulWidget {
+  String itemID;
+  int cost;
+  String uid;
+  Enterpaymentdetail(
+      {required this.itemID, required this.cost, required this.uid});
   @override
   State<StatefulWidget> createState() {
     return EnterpaymentdetailChild();
@@ -59,7 +66,11 @@ class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Choosepayment()),
+                                builder: (context) => Choosepayment(
+                                      itemID: widget.itemID,
+                                      cost: widget.cost,
+                                      uid: widget.uid,
+                                    )),
                           );
                         },
                       ),
@@ -143,7 +154,11 @@ class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ))),
-                        onPressed: () => null),
+                        onPressed: () async {
+                          String time = DateTime.now().toString();
+                          addPurchasesOfUsers(
+                              widget.uid, widget.itemID, widget.cost, time);
+                        }),
                   ),
                   SizedBox(
                     height: 20,

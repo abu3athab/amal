@@ -57,6 +57,8 @@ Future<void> addCharity(
       'location': location,
       'type': type,
       'isVerfied': false,
+      'total': 0,
+      'count': 1,
       'uid': uid,
     });
 
@@ -66,21 +68,33 @@ Future<void> addCharity(
   }
 }
 
-Future<void> addCharityProduct(String name, String desc, String cost,
-    String categ, String imageUrl) async {
+Future<void> addCharityProduct(
+    String name, String desc, int cost, String categ, String imageUrl) async {
   String uid = FirebaseAuth.instance.currentUser!.uid;
   CollectionReference productRef =
       FirebaseFirestore.instance.collection('Users');
   DocumentReference userDoc = productRef.doc(uid);
   var ref = userDoc.collection('myProducts');
-
-  ref.add({
+  DocumentReference doc = await ref.add({
     'product name': name,
     'desc': desc,
     'cost': cost,
     'categ': categ,
-    'imageUrl': imageUrl
+    'imageUrl': imageUrl,
+    'id': ''
   });
+  await doc.update({'id': doc.id});
+}
+
+Future<void> addPurchasesOfUsers(
+    String uid, String itemId, int price, String purchaseTime) async {
+  var productRef = FirebaseFirestore.instance.collection('Users').doc(uid);
+  var userTransactionRef =
+      FirebaseFirestore.instance.collection('userTransactions');
+  await userTransactionRef
+      .add({'userID': uid, 'itemID': itemId, 'purchase time': purchaseTime});
+  await productRef.update(
+      {'total': FieldValue.increment(price), 'count': FieldValue.increment(1)});
 }
 
 Future<void> updateUserEmailVerification(String v) async {
