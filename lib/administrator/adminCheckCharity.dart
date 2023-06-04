@@ -144,6 +144,8 @@ class AdminCharitymainChild extends State<AdminCharitymain> {
                                               .get('phone number'),
                                           email: snapshot.data!.docs[index]
                                               .get('email'),
+                                          imageUrl: snapshot.data!.docs[index]
+                                              .get('imageUrl'),
                                         );
                                       } else
                                         return Container();

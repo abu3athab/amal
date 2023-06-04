@@ -197,6 +197,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/administrator/administratormain.dart';
 import 'package:demo2/administrator/cardapprovalpage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
@@ -260,8 +261,14 @@ class CheckUrgentMainChild extends State<CheckUrgentMain> {
                     Container(
                         width: width * 0.1,
                         child: InkWell(
-                            child: Image.asset("assets/menu.gif"),
-                            onTap: () => null)),
+                            child: Icon(Icons.arrow_back_ios_new),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminMain()),
+                              );
+                            })),
                     SizedBox(
                       width: width * 0.07,
                     ),
