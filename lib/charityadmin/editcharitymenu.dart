@@ -231,7 +231,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                                 .child('post_$postID');
                             await reference.putFile(selectedImage!);
                             imageUrl = await reference.getDownloadURL();
-                            addCharityProduct(name, desc, int.parse(cost),
+                            addCharityProduct(name, desc, double.parse(cost),
                                 catagory, imageUrl);
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content:

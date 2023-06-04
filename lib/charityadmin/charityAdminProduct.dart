@@ -5,6 +5,7 @@ import 'package:demo2/chairty%20page/charityitemlist.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/chairty%20page/charitypage.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
+import 'package:demo2/charityadmin/charityadminmain.dart';
 import 'package:demo2/paymentPages/choosepaymentmethode.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
@@ -19,7 +20,7 @@ import 'charityAdminItems.dart';
 class AdminProductpage extends StatefulWidget {
   String name;
   String imageUrl;
-  int cost;
+  double cost;
   String desc;
   String categ;
   String count;
@@ -69,14 +70,7 @@ class AdminProductpageChild extends State<AdminProductpage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CharityAdminitems(
-                                      name: widget.name,
-                                      desc: widget.desc,
-                                      imageUrl: widget.imageUrl,
-                                      categ: widget.categ,
-                                      cost: widget.cost,
-                                      count: widget.count,
-                                    )),
+                                builder: (context) => Charityadminmain()),
                           );
                         },
                       ),

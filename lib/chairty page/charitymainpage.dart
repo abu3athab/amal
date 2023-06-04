@@ -234,7 +234,7 @@ class CharitymainChild extends State<Charitymain> {
                                 charityName: document['charity name'],
                                 location: document['location'],
                                 bio: document['charity bio'],
-                                uid: document['uid'],
+                                charityID: document['uid'],
                                 imageUrl: document['imageUrl'],
                                 donersNumber: document['count'],
                               );
@@ -246,7 +246,7 @@ class CharitymainChild extends State<Charitymain> {
                                 charityName: document['charity name'],
                                 location: document['location'],
                                 bio: document['charity bio'],
-                                uid: document['uid'],
+                                charityID: document['uid'],
                                 imageUrl: document['imageUrl'],
                                 donersNumber: document['count'],
                               );

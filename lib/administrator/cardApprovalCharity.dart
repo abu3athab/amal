@@ -399,6 +399,10 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           onPressed: () async {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Success!!"),
+                              duration: Duration(seconds: 1),
+                            ));
                             // Call the delete function when the "Deny" button is pressed
                             Navigator.push(
                               context,

@@ -369,6 +369,10 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
                               style:
                                   TextStyle(color: Colors.white, fontSize: 30)),
                           onPressed: () async {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Success!!"),
+                              duration: Duration(seconds: 1),
+                            ));
                             updateAttribute(widget.uid, true);
                           },
                         ),
@@ -388,6 +392,10 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
                               style:
                                   TextStyle(color: Colors.white, fontSize: 30)),
                           onPressed: () async {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Success!!"),
+                              duration: Duration(seconds: 1),
+                            ));
                             deleteDocument(widget.uid);
                           },
                         ),

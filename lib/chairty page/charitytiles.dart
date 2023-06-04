@@ -6,13 +6,13 @@ class Charitytiles extends StatelessWidget {
   String location;
   String bio;
   String imageUrl;
-  String uid;
+  String charityID;
   int donersNumber;
   Charitytiles(
       {required this.charityName,
       required this.location,
       required this.bio,
-      required this.uid,
+      required this.charityID,
       required this.imageUrl,
       required this.donersNumber});
   @override
@@ -31,7 +31,7 @@ class Charitytiles extends StatelessWidget {
                       charityName: charityName,
                       location: location,
                       bio: bio,
-                      uid: uid,
+                      charityID: charityID,
                     )),
           );
         },

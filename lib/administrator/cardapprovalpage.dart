@@ -566,6 +566,10 @@ class CardapprovalpageNonChild extends State<CardApprovalForNonUrgent> {
                           child: Text("Approve"),
                           onPressed: () async {
                             updateAttribute(widget.uid, true);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Success!!"),
+                              duration: Duration(seconds: 1),
+                            ));
                           },
                         ),
                       ),
@@ -582,6 +586,10 @@ class CardapprovalpageNonChild extends State<CardApprovalForNonUrgent> {
                         child: TextButton(
                           child: Text("Deny"),
                           onPressed: () async {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Success!!"),
+                              duration: Duration(seconds: 1),
+                            ));
                             deleteDocument(widget.uid);
                           },
                         ),

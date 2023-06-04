@@ -5,13 +5,14 @@ import 'package:demo2/chairty%20page/productpage.dart';
 import 'package:flutter/material.dart';
 
 class Charityitems extends StatelessWidget {
-  String imageUrl;
-  String name;
-  String desc;
-  int cost;
-  String categ;
-  String itemID;
-  String uid;
+  final String imageUrl;
+  final String name;
+  final String desc;
+  final double cost;
+  final String categ;
+  final String itemID;
+  final String charityID;
+
   Charityitems(
       {required this.imageUrl,
       required this.name,
@@ -19,7 +20,7 @@ class Charityitems extends StatelessWidget {
       required this.cost,
       required this.categ,
       required this.itemID,
-      required this.uid});
+      required this.charityID});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class Charityitems extends StatelessWidget {
                       categ: categ,
                       cost: cost,
                       itemID: itemID,
-                      uid: uid,
+                      charityID: charityID,
                     )),
           );
         },
