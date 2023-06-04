@@ -20,16 +20,16 @@ import 'choosepaymentmethode.dart';
 
 class EnterPaymentDetail extends StatefulWidget {
   final String itemID;
-  final int cost;
-  final String uid;
+  final double cost;
   final String itemName;
+  final String charityID;
 
   const EnterPaymentDetail(
       {super.key,
       required this.itemID,
       required this.cost,
-      required this.uid,
-      required this.itemName});
+      required this.itemName,
+      required this.charityID});
 
   @override
   State<StatefulWidget> createState() {
@@ -78,7 +78,7 @@ class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
                                       itemName: widget.itemName,
                                       itemID: widget.itemID,
                                       cost: widget.cost,
-                                      uid: widget.uid,
+                                      charityID: widget.charityID,
                                     )),
                           );
                         },
@@ -195,8 +195,13 @@ class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
                                       onFinish: (number) {
                                         print('order id : $number');
                                         String time = DateTime.now().toString();
-                                        addPurchasesOfUsers(widget.uid,
-                                            widget.itemID, widget.cost, time);
+                                        addPurchasesOfUsers(
+                                            FirebaseAuth
+                                                .instance.currentUser!.uid,
+                                            widget.itemID,
+                                            widget.cost,
+                                            time,
+                                            widget.charityID);
                                       },
                                     )),
                           );

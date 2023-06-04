@@ -1,11 +1,22 @@
 import 'package:demo2/administrator/cardapprovalpage.dart';
 import 'package:demo2/chairty%20page/charitypage.dart';
+import 'package:demo2/charityadmin/charityadminmain.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
 //ADD THE NEW CHARITY HERE FOR APPROVAL
 
 class Charityreportcard extends StatelessWidget {
+  String? charityName;
+  String? username;
+  String? productName;
+  String cost;
+
+  Charityreportcard(
+      {required this.charityName,
+      required this.username,
+      required this.productName,
+      required this.cost});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -14,12 +25,7 @@ class Charityreportcard extends StatelessWidget {
       width: width * 0.95,
       height: height * 0.08,
       child: InkWell(
-        onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => Cardapprovalpage()),
-          // );
-        },
+        onTap: () {},
         child: Card(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
@@ -33,11 +39,11 @@ class Charityreportcard extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Winter Clothing",
+                      productName!,
                       style: TextStyle(fontSize: height * 0.02),
                     ),
                     Text(
-                      "Hisham abuhamra",
+                      username!,
                       style: TextStyle(fontSize: height * 0.02),
                       softWrap: true,
                       maxLines: 2,
@@ -46,7 +52,7 @@ class Charityreportcard extends StatelessWidget {
                 ),
                 Spacer(),
                 Text(
-                  "15",
+                  cost,
                   style: TextStyle(fontSize: 25),
                 ),
                 Text(" JOD", style: TextStyle(fontSize: 25)),

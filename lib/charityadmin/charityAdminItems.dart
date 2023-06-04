@@ -10,7 +10,7 @@ class CharityAdminitems extends StatelessWidget {
   String imageUrl;
   String name;
   String desc;
-  int cost;
+  double cost;
   String categ;
   String count;
   CharityAdminitems(

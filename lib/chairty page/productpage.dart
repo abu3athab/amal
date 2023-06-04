@@ -15,13 +15,13 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
 class Productpage extends StatefulWidget {
-  String name;
-  String imageUrl;
-  int cost;
-  String desc;
-  String categ;
-  String itemID;
-  String uid;
+  final String name;
+  final String imageUrl;
+  final double cost;
+  final String desc;
+  final String categ;
+  final String itemID;
+  final String charityID;
   Productpage(
       {required this.name,
       required this.categ,
@@ -29,7 +29,7 @@ class Productpage extends StatefulWidget {
       required this.cost,
       required this.imageUrl,
       required this.itemID,
-      required this.uid});
+      required this.charityID});
   @override
   State<StatefulWidget> createState() {
     return ProductpageChild();
@@ -76,7 +76,7 @@ class ProductpageChild extends State<Productpage> {
                                       categ: widget.categ,
                                       cost: widget.cost,
                                       itemID: widget.itemID,
-                                      uid: widget.uid,
+                                      charityID: widget.charityID,
                                     )),
                           );
                         },
@@ -150,10 +150,10 @@ class ProductpageChild extends State<Productpage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Choosepayment(
-                                itemName: widget.name,
+                                    itemName: widget.name,
                                     itemID: widget.itemID,
                                     cost: widget.cost,
-                                    uid: widget.uid,
+                                    charityID: widget.charityID,
                                   )),
                         );
                       },

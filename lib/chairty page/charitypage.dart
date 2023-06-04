@@ -158,12 +158,12 @@ class Charitypage extends StatefulWidget {
   String bio;
   String charityName;
   String location;
-  String uid;
+  String charityID;
   Charitypage(
       {required this.bio,
       required this.charityName,
       required this.location,
-      required this.uid});
+      required this.charityID});
 
   @override
   State<StatefulWidget> createState() {
@@ -183,7 +183,7 @@ class CharitypageChild extends State<Charitypage> {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: _firestore
             .collection('Users')
-            .doc(widget.uid)
+            .doc(widget.charityID)
             .collection('myProducts')
             .snapshots(),
         builder: (BuildContext context,
@@ -207,14 +207,13 @@ class CharitypageChild extends State<Charitypage> {
 
               // Render the attributes of the product document
               return Charityitems(
-                imageUrl: document['imageUrl'],
-                name: document['product name'],
-                desc: document['desc'],
-                cost: document['cost'],
-                categ: document['categ'],
-                itemID: document['id'],
-                uid: widget.uid,
-              );
+                  imageUrl: document['imageUrl'],
+                  name: document['product name'],
+                  desc: document['desc'],
+                  cost: document['cost'],
+                  categ: document['categ'],
+                  itemID: document['id'],
+                  charityID: widget.charityID);
             },
           );
         },

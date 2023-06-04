@@ -16,17 +16,17 @@ import '../colors.dart';
 import 'enterpaymentdetails.dart';
 
 class Choosepayment extends StatefulWidget {
-  String itemID;
-  String itemName;
-  int cost;
-  String uid;
+  final String itemID;
+  final String itemName;
+  final double cost;
+  final String charityID;
 
-  Choosepayment({super.key,
-    required this.itemID,
-    required this.cost,
-    required this.uid,
-    required this.itemName,
-  });
+  Choosepayment(
+      {super.key,
+      required this.itemID,
+      required this.cost,
+      required this.itemName,
+      required this.charityID});
 
   @override
   State<StatefulWidget> createState() {
@@ -131,7 +131,7 @@ class ChoosepaymentChild extends State<Choosepayment> {
                                   itemName: widget.itemName,
                                   itemID: widget.itemID,
                                   cost: widget.cost,
-                                  uid: widget.uid,
+                                  charityID: widget.charityID,
                                 )),
                       ),
                       child: Card(

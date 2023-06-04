@@ -96,49 +96,116 @@ class ViewreportChild extends State<Viewreport> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Charity name",
+                            "All users donations ",
                             style: TextStyle(fontSize: 30, color: Colors.white),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Text("Total Income in jod : ",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              Text("amount",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: [
-                              Text("Number of Doners: ",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                              Text("amount",
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.white)),
-                            ],
                           ),
                         ),
                         Divider(
                           thickness: 2,
                         ),
                         Expanded(
-                            child: ListView(
-                          children: [
-                            Charityreportcard(),
-                            Charityreportcard(),
-                            Charityreportcard(),
-                            Charityreportcard(),
-                            Charityreportcard(),
-                          ],
-                        ))
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: FirebaseFirestore.instance
+                                .collection("userTransactions")
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                return ListView.builder(
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    String uid = snapshot.data!.docs[index]
+                                        .get('userID');
+                                    String charityID = snapshot
+                                        .data!.docs[index]
+                                        .get('charityID');
+                                    String itemID = snapshot.data!.docs[index]
+                                        .get('itemID');
+
+                                    return FutureBuilder<DocumentSnapshot>(
+                                      future: FirebaseFirestore.instance
+                                          .collection('Users')
+                                          .doc(uid)
+                                          .get(),
+                                      builder: (context, userSnapshot) {
+                                        if (userSnapshot.hasData) {
+                                          var userName =
+                                              userSnapshot.data!.get('name');
+                                          return FutureBuilder<
+                                              DocumentSnapshot>(
+                                            future: FirebaseFirestore.instance
+                                                .collection('Users')
+                                                .doc(charityID)
+                                                .get(),
+                                            builder:
+                                                (context, charitySnapshot) {
+                                              if (charitySnapshot.hasData) {
+                                                var charityName =
+                                                    charitySnapshot.data!
+                                                        .get('charity name');
+
+                                                return FutureBuilder<
+                                                    DocumentSnapshot>(
+                                                  future: FirebaseFirestore
+                                                      .instance
+                                                      .collection('Users')
+                                                      .doc(charityID)
+                                                      .collection('myProducts')
+                                                      .doc(itemID)
+                                                      .get(),
+                                                  builder: (context,
+                                                      productSnapshot) {
+                                                    if (productSnapshot
+                                                        .hasData) {
+                                                      var productName =
+                                                          productSnapshot.data!
+                                                              .get(
+                                                                  'product name');
+                                                      var cost = productSnapshot
+                                                          .data!
+                                                          .get('cost')
+                                                          .toString();
+                                                      return Charityreportcard(
+                                                          charityName:
+                                                              charityName,
+                                                          username: userName,
+                                                          productName:
+                                                              productName,
+                                                          cost: cost);
+                                                    } else if (productSnapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return CircularProgressIndicator();
+                                                    }
+                                                    return SizedBox();
+                                                  },
+                                                );
+                                              } else if (charitySnapshot
+                                                      .connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return CircularProgressIndicator();
+                                              }
+                                              return SizedBox();
+                                            },
+                                          );
+                                        } else if (userSnapshot
+                                                .connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        }
+                                        return SizedBox();
+                                      },
+                                    );
+                                  },
+                                );
+                              } else if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              }
+                              return SizedBox();
+                            },
+                          ),
+                        )
                       ]),
                     ),
                   ],
