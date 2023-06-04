@@ -352,6 +352,7 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                 SizedBox(
                   height: height * 0.08,
                 ),
+                Expanded(child: SizedBox()),
                 Row(
                   children: [
                     Container(
@@ -364,7 +365,8 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                       child: Center(
                         child: TextButton(
                           child: Text("Approve",
-                              style: TextStyle(color: Colors.white)),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30)),
                           onPressed: () async {
                             // Call the update function when the "Approve" button is pressed
                             await updateCharityDocument();
@@ -384,7 +386,7 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                         child: TextButton(
                           child: Text(
                             "Deny",
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           onPressed: () async {
                             // Call the delete function when the "Deny" button is pressed
@@ -394,6 +396,9 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: height * 0.012,
                 )
               ],
             ),
