@@ -22,7 +22,7 @@ class Charitymain extends StatefulWidget {
 
 class CharitymainChild extends State<Charitymain> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-
+  String searchText = '';
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -67,6 +67,11 @@ class CharitymainChild extends State<Charitymain> {
                         Container(
                           width: width * 0.7,
                           child: TextField(
+                            onChanged: (value) {
+                              setState(() {
+                                searchText = value;
+                              });
+                            },
                             cursorColor: Colors.grey,
                             decoration: InputDecoration(
                               focusedBorder: UnderlineInputBorder(
@@ -222,13 +227,37 @@ class CharitymainChild extends State<Charitymain> {
                           final QueryDocumentSnapshot<Map<String, dynamic>>
                               document = charityDocuments[index];
                           final String userId = document.id;
-
-                          return Charitytiles(
-                            charityName: document['charity name'],
-                            location: document['location'],
-                            bio: document['charity bio'],
-                            uid: document['uid'],
-                          );
+                          bool isVerfied = document['isVerfied'];
+                          if (isVerfied) {
+                            if (searchText.isEmpty) {
+                              return Charitytiles(
+                                charityName: document['charity name'],
+                                location: document['location'],
+                                bio: document['charity bio'],
+                                uid: document['uid'],
+                                imageUrl: document['imageUrl'],
+                                donersNumber: document['count'],
+                              );
+                            } else if (document['charity name']
+                                .toString()
+                                .toLowerCase()
+                                .contains(searchText.toLowerCase())) {
+                              return Charitytiles(
+                                charityName: document['charity name'],
+                                location: document['location'],
+                                bio: document['charity bio'],
+                                uid: document['uid'],
+                                imageUrl: document['imageUrl'],
+                                donersNumber: document['count'],
+                              );
+                            } else
+                              return Container(
+                                child:
+                                    Text("Sorry nothing matches your search"),
+                              );
+                          } else {
+                            return Container();
+                          }
                         },
                       );
                     },

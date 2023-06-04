@@ -5,12 +5,16 @@ class Charitytiles extends StatelessWidget {
   String charityName;
   String location;
   String bio;
+  String imageUrl;
   String uid;
+  int donersNumber;
   Charitytiles(
       {required this.charityName,
       required this.location,
       required this.bio,
-      required this.uid});
+      required this.uid,
+      required this.imageUrl,
+      required this.donersNumber});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -40,7 +44,11 @@ class Charitytiles extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                child: Image.asset("assets/charity.png"),
+                height: 110,
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -55,7 +63,7 @@ class Charitytiles extends StatelessWidget {
                       height: height * 0.005,
                     ),
                     Text(
-                      "location: $charityName",
+                      "location: $location",
                       style: TextStyle(fontSize: height * 0.02),
                       softWrap: true,
                       maxLines: 2,
@@ -64,7 +72,7 @@ class Charitytiles extends StatelessWidget {
                       height: height * 0.005,
                     ),
                     Text(
-                      "Number of benifactors: 19520",
+                      "Number of benifactors: $donersNumber",
                       style: TextStyle(fontSize: height * 0.012),
                       softWrap: true,
                       maxLines: 2,

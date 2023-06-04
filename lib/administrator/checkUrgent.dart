@@ -197,6 +197,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/administrator/administratormain.dart';
 import 'package:demo2/administrator/cardapprovalpage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
@@ -247,20 +248,48 @@ class CheckUrgentMainChild extends State<CheckUrgentMain> {
               colors: [Colors.white, Colors.white])),
       child: SafeArea(
         bottom: false,
-        child: SideMenu(
-          background: logoColor,
-          key: _sideMenuKey,
-          menu: Sidemenu(),
-          type: SideMenuType.shrinkNSlide,
-          child: Scaffold(
-            backgroundColor: Colors.white,
-            body: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
+
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          body: Padding(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Container(
+                        width: width * 0.1,
+                        child: InkWell(
+                            child: Icon(Icons.arrow_back_ios_new),
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => AdminMain()),
+                              );
+                            })),
+                    SizedBox(
+                      width: width * 0.07,
+                    ),
+                    Flexible(
+                      child: Text(
+                        'Be the reason for someone’s heartbeat',
+                        style: TextStyle(fontSize: width * 0.07),
+                      ),
+                    ),
+                  ],
+                ),
+
+                Divider(
+                  thickness: 1,
+                ),
+                Container(
+                  width: width,
+                  color: Colors.red,
+                  child: Row(
+
                     children: [
                       Container(
                           width: width * 0.1,

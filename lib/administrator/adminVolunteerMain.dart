@@ -11,6 +11,7 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../colors.dart';
 import '../side bar/side_bar.dart';
 import 'adminEventtiles.dart';
+import 'administratormain.dart';
 
 class AdminVounteermain extends StatefulWidget {
   @override
@@ -83,15 +84,14 @@ class AdminVounteermainChild extends State<AdminVounteermain> {
                         Container(
                             width: width * 0.1,
                             child: InkWell(
-                              child: Image.asset("assets/menu.gif"),
-                              // onTap: () {
-                              //   final _state = _sideMenuKey.currentState;
-                              //   if (_state!.isOpened)
-                              //     _state.closeSideMenu(); // close side menu
-                              //   else
-                              //     _state.openSideMenu();
-                              // },
-                            )),
+                                child: Icon(Icons.arrow_back_ios_new),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AdminMain()),
+                                  );
+                                })),
                         Spacer(),
                         Container(
                           width: width * 0.7,

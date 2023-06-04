@@ -39,6 +39,7 @@ Future<void> addCharity(
   String type,
   String charityName,
   String charityBio,
+  String imageUrl,
   String location,
 ) async {
   try {
@@ -56,9 +57,10 @@ Future<void> addCharity(
       'charity bio': charityBio,
       'location': location,
       'type': type,
+      'imageUrl': imageUrl,
       'isVerfied': false,
       'total': 0,
-      'count': 1,
+      'count': 0,
       'uid': uid,
     });
 
@@ -92,8 +94,12 @@ Future<void> addPurchasesOfUsers(
   var productRef = FirebaseFirestore.instance.collection('Users').doc(uid);
   var userTransactionRef =
       FirebaseFirestore.instance.collection('userTransactions');
-  await userTransactionRef
-      .add({'userID': uid, 'itemID': itemId, 'purchase time': purchaseTime, 'price': price});
+  await userTransactionRef.add({
+    'userID': uid,
+    'itemID': itemId,
+    'purchase time': purchaseTime,
+    'price': price
+  });
   await productRef.update(
       {'total': FieldValue.increment(price), 'count': FieldValue.increment(1)});
   await productRef

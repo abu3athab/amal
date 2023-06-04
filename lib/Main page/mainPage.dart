@@ -31,6 +31,7 @@ class MainPageChild extends State<MainPage> {
     var availableHeight =
         MediaQuery.of(context).size.height - AppBar().preferredSize.height;
     MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom;
+    String searchText = '';
 
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
 
@@ -147,14 +148,36 @@ class MainPageChild extends State<MainPage> {
                           child: Column(
                             children: [
                               Container(
-                                width: width * 0.2,
-                                child: Image.asset("assets/donate.gif"),
-                              ),
-                              Text(
-                                "Charity",
-                                style: TextStyle(
-                                    fontSize: width * 0.04,
-                                    color: Colors.black),
+
+                                  width: width * 0.1,
+                                  child: InkWell(
+                                    child: Image.asset("assets/menu.gif"),
+                                    onTap: () {
+                                      final _state = _sideMenuKey.currentState;
+                                      if (_state!.isOpened)
+                                        _state
+                                            .closeSideMenu(); // close side menu
+                                      else
+                                        _state.openSideMenu();
+                                    },
+                                  )),
+                              Spacer(),
+                              Container(
+                                width: width * 0.7,
+                                child: TextField(
+                                  onChanged: (value) {
+                                    searchText = value;
+                                  },
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                    focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.grey, width: 1)),
+                                    hintText: 'Try Charity,Food.clothing...',
+                                  ),
+                                  style: TextStyle(fontSize: height * 0.021),
+                                ),
+
                               ),
                             ],
                           ),
@@ -256,24 +279,33 @@ class MainPageChild extends State<MainPage> {
                                   .where((doc) => doc['type'] == 'charity')
                                   .toList();
 
-                          return ListView.builder(
-                            padding: const EdgeInsets.all(8),
-                            itemCount: charityDocuments.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              final QueryDocumentSnapshot<Map<String, dynamic>>
-                                  document = charityDocuments[index];
-                              final String userId = document.id;
+
+                        return ListView.builder(
+                          padding: const EdgeInsets.all(8),
+                          itemCount: charityDocuments.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            final QueryDocumentSnapshot<Map<String, dynamic>>
+                                document = charityDocuments[index];
+                            final String userId = document.id;
+                            bool isVerfied = document['isVerfied'];
+                            if (isVerfied) {
 
                               return Charitytiles(
                                 charityName: document['charity name'],
                                 location: document['location'],
                                 bio: document['charity bio'],
                                 uid: document['uid'],
+
+                                imageUrl: document['imageUrl'],
+                                donersNumber: document['count'],
                               );
-                            },
-                          );
-                        },
-                      ),
+                            } else {
+                              return Container();
+                            }
+                          },
+                        );
+                      },
+
                     ),
                   ],
                 ),

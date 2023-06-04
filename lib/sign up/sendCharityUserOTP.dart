@@ -22,6 +22,7 @@ class CharityOTP extends StatelessWidget {
   String phoneNumber;
   final charityName;
   final charityBio;
+  String imageUrl;
   final loca;
   CharityOTP(
       {required this.auth,
@@ -31,6 +32,7 @@ class CharityOTP extends StatelessWidget {
       required this.phoneNumber,
       required this.charityName,
       required this.charityBio,
+      required this.imageUrl,
       required this.loca});
   String otpValue = "";
   String? location = "Amman";
@@ -142,7 +144,7 @@ class CharityOTP extends StatelessWidget {
                             .createUserWithEmailAndPassword(
                                 email: email, password: password);
                         addCharity(userName, email, phoneNumber, 'charity',
-                            charityName, charityBio, loca);
+                            charityName, charityBio, imageUrl, loca);
                       } on FirebaseAuthException catch (e) {
                         if (e.code == 'email-already-in-use') {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
