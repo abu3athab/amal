@@ -52,6 +52,8 @@ dependencies:
   shared_preferences: ^2.1.1
   firebase_storage: ^11.2.1
   firebase_messaging: ^14.6.2
+  http_auth: ^1.0.1
+  webview_flutter: ^4.2.1
 
 
 dev_dependencies:

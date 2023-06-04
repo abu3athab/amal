@@ -12,12 +12,14 @@ class CharityAdminitems extends StatelessWidget {
   String desc;
   int cost;
   String categ;
+  String count;
   CharityAdminitems(
       {required this.imageUrl,
       required this.name,
       required this.desc,
       required this.cost,
-      required this.categ});
+      required this.categ,
+      required this.count});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class CharityAdminitems extends StatelessWidget {
                       desc: desc,
                       categ: categ,
                       cost: cost,
+                      count: count,
                     )),
           );
         },

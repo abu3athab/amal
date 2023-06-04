@@ -68,180 +68,184 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
           backgroundColor: Colors.white,
           body: Center(
             child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Charityadminmain()),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back_ios),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Charityadminmain()),
+                            );
+                          },
+                        ),
+                        Spacer(),
+                        Text(
+                          "Add Services",
+                          style: TextStyle(fontSize: width * 0.1),
+                        ),
+                        Spacer(),
+                        Spacer()
+                      ],
+                    ),
+                    Divider(
+                      thickness: 2,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "pleae note that services are displayed as cards for the app user, please fill out the following form to add a new service.",
+                        style: TextStyle(fontSize: width * 0.04),
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.02,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text("what is the name of the service"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: nameController,
+                        obscureText: false,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'name',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text("service Description"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: descController,
+                        obscureText: false,
+                        maxLines: 3,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'description',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text("How much does it cost"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        controller: costController,
+                        obscureText: false,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: 'Cost',
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: height * 0.01,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text("To which catagory does it apply"),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: DropdownButton(
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        value: catagory,
+                        // Array list of items
+                        items: types.map((String types) {
+                          return DropdownMenuItem(
+                            value: types,
+                            child: Text(types),
                           );
+                        }).toList(),
+
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            catagory = newValue!;
+                          });
                         },
                       ),
-                      Spacer(),
-                      Text(
-                        "Add Services",
-                        style: TextStyle(fontSize: width * 0.1),
-                      ),
-                      Spacer(),
-                      Spacer()
-                    ],
-                  ),
-                  Divider(
-                    thickness: 2,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      "pleae note that services are displayed as cards for the app user, please fill out the following form to add a new service.",
-                      style: TextStyle(fontSize: width * 0.04),
                     ),
-                  ),
-                  SizedBox(
-                    height: height * 0.02,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text("what is the name of the service"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: nameController,
-                      obscureText: false,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'name',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text("service Description"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: descController,
-                      obscureText: false,
-                      maxLines: 3,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'description',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text("How much does it cost"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: costController,
-                      obscureText: false,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Cost',
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: height * 0.01,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Text("To which catagory does it apply"),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: DropdownButton(
-                      icon: const Icon(Icons.keyboard_arrow_down),
-                      value: catagory,
-                      // Array list of items
-                      items: types.map((String types) {
-                        return DropdownMenuItem(
-                          value: types,
-                          child: Text(types),
-                        );
-                      }).toList(),
 
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          catagory = newValue!;
-                        });
-                      },
-                    ),
-                  ),
-
-///////////////////
-                  ElevatedButton(
-                      onPressed: () async {
-                        try {
-                          var pickedImage = await picker.pickImage(
-                              source: ImageSource.gallery);
-                          if (pickedImage == null) {
+                    ///////////////////
+                    ElevatedButton(
+                        onPressed: () async {
+                          try {
+                            var pickedImage = await picker.pickImage(
+                                source: ImageSource.gallery);
+                            if (pickedImage == null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content: Text("no image selected!!"),
+                                duration: Duration(seconds: 2),
+                              ));
+                            } else {
+                              setState(() {
+                                selectedImage = File(pickedImage.path);
+                              });
+                            }
+                          } catch (e) {
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("no image selected!!"),
+                              content: Text("jpeg extension isn't supported"),
                               duration: Duration(seconds: 2),
                             ));
-                          } else {
-                            setState(() {
-                              selectedImage = File(pickedImage.path);
-                            });
                           }
-                        } catch (e) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("jpeg extension isn't supported"),
-                            duration: Duration(seconds: 2),
-                          ));
-                        }
-                      },
-                      child: Text("Pick Image")),
+                        },
+                        child: Text("Pick Image")),
 
-                  SizedBox(
-                    height: height * 0.1,
-                  ),
-                  TextButton(
-                      onPressed: () async {
-                        String name = nameController.text;
-                        String desc = descController.text;
-                        String cost = costController.text;
-                        if (selectedImage != null) {
-                          var postID =
-                              DateTime.now().microsecondsSinceEpoch.toString();
-                          Reference reference = FirebaseStorage.instance
-                              .ref()
-                              .child('$id/images')
-                              .child('post_$postID');
-                          await reference.putFile(selectedImage!);
-                          imageUrl = await reference.getDownloadURL();
-                          addCharityProduct(
-                              name, desc, int.parse(cost), catagory, imageUrl);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content:
-                                Text("Product has been added successfully!"),
-                            duration: Duration(seconds: 2),
-                          ));
-                        }
-                      },
-                      child: Text(
-                        "create",
-                        style: TextStyle(fontSize: width * 0.1),
-                      ))
-                ],
+                    SizedBox(
+                      height: height * 0.1,
+                    ),
+                    TextButton(
+                        onPressed: () async {
+                          String name = nameController.text;
+                          String desc = descController.text;
+                          String cost = costController.text;
+                          if (selectedImage != null) {
+                            var postID = DateTime.now()
+                                .microsecondsSinceEpoch
+                                .toString();
+                            Reference reference = FirebaseStorage.instance
+                                .ref()
+                                .child('$id/images')
+                                .child('post_$postID');
+                            await reference.putFile(selectedImage!);
+                            imageUrl = await reference.getDownloadURL();
+                            addCharityProduct(name, desc, int.parse(cost),
+                                catagory, imageUrl);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content:
+                                  Text("Product has been added successfully!"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          }
+                        },
+                        child: Text(
+                          "create",
+                          style: TextStyle(fontSize: width * 0.1),
+                        ))
+                  ],
+                ),
               ),
             ),
           ),

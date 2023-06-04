@@ -150,6 +150,7 @@ class ProductpageChild extends State<Productpage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Choosepayment(
+                                itemName: widget.name,
                                     itemID: widget.itemID,
                                     cost: widget.cost,
                                     uid: widget.uid,

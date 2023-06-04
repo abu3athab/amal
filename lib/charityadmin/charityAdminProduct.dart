@@ -22,12 +22,14 @@ class AdminProductpage extends StatefulWidget {
   int cost;
   String desc;
   String categ;
+  String count;
   AdminProductpage(
       {required this.name,
       required this.categ,
       required this.desc,
       required this.cost,
-      required this.imageUrl});
+      required this.imageUrl,
+      required this.count});
   @override
   State<StatefulWidget> createState() {
     return AdminProductpageChild();
@@ -73,6 +75,7 @@ class AdminProductpageChild extends State<AdminProductpage> {
                                       imageUrl: widget.imageUrl,
                                       categ: widget.categ,
                                       cost: widget.cost,
+                                      count: widget.count,
                                     )),
                           );
                         },
@@ -136,14 +139,18 @@ class AdminProductpageChild extends State<AdminProductpage> {
                 Text(
                   'Ammount in JOD: ${widget.cost}',
                 ),
-                Expanded(child: SizedBox()),
                 SizedBox(
                   width: width * 0.8,
                   height: height * 0.06,
                 ),
+                Text("number of purchases for this product: ${widget.count}"),
                 SizedBox(
                   height: 30,
-                )
+                ),
+                Expanded(child: SizedBox()),
+                SizedBox(
+                  height: 30,
+                ),
               ],
             ),
           ),

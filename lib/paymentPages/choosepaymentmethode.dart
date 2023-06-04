@@ -17,9 +17,17 @@ import 'enterpaymentdetails.dart';
 
 class Choosepayment extends StatefulWidget {
   String itemID;
+  String itemName;
   int cost;
   String uid;
-  Choosepayment({required this.itemID, required this.cost, required this.uid});
+
+  Choosepayment({super.key,
+    required this.itemID,
+    required this.cost,
+    required this.uid,
+    required this.itemName,
+  });
+
   @override
   State<StatefulWidget> createState() {
     return ChoosepaymentChild();
@@ -34,7 +42,7 @@ class ChoosepaymentChild extends State<Choosepayment> {
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerRight,
               end: Alignment.bottomLeft,
@@ -61,7 +69,7 @@ class ChoosepaymentChild extends State<Choosepayment> {
                         icon: const Icon(Icons.arrow_back_ios),
                         onPressed: () {},
                       ),
-                      Spacer(),
+                      const Spacer(),
                       TextButton(
                           onPressed: () {},
                           child: Text(
@@ -85,7 +93,7 @@ class ChoosepaymentChild extends State<Choosepayment> {
                     //         builder: (context) => Enterpaymentdetail()),
                     //   );
                     // },
-                    child: Container(
+                    child: SizedBox(
                       width: width * 0.95,
                       child: Card(
                         shape: RoundedRectangleBorder(
@@ -96,30 +104,31 @@ class ChoosepaymentChild extends State<Choosepayment> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               width: width * 0.3,
                               child: Image.asset(
                                   "assets/WhatsApp Image 2023-05-31 at 6.54.36 PM.jpeg"),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               "Credit/Debit Cards",
                               style: TextStyle(fontSize: width * 0.05),
                             ),
-                            Spacer()
+                            const Spacer()
                           ],
                         ),
                       ),
                     ),
                   ),
                   SizedBox(height: height * 0.01),
-                  Container(
+                  SizedBox(
                     width: width * 0.95,
                     child: InkWell(
                       onTap: () => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Enterpaymentdetail(
+                            builder: (context) => EnterPaymentDetail(
+                                  itemName: widget.itemName,
                                   itemID: widget.itemID,
                                   cost: widget.cost,
                                   uid: widget.uid,
@@ -134,37 +143,37 @@ class ChoosepaymentChild extends State<Choosepayment> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               width: width * 0.3,
                               child: Image.asset(
                                   "assets/WhatsApp Image 2023-05-31 at 6.54.31 PM.jpeg"),
                             ),
-                            Spacer(),
+                            const Spacer(),
                             Text(
                               "Paypal Payment",
                               style: TextStyle(fontSize: width * 0.05),
                             ),
-                            Spacer(),
+                            const Spacer(),
                           ],
                         ),
                       ),
                     ),
                   ),
                   Expanded(child: Container()),
-                  Container(
+                  SizedBox(
                     width: width * 0.9,
                     height: height * 0.08,
                     child: ElevatedButton(
-                        child: Text("Enter payment Detailes",
-                            style: TextStyle(fontSize: 14)),
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ))),
-                        onPressed: () {}),
+                        onPressed: () {},
+                        child: const Text("Enter payment Detailes",
+                            style: TextStyle(fontSize: 14))),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],

@@ -46,7 +46,7 @@ class LoginChild extends State<Login> {
     return Scaffold(
       body: Form(
         key: _formKey,
-        child: Container(
+        child: SizedBox(
           height: height,
           width: width,
           child: SingleChildScrollView(
@@ -206,24 +206,28 @@ class LoginChild extends State<Login> {
                                 .firstWhere((doc) => doc['uid'] == uid);
                             String type = userSnapshot.get('type');
                             bool isVerfied = userSnapshot.get('isVerfied');
+
+                            print(type);
+                            print(isVerfied);
+
                             if (type == 'user' && isVerfied) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainPage()),
-                              );
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainPage()),
+                                  (Route<dynamic> route) => false);
                             } else if (type == 'charity' && isVerfied) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Charityadminmain()),
-                              );
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Charityadminmain()),
+                                  (Route<dynamic> route) => false);
                             } else if (type == 'admin' && isVerfied) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AdminMain()),
-                              );
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminMain()),
+                                  (Route<dynamic> route) => false);
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                   content: Text(

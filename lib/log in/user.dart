@@ -81,6 +81,7 @@ Future<void> addCharityProduct(
     'cost': cost,
     'categ': categ,
     'imageUrl': imageUrl,
+    'count': 0,
     'id': ''
   });
   await doc.update({'id': doc.id});
@@ -92,9 +93,13 @@ Future<void> addPurchasesOfUsers(
   var userTransactionRef =
       FirebaseFirestore.instance.collection('userTransactions');
   await userTransactionRef
-      .add({'userID': uid, 'itemID': itemId, 'purchase time': purchaseTime});
+      .add({'userID': uid, 'itemID': itemId, 'purchase time': purchaseTime, 'price': price});
   await productRef.update(
       {'total': FieldValue.increment(price), 'count': FieldValue.increment(1)});
+  await productRef
+      .collection('myProducts')
+      .doc(itemId)
+      .update({'count': FieldValue.increment(1)});
 }
 
 Future<void> updateUserEmailVerification(String v) async {

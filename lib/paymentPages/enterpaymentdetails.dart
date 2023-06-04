@@ -5,6 +5,7 @@ import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
 import 'package:demo2/log%20in/user.dart';
+import 'package:demo2/paypal/paypalPayment.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
@@ -17,19 +18,26 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 import '../colors.dart';
 import 'choosepaymentmethode.dart';
 
-class Enterpaymentdetail extends StatefulWidget {
-  String itemID;
-  int cost;
-  String uid;
-  Enterpaymentdetail(
-      {required this.itemID, required this.cost, required this.uid});
+class EnterPaymentDetail extends StatefulWidget {
+  final String itemID;
+  final int cost;
+  final String uid;
+  final String itemName;
+
+  const EnterPaymentDetail(
+      {super.key,
+      required this.itemID,
+      required this.cost,
+      required this.uid,
+      required this.itemName});
+
   @override
   State<StatefulWidget> createState() {
     return EnterpaymentdetailChild();
   }
 }
 
-class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
+class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -37,7 +45,7 @@ class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.centerRight,
               end: Alignment.bottomLeft,
@@ -67,6 +75,7 @@ class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Choosepayment(
+                                      itemName: widget.itemName,
                                       itemID: widget.itemID,
                                       cost: widget.cost,
                                       uid: widget.uid,
@@ -74,7 +83,7 @@ class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
                           );
                         },
                       ),
-                      Spacer(),
+                      const Spacer(),
                       TextButton(
                           onPressed: () {},
                           child: Text(
@@ -93,74 +102,109 @@ class EnterpaymentdetailChild extends State<Enterpaymentdetail> {
                     "please fill out this form",
                     style: TextStyle(fontSize: width * 0.06),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  TextField(
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Field must not be empty";
+                      } else
+                        return null;
+                    },
                     obscureText: false,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Card number',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
-                  TextField(
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Field must not be empty";
+                      } else
+                        return null;
+                    },
                     obscureText: false,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: 'Card Holder Name',
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: width * 0.5,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Field must not be empty";
+                            } else
+                              return null;
+                          },
                           obscureText: false,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'Exp date MM/YY',
                           ),
                         ),
                       ),
-                      Spacer(),
-                      Container(
+                      const Spacer(),
+                      SizedBox(
                         width: width * 0.3,
-                        child: TextField(
+                        child: TextFormField(
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Field must not be empty";
+                            } else
+                              return null;
+                          },
                           obscureText: false,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             labelText: 'CCV',
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                   Expanded(child: Container()),
-                  Container(
+                  SizedBox(
                     width: width * 0.9,
                     height: height * 0.08,
                     child: ElevatedButton(
-                        child: Text("Complete payment",
-                            style: TextStyle(fontSize: 14)),
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12.0),
                         ))),
                         onPressed: () async {
-                          String time = DateTime.now().toString();
-                          addPurchasesOfUsers(
-                              widget.uid, widget.itemID, widget.cost, time);
-                        }),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PaypalPayment(
+                                      itemName: widget.itemName,
+                                      itemPrice: widget.cost.toString(),
+                                      onFinish: (number) {
+                                        print('order id : $number');
+                                        String time = DateTime.now().toString();
+                                        addPurchasesOfUsers(widget.uid,
+                                            widget.itemID, widget.cost, time);
+                                      },
+                                    )),
+                          );
+                        },
+                        child: const Text("Complete payment",
+                            style: TextStyle(fontSize: 14))),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                 ],
