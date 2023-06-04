@@ -165,7 +165,7 @@ class AdminEventinfo extends StatelessWidget {
                         onPressed: () {
                           deleteEvent();
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text(uid),
+                            content: Text('Success!!'),
                             duration: Duration(seconds: 2),
                           ));
                         },

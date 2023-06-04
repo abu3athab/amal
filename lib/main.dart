@@ -117,8 +117,18 @@ class MyApp extends StatelessWidget {
               future: getUserType(id),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
-                } else if (snapshot.hasData) {
+                  return Container(
+                      color: Colors.white,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(),
+                        ],
+                      ));
+                }
+
+                if (snapshot.hasData) {
                   String? userType = snapshot.data;
                   if (userType == 'charity') {
                     return Charityadminmain();
@@ -126,8 +136,9 @@ class MyApp extends StatelessWidget {
                     return MainPage();
                   } else if (userType == 'admin') {
                     return AdminMain();
-                  } else
+                  } else {
                     return Login();
+                  }
                 } else {
                   return Login();
                 }

@@ -28,8 +28,7 @@ class Charityadminmain extends StatefulWidget {
 
 class CharityadminmainChild extends State<Charityadminmain> {
   String uid = FirebaseAuth.instance.currentUser!.uid;
-  String numberOfDonations = '';
-  String totalIncome = '';
+
   var fire = FirebaseFirestore.instance.collection('Users');
   @override
   Widget build(BuildContext context) {
@@ -67,10 +66,7 @@ class CharityadminmainChild extends State<Charityadminmain> {
                               } else {
                                 String charityName =
                                     snapshot.data!.get('charity name');
-                                totalIncome =
-                                    snapshot.data!.get('total').toString();
-                                numberOfDonations =
-                                    snapshot.data!.get('count').toString();
+
                                 return Text(
                                   charityName,
                                   style: TextStyle(fontSize: width * 0.07),
@@ -119,11 +115,19 @@ class CharityadminmainChild extends State<Charityadminmain> {
                                   fontSize: width * 0.05, color: Colors.white),
                             ),
                             Spacer(),
-                            Text(
-                              '$totalIncome jod',
-                              style: TextStyle(
-                                  fontSize: width * 0.05, color: Colors.white),
-                            ),
+                            FutureBuilder<DocumentSnapshot>(
+                                future: fire.doc(uid).get(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      '${snapshot.data!.get('total').toString()} jod',
+                                      style: TextStyle(
+                                          fontSize: width * 0.05,
+                                          color: Colors.white),
+                                    );
+                                  } else
+                                    return Container();
+                                }),
                             SizedBox(
                               width: width * 0.07,
                             ),
@@ -140,11 +144,19 @@ class CharityadminmainChild extends State<Charityadminmain> {
                                   fontSize: width * 0.05, color: Colors.white),
                             ),
                             Spacer(),
-                            Text(
-                              numberOfDonations,
-                              style: TextStyle(
-                                  fontSize: width * 0.05, color: Colors.white),
-                            ),
+                            StreamBuilder<DocumentSnapshot>(
+                                stream: fire.doc(uid).snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!.get('count').toString(),
+                                      style: TextStyle(
+                                          fontSize: width * 0.05,
+                                          color: Colors.white),
+                                    );
+                                  } else
+                                    return Container();
+                                }),
                             SizedBox(
                               width: width * 0.07,
                             ),
@@ -194,13 +206,16 @@ class CharityadminmainChild extends State<Charityadminmain> {
                               String url =
                                   snapshot.data!.docs[Index].get('imageUrl');
                               return CharityAdminitems(
-                                  imageUrl: url,
-                                  name: snapshot.data!.docs[Index]
-                                      .get('product name'),
-                                  desc: snapshot.data!.docs[Index].get('desc'),
-                                  cost: snapshot.data!.docs[Index].get('cost'),
-                                  categ:
-                                      snapshot.data!.docs[Index].get('categ'));
+                                imageUrl: url,
+                                name: snapshot.data!.docs[Index]
+                                    .get('product name'),
+                                desc: snapshot.data!.docs[Index].get('desc'),
+                                cost: snapshot.data!.docs[Index].get('cost'),
+                                categ: snapshot.data!.docs[Index].get('categ'),
+                                count: snapshot.data!.docs[Index]
+                                    .get('count')
+                                    .toString(),
+                              );
                             });
                       }
                     },
