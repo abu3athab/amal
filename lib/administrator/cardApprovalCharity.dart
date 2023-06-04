@@ -186,6 +186,7 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:demo2/administrator/administratormain.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -368,6 +369,15 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                           onPressed: () async {
                             // Call the update function when the "Approve" button is pressed
                             await updateCharityDocument();
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Success!"),
+                              duration: Duration(seconds: 1),
+                            ));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminMain()),
+                            );
                           },
                         ),
                       ),
@@ -388,6 +398,11 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                           ),
                           onPressed: () async {
                             // Call the delete function when the "Deny" button is pressed
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdminMain()),
+                            );
                             await deleteDocumentCharity();
                           },
                         ),

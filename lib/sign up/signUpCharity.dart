@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
 
 import 'package:demo2/colors.dart';
 import 'package:demo2/sign%20up/sendCharityUserOTP.dart';
@@ -9,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../log in/logIn.dart';
 import '../log in/user.dart';
@@ -27,6 +30,10 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
   final _firebase = FirebaseAuth.instance;
   static bool isEmailVerified = false;
   Timer? timer;
+  File? selectedImage;
+  ImagePicker picker = ImagePicker();
+  String imageUrl = "";
+  XFile? image;
 
   final _charityNameController = TextEditingController();
   final _phoneNumberController = TextEditingController();
@@ -239,6 +246,7 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                         )),
                     validator: checkPassword,
                   ),
+
                   SizedBox(
                     height: 16,
                   ),
@@ -258,6 +266,31 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                     height: height * 0.02,
                   ),
                   /////////
+
+                  ElevatedButton(
+                      onPressed: () async {
+                        try {
+                          var pickedImage = await picker.pickImage(
+                              source: ImageSource.gallery);
+                          if (pickedImage == null) {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("no image selected!!"),
+                              duration: Duration(seconds: 2),
+                            ));
+                          } else {
+                            setState(() {
+                              selectedImage = File(pickedImage.path);
+                            });
+                          }
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("this extension isn't supported"),
+                            duration: Duration(seconds: 2),
+                          ));
+                        }
+                      },
+                      child: Text("Pick Image")),
+                  SizedBox(height: height * 0.02),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text("what is the goal of this Charity"),
@@ -322,44 +355,56 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                 child: ElevatedButton(
                   onPressed: () async {
                     if (_formKey.currentState?.validate() == true) {
-                      // Save the form data and navigate to the next screen
-                      final charityUserName = _charityNameController.text;
-                      final phoneNumber = _phoneNumberController.text;
-                      final email = _emailController.text;
-                      final password = _passwordController.text;
-                      final _firebase = FirebaseAuth.instance;
-                      final charityName = charityController.text;
-                      final charityBio = bioController.text;
-                      final loca = location;
+                      if (selectedImage != null) {
+                        final charityUserName = _charityNameController.text;
+                        final phoneNumber = _phoneNumberController.text;
+                        final email = _emailController.text;
+                        final password = _passwordController.text;
+                        final _firebase = FirebaseAuth.instance;
+                        final charityName = charityController.text;
+                        final charityBio = bioController.text;
 
-                      // TODO: save the data and navigate to the next screen
+                        final loca = location;
+                        var postID =
+                            DateTime.now().microsecondsSinceEpoch.toString();
+                        Reference reference = FirebaseStorage.instance
+                            .ref()
+                            .child('id/images')
+                            .child('post_$postID');
+                        await reference.putFile(selectedImage!);
+                        imageUrl = await reference.getDownloadURL();
 
-                      auth.setConfig(
-                          appEmail: "me@rohitchouhan.com",
-                          appName: "Email OTP",
-                          userEmail: email,
-                          otpLength: 4,
-                          otpType: OTPType.digitsOnly);
-                      if (await auth.sendOTP() == true) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("OTP has been sent"),
-                        ));
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CharityOTP(
-                                    auth: auth,
-                                    userName: charityUserName,
-                                    email: email,
-                                    password: password,
-                                    phoneNumber: phoneNumber,
-                                    charityName: charityName,
-                                    charityBio: charityBio,
-                                    loca: loca,
-                                  )),
-                        );
+                        // TODO: save the data and navigate to the next screen
+
+                        auth.setConfig(
+                            appEmail: "me@rohitchouhan.com",
+                            appName: "Email OTP",
+                            userEmail: email,
+                            otpLength: 4,
+                            otpType: OTPType.digitsOnly);
+                        if (await auth.sendOTP() == true) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("OTP has been sent"),
+                          ));
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CharityOTP(
+                                      auth: auth,
+                                      userName: charityUserName,
+                                      email: email,
+                                      password: password,
+                                      phoneNumber: phoneNumber,
+                                      charityName: charityName,
+                                      charityBio: charityBio,
+                                      imageUrl: imageUrl,
+                                      loca: loca,
+                                    )),
+                          );
+                        }
                       }
+                      // Save the form data and navigate to the next screen
                     }
                   },
 

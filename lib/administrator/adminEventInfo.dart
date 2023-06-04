@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'administratormain.dart';
+
 class AdminEventinfo extends StatelessWidget {
   String name;
   String startTime;
@@ -101,6 +103,17 @@ class AdminEventinfo extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(20, 0, 0, 5),
                   child: Row(
                     children: [
+                      Container(
+                          width: width * 0.1,
+                          child: InkWell(
+                              child: Icon(Icons.arrow_back_ios_new),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AdminMain()),
+                                );
+                              })),
                       Text(
                         name,
                         style: TextStyle(fontSize: width * 0.10),

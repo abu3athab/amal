@@ -31,6 +31,7 @@ class MainPageChild extends State<MainPage> {
     var availableHeight =
         MediaQuery.of(context).size.height - AppBar().preferredSize.height;
     MediaQuery.of(context).padding.top - MediaQuery.of(context).padding.bottom;
+    String searchText = '';
 
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
 
@@ -106,6 +107,9 @@ class MainPageChild extends State<MainPage> {
                               Container(
                                 width: width * 0.7,
                                 child: TextField(
+                                  onChanged: (value) {
+                                    searchText = value;
+                                  },
                                   cursorColor: Colors.grey,
                                   decoration: InputDecoration(
                                     focusedBorder: UnderlineInputBorder(
@@ -257,13 +261,19 @@ class MainPageChild extends State<MainPage> {
                             final QueryDocumentSnapshot<Map<String, dynamic>>
                                 document = charityDocuments[index];
                             final String userId = document.id;
-
-                            return Charitytiles(
-                              charityName: document['charity name'],
-                              location: document['location'],
-                              bio: document['charity bio'],
-                              uid: document['uid'],
-                            );
+                            bool isVerfied = document['isVerfied'];
+                            if (isVerfied) {
+                              return Charitytiles(
+                                charityName: document['charity name'],
+                                location: document['location'],
+                                bio: document['charity bio'],
+                                uid: document['uid'],
+                                imageUrl: document['imageUrl'],
+                                donersNumber: document['count'],
+                              );
+                            } else {
+                              return Container();
+                            }
                           },
                         );
                       },

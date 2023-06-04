@@ -9,14 +9,15 @@ class AdminCharitytiles extends StatelessWidget {
   String name;
   String email;
   String phoneNumber;
-  AdminCharitytiles({
-    required this.charityName,
-    required this.location,
-    required this.uid,
-    required this.name,
-    required this.email,
-    required this.phoneNumber,
-  });
+  String imageUrl;
+  AdminCharitytiles(
+      {required this.charityName,
+      required this.location,
+      required this.uid,
+      required this.name,
+      required this.email,
+      required this.phoneNumber,
+      required this.imageUrl});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -48,7 +49,11 @@ class AdminCharitytiles extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                child: Image.asset("assets/charity.png"),
+                height: 120,
+                child: Image.network(
+                  imageUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -72,7 +77,7 @@ class AdminCharitytiles extends StatelessWidget {
                       height: height * 0.005,
                     ),
                     Text(
-                      "Number of benifactors: 19520",
+                      "Number of benifactors: 0",
                       style: TextStyle(fontSize: height * 0.012),
                       softWrap: true,
                       maxLines: 2,
