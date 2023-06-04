@@ -7,6 +7,7 @@ import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/chairty%20page/productpage.dart';
 import 'package:demo2/charityadmin/charityadminsettings.dart';
 import 'package:demo2/charityadmin/editcharitymenu.dart';
+import 'package:demo2/charityadmin/viewreportcard.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/log%20in/logIn.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
@@ -40,187 +41,212 @@ class CharityadminmainChild extends State<Charityadminmain> {
 
     final GlobalKey<SideMenuState> _sideMenuKey = GlobalKey<SideMenuState>();
 
-    return SafeArea(
-      bottom: false,
-      child: SideMenu(
-        background: logoColor,
-        key: _sideMenuKey,
-        menu: Sidemenu(),
-        type: SideMenuType.shrinkNSlide,
-        child: Scaffold(
-          backgroundColor: Colors.white,
-          body: Center(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
-                    child: Row(
-                      children: [
-                        FutureBuilder<DocumentSnapshot>(
-                            future: fire.doc(uid).get(),
-                            builder: (context, snapshot) {
-                              if (!snapshot.hasData) {
-                                return Text("data");
-                              } else {
-                                String charityName =
-                                    snapshot.data!.get('charity name');
+    return Container(
+      color: Colors.white,
+      child: SafeArea(
+        bottom: false,
+        child: SideMenu(
+          background: logoColor,
+          key: _sideMenuKey,
+          menu: Sidemenu(),
+          type: SideMenuType.shrinkNSlide,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: Center(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                      child: Row(
+                        children: [
+                          FutureBuilder<DocumentSnapshot>(
+                              future: fire.doc(uid).get(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData) {
+                                  return Text("data");
+                                } else {
+                                  String charityName =
+                                      snapshot.data!.get('charity name');
 
-                                return Text(
-                                  charityName,
-                                  style: TextStyle(fontSize: width * 0.07),
-                                );
-                              }
-                            }),
-                        Spacer(),
-                        InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Charityadminsettings()),
-                            );
-                          },
-                          child: Container(
-                            width: width * 0.1,
-                            child: Image.asset("assets/settings.gif"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Divider(
-                    thickness: 1,
-                  ),
-                  Container(
-                    width: width * 0.95,
-                    height: height * 0.17,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: logoColor),
-                    child: Column(children: [
-                      Text(
-                        "Report Card",
-                        style: TextStyle(
-                            fontSize: width * 0.05, color: Colors.white),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Total dontations",
-                              style: TextStyle(
-                                  fontSize: width * 0.05, color: Colors.white),
-                            ),
-                            Spacer(),
-                            FutureBuilder<DocumentSnapshot>(
-                                future: fire.doc(uid).get(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      '${snapshot.data!.get('total').toString()} jod',
-                                      style: TextStyle(
-                                          fontSize: width * 0.05,
-                                          color: Colors.white),
-                                    );
-                                  } else
-                                    return Container();
-                                }),
-                            SizedBox(
-                              width: width * 0.07,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
-                        child: Row(
-                          children: [
-                            Text(
-                              "Total of doners",
-                              style: TextStyle(
-                                  fontSize: width * 0.05, color: Colors.white),
-                            ),
-                            Spacer(),
-                            StreamBuilder<DocumentSnapshot>(
-                                stream: fire.doc(uid).snapshots(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      snapshot.data!.get('count').toString(),
-                                      style: TextStyle(
-                                          fontSize: width * 0.05,
-                                          color: Colors.white),
-                                    );
-                                  } else
-                                    return Container();
-                                }),
-                            SizedBox(
-                              width: width * 0.07,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ]),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          "All Products and services",
-                          style: TextStyle(fontSize: width * 0.04),
-                        ),
-                        Spacer(),
-                        TextButton(
-                            onPressed: () {
+                                  return Text(
+                                    charityName,
+                                    style: TextStyle(fontSize: width * 0.07),
+                                  );
+                                }
+                              }),
+                          Spacer(),
+                          InkWell(
+                            onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Editcharitymenu()),
+                                    builder: (context) =>
+                                        Charityadminsettings()),
                               );
                             },
-                            child: Text("Edit Menu"))
-                      ],
+                            child: Container(
+                              width: width * 0.1,
+                              child: Image.asset("assets/settings.gif"),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  Expanded(
-                      child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection('Users')
-                        .doc(uid)
-                        .collection('myProducts')
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return Container();
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
-                        return CircularProgressIndicator();
-                      } else {
-                        return ListView.builder(
-                            itemCount: snapshot.data!.docs.length,
-                            itemBuilder: (context, Index) {
-                              String url =
-                                  snapshot.data!.docs[Index].get('imageUrl');
-                              return CharityAdminitems(
-                                imageUrl: url,
-                                name: snapshot.data!.docs[Index]
-                                    .get('product name'),
-                                desc: snapshot.data!.docs[Index].get('desc'),
-                                cost: snapshot.data!.docs[Index].get('cost'),
-                                categ: snapshot.data!.docs[Index].get('categ'),
-                                count: snapshot.data!.docs[Index]
-                                    .get('count')
-                                    .toString(),
-                              );
-                            });
-                      }
-                    },
-                  )),
-                ],
+                    Divider(
+                      thickness: 1,
+                    ),
+                    Container(
+                      width: width * 0.95,
+                      height: height * 0.17,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: logoColor),
+                      child: Column(children: [
+                        Text(
+                          "Report Card",
+                          style: TextStyle(
+                              fontSize: width * 0.05, color: Colors.white),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Total dontations",
+                                style: TextStyle(
+                                    fontSize: width * 0.05,
+                                    color: Colors.white),
+                              ),
+                              Spacer(),
+                              FutureBuilder<DocumentSnapshot>(
+                                  future: fire.doc(uid).get(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Text(
+                                        '${snapshot.data!.get('total').toString()} jod',
+                                        style: TextStyle(
+                                            fontSize: width * 0.05,
+                                            color: Colors.white),
+                                      );
+                                    } else
+                                      return Container();
+                                  }),
+                              SizedBox(
+                                width: width * 0.07,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(5, 5, 5, 5),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Total of doners",
+                                style: TextStyle(
+                                    fontSize: width * 0.05,
+                                    color: Colors.white),
+                              ),
+                              Spacer(),
+                              StreamBuilder<DocumentSnapshot>(
+                                  stream: fire.doc(uid).snapshots(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.hasData) {
+                                      return Text(
+                                        snapshot.data!.get('count').toString(),
+                                        style: TextStyle(
+                                            fontSize: width * 0.05,
+                                            color: Colors.white),
+                                      );
+                                    } else
+                                      return Container();
+                                  }),
+                              SizedBox(
+                                width: width * 0.07,
+                              ),
+                            ],
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            Spacer(),
+                            TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Viewreport()),
+                                  );
+                                },
+                                child: Text(
+                                  "view info",
+                                  style: TextStyle(fontSize: 25),
+                                )),
+                            Spacer(),
+                          ],
+                        )
+                      ]),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            "All Products and services",
+                            style: TextStyle(fontSize: width * 0.04),
+                          ),
+                          Spacer(),
+                          TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Editcharitymenu()),
+                                );
+                              },
+                              child: Text("Edit Menu"))
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                        child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('Users')
+                          .doc(uid)
+                          .collection('myProducts')
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return Container();
+                        } else if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
+                        } else {
+                          return ListView.builder(
+                              itemCount: snapshot.data!.docs.length,
+                              itemBuilder: (context, Index) {
+                                String url =
+                                    snapshot.data!.docs[Index].get('imageUrl');
+                                return CharityAdminitems(
+                                  imageUrl: url,
+                                  name: snapshot.data!.docs[Index]
+                                      .get('product name'),
+                                  desc: snapshot.data!.docs[Index].get('desc'),
+                                  cost: snapshot.data!.docs[Index].get('cost'),
+                                  categ:
+                                      snapshot.data!.docs[Index].get('categ'),
+                                  count: snapshot.data!.docs[Index]
+                                      .get('count')
+                                      .toString(),
+                                );
+                              });
+                        }
+                      },
+                    )),
+                  ],
+                ),
               ),
             ),
           ),

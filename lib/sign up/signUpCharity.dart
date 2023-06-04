@@ -311,7 +311,7 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text("where will the event take place"),
+                    child: Text("where is the charity located"),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5.0),

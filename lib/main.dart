@@ -119,7 +119,7 @@ class MyApp extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
                       color: Colors.white,
-                      child: const Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [

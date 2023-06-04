@@ -174,7 +174,8 @@ class CharityOTP extends StatelessWidget {
                     ));
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("your entered OPT doesn't the sent one"),
+                      content:
+                          Text("your entered OPT doesn't match the sent one"),
                       duration: Duration(seconds: 2),
                     ));
                   }

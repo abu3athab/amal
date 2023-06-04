@@ -107,22 +107,7 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                           decoration: const InputDecoration(),
                         ),
                       ),
-                    ],
-                  ),
-                  Divider(
-                    thickness: 1,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text("Change Email:       "),
-                      Container(
-                        width: width * 0.03,
-                      ),
-                      new Flexible(
-                        child: TextField(
-                          decoration: const InputDecoration(),
-                        ),
-                      ),
+                      TextButton(onPressed: () {}, child: Text("Update")),
                     ],
                   ),
                   Divider(
@@ -139,22 +124,7 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                           decoration: const InputDecoration(),
                         ),
                       ),
-                    ],
-                  ),
-                  Divider(
-                    thickness: 1,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text("Change Address:  "),
-                      Container(
-                        width: width * 0.03,
-                      ),
-                      new Flexible(
-                        child: TextField(
-                          decoration: const InputDecoration(),
-                        ),
-                      ),
+                      TextButton(onPressed: () {}, child: Text("Update")),
                     ],
                   ),
                   Divider(
@@ -171,6 +141,7 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                           decoration: const InputDecoration(),
                         ),
                       ),
+                      TextButton(onPressed: () {}, child: Text("Update")),
                     ],
                   ),
                   Divider(

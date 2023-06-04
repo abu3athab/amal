@@ -352,6 +352,7 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
                 SizedBox(
                   height: height * 0.08,
                 ),
+                Expanded(child: SizedBox()),
                 Row(
                   //
                   children: [
@@ -364,7 +365,9 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
                       ),
                       child: Center(
                         child: TextButton(
-                          child: Text("Approve"),
+                          child: Text("Approve",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30)),
                           onPressed: () async {
                             updateAttribute(widget.uid, true);
                           },
@@ -381,7 +384,9 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
                       ),
                       child: Center(
                         child: TextButton(
-                          child: Text("Deny"),
+                          child: Text("Deny",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 30)),
                           onPressed: () async {
                             deleteDocument(widget.uid);
                           },
@@ -389,6 +394,9 @@ class CardapprovalpageChild extends State<CardApprovalForUrgent> {
                       ),
                     ),
                   ],
+                ),
+                SizedBox(
+                  height: 20,
                 )
               ],
             ),
