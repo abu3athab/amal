@@ -1,6 +1,7 @@
 import 'package:demo2/charityadmin/charityadminmain.dart';
 import 'package:demo2/charityadmin/charityadminsettings.dart';
 import 'package:demo2/log%20in/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +15,25 @@ class Charitysettingslocation extends StatefulWidget {
 }
 
 class CharitysettingslocationChild extends State<Charitysettingslocation> {
+  String? uid = FirebaseAuth.instance.currentUser!.uid;
+  Future<void> updateCharitylocation(String location) async {
+    if (uid != null) {
+      try {
+        await FirebaseFirestore.instance
+            .collection('Users')
+            .doc(uid)
+            .update({'location': location});
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Charity location updated successfully')),
+        );
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to update charity name')),
+        );
+      }
+    }
+  }
+
   TextEditingController dateinput = TextEditingController();
 
   String location = 'Amman';
@@ -118,7 +138,9 @@ class CharitysettingslocationChild extends State<Charitysettingslocation> {
                     width: width,
                     height: height * 0.07,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await updateCharitylocation(location);
+                        },
                         child: Text(
                           "Change",
                           style: TextStyle(fontSize: width * 0.07),

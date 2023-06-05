@@ -76,15 +76,6 @@ class AdminProductpageChild extends State<AdminProductpage> {
                       ),
                     ),
                     Spacer(),
-                    Container(
-                      width: width * 0.2,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Done",
-                            style: TextStyle(fontSize: width * 0.06),
-                          )),
-                    ),
                   ],
                 ),
                 Padding(

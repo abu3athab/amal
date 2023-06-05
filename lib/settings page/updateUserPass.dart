@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:math';
 
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
@@ -17,33 +18,8 @@ import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../colors.dart';
 
-class Updateaccountinfo extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return UpdateaccountinfoChild();
-  }
-}
-
-class UpdateaccountinfoChild extends State<Updateaccountinfo> {
-  var name = TextEditingController();
-  var number = TextEditingController();
-
-  String? checkPhoneNumber(String? phoneNumber) {
-    if (phoneNumber == null || phoneNumber.toString().isEmpty) {
-      return "field must not be empty";
-    }
-
-    if (phoneNumber.length != 10) {
-      return "phone number should consist of 10 digits ";
-    }
-    if (!(phoneNumber.startsWith('079')) &&
-        !(phoneNumber.startsWith('078')) &&
-        !(phoneNumber.startsWith('077'))) {
-      return "phone number should be Jordanian";
-    } else {
-      return null;
-    }
-  }
+class UpdateUserPass extends StatelessWidget {
+  var email = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +66,7 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                         ),
                       ),
                       Text(
-                        "   Account",
+                        "Reset password",
                         style: TextStyle(fontSize: width * 0.1),
                       ),
                     ],
@@ -106,51 +82,7 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                   ),
                   Row(
                     children: <Widget>[
-                      const Text("Change name:      "),
-                      Container(
-                        width: width * 0.03,
-                      ),
-                      Flexible(
-                        child: Form(
-                          key: _nameKey,
-                          child: TextFormField(
-                            controller: name,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return "field must not be empty";
-                              } else {
-                                return null;
-                              }
-                            },
-                            decoration: const InputDecoration(),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                          onPressed: () async {
-                            if (_nameKey.currentState!.validate()) {
-                              await updateUserProfileInfo('name', name.text,
-                                  FirebaseAuth.instance.currentUser!.uid);
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text("name updated successfully")));
-                            } else {
-                              return;
-                            }
-                          },
-                          child: const Text("Update")),
-                    ],
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  const Divider(
-                    thickness: 1,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      const Text("Change Number:  "),
+                      const Text("Email"),
                       Container(
                         width: width * 0.03,
                       ),
@@ -158,8 +90,14 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                         child: Form(
                           key: _numberKey,
                           child: TextFormField(
-                            validator: checkPhoneNumber,
-                            controller: number,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return "Field must not be empty";
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: email,
                             decoration: InputDecoration(),
                           ),
                         ),
@@ -167,15 +105,16 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                       TextButton(
                           onPressed: () async {
                             if (_numberKey.currentState!.validate()) {
-                              await updateUserProfileInfo(
-                                  'phone number',
-                                  number.text,
-                                  FirebaseAuth.instance.currentUser!.uid);
+                              await FirebaseAuth.instance
+                                  .sendPasswordResetEmail(email: email.text);
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                  content: Text(
+                                      "Reset password link has been sent to your email successfully! ${email.text}")));
                             } else {
                               return;
                             }
                           },
-                          child: const Text("Update")),
+                          child: const Text("Send link")),
                     ],
                   ),
                   const Divider(

@@ -54,7 +54,7 @@ class CharitymainChild extends State<Charitymain> {
                         Container(
                             width: width * 0.1,
                             child: InkWell(
-                              child: Image.asset("assets/menu.gif"),
+                              child: Icon(Icons.arrow_back_ios_new),
                               onTap: () {
                                 Navigator.push(
                                   context,

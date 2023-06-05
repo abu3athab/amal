@@ -9,6 +9,7 @@ import 'package:demo2/colors.dart';
 import 'package:demo2/profilepage.dart/profile.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/volunteermain.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
@@ -23,6 +24,7 @@ class MainPage extends StatefulWidget {
 }
 
 class MainPageChild extends State<MainPage> {
+  var fire = FirebaseFirestore.instance.collection('Users');
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -50,7 +52,7 @@ class MainPageChild extends State<MainPage> {
                   Container(
                     width: width,
                     height: availableHeight * 0.215,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     child: Column(children: [
                       SizedBox(height: availableHeight * .02),
                       Row(
@@ -61,12 +63,26 @@ class MainPageChild extends State<MainPage> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  "Hi, Alessandra",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: width * 0.06),
-                                ),
+                                FutureBuilder<DocumentSnapshot>(
+                                    future: fire
+                                        .doc(FirebaseAuth
+                                            .instance.currentUser!.uid)
+                                        .get(),
+                                    builder: (context, snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Text("");
+                                      } else {
+                                        String username =
+                                            snapshot.data!.get('name');
+
+                                        return Text(
+                                          "Hi, $username",
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: width * 0.06),
+                                        );
+                                      }
+                                    }),
                                 Text(
                                   "Let's start spreading goodness",
                                   style: TextStyle(
@@ -77,36 +93,34 @@ class MainPageChild extends State<MainPage> {
                             ),
                           ),
                           CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/girlportrait.jpeg'),
                             radius: height * 0.04,
                           )
                         ],
                       ),
-                      Container(
+                      SizedBox(
                           width: width,
                           height: height * 0.10,
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                   width: width * 0.1,
                                   child: InkWell(
                                     child: Image.asset("assets/menu.gif"),
                                     onTap: () {
                                       final _state = _sideMenuKey.currentState;
-                                      if (_state!.isOpened)
+                                      if (_state!.isOpened) {
                                         _state
                                             .closeSideMenu(); // close side menu
-                                      else
+                                      } else
                                         _state.openSideMenu();
                                     },
                                   )),
-                              Spacer(),
-                              Container(
+                              const Spacer(),
+                              SizedBox(
                                 width: width * 0.7,
                                 child: TextField(
                                   cursorColor: Colors.grey,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                             color: Colors.grey, width: 1)),
@@ -115,10 +129,10 @@ class MainPageChild extends State<MainPage> {
                                   style: TextStyle(fontSize: height * 0.021),
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Container(
                                   width: width * 0.1,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     color: Colors.white,
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20)),
@@ -142,7 +156,7 @@ class MainPageChild extends State<MainPage> {
                       InkWell(
                         child: Column(
                           children: [
-                            Container(
+                            SizedBox(
                               width: width * 0.2,
                               child: Image.asset("assets/donate.gif"),
                             ),
@@ -164,7 +178,7 @@ class MainPageChild extends State<MainPage> {
                       Column(
                         children: [
                           InkWell(
-                            child: Container(
+                            child: SizedBox(
                               width: width * 0.2,
                               child: Image.asset("assets/blood-bag.gif"),
                             ),
@@ -193,7 +207,7 @@ class MainPageChild extends State<MainPage> {
                                     builder: (context) => Vounteermain()),
                               );
                             },
-                            child: Container(
+                            child: SizedBox(
                               width: width * 0.2,
                               child: Image.asset("assets/volunteering.gif"),
                             ),
@@ -212,7 +226,7 @@ class MainPageChild extends State<MainPage> {
                     ],
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 10, 0, 0),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text("Featured Charities",
@@ -239,7 +253,8 @@ class MainPageChild extends State<MainPage> {
 
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(child: CircularProgressIndicator());
+                          return const Center(
+                              child: CircularProgressIndicator());
                         }
 
                         final List<QueryDocumentSnapshot<Map<String, dynamic>>>

@@ -93,28 +93,6 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Charitysettingemail()),
-                          );
-                        },
-                        title: Text("Edit Email"),
-                        trailing: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: logoColor,
-                        ),
-                        leading: Icon(
-                          Icons.email,
-                          color: logoColor,
-                        ),
-                      ),
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: ListTile(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
                                 builder: (context) => Charitysettingpass()),
                           );
                         },
@@ -199,22 +177,6 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                         ),
                         leading: Icon(
                           Icons.location_city,
-                          color: logoColor,
-                        ),
-                      ),
-                    ),
-                    Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      child: ListTile(
-                        onTap: () => null,
-                        title: Text("View Donation history"),
-                        trailing: Icon(
-                          Icons.keyboard_arrow_right,
-                          color: logoColor,
-                        ),
-                        leading: Icon(
-                          Icons.history,
                           color: logoColor,
                         ),
                       ),

@@ -16,8 +16,7 @@ class UserInfo {
 
 Future<void> addUser(
     String username, String email, String phoneNumber, String type) async {
-  CollectionReference users =
-      await FirebaseFirestore.instance.collection('Users');
+  CollectionReference users = FirebaseFirestore.instance.collection('Users');
   FirebaseAuth auth = FirebaseAuth.instance;
   String uid = auth.currentUser!.uid.toString();
   DocumentReference userDoc = users.doc(uid);
@@ -30,6 +29,13 @@ Future<void> addUser(
     'isVerfied': true
   });
   return;
+}
+
+Future<void> updateUserProfileInfo(
+    String fieldName, String newValue, String uid) async {
+  CollectionReference userRef = FirebaseFirestore.instance.collection('Users');
+  DocumentReference userDoc = userRef.doc(uid);
+  await userDoc.update({fieldName: newValue});
 }
 
 Future<void> addCharity(

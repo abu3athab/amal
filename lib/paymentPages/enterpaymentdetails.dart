@@ -192,10 +192,10 @@ class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
                                 builder: (context) => PaypalPayment(
                                       itemName: widget.itemName,
                                       itemPrice: widget.cost.toString(),
-                                      onFinish: (number) {
+                                      onFinish: (number) async {
                                         print('order id : $number');
                                         String time = DateTime.now().toString();
-                                        addPurchasesOfUsers(
+                                        await addPurchasesOfUsers(
                                             FirebaseAuth
                                                 .instance.currentUser!.uid,
                                             widget.itemID,
