@@ -113,8 +113,9 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             String id = snapshot.data!.uid;
-            return FutureBuilder<String?>(
-              future: getUserType(id),
+            return FutureBuilder(
+              future:
+                  FirebaseFirestore.instance.collection('Users').doc(id).get(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
@@ -129,12 +130,14 @@ class MyApp extends StatelessWidget {
                 }
 
                 if (snapshot.hasData) {
-                  String? userType = snapshot.data;
-                  if (userType == 'charity') {
+                  String userType = snapshot.data!.get('type');
+                  bool isVerfied = snapshot.data!.get('isVerfied');
+
+                  if (userType == 'charity' && isVerfied) {
                     return Charityadminmain();
-                  } else if (userType == 'user') {
+                  } else if (userType == 'user' && isVerfied) {
                     return MainPage();
-                  } else if (userType == 'admin') {
+                  } else if (userType == 'admin' && isVerfied) {
                     return AdminMain();
                   } else {
                     return Login();

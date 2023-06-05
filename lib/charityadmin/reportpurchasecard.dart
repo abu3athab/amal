@@ -50,13 +50,13 @@ class Charityreportcard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 Text(
                   cost,
-                  style: TextStyle(fontSize: 25),
+                  style: const TextStyle(fontSize: 25),
                 ),
-                Text(" JOD", style: TextStyle(fontSize: 25)),
-                SizedBox(
+                const Text(" JOD", style: TextStyle(fontSize: 25)),
+                const SizedBox(
                   width: 10,
                 ),
                 Image.asset("assets/charity.gif")

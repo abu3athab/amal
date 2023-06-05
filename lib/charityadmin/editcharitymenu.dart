@@ -84,16 +84,16 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                             );
                           },
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Text(
                           "Add Services",
                           style: TextStyle(fontSize: width * 0.1),
                         ),
-                        Spacer(),
-                        Spacer()
+                        const Spacer(),
+                        const Spacer()
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 2,
                     ),
                     Padding(
@@ -106,8 +106,8 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                     SizedBox(
                       height: height * 0.02,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
                       child: Text("what is the name of the service"),
                     ),
                     Padding(
@@ -115,7 +115,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                       child: TextField(
                         controller: nameController,
                         obscureText: false,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'name',
                         ),
@@ -124,8 +124,8 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                     SizedBox(
                       height: height * 0.01,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
                       child: Text("service Description"),
                     ),
                     Padding(
@@ -134,7 +134,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                         controller: descController,
                         obscureText: false,
                         maxLines: 3,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'description',
                         ),
@@ -143,8 +143,8 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                     SizedBox(
                       height: height * 0.01,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
                       child: Text("How much does it cost"),
                     ),
                     Padding(
@@ -153,7 +153,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                         controller: costController,
                         obscureText: false,
                         keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Cost',
                         ),
@@ -162,8 +162,8 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                     SizedBox(
                       height: height * 0.01,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
+                    const Padding(
+                      padding: EdgeInsets.all(5.0),
                       child: Text("To which catagory does it apply"),
                     ),
                     Padding(
@@ -195,7 +195,7 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                                 source: ImageSource.gallery);
                             if (pickedImage == null) {
                               ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
+                                  .showSnackBar(const SnackBar(
                                 content: Text("no image selected!!"),
                                 duration: Duration(seconds: 2),
                               ));
@@ -205,13 +205,14 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                               });
                             }
                           } catch (e) {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content: Text("jpeg extension isn't supported"),
                               duration: Duration(seconds: 2),
                             ));
                           }
                         },
-                        child: Text("Pick Image")),
+                        child: const Text("Pick Image")),
 
                     SizedBox(
                       height: height * 0.1,
@@ -233,7 +234,8 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                             imageUrl = await reference.getDownloadURL();
                             addCharityProduct(name, desc, double.parse(cost),
                                 catagory, imageUrl);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               content:
                                   Text("Product has been added successfully!"),
                               duration: Duration(seconds: 2),

@@ -1,7 +1,9 @@
 import 'dart:developer';
 
+import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/colors.dart';
 import 'package:demo2/settings%20page/settingspage.dart';
+import 'package:demo2/settings%20page/updateUserPass.dart';
 import 'package:demo2/settings%20page/updateaccountinfo.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +27,26 @@ class ConfigChild extends State<Config> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text(
-          "Settings",
-          style: TextStyle(color: Colors.black),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainPage()),
+                );
+              },
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: logoColor,
+              ),
+            ),
+            Text(
+              "                     Settings",
+              style: TextStyle(color: Colors.black),
+            ),
+          ],
         ),
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
@@ -52,6 +71,25 @@ class ConfigChild extends State<Config> {
             ),
             leading: Icon(
               Icons.account_circle,
+              color: logoColor,
+            ),
+          ),
+        ),
+        Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          child: ListTile(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => UpdateUserPass()),
+            ),
+            title: Text("Change password"),
+            trailing: Icon(
+              Icons.keyboard_arrow_right,
+              color: logoColor,
+            ),
+            leading: Icon(
+              Icons.password_rounded,
               color: logoColor,
             ),
           ),

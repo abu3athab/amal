@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, avoid_print
 
 import 'package:demo2/paypal/paypalService.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -10,6 +11,8 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 
 // Import for iOS features.
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+
+import '../log in/user.dart';
 // #enddocregion platform_imports
 
 class PaypalPayment extends StatefulWidget {
@@ -17,7 +20,7 @@ class PaypalPayment extends StatefulWidget {
   final String itemName;
   final String itemPrice;
 
-  const PaypalPayment(
+  PaypalPayment(
       {Key? key,
       required this.onFinish,
       required this.itemName,
@@ -151,6 +154,7 @@ Page resource error:
                 }
                 Navigator.of(context).pop();
                 widget.onFinish(-1);
+
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Success')),
                 );
