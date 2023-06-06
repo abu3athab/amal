@@ -9,10 +9,13 @@ import 'package:demo2/profilepage.dart/profileView.dart';
 import 'package:demo2/side%20bar/side_bar.dart';
 import 'package:demo2/volunteer%20page/eventtiles.dart';
 import 'package:demo2/volunteer%20page/manageyourevents.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shrink_sidemenu/shrink_sidemenu.dart';
 
 import '../colors.dart';
+import '../log in/user.dart';
+import '../paypal/paypalPayment.dart';
 import 'enterpaymentdetails.dart';
 
 class Choosepayment extends StatefulWidget {
@@ -108,16 +111,27 @@ class ChoosepaymentChild extends State<Choosepayment> {
                   SizedBox(
                     width: width * 0.95,
                     child: InkWell(
-                      onTap: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EnterPaymentDetail(
-                                  itemName: widget.itemName,
-                                  itemID: widget.itemID,
-                                  cost: widget.cost,
-                                  charityID: widget.charityID,
-                                )),
-                      ),
+                      onTap: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PaypalPayment(
+                                    itemName: widget.itemName,
+                                    itemPrice: widget.cost.toString(),
+                                    onFinish: (number) async {
+                                      print('order id : $number');
+                                      String time = DateTime.now().toString();
+                                      await addPurchasesOfUsers(
+                                          FirebaseAuth
+                                              .instance.currentUser!.uid,
+                                          widget.itemID,
+                                          widget.cost,
+                                          time,
+                                          widget.charityID);
+                                    },
+                                  )),
+                        );
+                      },
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15.0),
