@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/administrator/checkUrgent.dart';
+import 'package:demo2/administrator/viewallcharities.dart';
+import 'package:demo2/administrator/viewallusers.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
@@ -216,14 +218,26 @@ class AdminMainChild extends State<AdminMain> {
                     children: [
                       Spacer(),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ViewallCharities()),
+                            );
+                          },
                           child: Text(
                             "charities",
                             style: TextStyle(fontSize: width * 0.08),
                           )),
                       Spacer(),
                       TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Viewallusers()),
+                            );
+                          },
                           child: Text("Users",
                               style: TextStyle(fontSize: width * 0.08))),
                       Spacer(),
