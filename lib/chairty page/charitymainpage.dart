@@ -93,111 +93,16 @@ class CharitymainChild extends State<Charitymain> {
                             child: Image.asset("assets/magnifying-glass.gif")),
                       ],
                     )),
-                ////////search bar/////////////////
-                Divider(
-                  thickness: 1,
-                ),
 
-                ////
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 5, 15, 0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/food-donation.gif')),
-                          Text(
-                            "Food",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                      ///////////////////////////////
+                      Text("Featured Charities"),
                       Spacer(),
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/clothes.gif')),
-                          Text(
-                            "Clothing",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                      ////////////////////////////////////////
-                      Spacer(),
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/air-conditioner.gif')),
-                          Text(
-                            "Utilities",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
+                      TextButton(onPressed: () {}, child: Text("view all"))
                     ],
                   ),
-                  /////////
-                ),
-
-                ///
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 5, 22, 0),
-                  child: Row(
-                    children: [
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/juggling.gif')),
-                          Text(
-                            "Fun",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/graduation.gif')),
-                          Text(
-                            "Education",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                      Spacer(),
-                      Column(
-                        children: [
-                          Container(
-                              width: width * 0.15,
-                              child: Image.asset('assets/heartbeat.gif')),
-                          Text(
-                            "Health",
-                            style: TextStyle(fontSize: height * 0.03),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Divider(
-                  thickness: 1,
-                ),
-                ////////////////////////////////////
-                Row(
-                  children: [
-                    Text("Featured Charities"),
-                    Spacer(),
-                    TextButton(onPressed: () {}, child: Text("view all"))
-                  ],
                 ),
                 Expanded(
                   child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(

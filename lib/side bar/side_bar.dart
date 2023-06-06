@@ -31,7 +31,7 @@ class Sidemenuchild extends State<Sidemenu> {
           //info card start//////////////////////////////
           ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/girlportrait.jpeg'),
+              backgroundImage: AssetImage('assets/default-user-image.png'),
               radius: height * 0.04,
             ),
             title: Text(

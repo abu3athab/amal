@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/Main%20page/mainPage.dart';
+import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
@@ -42,6 +43,31 @@ class Bloodrequestindo extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Row(
+                      children: [
+                        Container(
+                            width: width * 0.1,
+                            child: InkWell(
+                                child: Icon(Icons.arrow_back_ios_new),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Bloodmain()),
+                                  );
+                                })),
+                        Spacer(),
+                        Text(
+                          "Blood Request",
+                          style: TextStyle(fontSize: width * 0.1),
+                        ),
+                        Spacer(),
+                        Spacer()
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
                     Container(
                       width: 300,
                       height: 300,
@@ -73,65 +99,17 @@ class Bloodrequestindo extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      width: width * 0.9,
-                      height: height * 0.25,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.all(Radius.circular(
-                                20.0) //                 <--- border radius here
-                            ),
-                      ),
-                      child: FittedBox(
-                        fit: BoxFit.contain,
-                        child: Text(
-                          " location: ${location} ",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                    Divider(
+                      thickness: 1,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: width * 0.45,
-                            height: height * 0.1,
-                            decoration: BoxDecoration(
-                              color: Colors.greenAccent,
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                      20.0) //                 <--- border radius here
-                                  ),
-                            ),
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text(
-                                "Call",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                          Spacer(),
-                          Container(
-                            width: width * 0.45,
-                            height: height * 0.1,
-                            decoration: BoxDecoration(
-                              color: Colors.blue,
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                      20.0) //                 <--- border radius here
-                                  ),
-                            ),
-                            child: FittedBox(
-                              fit: BoxFit.contain,
-                              child: Text(
-                                "I will Help",
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    SizedBox(
+                      height: 80,
                     ),
+                    Text(
+                      " location: ${location} ",
+                      style: TextStyle(color: Colors.black, fontSize: 30),
+                    ),
+                    Expanded(child: SizedBox()),
                   ]),
             ),
           ),

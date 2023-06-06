@@ -44,17 +44,20 @@ class ProfileViewChild extends State<ProfileView> {
                     (BuildContext context, BoxConstraints constraints) {
                   if (constraints.maxWidth > 500.0) {
                     return new CircleAvatar(
-                      backgroundImage: AssetImage('assets/girlportrait.jpeg'),
+                      backgroundImage:
+                          AssetImage('assets/default-user-image.png'),
                       radius: width * 0.16,
                     );
                   } else if (constraints.maxWidth < 320) {
                     return new CircleAvatar(
-                      backgroundImage: AssetImage('assets/girlportrait.jpeg'),
+                      backgroundImage:
+                          AssetImage('assets/default-user-image.png'),
                       radius: width * 0.15,
                     );
                   } else {
                     return new CircleAvatar(
-                      backgroundImage: AssetImage('assets/girlportrait.jpeg'),
+                      backgroundImage:
+                          AssetImage('assets/default-user-image.png'),
                       radius: width * 0.22,
                     );
                   }
