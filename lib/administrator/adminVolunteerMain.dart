@@ -126,7 +126,8 @@ class AdminVounteermainChild extends State<AdminVounteermain> {
                     onPressed: () => null,
                     child: Text(
                       "manage users events",
-                      style: TextStyle(fontSize: width * 0.06),
+                      style:
+                          TextStyle(fontSize: width * 0.06, color: logoColor),
                     )),
                 Divider(
                   thickness: 2,
