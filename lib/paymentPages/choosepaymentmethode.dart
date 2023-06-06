@@ -55,6 +55,10 @@ class ChoosepaymentChild extends State<Choosepayment> {
           menu: Sidemenu(),
           type: SideMenuType.shrinkNSlide,
           child: Scaffold(
+            appBar: AppBar(
+              title: Text("Payment methods"),
+              backgroundColor: logoColor,
+            ),
             backgroundColor: Colors.white,
             body: Padding(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -62,26 +66,6 @@ class ChoosepaymentChild extends State<Choosepayment> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {},
-                      ),
-                      const Spacer(),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Canel",
-                            style: TextStyle(fontSize: width * 0.06),
-                          ))
-                    ],
-                  ),
-                  Text(
-                    "Payment methods",
-                    style: TextStyle(fontSize: width * 0.1),
-                  ),
                   SizedBox(height: height * 0.02),
                   Image.asset(
                       "assets/WhatsApp Image 2023-05-31 at 6.54.40 PM.jpeg"),
@@ -160,19 +144,6 @@ class ChoosepaymentChild extends State<Choosepayment> {
                     ),
                   ),
                   Expanded(child: Container()),
-                  SizedBox(
-                    width: width * 0.9,
-                    height: height * 0.08,
-                    child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ))),
-                        onPressed: () {},
-                        child: const Text("Enter payment Detailes",
-                            style: TextStyle(fontSize: 14))),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),

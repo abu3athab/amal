@@ -26,7 +26,8 @@ Future<void> addUser(
     'phone number': phoneNumber,
     'type': type,
     'uid': uid,
-    'isVerfied': true
+    'isVerfied': true,
+    'count': 0
   });
   return;
 }
@@ -101,6 +102,8 @@ Future<void> addPurchasesOfUsers(String uid, String itemId, double price,
       FirebaseFirestore.instance.collection('Users').doc(charityID);
   var userTransactionRef =
       FirebaseFirestore.instance.collection('userTransactions');
+
+  var userRef = FirebaseFirestore.instance.collection('Users').doc(uid);
   await userTransactionRef.add({
     'userID': uid,
     'itemID': itemId,
@@ -114,6 +117,7 @@ Future<void> addPurchasesOfUsers(String uid, String itemId, double price,
       .collection('myProducts')
       .doc(itemId)
       .update({'count': FieldValue.increment(1)});
+  await userRef.update({'count': FieldValue.increment(1)});
 }
 
 Future<void> updateUserEmailVerification(String v) async {
@@ -221,7 +225,7 @@ String getUserId() {
 }
 
 Future<void> addEvent(String name, String description, String date,
-    String startTime, String endTime, String location) async {
+    String startTime, String endTime, String location, String uid) async {
   try {
     // Get the current user's ID
     String uid = FirebaseAuth.instance.currentUser!.uid;
@@ -261,6 +265,7 @@ Future<void> addEvent(String name, String description, String date,
       'startTime': startTime,
       'endTime': endTime,
       'location': location,
+      'uid': uid
     });
 
     // Update the "id" field with the actual ID of the document
@@ -343,7 +348,7 @@ Future<List<QuerySnapshot>> fetchSubcollectionsDataForDocuments(
   return await Future.wait(allEvents);
 }
 
-void updateUserName(String userId, String updatedValue) async {
+Future<void> updateUserName(String userId, String updatedValue) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   try {
@@ -359,7 +364,7 @@ void updateUserName(String userId, String updatedValue) async {
   }
 }
 
-void updateUserPhoneNumber(String userId, String updatedValue) async {
+Future<void> updateUserPhoneNumber(String userId, String updatedValue) async {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   try {
@@ -373,4 +378,9 @@ void updateUserPhoneNumber(String userId, String updatedValue) async {
   } catch (e) {
     print('Error updating user field: $e');
   }
+}
+
+Future<void> addEnrolledUsers(String uid, String eventID) async {
+  var userRef = FirebaseFirestore.instance.collection("enrolledUsersEvents");
+  await userRef.add({'userID': uid, 'eventID': eventID});
 }

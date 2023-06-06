@@ -8,13 +8,15 @@ class Eventtile extends StatelessWidget {
   String finishTime;
   String location;
   String desc;
+  String eventID;
   Eventtile(
       {required this.name,
       required this.date,
       required this.startTime,
       required this.finishTime,
       required this.location,
-      required this.desc});
+      required this.desc,
+      required this.eventID});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -33,6 +35,7 @@ class Eventtile extends StatelessWidget {
                       endTime: finishTime,
                       loca: location,
                       desc: desc,
+                      eventID: eventID,
                     )),
           );
         },

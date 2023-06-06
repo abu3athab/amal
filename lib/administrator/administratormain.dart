@@ -251,7 +251,7 @@ class AdminMainChild extends State<AdminMain> {
                           MaterialPageRoute(builder: (context) => Login()),
                         );
                       },
-                      child: Text("Signout",
+                      child: Text("sign out",
                           style: TextStyle(fontSize: width * 0.09)))
                 ],
               ),

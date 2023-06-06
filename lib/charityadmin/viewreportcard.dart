@@ -164,13 +164,19 @@ class ViewreportChild extends State<Viewreport> {
                                                           .data!
                                                           .get('cost')
                                                           .toString();
-                                                      return Charityreportcard(
-                                                          charityName:
-                                                              charityName,
-                                                          username: userName,
-                                                          productName:
-                                                              productName,
-                                                          cost: cost);
+                                                      if (FirebaseAuth
+                                                              .instance
+                                                              .currentUser!
+                                                              .uid ==
+                                                          charityID) {
+                                                        return Charityreportcard(
+                                                            charityName:
+                                                                charityName,
+                                                            username: userName,
+                                                            productName:
+                                                                productName,
+                                                            cost: cost);
+                                                      }
                                                     } else if (productSnapshot
                                                             .connectionState ==
                                                         ConnectionState

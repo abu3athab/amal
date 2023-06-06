@@ -6,6 +6,11 @@ import 'adminEventInfo.dart';
 
 class Charitytileview extends StatelessWidget {
   @override
+  String name;
+  String location;
+  String imageUrl;
+  Charitytileview(
+      {required this.name, required this.location, required this.imageUrl});
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -39,7 +44,7 @@ class Charitytileview extends StatelessWidget {
                     width: width * 0.30,
                     child: FittedBox(
                       child: CircleAvatar(
-                        backgroundImage: AssetImage("assets/donate.gif"),
+                        backgroundImage: NetworkImage(imageUrl),
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -52,11 +57,12 @@ class Charitytileview extends StatelessWidget {
                       height: 40,
                     ),
                     Text(
-                      "Tikyat Um ali",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      name,
+                      style: TextStyle(
+                          fontSize: height * 0.02, color: Colors.white),
                     ),
                     Text(
-                      "Amman",
+                      location,
                       style: TextStyle(fontSize: 25, color: Colors.white),
                     ),
                   ],

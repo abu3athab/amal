@@ -72,7 +72,7 @@ class CharityadminmainChild extends State<Charityadminmain> {
 
                                   return Text(
                                     charityName,
-                                    style: TextStyle(fontSize: width * 0.07),
+                                    style: TextStyle(fontSize: width * 0.05),
                                   );
                                 }
                               }),

@@ -340,14 +340,6 @@ class _SignUpChartiyState extends State<SignUpChartiy> {
                   ),
                 ]),
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Charitydetails()),
-                    );
-                  },
-                  child: Text("bypass")),
               Container(
                 margin: const EdgeInsets.all(20),
                 width: width * 0.6,

@@ -310,28 +310,11 @@ class LoginChild extends State<Login> {
                           "Sign Up",
                           style: TextStyle(color: logoColor),
                         )),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => MainPage()),
-                          );
-                        },
-                        child: Text("bypass auth"))
                   ],
                 ),
                 Row(
                   children: [
                     Spacer(),
-                    TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AdminMain()),
-                          );
-                        },
-                        child: Text("App Admin")),
                     Spacer(),
                   ],
                 ),
