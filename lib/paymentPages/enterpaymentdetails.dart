@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:demo2/Main%20page/mainPage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
 import 'package:demo2/bloodpage/requestblood.dart';
+import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
 import 'package:demo2/log%20in/user.dart';
 import 'package:demo2/paypal/paypalPayment.dart';
@@ -58,6 +59,10 @@ class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
           menu: Sidemenu(),
           type: SideMenuType.shrinkNSlide,
           child: Scaffold(
+            appBar: AppBar(
+              title: Text("Payment page"),
+              backgroundColor: logoColor,
+            ),
             backgroundColor: Colors.white,
             body: Padding(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -65,33 +70,6 @@ class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Choosepayment(
-                                      itemName: widget.itemName,
-                                      itemID: widget.itemID,
-                                      cost: widget.cost,
-                                      charityID: widget.charityID,
-                                    )),
-                          );
-                        },
-                      ),
-                      const Spacer(),
-                      TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Canel",
-                            style: TextStyle(fontSize: width * 0.06),
-                          ))
-                    ],
-                  ),
                   Container(
                     child: Image.asset(
                       "assets/happygirlpassword.jpeg",
@@ -181,10 +159,12 @@ class EnterpaymentdetailChild extends State<EnterPaymentDetail> {
                     height: height * 0.08,
                     child: ElevatedButton(
                         style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(logoColor),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12.0),
-                        ))),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ))),
                         onPressed: () async {
                           Navigator.push(
                             context,

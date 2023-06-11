@@ -324,8 +324,8 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                   child: Row(
                     children: [
                       Text("Charity name:${widget.charityName} ",
-                          style: TextStyle(fontSize: width * 0.06)),
-                      Text("", style: TextStyle(fontSize: width * 0.06)),
+                          style: TextStyle(fontSize: width * 0.041)),
+                      Text("", style: TextStyle(fontSize: width * 0.05)),
                     ],
                   ),
                 ),
@@ -333,9 +333,9 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Text("Email: ", style: TextStyle(fontSize: width * 0.06)),
+                      Text("Email: ", style: TextStyle(fontSize: width * 0.05)),
                       Text(widget.email,
-                          style: TextStyle(fontSize: width * 0.05)),
+                          style: TextStyle(fontSize: width * 0.044)),
                     ],
                   ),
                 ),
@@ -399,6 +399,7 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                             style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           onPressed: () async {
+                            await deleteDocumentCharity();
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text("Success!!"),
                               duration: Duration(seconds: 1),
@@ -409,7 +410,6 @@ class CardapprovalCharityChild extends State<CardApprovalCharity> {
                               MaterialPageRoute(
                                   builder: (context) => AdminMain()),
                             );
-                            await deleteDocumentCharity();
                           },
                         ),
                       ),

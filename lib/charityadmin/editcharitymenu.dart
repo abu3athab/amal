@@ -245,7 +245,10 @@ class EditcharitymenuChild extends State<Editcharitymenu> {
                         child: Text(
                           "create",
                           style: TextStyle(fontSize: width * 0.1),
-                        ))
+                        )),
+                    SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ),

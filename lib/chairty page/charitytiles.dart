@@ -57,7 +57,7 @@ class Charitytiles extends StatelessWidget {
                   children: [
                     Text(
                       charityName,
-                      style: TextStyle(fontSize: height * 0.03),
+                      style: TextStyle(fontSize: height * 0.015),
                     ),
                     SizedBox(
                       height: height * 0.005,

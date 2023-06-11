@@ -84,14 +84,39 @@ class ViewallCharitiesChild extends State<ViewallCharities> {
                   thickness: 1,
                 ),
                 Expanded(
-                    child: ListView(
-                  children: [
-                    Charitytileview(),
-                    Charitytileview(),
-                    Charitytileview(),
-                    Charitytileview(),
-                  ],
-                ))
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                        .collection('Users')
+                        .where('type', isEqualTo: 'charity')
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      }
+
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      }
+
+                      final users = snapshot.data!.docs;
+
+                      return ListView.builder(
+                        itemCount: users.length,
+                        itemBuilder: (context, index) {
+                          String charityName = users[index].get('charity name');
+                          String location =
+                              users[index].get('location').toString();
+                          String imageUrl = users[index].get('imageUrl');
+                          return Charitytileview(
+                              name: charityName,
+                              location: location,
+                              imageUrl: imageUrl);
+                          // Render user details on the screen as desired
+                        },
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ),

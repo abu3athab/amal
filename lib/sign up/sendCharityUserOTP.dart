@@ -169,7 +169,8 @@ class CharityOTP extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => Login()),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text("OPT verified"),
+                      content: Text(
+                          "OTP verified, please wait for the admin verification"),
                       duration: Duration(seconds: 2),
                     ));
                   } else {

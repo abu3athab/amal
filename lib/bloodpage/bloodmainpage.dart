@@ -152,6 +152,8 @@ class BloodmainChild extends State<Bloodmain> {
                                               nOfUnits: snapshot
                                                   .data!.docs[index]
                                                   .get('number of units'),
+                                              uid: snapshot.data!.docs[index]
+                                                  .get('user id'),
                                             );
                                           } else
                                             return Container();
@@ -225,6 +227,8 @@ class BloodmainChild extends State<Bloodmain> {
                                               nOfUnits: snapshot
                                                   .data!.docs[index]
                                                   .get('number of units'),
+                                              uid: snapshot.data!.docs[index]
+                                                  .get('user id'),
                                             );
                                           } else
                                             return Container();

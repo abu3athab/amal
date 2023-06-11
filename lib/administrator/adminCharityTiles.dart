@@ -62,7 +62,7 @@ class AdminCharitytiles extends StatelessWidget {
                   children: [
                     Text(
                       charityName,
-                      style: TextStyle(fontSize: height * 0.03),
+                      style: TextStyle(fontSize: height * 0.013),
                     ),
                     SizedBox(
                       height: height * 0.005,

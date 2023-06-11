@@ -31,12 +31,7 @@ class Sidemenuchild extends State<Sidemenu> {
           //info card start//////////////////////////////
           ListTile(
             leading: CircleAvatar(
-              backgroundImage: AssetImage('assets/girlportrait.jpeg'),
               radius: height * 0.04,
-            ),
-            title: Text(
-              "Alessandra Lauren",
-              style: TextStyle(color: Colors.white),
             ),
             subtitle: Text(
               "Doner Account",

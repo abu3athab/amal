@@ -202,11 +202,13 @@ class CharityadminsettingsChild extends State<Charityadminsettings> {
                           ),
                           label: Text('Log out'),
                           style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(logoColor),
                               shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          )))
+                                borderRadius: BorderRadius.circular(25.0),
+                              )))
                           // <-- Text
                           ),
                     ),

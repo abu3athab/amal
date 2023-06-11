@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:demo2/bloodpage/bloodmainpage.dart';
 import 'package:demo2/bloodpage/bloodtiles.dart';
+import 'package:demo2/colors.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -77,6 +78,10 @@ class RequestbloodChild extends State<Requestblood> {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          appBar: AppBar(
+            title: Text("Request blood page"),
+            backgroundColor: logoColor,
+          ),
           backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -225,6 +230,9 @@ class RequestbloodChild extends State<Requestblood> {
                     width: width,
                     height: height * 0.07,
                     child: ElevatedButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(logoColor)),
                         onPressed: () {
                           if (urgency == 'urgent') {
                             addUrgentBloodUser(location!, bloodType!,

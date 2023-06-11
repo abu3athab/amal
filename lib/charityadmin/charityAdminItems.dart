@@ -72,7 +72,7 @@ class CharityAdminitems extends StatelessWidget {
                     Spacer(),
                     Text(
                       "price: ${cost} Jod",
-                      style: TextStyle(fontSize: height * 0.03),
+                      style: TextStyle(fontSize: height * 0.02),
                       softWrap: true,
                       maxLines: 2,
                     ),

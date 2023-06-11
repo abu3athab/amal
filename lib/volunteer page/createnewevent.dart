@@ -1,4 +1,5 @@
 import 'package:demo2/log%20in/user.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -218,7 +219,8 @@ class CreateneweventChild extends State<Createnewevent> {
                               dateinput.text,
                               timeController.text,
                               timeController2.text,
-                              location);
+                              location,
+                              FirebaseAuth.instance.currentUser!.uid);
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content:
                                 Text("your event has been added sucessfully"),

@@ -16,10 +16,12 @@ class Bloodrequestindo extends StatelessWidget {
   String location;
   String bloodType;
   String nOfUnits;
+  String uid;
   Bloodrequestindo(
       {required this.location,
       required this.bloodType,
-      required this.nOfUnits});
+      required this.nOfUnits,
+      required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +37,9 @@ class Bloodrequestindo extends StatelessWidget {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          appBar: AppBar(
+            title: Text("Blood request info"),
+          ),
           backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -123,10 +128,25 @@ class Bloodrequestindo extends StatelessWidget {
                             ),
                             child: FittedBox(
                               fit: BoxFit.contain,
-                              child: Text(
-                                "I will Help",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                              child: FutureBuilder(
+                                  future: FirebaseFirestore.instance
+                                      .collection('Users')
+                                      .doc(uid)
+                                      .get(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return CircularProgressIndicator();
+                                    } else if (snapshot.hasData) {
+                                      String phone =
+                                          snapshot.data!.get('phone number');
+                                      return Text(
+                                        '$phone',
+                                        style: TextStyle(color: Colors.white),
+                                      );
+                                    } else
+                                      return Container();
+                                  }),
                             ),
                           ),
                         ],

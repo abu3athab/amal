@@ -171,6 +171,10 @@ class UpdateaccountinfoChild extends State<Updateaccountinfo> {
                                   'phone number',
                                   number.text,
                                   FirebaseAuth.instance.currentUser!.uid);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content:
+                                          Text("phone updated successfully")));
                             } else {
                               return;
                             }

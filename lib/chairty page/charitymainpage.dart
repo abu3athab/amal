@@ -250,11 +250,9 @@ class CharitymainChild extends State<Charitymain> {
                                 imageUrl: document['imageUrl'],
                                 donersNumber: document['count'],
                               );
-                            } else
-                              return Container(
-                                child:
-                                    Text("Sorry nothing matches your search"),
-                              );
+                            } else {
+                              return Container();
+                            }
                           } else {
                             return Container();
                           }

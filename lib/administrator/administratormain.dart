@@ -75,7 +75,7 @@ class AdminMainChild extends State<AdminMain> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Hi, Alessandra",
+                              "Hi, Ahmed",
                               style: TextStyle(
                                   color: Colors.black, fontSize: width * 0.06),
                             ),
@@ -93,7 +93,6 @@ class AdminMainChild extends State<AdminMain> {
                         ),
                       ),
                       CircleAvatar(
-                        backgroundImage: AssetImage('assets/girlportrait.jpeg'),
                         radius: height * 0.04,
                       ),
                     ],
@@ -251,7 +250,7 @@ class AdminMainChild extends State<AdminMain> {
                           MaterialPageRoute(builder: (context) => Login()),
                         );
                       },
-                      child: Text("Signout",
+                      child: Text("sign out",
                           style: TextStyle(fontSize: width * 0.09)))
                 ],
               ),

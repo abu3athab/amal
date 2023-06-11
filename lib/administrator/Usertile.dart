@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'adminEventInfo.dart';
 
 class Usertile extends StatelessWidget {
+  String name;
+  String totalDonations;
+  Usertile({required this.name, required this.totalDonations});
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -39,7 +42,7 @@ class Usertile extends StatelessWidget {
                     width: width * 0.30,
                     child: FittedBox(
                       child: CircleAvatar(
-                        backgroundImage: AssetImage("assets/girlportrait.jpeg"),
+                        backgroundImage: AssetImage("assets/kid.png"),
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -52,17 +55,14 @@ class Usertile extends StatelessWidget {
                       height: 40,
                     ),
                     Text(
-                      "Alessandra Lauren",
-                      style: TextStyle(fontSize: 25, color: Colors.white),
+                      name,
+                      style: TextStyle(
+                          fontSize: height * 0.02, color: Colors.white),
                     ),
                     Row(
                       children: [
                         Text(
-                          "Total donations : ",
-                          style: TextStyle(fontSize: 18, color: Colors.white),
-                        ),
-                        Text(
-                          "9",
+                          "Total donations :$totalDonations ",
                           style: TextStyle(fontSize: 18, color: Colors.white),
                         ),
                       ],

@@ -5,6 +5,7 @@ import 'package:demo2/chairty%20page/charityitemlist.dart';
 import 'package:demo2/chairty%20page/charitymainpage.dart';
 import 'package:demo2/chairty%20page/charitypage.dart';
 import 'package:demo2/chairty%20page/charitytiles.dart';
+import 'package:demo2/colors.dart';
 import 'package:demo2/paymentPages/choosepaymentmethode.dart';
 import 'package:demo2/profilepage.dart/profileBadges.dart';
 import 'package:demo2/profilepage.dart/profileView.dart';
@@ -51,6 +52,10 @@ class ProductpageChild extends State<Productpage> {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          appBar: AppBar(
+            title: Text("Product page"),
+            backgroundColor: logoColor,
+          ),
           backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -61,37 +66,7 @@ class ProductpageChild extends State<Productpage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: width * 0.2,
-                      child: IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Charityitems(
-                                      name: widget.name,
-                                      desc: widget.desc,
-                                      imageUrl: widget.imageUrl,
-                                      categ: widget.categ,
-                                      cost: widget.cost,
-                                      itemID: widget.itemID,
-                                      charityID: widget.charityID,
-                                    )),
-                          );
-                        },
-                      ),
-                    ),
                     Spacer(),
-                    Container(
-                      width: width * 0.2,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Done",
-                            style: TextStyle(fontSize: width * 0.06),
-                          )),
-                    ),
                   ],
                 ),
                 Padding(
@@ -159,11 +134,12 @@ class ProductpageChild extends State<Productpage> {
                       },
                       child: Text("Proceed to payment"),
                       style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(logoColor),
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                      )))),
+                            borderRadius: BorderRadius.circular(18.0),
+                          )))),
                 ),
                 SizedBox(
                   height: 30,

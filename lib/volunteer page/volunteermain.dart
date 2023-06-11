@@ -60,6 +60,10 @@ class VounteermainChild extends State<Vounteermain> {
       child: SafeArea(
         bottom: false,
         child: Scaffold(
+          appBar: AppBar(
+            title: Text("Main volunteer page"),
+            backgroundColor: logoColor,
+          ),
           backgroundColor: Colors.white,
           body: Padding(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
@@ -130,7 +134,8 @@ class VounteermainChild extends State<Vounteermain> {
                     },
                     child: Text(
                       "manage your events",
-                      style: TextStyle(fontSize: width * 0.06),
+                      style:
+                          TextStyle(fontSize: width * 0.06, color: logoColor),
                     )),
                 Divider(
                   thickness: 2,
@@ -192,6 +197,7 @@ class VounteermainChild extends State<Vounteermain> {
                                           location: data['location'],
                                           finishTime: data['endTime'],
                                           desc: data['description'],
+                                          eventID: data['id'],
                                         );
                                       }
                                       if (data['name']
@@ -205,6 +211,7 @@ class VounteermainChild extends State<Vounteermain> {
                                           location: data['location'],
                                           finishTime: data['endTime'],
                                           desc: data['description'],
+                                          eventID: data['id'],
                                         );
                                       } else
                                         return Container();

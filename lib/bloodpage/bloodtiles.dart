@@ -6,10 +6,12 @@ class Bloodtiles extends StatelessWidget {
   String location;
   String bloodType;
   String nOfUnits;
+  String uid;
   Bloodtiles(
       {required this.location,
       required this.bloodType,
-      required this.nOfUnits});
+      required this.nOfUnits,
+      required this.uid});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,7 @@ class Bloodtiles extends StatelessWidget {
                     location: location,
                     bloodType: bloodType,
                     nOfUnits: nOfUnits,
+                    uid: uid,
                   )),
         );
       },
